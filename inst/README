@@ -1,0 +1,19 @@
+BUGS                            Known bugs log
+
+CITATION                        How to cite ReGenesees package in publications
+                                (In R type the command citation("ReGenesees"))
+
+COPYING                         Copyright information
+
+DISCLAIMER                      Important information for ReGenesees package users
+
+NEWS                            Change log
+
+README                          This file
+
+CREDITS                         ReGenesees debt of gratitude towards 'survey'
+
+CRUX.survey                     Partial list of critical 'survey' bugs fixed
+
+DESIDERATA                      List of ReGenesees extensions I would like to
+                                work on if I find the time.

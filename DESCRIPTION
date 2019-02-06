@@ -1,0 +1,24 @@
+Package: ReGenesees
+Type: Package
+Title: R Evolved Generalized Software for Sampling Estimates and Errors
+        in Surveys
+Description: Design-Based and Model-Assisted analysis of complex sampling surveys.
+        Multistage, stratified, clustered, unequally weighted survey designs.
+        Horvitz-Thompson and Calibration Estimators. Variance Estimation for
+        nonlinear smooth estimators by Taylor-series linearization. Estimates,
+        standard errors, confidence intervals and design effects for: Totals,
+        Means, absolute and relative Frequency Distributions (marginal, conditional
+        and joint), Ratios, Shares and Ratios of Shares, Multiple Regression
+        Coefficients and Quantiles. Automated Linearization of Complex Analytic
+        Estimators. Design Covariance and Correlation. Estimates, standard errors,
+        confidence intervals and design effects for user-defined analytic estimators.
+        Estimates and sampling errors for subpopulations. Consistent trimming of
+        calibration weights. Generalized Variance Functions (GVF) method for
+        predicting variance estimates.
+Version: 2.0
+Author: Diego Zardetto
+Maintainer: Diego Zardetto <zardetto@istat.it>
+License: EUPL
+Imports: stats, MASS
+Depends: R (>= 2.14.0)
+ByteCompile: TRUE

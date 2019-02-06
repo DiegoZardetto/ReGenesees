@@ -1,0 +1,11 @@
+- ReGenesees owes a lot to the beautiful, rich and still growing
+  'survey' package written by Thomas Lumley.
+- Retrospectively, the original seeds of the ReGenesees project
+  can be traced back to late 2006, when I was trying to optimize
+  'survey' in order to enable its critical functions to successfully
+  process Istat's large-scale surveys.
+- Quite soon, this attempt required me to rethink globally the design
+  of the package, i.e. its internal structure at a deeper level.
+- Over time, this line of work coagulated into an R package in its own
+  right, eventually leading to the first public release of ReGenesees
+  in December 2011.

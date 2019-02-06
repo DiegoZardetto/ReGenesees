@@ -1,0 +1,242 @@
+`aux.estimates` <-
+function(design,
+         calmodel = if (inherits(template, "pop.totals"))
+                        attr(template, "calmodel"), 
+         partition = if (inherits(template, "pop.totals")) 
+                         attr(template, "partition") else FALSE,
+         template = NULL)
+#################################################################################
+# Given a design object and a calibration model (via 'calmodel' and 'partition' #
+# or via 'template') QUICKLY COMPUTES estimates of the totals of the involved   #
+# auxiliary variables. In order to save computation time, sampling variances    #
+# are not estimated. Moreover, as 'calmodel' can be arbitrarily complex, this   #
+# function can be much more user-friendly than svystatTM.                       #
+# NOTE: If the data to be processed (whose size depend on both design and       #
+#       calibration model) become too big as compared to the maximum allocable  #
+#       memory, sample data gets split in smaller chunks (see below).           #
+#       Parameter 'th.frac' fixes the memory threshold to 1/th.frac of maximum  #
+#       allocable memory. Actual choice th.frac=10 seems very good.             #
+#################################################################################
+{
+    # First verify if the function has been called inside another function:
+    # this is needed to correctly manage metadata when e.g. the caller is a
+    # GUI stratum
+    directly <- !( length(sys.calls()) > 1 )
+    design.expr <- if (directly) substitute(design)
+
+    if (!inherits(design, "analytic"))
+        stop("Object 'design' must be of class analytic")
+    dataset <- design$variables
+    weights.char <- all.vars(attr(design, "weights"))
+    must.check.na <- TRUE
+
+    # Has template been given?
+    if (!is.null(template)){
+        if (!inherits(template, "pop.totals"))
+            stop("If supplied, 'template' must be of class pop.totals")
+    }
+
+    if (!inherits(calmodel, "formula")) 
+        stop("Parameter 'calmodel' must be supplied as a formula")
+    if (!identical(partition, FALSE)) {
+        if (!inherits(partition, "formula")) 
+            stop("Parameter 'partition' must be supplied as a formula")
+    }
+
+    # When both template and calmodel-partition have been given, must check for coherence
+    if (inherits(template, "pop.totals")) {
+        if (!identical(calmodel, attr(template, "calmodel"))) 
+            warning("'calmodel' formula (1) does not agree with the 'calmodel' attribute of template (2).\nValue (2) will be used", immediate. = TRUE)
+        if (!identical(partition, attr(template, "partition"))) 
+            warning("'partition' formula (1) does not agree with the 'partition' attribute of template (2).\nValue (2) will be used", immediate. = TRUE)
+        if (!identical(attr(design, "data"), attr(template, "data")) &&
+            !identical(design, eval(attr(template, "data")))         &&
+            !is.null(attr(template, "data"))                         &&
+            !is.null(attr(design, "data")) ) 
+            warning("Data frames used to build objects design and template have different names",
+                    immediate. = TRUE)
+    }
+    else {
+        template <- pop.template(dataset, calmodel, partition)
+        must.check.na <- FALSE
+    }
+
+    # From there on, will use always template for assessing the calibration model
+    
+    # Coherence check between template (i.e. calibration model) and design
+    dataset.check(dataset, template)
+
+    # Missing data check on dataset
+    calmodel <- attr(template, "calmodel")
+    calmodel.vars <- all.vars(calmodel)
+    if (must.check.na) na.Fail(dataset, calmodel.vars)
+
+    partition <- attr(template, "partition")
+    if (!identical(partition, FALSE)) {
+        partition.vars <- all.vars(partition)
+        if (must.check.na) na.Fail(dataset, partition.vars)
+        # Prepare partition names
+        partition.names <- apply(template[,rev(partition.vars),drop=FALSE],1,paste,collapse=".")
+    }
+    
+    #################################################################
+    #  Il parametro need.fetch determina se i record di 'dataset'   #
+    #  debbano, o non debbano, essere processati in blocchetti.     #
+    #  Il valore di soglia e' determinato stimando la dimensione    #
+    #  massima delle model-matrix da calcolare: se la memoria       #
+    #  necessaria eccede il 1/th.frac della memoria massima         #
+    #  allocabile il sistema splitta. Il numero di chunks generati  #
+    #  e' tale che la matrice di cui sopra generata sui singoli     #
+    #  chunks non ecceda 1/(2*th.frac) della memoria massima.       #
+    #  NOTA: Non dividere per il numero di domini di calibrazione   #
+    #        nella stima della dimensione massima della             #
+    #        model-matrix serve a contrastare potenziali casi       #
+    #        "sfortunati" in cui le dimensioni dei domini di        #
+    #        calibrazione siano molto squilibrate (cioe' quando     #
+    #        esistano domini con un numero di unita' molto maggiore #
+    #        che nell'equidistribuzione).                           #
+    #  NOTA: Il default di th.frac e' 10.                           #
+    #################################################################
+    need.fetch <- FALSE
+    if (Sys.info()["sysname"] == "Windows"){
+        naux  <- if (identical(partition, FALSE)) ncol(template) else (ncol(template) - length(partition.vars))
+        nrec <- nrow(dataset)
+        MEM.mega <- memory.limit()
+        th.frac <- 10
+        need.fetch <- ( ((8 * nrec * naux )/(1024^2))  > (MEM.mega / th.frac) )
+    }
+
+    if (need.fetch) {
+        nchunks <- ceiling( 2 * ((8 * nrec * naux )/(1024^2)) * (th.frac / MEM.mega) )
+        warning("Processing design as a whole would require more than 1/",
+                th.frac," of maximum allocable memory:\n it will be split into ",
+                nchunks, " chunks instead.", immediate. = TRUE)
+        if (!is.numeric(nchunks) || (nchunks < 1) || (nchunks > nrec)){
+            stop("Chunks number doesn't satisfy 1 <= nchunks <= ", nrec,"!")
+        }
+
+        # Prepare tools needed to split dataset into chunks
+        # 'splitter': factor i cui livelli identificano i chunks con un sequenziale
+        splitter <- factor(rep(1:nchunks, each=ceiling(nrec/nchunks), length.out=nrec))
+        # 'chunks': lista che contiene gli indici di riga delle osservazioni nei diversi chunks
+        # chunks <- .Internal(split(1:nrec, splitter))
+        chunks <- split(1:nrec, splitter)
+    }
+
+
+    if (identical(partition,FALSE)) {
+    ########################
+    #  Global calibration  #
+    ########################
+        if (!need.fetch){
+            mm <- model.matrix(calmodel, model.frame(calmodel, data = dataset))
+            ww <- dataset[, weights.char]
+            template[,] <- colSums(mm * ww)
+        }
+        else {
+            ##################################
+            # Process chunk-by-chunk and add #
+            # partial sums to template.      #
+            ##################################
+            # Initialize template total to zero
+            template[,] <- 0
+            for (ch in chunks) {
+                mm.ch <- model.matrix(calmodel, model.frame(calmodel, data = dataset[ch, , drop = FALSE]))
+                ww.ch <- dataset[ch, weights.char]
+                template[,] <- template[,] + colSums(mm.ch * ww.ch)
+            }
+        }
+    }
+    else {
+    #############################
+    #  Partitioned Calibration  #
+    #############################
+        if (!need.fetch){
+            # 'interact': factor i cui livelli identificano le partizioni
+            interact <- interaction(dataset[, rev(partition.vars), drop = FALSE], drop=TRUE)
+            # 'groups': lista che contiene gli indici di riga delle osservazioni nelle diverse partizioni
+            # groups <- .Internal(split(1:nrow(dataset), interact))
+            groups <- split(1:nrow(dataset), interact)
+            group.names <- names(groups)
+            ######################################
+            # Calcola i totali per le partizioni #
+            ######################################
+            i.g <- 0
+            for (g in groups) {
+                i.g <- i.g+1
+                mm.g <- model.matrix(calmodel, model.frame(calmodel, data = dataset[g, , drop = FALSE]))
+                ww.g <- dataset[g, weights.char]
+                template[partition.names == group.names[i.g],
+                         which(!(names(template) %in% partition.vars))] <- colSums(mm.g * ww.g)
+            }
+        }
+        else {
+            ##################################
+            # Process chunk-by-chunk and add #
+            # partial sums to template.      #
+            ##################################
+            # Initialize template total to zero for auxiliary variables columns
+            aux.ind <-which(!(names(template) %in% partition.vars))
+            template[, aux.ind] <- 0
+            for (ch in chunks) {
+                dataset.ch <- dataset[ch, , drop = FALSE]
+                # 'interact': factor i cui livelli identificano le partizioni
+                interact.ch <- interaction(dataset.ch[, rev(partition.vars), drop = FALSE], drop=TRUE)
+                # 'groups': lista che contiene gli indici di riga delle osservazioni nelle diverse partizioni
+                # groups.ch <- .Internal(split(1:nrow(dataset.ch), interact.ch))
+                groups.ch <- split(1:nrow(dataset.ch), interact.ch)
+                group.names.ch <- names(groups.ch)
+                # Process group-by-group inside current chunk
+                i.g <- 0
+                for (g in groups.ch) {
+                    i.g <- i.g+1
+                    mm.g <- model.matrix(calmodel, model.frame(calmodel, data = dataset.ch[g, , drop = FALSE]))
+                    ww.g <- dataset.ch[g, weights.char]
+                    template[partition.names == group.names.ch[i.g], aux.ind] <-
+                    template[partition.names == group.names.ch[i.g], aux.ind] + colSums(mm.g * ww.g)
+                }
+            }
+        }
+    }
+ class(template) <- unique(c("aux.estimates", class(template)))
+ attr(template,"design") <- design.expr
+ return(template)
+}
+
+
+`dataset.check` <-
+function (dataset, pop.totals)
+{
+    calmodel <- attr(pop.totals, "calmodel")
+    partition <- attr(pop.totals, "partition")
+
+    template <- pop.template(dataset, calmodel, partition)
+
+    if (!identical(dim(pop.totals), dim(template))){
+        stop.dim <- paste("Dimension mismatch: auxiliary variables in design do not agree calibration model\n(to solve the problem use pop.template)")
+        stop(stop.dim)
+    }
+
+    if (!identical(names(pop.totals), names(template))){
+        stop.names <- paste("Names of auxiliary variables in design do not agree with calibration model\n(to solve the problem use pop.template)")
+        stop(stop.names)
+    }
+
+    if (!identical(partition, FALSE)) {
+        test.var.class <- function(df, class) sapply(names(df), 
+            function(v) inherits(df[, v], class))
+        template.factor <- data.frame(template[, test.var.class(template, 
+            "factor"), drop = FALSE])
+        pop.totals.factor <- data.frame(pop.totals[, test.var.class(pop.totals, 
+            "factor"), drop = FALSE])
+        if (!identical(as.matrix(pop.totals.factor), as.matrix(template.factor))){
+            stop.fact <- paste("Calibration domains do not agree with design variables\n(to solve the problem use pop.template)")
+            stop(stop.fact)
+        }
+    }
+    # Wondering if this print is actually useful. In case of lack of coherence
+    # the caller would stop with an error message... For sure it would be
+    # bothering when invoking new function 'trimcal'!
+    # COMMENTED 22/07/2016: 	
+    # cat("\n# Coherence check between design and calibration model: OK\n\n")
+}

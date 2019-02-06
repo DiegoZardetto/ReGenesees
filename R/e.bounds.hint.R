@@ -1,0 +1,280 @@
+`bounds.hint` <-
+function (design, df.population, 
+    calmodel = if (inherits(df.population, "pop.totals"))
+                   attr(df.population, "calmodel"), 
+    partition = if (inherits(df.population, "pop.totals")) 
+                    attr(df.population, "partition") else FALSE,
+    msg = TRUE)
+############################################################################
+# Dati (i) un oggetto da calibrare, (ii) i totali noti ed (iii) i metadati #
+# che descrivono il modello di calibrazione, la funzione calcola un        #
+# intervallo di valori [smallest, greatest] che deve essere                #
+# NECESSARIAMENTE interno al range specificato dal parametro 'bounds' di   #
+# e.calibrate (in caso contrario certamente l'algoritmo di calibrazione    #
+# non converge).                                                           #
+# Sulla base di tale intervallo la funzione costruisce un nuovo intervallo #
+# con il medesimo punto medio ed ampiezza doppia [L.sugg, U.sugg]. Tale    #
+# intervallo viene suggerito come possibile valore di 'bounds'.            #
+# Nota: L'intervallo suggerito NON garantisce la convergenza di            #
+#       e.calibrate ma puo' rivelarsi un buon guess iniziale.              #
+# NOTA: La funzione stampa entrambi gli intervalli ma ritorna              #
+#       [L.sugg, U.sugg] con attributi che forniscono informazioni piu'    #
+#       ricche.                                                            #
+# NOTA: In caso di mancata convergenza puo' aiutare: 1) l'ispezione della  #
+#       lista di output, 2) l'ispezione di 'ecal.status'.                  #
+#       In alternativa e' possibile 1) specificare inizialmente dei bounds #
+#       molto ampi (tali da assicurare la convergenza) e 2) restringere    #
+#       progressivamente tali bounds con l'aiuto della funzione g.range.   #
+############################################################################
+{
+    # First verify if the function has been called inside another function:
+    # this is needed to correctly manage metadata when e.g. the caller is a
+    # GUI stratum. (affects ONLY ecal.status)
+    directly <- !( length(sys.calls()) > 1 )
+
+    if (!inherits(design, "analytic")) 
+        stop("Object 'design' must inherit from class analytic")
+    if (!inherits(df.population, "data.frame")) 
+        stop("Object 'df.population' must be of class data frame")
+    if (!inherits(calmodel, "formula")) 
+        stop("Parameter 'calmodel' must be supplied as a formula")
+    if (!identical(partition, FALSE)) {
+        if (!inherits(partition, "formula")) 
+            stop("Parameter 'partition' must be supplied as a formula")
+    }
+    if (!is.logical(msg)) 
+        stop("Parameter 'msg' must be logical")
+    if (inherits(df.population, "pop.totals")) {
+        if (!identical(calmodel, attr(df.population, "calmodel"))) 
+            warning("'calmodel' formula (1) does not agree with the 'calmodel' attribute of df.population (2).\nValue (2) will be used", immediate. = TRUE)
+        if (!identical(partition, attr(df.population, "partition"))) 
+            warning("'partition' formula (1) does not agree with the 'partition' attribute of df.population (2).\nValue (2) will be used", immediate. = TRUE)
+
+        if ( !identical(attr(design, "data"), attr(df.population, "data")) &&
+             !identical(design, eval(attr(df.population, "data")))         &&
+             !is.null(attr(df.population, "data"))                         &&
+             !is.null(attr(design, "data")) ) 
+            warning("Data frames used to build objects design and df.population have different names",
+                    immediate. = TRUE)
+    }
+    else {
+        df.population <- population.check(df.population, design, 
+            calmodel, partition)
+    }
+    e.df <- design$variables
+    calmodel <- attr(df.population, "calmodel")
+    calmodel.vars <- all.vars(calmodel)
+    na.Fail(e.df, calmodel.vars)
+    partition <- attr(df.population, "partition")
+    ids <- attr(design, "ids")
+    ids.char <- all.vars(ids)
+    weights <- attr(design, "weights")
+    weights.char <- all.vars(weights)
+    mk.bounds <- function(df.population,partition,partition.names=NULL){
+    ############################################################
+    # Crea la lista 'bounds' con tre componenti:               #
+    #  - 'call':                                               #
+    #    identifica la chiamata di bounds.hint che ha generato #
+    #    lista 'bounds';                                       #
+    #  - 'lower' e 'upper':                                    #
+    #    matrici che contengono, per ogni singoli sub-task del #
+    #    processo di calibrazione complessivo, il valore       #
+    #    minimo e massimo dei rapporti fra totali noti e       #
+    #    corrispondenti stime dirette.                         #
+    ############################################################
+        tasks <- 1
+        parts <- nrow(df.population)
+        rownam <- "original"
+        colnam <- if (identical(partition,FALSE)) "global" else partition.names
+        lower <- matrix(-Inf, nrow = tasks, ncol = parts, dimnames = list(rownam, colnam))
+        upper <- matrix( Inf, nrow = tasks, ncol = parts, dimnames = list(rownam, colnam))
+        if   (directly) {
+             bounds <- list(call = sys.call(-1), lower = lower, upper = upper)
+            }
+        else {
+             bounds <- list(lower = lower, upper = upper)
+            }
+        bounds
+    }
+    upd.bounds <- function(n.sub.task,interval){
+    ###############################################
+    #  Aggiorna la lista 'bounds' nel             #
+    #  .GlobalEnv con i valori low e up ritornati #
+    #  dal sub-task di ordine 'n.subtask'.        #
+    ###############################################
+        last.task <- col(t(bounds[["lower"]]))[n.sub.task]
+        last.part <- row(t(bounds[["lower"]]))[n.sub.task]
+        bounds[["lower"]][last.task,last.part] <<- interval[1]
+        bounds[["upper"]][last.task,last.part] <<- interval[2]
+    }
+    #############################################################
+    #  Il parametro need.gc determina se la garbage collection  #
+    #  debba, o non debba, essere gestita dal programma.        #
+    #  Il valore di soglia per la dimensione di design e'       #
+    #  fissata ad 1/10 della memoria massima allocabile.        #
+    #############################################################
+    need.gc <- FALSE
+    if (Sys.info()["sysname"] == "Windows"){
+        need.gc <- ((object.size(design)/(1024^2)) > memory.limit()/10)
+    }
+    if (need.gc) 
+        warning("Input analytic object takes up more than 1/10 of maximum allocable memory", 
+                immediate. = TRUE)
+    gc.here <- function(doit) {
+    #################################################
+    #  Se doit=TRUE effettua la garbage collection  #
+    #  quando viene invocata.                       #
+    #################################################
+        if (doit) 
+            gc()
+    }
+    sub.task <- 0
+
+    check.totals <- function(tot)
+    #######################################
+    # "Type" check for population totals. #
+    #######################################
+    {
+     num.col <- function(df) sapply(names(df), function(v) is.numeric(df[, v]))    
+     if ( any(is.na(as.matrix(tot))) || any(is.infinite(as.matrix(tot))) || !(all(num.col(tot))) ) 
+          stop("Population totals must be numeric and finite")
+    }
+    
+    if (identical(partition,FALSE)) {
+    #####################################################
+    #  Intervallo minimo globale (senza domini)         #
+    #####################################################
+        check.totals(df.population)
+        bounds <- mk.bounds(df.population,partition)
+        gc.here(need.gc)
+        des <- ez.design(data = e.df, weights = weights, ids = ids, 
+            variables = c(ids.char, weights.char, calmodel.vars))
+        gc.here(need.gc)
+        interval <- ez.ranger(design = des, population = as.numeric(df.population), 
+            formula = calmodel)
+        gc.here(need.gc)
+        sub.task <- (sub.task+1)
+        upd.bounds(sub.task,interval)
+        gc.here(need.gc)
+    }
+    else {
+    ##########################################################
+    #  Intervalli minimi sui singoli domini di calibrazione  #
+    ##########################################################
+        partition.vars <- all.vars(partition)
+        check.totals(df.population[, -(1:length(partition.vars)), drop = FALSE])
+        na.Fail(e.df, partition.vars)
+        partition.names <- apply(df.population[,partition.vars,drop=FALSE],1,paste,collapse=".")
+        bounds <- mk.bounds(df.population,partition,partition.names)
+        #  'interact': factor i cui livelli identificano le partizioni
+        interact <- interaction(e.df[, rev(partition.vars), drop = FALSE], drop=TRUE)
+        #  'groups': lista che contiene gli indici di riga delle osservazioni nelle diverse partizioni
+        # groups <- .Internal(split(1:nrow(e.df), interact))
+        groups <- split(1:nrow(e.df), interact)
+        range.iter <- function(wname) {
+        #####################################
+        # Calcola i range per le partizioni #
+        #####################################
+            i.g <- 0
+            for (g in groups) {
+                i.g <- i.g+1
+                weights <- as.formula(paste("~", wname, sep = ""), env = .GlobalEnv)
+                des.g <- ez.design(data = e.df[g,], weights = weights, ids = ids, 
+                  variables = c(ids.char, wname, calmodel.vars, partition.vars))
+                pop.g <- df.population[i.g, which(!(names(df.population) %in% 
+                  partition.vars))]
+                interval.g <- ez.ranger(design = des.g, population = as.numeric(pop.g), 
+                  formula = calmodel)
+                gc.here(need.gc)
+                sub.task <<- (sub.task+1)
+                upd.bounds(sub.task,interval.g)
+            }
+        }
+        gc.here(need.gc)
+        range.iter(weights.char)
+        gc.here(need.gc)
+    }
+
+all <- apply(bounds[["lower"]], 2, min)
+smallest <- min(1, all)
+bounds[["lower"]] <- rbind(bounds[["lower"]], all)
+
+all <- apply(bounds[["upper"]], 2, max)
+greatest <- max(1, all)
+bounds[["upper"]] <- rbind(bounds[["upper"]], all)
+
+# Treat differently cases with finite smallest and greatest
+# as compared to infinite ones:
+# 1) Both finite
+if ( is.finite(smallest) && is.finite(greatest) ){
+    mid <- (smallest+greatest)/2
+    L <- mid - 2*(mid-smallest)
+    U <- mid + 2*(greatest-mid)
+    L.sugg <- round(L,3)
+    if ( isTRUE(all.equal(L.sugg, 1)) ) L.sugg <- (L.sugg - 1E-3)
+    U.sugg <- round(U,3)
+    if ( isTRUE(all.equal(U.sugg, 1)) ) U.sugg <- (U.sugg + 1E-3)
+    suggestion <- c(L.sugg, U.sugg)
+    }
+else {
+      # 2) Both infinite
+      if ( is.infinite(smallest) && is.infinite(greatest) ) {
+           L.sugg <- smallest
+           U.sugg <- greatest
+           suggestion <- c(smallest, greatest)
+         }
+      else {
+            # 3) Smallest finite and greatest infinite
+            if   (is.finite(smallest)) {
+                  mid <- 1
+                  L <- mid - 2*(mid-smallest)
+                  L.sugg <- round(L,3)
+                  if ( isTRUE(all.equal(L.sugg, 1)) ) L.sugg <- (L.sugg - 1E-3)
+                  U.sugg <- greatest
+                }
+            # 4) Smallest infinite and greatest finite
+            else {
+                  mid <- 1
+                  U <- mid + 2*(greatest-mid)
+                  U.sugg <- round(U,3)
+                  if ( isTRUE(all.equal(U.sugg, 1)) ) U.sugg <- (U.sugg + 1E-3)
+                  L.sugg <- smallest
+                }
+        suggestion <- c(L.sugg, U.sugg)
+        }
+    }
+
+attr(suggestion, "star.interval") <- c(smallest, greatest)
+attr(suggestion, "bounds") <- bounds
+class(suggestion) <- c("bounds.hint", class(suggestion))
+
+if (isTRUE(msg)){
+    cat("\n")
+    cat(paste("A starting suggestion: try to calibrate with bounds=c(",
+               L.sugg, ", ", U.sugg, ")\n", sep=""))
+    cat("\n")
+    cat("Remark: this is just a hint, not an exact result\n")
+    cat(paste("Feasible bounds for calibration problem must cover the interval [",
+                 round(smallest,3),", ", round(greatest,3),"]\n",sep=""))
+    cat("\n")
+    }
+
+invisible(suggestion)
+}
+
+
+print.bounds.hint <- function(x, ...){
+L.sugg <- x[1]
+U.sugg <- x[2]
+star <- attr(x, "star.interval")
+smallest <- star[1]
+greatest <- star[2]
+cat("\n")
+cat(paste("A starting suggestion: try to calibrate with bounds=c(",
+           L.sugg, ", ", U.sugg, ")\n", sep=""))
+cat("\n")
+cat("Remark: this is just a hint, not an exact result\n")
+cat(paste("Feasible bounds for calibration problem must cover the interval [",
+             round(smallest,3),", ", round(greatest,3),"]\n",sep=""))
+cat("\n")
+}

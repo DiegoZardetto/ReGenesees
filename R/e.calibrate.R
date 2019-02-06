@@ -1,0 +1,349 @@
+`e.calibrate` <-
+function (design, df.population, 
+    calmodel = if (inherits(df.population, "pop.totals"))
+                   attr(df.population, "calmodel"), 
+    partition = if (inherits(df.population, "pop.totals")) 
+                    attr(df.population, "partition") else FALSE, 
+    calfun = c("linear", "raking", "logit"), bounds = c(-Inf, Inf), 
+    aggregate.stage = NULL, sigma2 = NULL, 
+    maxit = 50, epsilon = 1e-07, force = TRUE)
+#######################################################################
+#  Definisce un oggetto di classe 'cal.analytic'                      #
+#  NOTA: L'algoritmo e' iterativo (calibrazioni indipendenti sui      #
+#        singoli domini) o non iterativo (calibrazione globale) a     #
+#        seconda della struttura del dataframe dei totali noti        #
+#        'df.population'.                                             #
+#  NOTA: Il programma verifica se 'df.population' sia conforme allo   #
+#        standard richiesto da e.calibrate (la struttura standard     #
+#        e' quella generata dalla funzione pop.template); se cosi'    #
+#        e', allora la struttura di 'df.population' identifica in     #
+#        modo univoco gli eventuali domini di calibrazione e la       #
+#        formula che definisce il modello di calibrazione.            #
+#        Il programma e', quindi, in grado di generare                #
+#        automaticamente, a partire da 'df.population', i parametri   #
+#        'formula e 'population' della ez.calib.                      #
+#  NOTA: L'argomento 'force' consente di richiedere di accettare      #
+#        l'approssimazione finale dei pesi "calibrati" in caso di     #
+#        mancata convergenza dell'algoritmo di calibrazione.          #
+#  NOTA: L'argomento 'sigma2' modella un eventuale effetto            #
+#        eteroschedastico nel modello di calibrazione (vedi 1/q_k di  #
+#        Deville e Sarndal).                                          #
+#######################################################################
+{
+    # First verify if the function has been called inside another function:
+    # this is needed to correctly manage metadata when e.g. the caller is a
+    # GUI stratum. (affects ONLY ecal.status)
+    directly <- !( length(sys.calls()) > 1 )
+
+    if (!inherits(design, "analytic")) 
+        stop("Object 'design' must inherit from class analytic")
+    if (!inherits(df.population, "data.frame")) 
+        stop("Object 'df.population' must be of class data frame")
+    if (!inherits(calmodel, "formula")) 
+        stop("Parameter 'calmodel' must be supplied as a formula")
+    if (!identical(partition, FALSE)) {
+        if (!inherits(partition, "formula")) 
+            stop("Parameter 'partition' must be supplied as a formula")
+    }
+    if (inherits(df.population, "pop.totals")) {
+        if (!identical(calmodel, attr(df.population, "calmodel"))) 
+            warning("'calmodel' formula (1) does not agree with the 'calmodel' attribute of df.population (2).\nValue (2) will be used", immediate. = TRUE)
+        if (!identical(partition, attr(df.population, "partition"))) 
+            warning("'partition' formula (1) does not agree with the 'partition' attribute of df.population (2).\nValue (2) will be used", immediate. = TRUE)
+
+        if ( !identical(attr(design, "data"), attr(df.population, "data")) &&
+             !identical(design, eval(attr(df.population, "data")))         &&
+             !is.null(attr(df.population, "data"))                         &&
+             !is.null(attr(design, "data")) ) 
+            warning("Data frames used to build objects design and df.population have different names",
+                    immediate. = TRUE)
+    }
+    else {
+        df.population <- population.check(df.population, design, 
+            calmodel, partition)
+    }
+    if ( !is.numeric(bounds) || (bounds[1] > 1) || (1 > bounds[2]) )
+        stop("Bounds must be numeric and must satisfy bounds[1] <= 1 <= bounds[2]")
+    if (!is.logical(force)) 
+        stop("Parameter 'force' must be logical")
+    if (is.character(calfun)) 
+        calfun <- match.arg(calfun)
+    if (calfun=="logit") {
+        if (any(is.infinite(bounds)))
+            stop("Bounds must be finite for logit calibration")
+        if (any(zapsmall(bounds)==1))
+            stop("Logit distance is not defined for bounds[1]=1 or bounds[2]=1")
+    }
+
+    e.df <- design$variables
+    calmodel <- attr(df.population, "calmodel")
+    calmodel.vars <- all.vars(calmodel)
+    na.Fail(e.df, calmodel.vars)
+    partition <- attr(df.population, "partition")
+    ids <- attr(design, "ids")
+    ids.char <- all.vars(ids)
+    stages <- length(ids.char)
+    weights <- attr(design, "weights")
+    weights.char <- all.vars(weights)
+    # If design is already calibrated, check that it has no negative "initial 
+    # weights" (i.e. calibration weights generated at the previous calibration step
+    # NOTE: This cannot happen for uncalibrated designs, owing to e.svydesign checks
+    if (inherits(design, "cal.analytic")) {
+         if (any(e.df[, weights.char] < 0)) {
+             stop("Negative weights in *calibrated* input object 'design': cannot calibrate it further!")
+            }
+        }
+    cal.weights.char <- paste(weights.char, ".cal",sep = "")
+
+    if (!is.null(sigma2)){
+        if (!inherits(sigma2,"formula"))
+            stop("Heteroskedasticity variable must be passed as a formula")
+        sigma2.char <- all.vars(sigma2)
+        if (length(sigma2.char)>1) 
+            stop("Heteroskedasticity formula must reference only one variable")
+        na.Fail(e.df, sigma2.char)
+        if (!is.numeric(variance <- e.df[, sigma2.char])) 
+            stop("Heteroskedasticity variable must be numeric")
+
+        ### BLOCK BELOW IS COMMENTED BECAUSE IT DOES NOT WORK YET ###
+        # Prevent negative sigma2, with the possible EXCEPTION of those
+        # coming from an invokation of ext.calibrated(), as they are actually
+        # convenience values derived from CALIBRATED external weights (see
+        # ext.calibrated) 
+        # if ( any(is.infinite(variance)) || any(variance <= 0) && !isTRUE(attr(e.df, "negw.pass")))
+        ### BLOCK ABOVE IS COMMENTED BECAUSE IT DOES NOT WORK YET ###
+
+        if ( any(is.infinite(variance)) || any(variance <= 0) )
+            stop("Heteroskedasticity variable must have finite and strictly positive values")
+    } else sigma2.char <- NULL
+
+    mk.ecal.status <- function(df.population,partition,partition.names=NULL){
+    ############################################################
+    #  Diagnostica sul processo di calibrazione.               #
+    #  Crea nel .GlobalEnv la lista a 2/3 componenti           #
+    #  'ecal.status':                                          #
+    #  - 'call':                                               #
+    #    identifica la chiamata di e.calibrate che ha          #
+    #    generato la lista 'ecal.status';                      #
+    #  - 'return.code':                                        #
+    #    matrice che contiene i codici di ritorno dei singoli  #
+    #    sub-task del processo di calibrazione complessivo:    #
+    #     -1 -> task non ancora affrontato;                    #
+    #     0  -> convergenza ottenuta;                          #
+    #     1  -> convergenza NON ottenuta ma force=TRUE.        #
+    # - 'fail.diagnostics':                                    #
+    #    presente solo se almeno un return code e' 1, fornisce #
+    #    utili informazioni di diagnostica per ogni partizione #
+    #    in cui la convergenza sia stata forzata.              #
+    ############################################################
+        tasks <- 1
+        parts <- nrow(df.population)
+        rownam <- "code"
+        colnam <- if (identical(partition,FALSE)) "global" else partition.names
+        ret.cod <- matrix(-1, nrow = tasks, ncol = parts, dimnames = list(rownam, colnam))
+        if   (directly) {
+               # assign("ecal.status", list(call = sys.call(-1), return.code = ret.cod), envir = .GlobalEnv)
+               assign2GE("ecal.status", list(call = sys.call(-1), return.code = ret.cod))
+              }
+        else  {
+               # assign("ecal.status", list(return.code = ret.cod), envir = .GlobalEnv)
+               assign2GE("ecal.status", list(return.code = ret.cod))
+              }
+    }
+    upd.ecal.status <- function(n.sub.task,code){
+    ###############################################
+    #  Aggiorna la lista 'ecal.status' nel        #
+    #  .GlobalEnv con il codice 'code' ritornato  #
+    #  dal sub-task di ordine 'n.subtask' e, se   #
+    #  code=1, con i dati diagnostici.            #
+    ###############################################
+        last.task <- col(t(ecal.status[["return.code"]]))[n.sub.task]
+        last.part <- row(t(ecal.status[["return.code"]]))[n.sub.task]
+        ecal.status[["return.code"]][last.task,last.part] <<- code
+        # Add fail diagnostics data:
+        if (code==1) {
+            fd <- list(attr(code, "fail.diagnostics"))
+            names(fd) <- colnames(ecal.status[["return.code"]])[last.part]
+            ecal.status[["fail.diagnostics"]] <<- c(ecal.status[["fail.diagnostics"]], fd)
+        }
+    }
+    #################################################################
+    #  Il parametro need.gc determina se la garbage collection      #
+    #  debba, o non debba, essere gestita dal programma.            #
+    #  Il valore di soglia per la dimensione della model-matrix     #
+    #  completa del modello di calibrazione e' fissato ad 1/10      #
+    #  della memoria massima allocabile.                            #
+    #  NOTA: Non dividere per il numero di domini di calibrazione   #
+    #        nella stima della dimensione massima della             #
+    #        model-matrix serve a contrastare potenziali casi       #
+    #        "sfortunati" in cui le dimensioni dei domini di        #
+    #        calibrazione siano molto squilibrate (cioe' quando     #
+    #        esistano domini con un numero di unita' molto maggiore #
+    #        che nell'equidistribuzione).                           #
+    #################################################################
+    need.gc <- FALSE
+    if (Sys.info()["sysname"] == "Windows"){
+        naux  <- if (identical(partition, FALSE)) {
+                     ncol(df.population)
+                    }
+                 else {
+                     (ncol(df.population) - length(all.vars(partition)))
+                    }
+        nrec <- nrow(e.df)
+        MEM.mega <- memory.limit()
+        mem.frac <- 10                 #Default value
+        need.gc <- ( ((8 * nrec * naux )/(1024^2))  > (MEM.mega / mem.frac) )
+    }
+    if (need.gc) 
+        warning("Complete calibration model-matrix ", if (identical(partition, FALSE)) "takes" else "would take",
+                " up more than 1/10 of maximum allocable memory", immediate. = TRUE)
+
+    gc.here <- function(doit) {
+    #################################################
+    #  Se doit=TRUE effettua la garbage collection  #
+    #  quando viene invocata.                       #
+    #################################################
+        if (doit) 
+            gc()
+    }
+    # Require MASS package to get ginv at hand ## No longer needed: ReGenesees now IMPORTS MASS
+    # require(MASS)
+    cal.sub.task <- 0
+
+    if (!is.null(aggregate.stage)) {
+        if (aggregate.stage < 1 || aggregate.stage > stages) 
+            stop("aggregate.stage must be between 1 and the number of sampling stages (", 
+            stages, ")")
+
+        aggindex <- design$cluster[[aggregate.stage]]
+        # Check that weights are constant at stage aggregate.stage
+        if (any(err <- tapply(e.df[, weights.char], aggindex,
+                              function(x) length(unique(x)) > 1))) {
+                first.err <- names(err[err])[1]
+                stop("Weights are not constant inside stage-", aggregate.stage, 
+                     " clusters! (e.g. cluster ", first.err,")")
+        }
+        # Check that sigma2 is constant at stage aggregate.stage
+        if (!is.null(sigma2)){
+            if (any(err <- tapply(variance, aggindex,
+                                  function(x) length(unique(x)) > 1))) {
+                    first.err <- names(err[err])[1]
+                    stop("Heteroskedasticity variable isn't constant inside stage-", aggregate.stage, 
+                         " clusters! (e.g. cluster ", first.err,")")
+            }
+        }
+    }
+
+    check.totals <- function(tot)
+    #######################################
+    # "Type" check for population totals. #
+    #######################################
+    {
+     num.col <- function(df) sapply(names(df), function(v) is.numeric(df[, v]))
+     if ( any(is.na(as.matrix(tot))) || any(is.infinite(as.matrix(tot))) || !(all(num.col(tot))) ) 
+          stop("Population totals must be numeric and finite")
+    }
+
+    if (identical(partition,FALSE)) {
+    #####################################################
+    #  Calibrazione globale (senza domini)              #
+    #####################################################
+        check.totals(df.population)
+        N.cal.constr <- ncol(df.population)
+        mk.ecal.status(df.population,partition)
+        qr.list <- vector("list", length = 1)
+        names(qr.list) <- "population"
+        gc.here(need.gc)
+        des <- ez.design(data = e.df, weights = weights, ids = ids, 
+            variables = c(ids.char, weights.char, calmodel.vars, sigma2.char))
+        gc.here(need.gc)
+        w.cal <- ez.calib(design = des, population = as.numeric(df.population), 
+            formula = calmodel, calfun = calfun, bounds = bounds, 
+            aggregate.stage = aggregate.stage, sigma2 = sigma2,
+            maxit = maxit, epsilon = epsilon, force = force)
+        gc.here(need.gc)
+        cal.sub.task <- (cal.sub.task+1)
+        upd.ecal.status(cal.sub.task,attr(w.cal,"ret.code"))
+        qr.list[[1]] <- list(group = 1:nrow(e.df), qr = attr(w.cal,"qr"), gwhalf = attr(w.cal,"gwhalf"))
+        gc.here(need.gc)
+        w.cal <- as.numeric(w.cal)
+        gc.here(need.gc)
+    }
+    else {
+    #####################################################
+    #  Calibrazione sui singoli domini di calibrazione  #
+    #####################################################
+        partition.vars <- all.vars(partition)
+        check.totals(df.population[, -(1:length(partition.vars)), drop = FALSE])
+        na.Fail(e.df, partition.vars)
+        N.cal.constr <- prod(nrow(df.population), ncol(df.population)- length(partition.vars))
+        partition.names <- apply(df.population[,partition.vars,drop=FALSE],1,paste,collapse=".")
+        mk.ecal.status(df.population,partition,partition.names)
+        #  'interact': factor i cui livelli identificano le partizioni
+        interact <- interaction(e.df[, rev(partition.vars), drop = FALSE], drop=TRUE)
+        #  'groups': lista che contiene gli indici di riga delle osservazioni nelle diverse partizioni
+        # groups <- .Internal(split(1:nrow(e.df), interact))
+        groups <- split(1:nrow(e.df), interact)
+        qr.list <- vector("list", length = length(groups))
+        names(qr.list) <- partition.names
+        #  'w.cal' conterra' i pesi calibrati calcolati nel loop partizione per partizione
+        w.cal <- rep(NA,nrow(e.df))
+        i.g <- 0
+        for (g in groups) {
+            i.g <- i.g+1
+            des.g <- ez.design(data = e.df[g,], weights = weights, ids = ids, 
+              variables = c(ids.char, weights.char, calmodel.vars, partition.vars, sigma2.char))
+            pop.g <- df.population[i.g, which(!(names(df.population) %in% 
+              partition.vars))]
+            w.cal.g <- ez.calib(design = des.g, population = as.numeric(pop.g), 
+              formula = calmodel, calfun = calfun, bounds = bounds, 
+              aggregate.stage = aggregate.stage, sigma2 = sigma2,
+              maxit = maxit, epsilon = epsilon, force = force)
+            gc.here(need.gc)
+            cal.sub.task <- (cal.sub.task+1)
+            upd.ecal.status(cal.sub.task,attr(w.cal.g,"ret.code"))
+            qr.list[[i.g]] <- list(group = g, qr = attr(w.cal.g,"qr"), gwhalf = attr(w.cal.g,"gwhalf"))
+            w.cal[g] <- as.numeric(w.cal.g)
+            }
+        gc.here(need.gc)
+    }
+# Aggiunge al dataframe interno a design i pesi calibrati calcolati w.cal
+design$variables[[cal.weights.char]] <- w.cal
+design$prob <- 1/w.cal
+attr(design, "weights") <- as.formula(paste("~", cal.weights.char, sep = ""), env = .GlobalEnv)
+if (!is.null(sigma2)){
+    attr(design, "sigma2")  <- sigma2
+    }
+# Add some component to qr.list (so it becomes conform to caldata in calibrate.survey.design2)
+psvar <- list(qr.list = qr.list, stage = 0, index = NULL)
+class(psvar) <- "analytic_calibration"
+design$postStrata <- list(psvar)
+# ADD calibration model metadata (2016/07/21 ADDED TO BENEFIT trimcal)
+attr(design, "calmodel") <- calmodel
+attr(design, "partition") <- partition
+if (!is.null(aggregate.stage)){
+    attr(design, "aggregate.stage")  <- aggregate.stage
+    }
+
+# If design was trimmed, remove the trimming token (i.e. calibrating a trimmed
+# object generates an 'ordinary' calibrated output)
+if (is.trimmed(design)) {
+    attr(design, "trimmed") <- NULL
+    }
+
+# Add calibration diagnostics
+attr(design, "ecal.status") <- get("ecal.status", envir = .GlobalEnv)
+attr(design, "epsilon") <- epsilon
+attr(design, "N.cal.constr") <- N.cal.constr
+# Define cal.analytic class
+if (inherits(design, "cal.analytic")) {
+    design$call <- c(sys.call(), design$call)
+    gc.here(need.gc)
+    }
+else {
+    design$call <- sys.call()
+    class(design) <- c("cal.analytic", class(design))
+    gc.here(need.gc)
+    }
+design
+}

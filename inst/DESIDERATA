@@ -1,0 +1,87 @@
+###################################################################
+# A list of possible future extensions of the ReGenesees package. #
+#                                                                 #
+# NOTE: This list is not necessarily up-to-date, and topics are   #
+#       listed in no particular order.                            #
+###################################################################
+
+
+TOPIC --------------------------------------------------------------------------
+     Bring Kott DAGJK into ReGenesees, by integrating package EVER into
+     ReGenesees
+COMPLEXITY/TIME
+     High
+MAIN DRIVER
+     Me
+
+
+TOPIC --------------------------------------------------------------------------
+     Enable variance estimation of poverty and inequality estimators (e.g. Gini,
+     Laeken indicators), via Deville influence functions approach
+COMPLEXITY/TIME
+     High
+MAIN DRIVER
+     Istat EU-SILC team, me
+
+
+TOPIC --------------------------------------------------------------------------
+     Enable exact variance estimation under multi-step calibration, using
+     super residuals
+COMPLEXITY/TIME
+     High
+MAIN DRIVER
+     Me
+
+
+TOPIC --------------------------------------------------------------------------
+     Enable ReGenesses to digest calibration weights which have been computed
+     externally (e.g. by other software), so as to provide correct variance
+     estimates
+COMPLEXITY/TIME
+     Low
+MAIN DRIVER
+     ONS, some Istat social survey teams, me
+STATUS
+     *Done* - function 'ext.calibrated' released with ReGenesees 1.8
+
+
+TOPIC --------------------------------------------------------------------------
+     Enable ReGenesses to calibrate while simultaneously fulfilling range
+     restrictions both on g-weights and on calibration weights (this would be
+     far better than a heuristic post-calibration trimming procedure)
+COMPLEXITY/TIME
+     Medium
+MAIN DRIVER
+     ONS, some Istat survey teams (e.g. EUSILC), me
+STATUS
+     *Done* - function 'trimcal' released with ReGenesees 1.9
+
+
+TOPIC --------------------------------------------------------------------------
+     Devise a way to enable ReGenesees to automagically fill a population
+     totals template by using a data mart of partially aggregated data as
+     'universe' (instead of a complete microdata file)
+COMPLEXITY/TIME
+     ?
+MAIN DRIVER
+     All Istat household survey teams (as we do not have a population register
+     yet), me
+
+
+TOPIC --------------------------------------------------------------------------
+     Integrate ReGenesees "partitioned" calibration approach with dedicated
+     matrix algebra methods (e.g. multiplication, generalize inverse, QR) for
+     sparse matrices
+COMPLEXITY/TIME
+     Medium
+MAIN DRIVER
+     Me, Istat team in charge of processing long-form Population Census sample
+
+
+TOPIC --------------------------------------------------------------------------
+     Parallelize variance estimation algorithms (mainly for domain estimation)
+COMPLEXITY/TIME
+     Medium
+MAIN DRIVER
+     Me
+

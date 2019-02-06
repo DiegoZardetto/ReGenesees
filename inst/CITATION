@@ -1,0 +1,25 @@
+citHeader("To cite the ReGenesees package in publications please use:")
+
+citEntry(
+    entry="article",
+    author="Diego Zardetto",
+    year=2015,
+    title="ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys",
+    journal="Journal of Official Statistics",
+    volume="31",
+    number=2,
+    pages="177-203",
+    textVersion="Zardetto D. (2015) \"ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys\". Journal of Official Statistics 31(2): 177-203"
+    )
+
+citEntry(
+    entry="misc",
+    author="Diego Zardetto",
+    year=2019,
+    title="ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys",
+    note="R package version 2.0",
+    organization="Istat",
+    address="Rome, Italy",
+    textVersion="Zardetto D. (2019) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.0, Istat, Italy."
+    )
+

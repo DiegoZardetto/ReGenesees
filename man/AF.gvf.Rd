@@ -32,7 +32,7 @@
 
 \title{Example Data for GVF Model Fitting}
 \description{
-File \code{AF.gvf} containes a set of summary statistics that can be used to illustrate \pkg{ReGenesees} facilities for fitting Generalized Variance Functions models. These summary statistics have kind \sQuote{Absolute Frequency} (see function \code{\link{estimator.kind}}), i.e. involve estimates and errors of counts.
+File \code{AF.gvf} contains a set of summary statistics that can be used to illustrate \pkg{ReGenesees} facilities for fitting Generalized Variance Functions models. These summary statistics have kind \sQuote{Absolute Frequency} (see function \code{\link{estimator.kind}}), i.e. involve estimates and errors of counts.
 }
 
 \usage{data(AF.gvf)}

@@ -48,7 +48,7 @@ As a side effect, the function prints on screen the induced change for selected 
 \code{\link{getR2}}).
 
 If \code{method = "pick"}, observations to be dropped are identified interactively by clicking on points of a plot (see \sQuote{Note}).
-Argumemt \code{which.plot} determines the nature of the plot: value \code{1} is for \emph{\sQuote{Observed vs Fitted}},
+Argument \code{which.plot} determines the nature of the plot: value \code{1} is for \emph{\sQuote{Observed vs Fitted}},
 value \code{2} is for \emph{\sQuote{Residuals vs Fitted}}. In the latter case, argument \code{res.type} specifies what
 kind of residuals have to be plotted. Argument \code{id.n} specifies how many points have to be labelled
 initially, starting with the most extreme in terms of the selected residuals: this applies to both kinds of plots.

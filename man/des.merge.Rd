@@ -28,7 +28,7 @@ Should \code{design} and \code{data} contain further common variables besides th
 }
 
 \section{Practical Purpose}{
-In the field of Official Statistics, it is not unfrequent that calibration weights must be computed even several months before the target variables of the survey are made available for estimation. Such a time lag follows from the fact that target variables tipically undergo much more thorough editing and imputation procedures than auxiliary variables.
+In the field of Official Statistics, it is not infrequent that calibration weights must be computed even several months before the target variables of the survey are made available for estimation. Such a time lag follows from the fact that target variables typically undergo much more thorough editing and imputation procedures than auxiliary variables.
 
 In such production scenarios, function \code{des.merge} allows to tackle the task of computing estimates and errors for the fresh-released target variables \emph{without} any need of \emph{repeating} the calibration step. Indeed, by using the function, one can join the data contained into an already calibrated \code{design} object with new \code{data} made available only after the calibration step. The merge operation is made easy and safe, and preserves all the original calibration metadata (e.g. those needed for variance estimation).
 }

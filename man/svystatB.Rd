@@ -60,7 +60,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 
 Missing values (\code{NA}) in model variables should be avoided. If \code{na.rm=FALSE} (the default) they generate an error. If \code{na.rm=TRUE}, observations containing NAs in model variables are dropped, and estimates gets computed on non missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this be not the case, computed estimates would be \emph{biased}.
 
-The \code{summary} method invoked on regression coefficients (say \code{b}) estimated via \code{svystatB}, gives p-values and significance codes for the component-wise test \code{b = 0}. Such values are computed assuming that the distribution of the regression coefficients estimators is normal (which is asymptotically true for large scale surveys). This assumption has the advantage of overcoming the problem of chosing the "right" statistic and assessing its "right" number of degrees of freedom when using data from a complex survey (see e.g. [Korn, Graubard 1990]).
+The \code{summary} method invoked on regression coefficients (say \code{b}) estimated via \code{svystatB}, gives p-values and significance codes for the component-wise test \code{b = 0}. Such values are computed assuming that the distribution of the regression coefficients estimators is normal (which is asymptotically true for large scale surveys). This assumption has the advantage of overcoming the problem of choosing the "right" statistic and assessing its "right" number of degrees of freedom when using data from a complex survey (see e.g. [Korn, Graubard 1990]).
 }
 
 \value{

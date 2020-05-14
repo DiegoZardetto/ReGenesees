@@ -27,7 +27,7 @@ function (design, formula, population, aggregate.stage = NULL, sigma2 = NULL,
 {
     if (is.character(calfun)) 
         calfun <- match.arg(calfun)
-    if (is.character(calfun) && calfun == "linear" && (bounds == 
+    if (is.character(calfun) && calfun == "linear" && identical(bounds, 
         c(-Inf, Inf))) {
         cal.weights <- ez.regcalib(design, formula, population,
                                    aggregate.stage = aggregate.stage,

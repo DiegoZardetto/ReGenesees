@@ -372,7 +372,7 @@ char.form
             }
         }
     # Here's the actual test on design
-    if (!is.null(root.des) && !identical(design, get(root.des))){
+    if (!identical(root.des, character(0)) && !identical(design, get(root.des))){
         stop("Input estimates have not been computed from input design object!")
         }
 

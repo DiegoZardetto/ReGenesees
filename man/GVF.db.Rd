@@ -62,7 +62,7 @@ GVF.db
 Information about registered GVF models stored inside \code{GVF.db} will be accessed and used by \pkg{ReGenesees} Generalized Variance Functions facilities, e.g. functions \code{\link{fit.gvf}} or \code{\link{predictCV}}.\cr\cr
 
 \strong{GVF.db$insert()}\cr
-Function \code{GVF.db$insert} has just a single mandatory argument: \code{GVF.model}. This can be either a two-sided formula or a character string which would be tranformed into a (well formed) two-sided formula by function \code{\link{as.formula}}.
+Function \code{GVF.db$insert} has just a single mandatory argument: \code{GVF.model}. This can be either a two-sided formula or a character string which would be transformed into a (well formed) two-sided formula by function \code{\link{as.formula}}.
 
 The \code{GVF.model} formula to be inserted into \code{GVF.db} must be \emph{new} (i.e. not already present into the archive) and can involve only variables contained inside \code{\link{gvf.input}} objects, namely:
 \preformatted{

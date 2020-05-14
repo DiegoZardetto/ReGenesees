@@ -26,7 +26,7 @@ deff(object, ...)
 With the exception of \code{deff}, all extractor functions can be used on any object returned by a survey statistic function: the correct answer will be obtained whatever the call that generated the object. For getting the design effect, \code{object} must have been built with option \code{deff = TRUE}.  
 }
 \value{
-A data structure (typically hineriting from classes \code{matrix} or \code{data.frame}) storing the requested informations.
+A data structure (typically inheriting from classes \code{matrix} or \code{data.frame}) storing the requested informations.
 }
 \note{
 Package \pkg{ReGenesees} provides extensions of methods \code{\link{coef}} and \code{\link{confint}} (originally from package \pkg{stats}) that can be used to extract estimates and confidence intervals respectively.

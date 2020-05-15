@@ -18,6 +18,7 @@ Description: Design-Based and Model-Assisted analysis of complex sampling survey
 Version: 2.0
 Author: Diego Zardetto
 Maintainer: Diego Zardetto <zardetto@istat.it>
+Authors@R: person("Diego", "Zardetto", role = c("aut", "cre"), email = "zardetto@istat.it")
 License: EUPL
 Imports: stats, MASS
 Depends: R (>= 2.14.0)

@@ -10,7 +10,7 @@ ReGenesees is the standard tool for calibration, estimation and sampling error a
 ## Installation
 You can install the **development version** of ReGenesees from [GitHub](https://github.com/DiegoZardetto/ReGenesees) as follows:
 
-``` r
+```r
 install.packages("devtools")
 devtools::install_github("DiegoZardetto/ReGenesees")
 ```
@@ -19,10 +19,10 @@ The **last released version** of ReGenesees can be downloaded from [Istat websit
 
 
 ## Website
-A pkgdown [website](https://DiegoZardetto.github.io/ReGenesees) for ReGenesees is available here:
+A [pkgdown website](https://DiegoZardetto.github.io/ReGenesees) for ReGenesees is available here:
 - <https://DiegoZardetto.github.io/ReGenesees>
 
 
 ## Graphical User Interface
-A companion R package named **ReGenesees.GUI**, which provides a user-friendly mouse-click graphical interface for ReGenesees, is available. Find it, e.g., on [GitHub](https://github.com/DiegoZardetto/ReGenesees.GUI) here:
+A companion R package named **ReGenesees.GUI** is also available, which provides a user-friendly mouse-click graphical interface for ReGenesees. Find it e.g. on [GitHub](https://github.com/DiegoZardetto/ReGenesees.GUI) here:
 - <https://github.com/DiegoZardetto/ReGenesees.GUI>

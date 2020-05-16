@@ -15,6 +15,11 @@ Changes in ReGenesees version 2.0
    variables be represented as *factors*. The companion package ReGenesees.GUI
    will, of course, keep automatically converting character columns into factors
    when importing data from external files.
+ - ReGenesees is now also available from GITHUB at the following URL:
+   https://github.com/DiegoZardetto/ReGenesees
+ - ReGenesees has now a brand new website (built with pkgdown) hosted on GITHUB
+   pages at the following URL:
+   https://diegozardetto.github.io/ReGenesees
  - e.calibrate, bounds.hint, aux.estimates: now equality of model.formulae is
    checked with all.equal() instead of identical(), so that environment
    mismatches are neglected. This is desirable when the model.formulae being

@@ -24,7 +24,7 @@ e.calibrate(design, df.population,
   \item{design}{Object of class \code{analytic} (or inheriting from it) containing survey data and sampling design metadata.}
   \item{df.population}{Data frame containing the known population totals for the auxiliary variables.}
   \item{calmodel}{Formula defining the linear structure of the calibration model.}
-  \item{partition}{Formula specifying the variables that define the "calibration domains" for the model ((see \sQuote{Details}); \code{FALSE} (the default) implies no calibration domains.}
+  \item{partition}{Formula specifying the variables that define the "calibration domains" for the model (see \sQuote{Details}); \code{FALSE} (the default) implies no calibration domains.}
   \item{calfun}{\code{character} specifying the distance function for the calibration process; the default is
                 \code{'linear'}.}  
   \item{bounds}{Allowed range for the ratios between calibrated and initial weights; the default is

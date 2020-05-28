@@ -5,8 +5,8 @@ Changes in ReGenesees version 2.0
    changes: see, e.g., the following NOTEs. 
  - NOTE: Under R 4.0.0 or later, old versions of the ReGenesees package need to
    be re-installed from sources (i.e. local .tar.gz files). Binary distributions
-   of old versions (i.e. local .zip files) are expect not to work under R 4.0.0
-   or later.
+   of old versions (i.e. local .zip files) are expected not to work under
+   R 4.0.0 or later.
  - NOTE: R 4.0.0 changed the default value of argument 'stringsAsFactors', which
    enters functions data.frame(), as.data.frame(), read.table() and possibly
    many others. The new default is now: *stringsAsFactors = FALSE*.

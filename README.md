@@ -15,7 +15,7 @@ install.packages("devtools")
 devtools::install_github("DiegoZardetto/ReGenesees")
 ```
 
-The **last released version** of ReGenesees can be downloaded from [Istat website](http://www.istat.it/en/tools/methods-and-it-tools/processing-tools/regenesees) or from the [European Commission platform Joinup]( https://joinup.ec.europa.eu/solution/regenesees-system/releases) (where **older versions** are available too).
+The **last released version** of ReGenesees can be downloaded from [Istat website](https://www.istat.it/en/tools/methods-and-it-tools/processing-tools/regenesees) or from the [European Commission platform Joinup]( https://joinup.ec.europa.eu/solution/regenesees-system/releases) (where **older versions** are available too).
 
 
 ## Website

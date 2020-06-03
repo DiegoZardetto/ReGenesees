@@ -2,7 +2,7 @@
 
 # ReGenesees <img src="ReGenesees_LOGO_small.png" align="right" alt="" />
 
-**ReGenesees** (R Evolved Generalized Software for Sampling Estimates and Errors in Surveys) is an R package for design-based and model-assisted analysis of complex sample surveys.
+**ReGenesees (R Evolved Generalized Software for Sampling Estimates and Errors in Surveys)** is an R package for design-based and model-assisted analysis of complex sample surveys.
 
 ReGenesees is the standard tool for calibration, estimation and sampling error assessment at **Istat (the Italian National Institute of Statistics)**.
 

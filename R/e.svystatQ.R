@@ -93,7 +93,8 @@ else {
     # Count how many variables inside
     nvariables <- attr(stat, "svyby")$nstats
     # Consistency check
-    if (!all.equal(nstats, nvariables*(1 + nvariances))) stop("Format modification failed")
+      # DEBUG 12/06/2020: BUG: if clauses have to use !isTRUE(all.equal()). Fixed
+    if (!isTRUE(all.equal(nstats, nvariables*(1 + nvariances)))) stop("Format modification failed")
     # Store properly the relevant stats into a matrix
     stat.mat <- matrix(nrow = nvariables, ncol = (1 + nvariances))
     stat.mat[, ] <- as.matrix(stat.f[, ])

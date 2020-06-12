@@ -5,6 +5,7 @@ Changes in ReGenesees version 2.1
    checked with all.equal() (which was a good idea) but if clauses didn't use
    the right construct (i.e. isTRUE(all.equal())). Fixed. 
 
+
 Changes in ReGenesees version 2.0
 
  - The main purpose of this version is to ensure a safe transition of ReGenesees

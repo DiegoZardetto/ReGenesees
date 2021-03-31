@@ -36,13 +36,13 @@ A call to \code{contrasts.reset()} restores \R factory-fresh defaults for contra
 \section{Technical Remarks and Warnings}{
 
 \dQuote{\emph{[...] the corner cases of model.matrix and friends is some of the more impenetrable code in the R sources.}}\cr
-\href{http://tolstoy.newcastle.edu.au/R/e17/help/12/01/2497.html}{Peter Dalgaard}\cr
+\href{https://stat.ethz.ch/pipermail/r-help/2012-January/301901.html}{Peter Dalgaard}\cr
 
 Contrasts handling functions tell \R how to encode the model-matrix associated to a given model-formula on specific data (see, e.g., \code{\link{contr.treatment}}, \code{\link{contrasts}}, \code{\link{model.matrix}}, \code{\link{formula}}, and references therein). More specifically, contrasts control the way factor-terms and interaction-terms occurring in formulae get actually represented in the model matrix. For instance, \R (by default) avoids the complete dummy coding of a factor whenever it is able to understand, on the basis of the structure of the model-formula, that some of the factor levels would generate linearly dependent (i.e. redundant) columns in the model-matrix (see Section \sQuote{Examples}).
 
 The usage of contrasts to build smaller, full-rank calibration model-matrices would be a good opportunity for \pkg{ReGenesees}, provided it comes \emph{without any information loss}. Indeed, smaller model-matrices mean less population totals to be provided by users, and higher efficiency in computations.
 
-Unfortunately, few controversial cases have been signalled in which \R ability to "simplify" a model-matrix on the basis of the structure of the related model-formula seems to lead to strange, unexpected results (see, e.g., \href{http://tolstoy.newcastle.edu.au/R/e17/help/12/01/2375.html}{this R-help thread}). No matter whether such \R behaviour is or not an actual bug with respect to its impact on \R linear model fitting or ANOVA facilities, it surely represents a concern for \pkg{ReGenesees} with respect to calibration (see Section \sQuote{Examples}). The risk is the following: there could be rare cases in which exploiting \R contrasts handling functions inside \pkg{ReGenesees} ends up with a \emph{wrong} (i.e. incomplete) population totals template, and (eventually) with \emph{wrong} calibration results.
+Unfortunately, few controversial cases have been signalled in which \R ability to "simplify" a model-matrix on the basis of the structure of the related model-formula seems to lead to strange, unexpected results (see, e.g., \href{https://stat.ethz.ch/pipermail/r-help/2012-January/301778.html}{this R-help thread}). No matter whether such \R behaviour is or not an actual bug with respect to its impact on \R linear model fitting or ANOVA facilities, it surely represents a concern for \pkg{ReGenesees} with respect to calibration (see Section \sQuote{Examples}). The risk is the following: there could be rare cases in which exploiting \R contrasts handling functions inside \pkg{ReGenesees} ends up with a \emph{wrong} (i.e. incomplete) population totals template, and (eventually) with \emph{wrong} calibration results.
 
 Though one could adopt several ad-hoc countermeasures to sterilize the risk described above while still taking advantage of contrasts (see Section \sQuote{Examples}), the choice of completely disabling contrasts via \code{contrasts.off()} would result in a \strong{100\% safety guarantee}. If computational efficiency is not a serious concern for you, switching off contrasts may determine the best \pkg{ReGenesees} setup for your analyses.
 }
@@ -52,7 +52,7 @@ Diego Zardetto
 \references{
 Chambers, J. M. and Hastie, T. J. (1992) \emph{Statistical models}. Chapter 2 of \emph{Statistical Models in S} eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
 
-\href{http://tolstoy.newcastle.edu.au/R/e17/help/12/01/2375.html}{"Why does the order of terms in a formula translate into different models/model matrices?"}, R-help thread.
+\href{https://stat.ethz.ch/pipermail/r-help/2012-January/301778.html}{"Why does the order of terms in a formula translate into different models/model matrices?"}, R-help thread.
 }
 \seealso{
 \code{\link{e.calibrate}}, \code{\link{pop.template}}, \code{\link{fill.template}}, and \code{\link{aux.estimates}} for the meaning and the usage of \code{calmodel} in \pkg{ReGenesees}. \code{\link{formula}}, \code{\link{model.matrix}}, \code{\link{contrasts}}, and \code{\link{contr.treatment}} to understand the role of contrasts in \R.

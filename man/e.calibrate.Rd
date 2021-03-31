@@ -108,7 +108,7 @@ Vanderhoeft, C. (2001) \emph{"Generalized Calibration at Statistic Belgium"}, St
 
 Sarndal, C.E., Lundstrom, S. (2005) Estimation in surveys with nonresponse. John Wiley & Sons.
 
-Scannapieco, M., Zardetto, D., Barcaroli, G. (2007) \emph{"La Calibrazione dei Dati con R: una Sperimentazione sull'Indagine Forze di Lavoro ed un Confronto con GENESEES/SAS"}, Contributi Istat n. 4., \url{http://www3.istat.it/dati/pubbsci/contributi/Contributi/contr_2007/2007_4.pdf}.
+Scannapieco, M., Zardetto, D., Barcaroli, G. (2007) \emph{"La Calibrazione dei Dati con R: una Sperimentazione sull'Indagine Forze di Lavoro ed un Confronto con GENESEES/SAS"}, Contributi Istat n. 4., \url{https://www.istat.it/it/files/2018/07/2007_4.pdf}.
 }
 
 \seealso{

@@ -632,7 +632,7 @@ pop<-fill.template(universe=sbs.frame,template=pop)
 
 ##############################################################
 # Calibrating simultaneously on unit-level and cluster-level #
-# auxiliary informations: an household survey example.       #
+# auxiliary information: an household survey example.        #
 ##############################################################
 
 # Load household data:

@@ -198,12 +198,12 @@ options(old.op)
 
 # Large scale household surveys typically adopt a 2-stage sampling
 # design with municipalities as PSUs and households as SSUs, in order
-# to eventually collect informations on each individual belonging to
+# to eventually collect information on each individual belonging to
 # sampled SSUs. In such a framework (up to possible total nonresponse
 # effects), each individual inside a sampled household shares the
 # same direct weight, which, in turn, equals the household weight.
 # This implies that it is very easy to build estimates referred to
-# SSU-level (households) informations, despite estimators actually
+# SSU-level (households) information, despite estimators actually
 # involve only individual values. Some examples are given below.
 
   # Load survey data:

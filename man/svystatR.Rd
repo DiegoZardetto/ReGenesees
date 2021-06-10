@@ -60,7 +60,7 @@ The \code{conf.int} argument allows to request the confidence intervals for the 
 
 Whenever confidence intervals are requested (i.e. \code{conf.int=TRUE}), the desired confidence level can be specified by means of the \code{conf.lev} argument. The \code{conf.lev} value must represent a probability (\code{0<=conf.lev<=1}) and its default is chosen to be \code{0.95}.
 
-The optional argument \code{deff} allows to request the design effect [Kish 1995] for the estimates.  By default \code{deff=FALSE}, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling \emph{"with replacement"}, one must use \code{deff="replace"}.\cr
+The optional argument \code{deff} allows to request the design effect [Kish 1995] for the estimates.  By default \code{deff=FALSE}, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}.\cr
 Being Ratios nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is: for the estimator of the total of the linearized variable, aka "Woodruff transform").\cr
 When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out \emph{within} that subpopulation. This is the same as the \code{srssubpop} option for Stata's function \code{estat}.
 
@@ -80,9 +80,9 @@ Diego Zardetto
 }
 
 \references{
-Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{"Model Assisted Survey Sampling"}, Springer Verlag.
+Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Survey Sampling}}, Springer Verlag.
 
-Kish, L. (1995). \emph{"Methods for design effects"}. Journal of Official Statistics, Vol. 11, pp. 55-77.
+Kish, L. (1995). \emph{\dQuote{Methods for design effects}}. Journal of Official Statistics, Vol. 11, pp. 55-77.
 }
 
 \seealso{

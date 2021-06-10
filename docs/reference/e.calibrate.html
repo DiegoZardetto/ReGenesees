@@ -8,6 +8,13 @@
 
 <title>Calibration of Survey Weights — e.calibrate • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -122,12 +138,12 @@
     </div>
 
     <pre class="usage"><span class='fu'>e.calibrate</span>(<span class='no'>design</span>, <span class='no'>df.population</span>,
-            <span class='kw'>calmodel</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
-                       <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/attr'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"calmodel"</span>),
-            <span class='kw'>partition</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
-                        <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/attr'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"partition"</span>) <span class='kw'>else</span> <span class='fl'>FALSE</span>,
-            <span class='kw'>calfun</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"linear"</span>, <span class='st'>"raking"</span>, <span class='st'>"logit"</span>),
-            <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>Inf</span>, <span class='fl'>Inf</span>), <span class='kw'>aggregate.stage</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+            <span class='kw'>calmodel</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
+                       <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"calmodel"</span>),
+            <span class='kw'>partition</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
+                        <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"partition"</span>) <span class='kw'>else</span> <span class='fl'>FALSE</span>,
+            <span class='kw'>calfun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"linear"</span>, <span class='st'>"raking"</span>, <span class='st'>"logit"</span>),
+            <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>Inf</span>, <span class='fl'>Inf</span>), <span class='kw'>aggregate.stage</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
             <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>maxit</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>1e-07</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,7 +173,7 @@
     <tr>
       <th>bounds</th>
       <td><p>Allowed range for the ratios between calibrated and initial weights; the default is
-                <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(-Inf,Inf)</a></code>.</p></td>
+                <code><a href='https://rdrr.io/r/base/c.html'>c(-Inf,Inf)</a></code>.</p></td>
     </tr>
     <tr>
       <th>aggregate.stage</th>
@@ -190,12 +206,12 @@
     <p>This function creates an object of class <code>cal.analytic</code>. A <code>cal.analytic</code> object makes it possible to compute estimates and standard errors of calibration estimators [Deville, Sarndal 92] [Deville, Sarndal, Sautory 93].</p>
 <p>The mandatory argument <code>calmodel</code> symbolically defines the calibration model you intend to use, that is - in the language of the Generalized Regression Estimator - the assisting linear regression model underlying the calibration problem. More specifically, the <code>calmodel</code> formula identifies the auxiliary variables and the constraints for the calibration problem, with a notation inspired by [Wilkinson, Rogers 73]. For example, <code>calmodel=~(X+Z):C+(A+B):D-1</code> defines the calibration problem in which constraints are imposed: (i) on the totals of auxiliary (quantitative) variables <code>X</code> and <code>Z</code> within the subpopulations identified by the (qualitative) classification variable <code>C</code> and, at the same time, (ii) on the absolute frequency of the (qualitative) variables <code>A</code> and <code>B</code> within the subpopulations identified by the (qualitative) classification variable <code>D</code>.<br />
 The <code>design</code> variables referenced by <code>calmodel</code> must be <code>numeric</code> or <code>factor</code> and must not contain any missing value (<code>NA</code>).</p>
-<p>Problems for which one or more qualitative variables can be <em>"factorized"</em> in the formula that specifies the calibration model, are particularly interesting. These variables split the population into non-overlapping subpopulations known as <em>"calibration domains"</em> for the model. An example is provided by the statement <code>calmodel=~(A+B+X+Z):D-1</code> in which the variable that identifies the calibration domains is <code>D</code>; similarly, the formula <code>calmodel=~(A+B+X+Z):D1:D2-1</code> identifies as calibration domains the subpopulations determined by crossing the modalities of <code>D1</code> and <code>D2</code>. The interest in models of this kind lies in the fact that the <em>global</em> calibration problem they describe can, actually, be broken down into <em>local</em> subproblems, one per calibration domain, which can be solved separately [Vanderhoeft 01]. Thus, for example, the global problem defined by <code>calmodel=~(A+B+X+Z):D-1</code> is equivalent to the sequence of problems defined by the <em>"reduced model"</em> <code>calmodel=~A+B+X+Z-1</code> in each of the domains identified by the modalities of <code>D</code>. The opportunity to separately solve the subproblems related to different calibration domains achieves a significant reduction in computation complexity: the gain increases with increasing survey data size and (most importantly) with increasing auxiliary variables number.</p>
+<p>Problems for which one or more qualitative variables can be <em>&#8220;factorized&#8221;</em> in the formula that specifies the calibration model, are particularly interesting. These variables split the population into non-overlapping subpopulations known as <em>&#8220;calibration domains&#8221;</em> for the model. An example is provided by the statement <code>calmodel=~(A+B+X+Z):D-1</code> in which the variable that identifies the calibration domains is <code>D</code>; similarly, the formula <code>calmodel=~(A+B+X+Z):D1:D2-1</code> identifies as calibration domains the subpopulations determined by crossing the modalities of <code>D1</code> and <code>D2</code>. The interest in models of this kind lies in the fact that the <em>global</em> calibration problem they describe can, actually, be broken down into <em>local</em> subproblems, one per calibration domain, which can be solved separately [Vanderhoeft 01]. Thus, for example, the global problem defined by <code>calmodel=~(A+B+X+Z):D-1</code> is equivalent to the sequence of problems defined by the <em>&#8220;reduced model&#8221;</em> <code>calmodel=~A+B+X+Z-1</code> in each of the domains identified by the modalities of <code>D</code>. The opportunity to separately solve the subproblems related to different calibration domains achieves a significant reduction in computation complexity: the gain increases with increasing survey data size and (most importantly) with increasing auxiliary variables number.</p>
 <p>The optional argument <code>partition</code> makes it possible to choose, in cases in which the calibration problem can be factorized, whether to solve the problem globally or in a partitioned way (that is, separately for each calibration domain). The global solution (which is the default option) can be selected invoking the <code>e.calibrate</code> function with <code>partition=FALSE</code>. To request the partitioned solution - a strongly recommended option when dealing with a lot of auxiliary variables and big data sizes - it is necessary to specify via <code>partition</code> the variables defining the calibration domains for the model. If a formula is passed through the <code>partition</code> argument (for example: <code>partition=~D1:D2</code>), the program checks that <code>calmodel</code> actually describes a "reduced model" (for example: <code>calmodel=~A+B+X+Z-1</code>), that is it does <em>not</em> reference any of the partition variables; if this is not the case, the program stops and prints an error message. Notice that a formula like <code>partition=~D1+D2</code> will be automatically translated into the factor-crossing formula <code>partition=~D1:D2</code>.<br />
 The <code>design</code> variables referenced by <code>partition</code> (if any) must be <code>factor</code> and must not contain any missing value (<code>NA</code>).</p>
 <p>The mandatory argument <code>df.population</code> is used to specify the known totals of the auxiliary variables referenced by <code>calmodel</code> within the subpopulations (if any) identified by <code>partition</code>. These known totals must be stored in a data frame whose structure (i) depends on the values of <code>calmodel</code> and <code>partition</code> and (ii) must conform to a standard. In order to facilitate understanding of and compliance with this standard, the <span class="pkg">ReGenesees</span> package provides the user with four functions: <code><a href='pop.template.html'>pop.template</a></code>, <code><a href='population.check.html'>population.check</a></code>, <code><a href='describe.html'>pop.desc</a></code> and <code><a href='fill.template.html'>fill.template</a></code>. The <code>pop.template</code> function is able to guide the user in constructing the known totals data frame for a specific calibration problem, the <code><a href='describe.html'>pop.desc</a></code> function provides a natural language description of the template structure, the <code><a href='fill.template.html'>fill.template</a></code> function can be exploited to automatically fill the template when a sampling frame is available, while the <code>population.check</code> function allows to check whether a known totals data frame conforms to the standard required by <code>e.calibrate</code>. In any case, if the <code>df.population</code> data frame does not comply with the standard, the <code>e.calibrate</code> function stops and prints an error message: the meaning of the message should help the user diagnose the cause of the problem.</p>
-<p>The <code>calfun</code> argument identifies the distance function to be used in the calibration process. Three built-in functions are provided: <code>"linear"</code>, <code>"raking"</code>, and <code>"logit"</code> (see [Deville, Sarndal, Sautory 93]). The default is <code>"linear"</code>, which corresponds to the euclidean metric and yields the Generalized Regression Estimator (provided that no range restrictions are imposed on the g-weights). The <code>"raking"</code> distance corresponds to the <em>"multiplicative method"</em> of [Deville, Sarndal, Sautory 93].</p>
-<p>The <code>bounds</code> argument allows to add <em>"range constraints"</em> to the calibration problem. To be precise, the interval defined by <code>bounds</code> will contain the values of the ratios between final (calibrated) and initial (direct) weights. The default value is <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(-Inf,Inf)</a></code>, i.e. no range constraints are imposed. These constraints are optional unless the <code>"logit"</code> function is selected: in the latter case the range defined by <code>bounds</code> has to be finite (see, again, [Deville, Sarndal, Sautory 93]).</p>
+<p>The <code>calfun</code> argument identifies the distance function to be used in the calibration process. Three built-in functions are provided: <code>"linear"</code>, <code>"raking"</code>, and <code>"logit"</code> (see [Deville, Sarndal, Sautory 93]). The default is <code>"linear"</code>, which corresponds to the euclidean metric and yields the Generalized Regression Estimator (provided that no range restrictions are imposed on the g-weights). The <code>"raking"</code> distance corresponds to the <em>&#8220;multiplicative method&#8221;</em> of [Deville, Sarndal, Sautory 93].</p>
+<p>The <code>bounds</code> argument allows to add <em>&#8220;range constraints&#8221;</em> to the calibration problem. To be precise, the interval defined by <code>bounds</code> will contain the values of the ratios between final (calibrated) and initial (direct) weights. The default value is <code><a href='https://rdrr.io/r/base/c.html'>c(-Inf,Inf)</a></code>, i.e. no range constraints are imposed. These constraints are optional unless the <code>"logit"</code> function is selected: in the latter case the range defined by <code>bounds</code> has to be finite (see, again, [Deville, Sarndal, Sautory 93]).</p>
 <p>The value passed by the <code>aggregate.stage</code> argument must be an integer between <code>1</code> and the number of sampling stages of <code>design</code>. If specified, causes the calibrated weights to be constant within sampling units selected at the <code>aggregate.stage</code> stage (actually this is only allowed if the initial weights had already this property, as it is sometimes the case in multistage cluster sampling). If not specified, the calibrated weights may differ even for sampling units with identical initial weights. The same holds if some final units belonging to the same cluster selected at the stage <code>aggregate.stage</code> fall in distinct calibration domains (i.e. if the domains defined by <code>partition</code> "cut across" the <code>aggregate.stage</code>-stage clusters).</p>
 <p>The argument <code>sigma2</code> can be used to take into account a possible heteroskedasticity effect in the (assisting linear regression model underlying the) calibration problem. In such cases, <code>sigma2</code> must identify some variable to which the variances of the error terms are believed to be proportional. Notice that <code>sigma2</code> can also be interpreted from a "purely calibration-based" point of view: it corresponds to the \(1/q_k\) unit-weights appearing inside the distance measures of [Deville, Sarndal 92] [Deville, Sarndal, Sautory 93]. The final effect is, on average, that <em>calibrated weights associated to higher values of</em> <code>sigma2</code> <em>tend to stay closer to their corresponding initial weights</em>.<br />
 Note that it is technically possible to exploit this behaviour in order to <em>prevent some subset of the initial weights from being altered by calibration</em>. The trick is simple: just build a convenience <code>sigma2</code> variable whose values are set to some very high value (e.g. <code>1E12</code>) for those units whose initial weight must be preserved, and to <code>1</code> otherwise (see &#8216;Examples&#8217;). Nevertheless, this trick should be used sparingly and very carefully, as otherwise it may: (i) cause the calibration algorithm to not converge, (ii) result in introducing bias in calibration estimates. In particular, with respect to bias, one should not select the units whose weight must be preserved on the basis of the current sample.<br />
@@ -212,7 +228,8 @@ CODE        MEANING
    0........solved sub-problem (convergence achieved);
    1........unsolved sub-problem (no convergence): output forced.
 </pre>
-    <p>Recall that the latter return code (<code>1</code>) may only occur if <code>force = TRUE</code>.<br />
+
+<p>Recall that the latter return code (<code>1</code>) may only occur if <code>force = TRUE</code>.<br />
 If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.status</code> list gains a third component named <code>"fail.diagnostics"</code> which is itself a list; its components correspond to sub-problems for which convergence was not achieved, and store useful information about the auxiliary variables for which calibration constraints are violated. Therefore, users can exploit <code>ecal.status</code> to identify sub-problems and variables from which errors stemmed, hence taking a step forward to eliminate them.</p>
 <p>Notice, lastly, that the <code>ecal.status</code> list will also be persistently bound to the <code>e.calibrate</code> return object, stored inside a dedicated attribute. For the inspection of such diagnostics information the <code><a href='check.cal.html'>check.cal</a></code> function is available.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -223,12 +240,12 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
     <p>The <code>cal.analytic</code> class is a specialization of the <code><a href='e.svydesign.html'>analytic</a></code> class; this means that an object created by <code>e.calibrate</code> inherits from the <code><a href='e.svydesign.html'>analytic</a></code> class and you can use on it all methods defined on the latter class, e.g. <code>print</code>, <code>summary</code>, <code><a href='weights.html'>weights</a></code>. Moreover, a calibrated design can be passed again to <code>e.calibrate</code>, thus undergoing further calibration steps.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Deville, J.C., Sarndal, C.E. (1992) <em>"Calibration Estimators in Survey Sampling"</em>, Journal of the American Statistical Association, Vol. 87, No. 418, pp. 376-382.</p>
-<p>Deville, J.C., Sarndal, C.E., Sautory, O. (1993) <em>"Generalized Raking Procedures in Survey Sampling"</em>, Journal of the American Statistical Association, Vol. 88, No. 423, pp. 1013-1020.</p>
-<p>Wilkinson, G.N., Rogers, C.E. (1973) <em>"Symbolic Description of Factorial Models for Analysis of Variance"</em>, Journal of the Royal Statistical Society, series C (Applied Statistics), Vol. 22, pp. 181-191.</p>
-<p>Vanderhoeft, C. (2001) <em>"Generalized Calibration at Statistic Belgium"</em>, Statistics Belgium Working Paper n. 3.</p>
+    <p>Deville, J.C., Sarndal, C.E. (1992) <em>&#8220;Calibration Estimators in Survey Sampling&#8221;</em>, Journal of the American Statistical Association, Vol. 87, No. 418, pp. 376-382.</p>
+<p>Deville, J.C., Sarndal, C.E., Sautory, O. (1993) <em>&#8220;Generalized Raking Procedures in Survey Sampling&#8221;</em>, Journal of the American Statistical Association, Vol. 88, No. 423, pp. 1013-1020.</p>
+<p>Wilkinson, G.N., Rogers, C.E. (1973) <em>&#8220;Symbolic Description of Factorial Models for Analysis of Variance&#8221;</em>, Journal of the Royal Statistical Society, series C (Applied Statistics), Vol. 22, pp. 181-191.</p>
+<p>Vanderhoeft, C. (2001) <em>&#8220;Generalized Calibration at Statistic Belgium&#8221;</em>, Statistics Belgium Working Paper n. 3.</p>
 <p>Sarndal, C.E., Lundstrom, S. (2005) Estimation in surveys with nonresponse. John Wiley &amp; Sons.</p>
-<p>Scannapieco, M., Zardetto, D., Barcaroli, G. (2007) <em>"La Calibrazione dei Dati con R: una Sperimentazione sull'Indagine Forze di Lavoro ed un Confronto con GENESEES/SAS"</em>, Contributi Istat n. 4., <a href='https://www.istat.it/it/files/2018/07/2007_4.pdf'>https://www.istat.it/it/files/2018/07/2007_4.pdf</a>.</p>
+<p>Scannapieco, M., Zardetto, D., Barcaroli, G. (2007) <em>&#8220;La Calibrazione dei Dati con R: una Sperimentazione sull'Indagine Forze di Lavoro ed un Confronto con GENESEES/SAS&#8221;</em>, Contributi Istat n. 4., <a href='https://www.istat.it/it/files/2018/07/2007_4.pdf'>https://www.istat.it/it/files/2018/07/2007_4.pdf</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='e.svydesign.html'>e.svydesign</a></code> to bind survey data and sampling design metadata, <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code> and <code><a href='svystatL.html'>svystatL</a></code> for calculating estimates and standard errors, <code><a href='pop.template.html'>pop.template</a></code> for constructing known totals data frames in compliance with the standard required by <code>e.calibrate</code>, <code><a href='population.check.html'>population.check</a></code> to check that the known totals data frame satisfies that standard, <code><a href='describe.html'>pop.desc</a></code> to provide a natural language description of the template structure, <code><a href='fill.template.html'>fill.template</a></code> to automatically fill the template when a sampling frame is available, <code><a href='bounds.hint.html'>bounds.hint</a></code> to obtain a hint for range restricted calibration, <code><a href='g.range.html'>g.range</a></code> to asses the variation of weights after calibration and <code><a href='check.cal.html'>check.cal</a></code> to check if calibration constraints have been fulfilled.</p></div>
@@ -243,7 +260,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'>######################################################################</span>
 
 <span class='co'># Load household data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 
 <span class='co'># Creation of the object to be calibrated:</span>
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
@@ -265,7 +282,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; e.calibrate(design = des, df.population = pop01, calmodel = ~1, 
 #&gt;     calfun = "logit", bounds = bounds, aggregate.stage = 2)</div><div class='input'>
 <span class='co'># Use the summary() function if you need some additional details, e.g.:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>descal01</span>)</div><div class='output co'>#&gt; Calibrated, Stratified 2 - Stage Cluster Sampling Design (with replacement)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>descal01</span>)</div><div class='output co'>#&gt; Calibrated, Stratified 2 - Stage Cluster Sampling Design (with replacement)
 #&gt; - [55] strata
 #&gt; - [1307, 2372] clusters
 #&gt; 
@@ -295,7 +312,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; [16] "age5c"        "age10c"       "sex"          "marstat"      "z"           
 #&gt; [21] "income"       "weight.cal"  </div><div class='input'>
 <span class='co'># Use the 'variables' slot to extract survey data, e.g.:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>descal01</span>$<span class='no'>variables</span>)</div><div class='output co'>#&gt;   towcod famcod key weight stratum SUPERSTRATUM sr regcod procod x1 x2 x3 y1 y2
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>descal01</span>$<span class='no'>variables</span>)</div><div class='output co'>#&gt;   towcod famcod key weight stratum SUPERSTRATUM sr regcod procod x1 x2 x3 y1 y2
 #&gt; 1    147   3103   1  485.8     803           26  0      7      8  0  0  0  0  0
 #&gt; 2    147   3103   2  485.8     803           26  0      7      8  0  0  0  1  1
 #&gt; 3    147   3109   3  485.8     803           26  0      7      8  0  0  0  1  1
@@ -310,7 +327,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; 5  0     2      4   f   married 110.52172    537   483.7165
 #&gt; 6  0     3      5   f   married 134.40092   2143   483.7165</div><div class='input'>
 <span class='co'># Use the weights() function to extract weights, e.g.:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>descal01</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>descal01</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;   95.09  217.86  318.55  306.10  360.75  927.21 </div><div class='input'>
 <span class='co'># Checking the result (first add the new 'ones' variable </span>
 <span class='co'># to estimate the number of final units in the population):</span>
@@ -458,7 +475,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'>#      (recall that force=TRUE by default):</span>
 <span class='no'>approx.cal</span><span class='kw'>&lt;-</span><span class='fu'>e.calibrate</span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>des</span>,<span class='kw'>df.population</span><span class='kw'>=</span><span class='no'>pop05p</span>,
             <span class='kw'>calmodel</span><span class='kw'>=</span>~<span class='no'>age5c</span>+<span class='no'>x1</span>-<span class='fl'>1</span>,<span class='kw'>partition</span><span class='kw'>=</span>~<span class='no'>sex</span>:<span class='no'>marstat</span>,
-            <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.95</span>,<span class='fl'>1.05</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0264941359907803 in 51 iterations (variable x1), see ecal.status.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0634422936449963 in 51 iterations (variable x1), see ecal.status.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0419225750326229 in 51 iterations (variable x1), see ecal.status.</span></div><div class='input'>
+            <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.95</span>,<span class='fl'>1.05</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0264941359907803 in 51 iterations (variable x1), see ecal.status.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0634422936449963 in 51 iterations (variable x1), see ecal.status.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0419225750326229 in 51 iterations (variable x1), see ecal.status.</span></div><div class='input'>
 <span class='co'># ...now use check.cal function to assess the amount of calibration</span>
 <span class='co'># constraints violation:</span>
 <span class='fu'><a href='check.cal.html'>check.cal</a></span>(<span class='no'>approx.cal</span>)</div><div class='output co'>#&gt; Calibration Constraints missed (at tolerance level epsilon = 1e-07): 4 out of 36
@@ -512,7 +529,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'>#################################################</span>
 
 <span class='co'># Load sbs data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 
   <span class='co'>#######################</span>
   <span class='co'># Full-response case. #</span>
@@ -527,10 +544,10 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='no'>mean.VA</span></div><div class='output co'>#&gt;             Mean CI.l(95%) CI.u(95%)     CV%
 #&gt; va.imp2 3250.599  3136.161  3365.038 1.79623</div><div class='input'>
   <span class='co'># Compare the obtained estimate with the true population parameter:</span>
-  <span class='no'>MEAN.VA</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>va.imp2</span>)
+  <span class='no'>MEAN.VA</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>va.imp2</span>)
   <span class='no'>MEAN.VA</span></div><div class='output co'>#&gt; [1] 3136.899</div><div class='input'>
   <span class='co'># We get a small overestimation of about 4%...</span>
-  <span class='fl'>100</span>*(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mean.VA</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
+  <span class='fl'>100</span>*(<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mean.VA</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
 #&gt; 3.624619 </div><div class='input'>
   <span class='co'># which, anyway, doesn't indicate a significant bias for the</span>
   <span class='co'># full-response sample, because the 95% confidence interval</span>
@@ -545,18 +562,18 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'># Set bigger response probabilities for bigger firms,</span>
   <span class='co'># e.g. exploiting available information about the</span>
   <span class='co'># number of employees (emp.cl):</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/levels'>levels</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.cl</span>)</div><div class='output co'>#&gt; [1] "[6,9]"    "(9,19]"   "(19,49]"  "(49,99]"  "(99,Inf]"</div><div class='input'>  <span class='no'>p.resp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.4</span>,<span class='fl'>.6</span>,<span class='fl'>.8</span>,<span class='fl'>.95</span>,<span class='fl'>.99</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.cl</span>)</div><div class='output co'>#&gt; [1] "[6,9]"    "(9,19]"   "(19,49]"  "(49,99]"  "(99,Inf]"</div><div class='input'>  <span class='no'>p.resp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>.4</span>,<span class='fl'>.6</span>,<span class='fl'>.8</span>,<span class='fl'>.95</span>,<span class='fl'>.99</span>)
 
   <span class='co'># Tie response probabilities to sample observations:</span>
-  <span class='no'>pr</span><span class='kw'>&lt;-</span><span class='no'>p.resp</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>unclass</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.cl</span>)]
+  <span class='no'>pr</span><span class='kw'>&lt;-</span><span class='no'>p.resp</span>[<span class='fu'><a href='https://rdrr.io/r/base/class.html'>unclass</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.cl</span>)]
 
   <span class='co'># Now, randomly select a subsample of responding units from sbs:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>12345</span>)          <span class='co'># (fix the RNG seed for reproducibility)</span>
-  <span class='no'>rand</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>sbs</span>))
+  <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>12345</span>)          <span class='co'># (fix the RNG seed for reproducibility)</span>
+  <span class='no'>rand</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>sbs</span>))
   <span class='no'>sbs.nr</span><span class='kw'>&lt;-</span><span class='no'>sbs</span>[<span class='no'>rand</span><span class='kw'>&lt;</span><span class='no'>pr</span>,]
 
   <span class='co'># This implies an overall response rate of about 73%:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>sbs.nr</span>)/<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>sbs</span>)</div><div class='output co'>#&gt; [1] 0.7261543</div><div class='input'>
+  <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>sbs.nr</span>)/<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>sbs</span>)</div><div class='output co'>#&gt; [1] 0.7261543</div><div class='input'>
   <span class='co'># Treat the non-response sample as it was complete: this should</span>
   <span class='co'># lead to biased estimates of value added, as the latter is</span>
   <span class='co'># positively correlated with firms size...</span>
@@ -565,7 +582,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; # Empty levels have been dropped!
 #&gt; </div><div class='input'>
   <span class='co'>#...indeed:</span>
-  <span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)   <span class='co'># (prevent lonely-PSUs troubles)</span>
+  <span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)   <span class='co'># (prevent lonely-PSUs troubles)</span>
   <span class='no'>mean.VA.nr</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbsdes.nr</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>va.imp2</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>,
               <span class='kw'>vartype</span><span class='kw'>=</span> <span class='st'>"cvpct"</span>,<span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>conf.lev</span><span class='kw'>=</span><span class='fl'>0.95</span>)
   <span class='no'>mean.VA.nr</span></div><div class='output co'>#&gt;             Mean CI.l(95%) CI.u(95%)      CV%
@@ -616,8 +633,8 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'># Even if the 95% confidence interval still doesn't cover the</span>
   <span class='co'># true value, by calibration we passed from an initial overestimation</span>
   <span class='co'># of about 33% to a 7% one: </span>
-  <span class='fl'>100</span>*(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mean.VA.nr</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
-#&gt; 33.17462 </div><div class='input'>  <span class='fl'>100</span>*(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mean.VA.cal.nr</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
+  <span class='fl'>100</span>*(<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mean.VA.nr</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
+#&gt; 33.17462 </div><div class='input'>  <span class='fl'>100</span>*(<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mean.VA.cal.nr</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
 #&gt; 7.460192 </div><div class='input'>
 
   <span class='co'>#################################################</span>
@@ -676,7 +693,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'># Notice also that, even if the second calibration step causes</span>
   <span class='co'># sbscal.nr2 to be no more exactly calibrated with respect to </span>
   <span class='co'># emp.cl (look at the cvpct values)...</span>
-  <span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)   <span class='co'># (prevent lonely-PSUs troubles)</span>
+  <span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)   <span class='co'># (prevent lonely-PSUs troubles)</span>
   <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal.nr2</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>emp.cl</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                   Total       CV%
 #&gt; emp.cl[6,9]    5292.797 0.8556058
 #&gt; emp.cl(9,19]   4761.984 0.6970512
@@ -688,10 +705,10 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='no'>mean.VA.cal.nr2</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal.nr2</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>va.imp2</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>,
                    <span class='kw'>vartype</span><span class='kw'>=</span> <span class='st'>"cvpct"</span>,<span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>conf.lev</span><span class='kw'>=</span><span class='fl'>0.95</span>)
 
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)   <span class='co'># (reset variance estimation options)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)   <span class='co'># (reset variance estimation options)</span>
 
   <span class='no'>mean.VA.cal.nr2</span></div><div class='output co'>#&gt;             Mean CI.l(95%) CI.u(95%)      CV%
-#&gt; va.imp2 3361.037  3152.528  3569.545 3.165209</div><div class='input'>  <span class='fl'>100</span>*(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mean.VA.cal.nr2</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
+#&gt; va.imp2 3361.037  3152.528  3569.545 3.165209</div><div class='input'>  <span class='fl'>100</span>*(<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mean.VA.cal.nr2</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
 #&gt; 7.145207 </div><div class='input'>
 
   <span class='co'>##############################################################</span>
@@ -745,13 +762,13 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; e.calibrate(design = sbsdes.nr, df.population = pop1, bounds = hint1)</div><div class='input'>
   <span class='co'># Now:</span>
   <span class='co'># (i) verify the nonresponse bias reduction effect:</span>
-    <span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)  <span class='co'>#(prevent lonely-PSUs troubles)</span>
+    <span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)  <span class='co'>#(prevent lonely-PSUs troubles)</span>
     <span class='no'>mean.VA.cal.nr1</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal.nr1</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>va.imp2</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>,
                      <span class='kw'>vartype</span><span class='kw'>=</span> <span class='st'>"cvpct"</span>,<span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>conf.lev</span><span class='kw'>=</span><span class='fl'>0.95</span>)
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+    <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
     <span class='no'>mean.VA.cal.nr1</span></div><div class='output co'>#&gt;             Mean CI.l(95%) CI.u(95%)      CV%
-#&gt; va.imp2 3349.107  3140.887  3557.326 3.172087</div><div class='input'>    <span class='fl'>100</span>*(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>mean.VA.cal.nr1</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
+#&gt; va.imp2 3349.107  3140.887  3557.326 3.172087</div><div class='input'>    <span class='fl'>100</span>*(<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mean.VA.cal.nr1</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
 #&gt; 6.764894 </div><div class='input'>
   <span class='co'># thus we are back to ~7%, as for the previous 2-step calibration example.</span>
 
@@ -771,7 +788,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'>############################################################################</span>
 
 <span class='co'># Load sbs data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 
 <span class='co'># Create the design object to be calibrated:</span>
 <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,<span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
@@ -798,14 +815,14 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; va.imp2 56250232 1002997</div><div class='input'>
 <span class='co'>#... and observe that this is identical to the ratio estimator of the total...</span>
 <span class='no'>TOT.emp.num</span> <span class='kw'>&lt;-</span> <span class='no'>pop</span>[<span class='fl'>1</span>, <span class='fl'>1</span>]
-<span class='no'>VA.ratio</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatL.html'>svystatL</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbsdes</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='no'>TOT.emp.num</span> * (<span class='no'>va.imp2</span>/<span class='no'>emp.num</span>)))</div><div class='output co'>#&gt; <span class='error'>Error in get(x): object 'TOT.emp.num' not found</span></div><div class='input'><span class='no'>VA.ratio</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'VA.ratio' not found</span></div><div class='input'>
+<span class='no'>VA.ratio</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatL.html'>svystatL</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbsdes</span>, <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='no'>TOT.emp.num</span> * (<span class='no'>va.imp2</span>/<span class='no'>emp.num</span>)))</div><div class='output co'>#&gt; <span class='error'>Error in get(x): object 'TOT.emp.num' not found</span></div><div class='input'><span class='no'>VA.ratio</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'VA.ratio' not found</span></div><div class='input'>
 <span class='co'># ...as it must be.</span>
 
 <span class='co'># Recall that, for the calibration problem above, one must expect, by virtue of</span>
 <span class='co'># simple theoretical arguments, that the g-weights are constant and equal to the</span>
 <span class='co'># ratio between the known total of emp.num (984394) and its HT estimate.</span>
 <span class='co'># This property is exactly satisfied by our numerical results, see below:</span>
-<span class='no'>pop</span>[<span class='fl'>1</span>, <span class='fl'>1</span>]/<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>sbsdes</span>, ~<span class='no'>emp.num</span>))</div><div class='output co'>#&gt;   emp.num 
+<span class='no'>pop</span>[<span class='fl'>1</span>, <span class='fl'>1</span>]/<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>sbsdes</span>, ~<span class='no'>emp.num</span>))</div><div class='output co'>#&gt;   emp.num 
 #&gt; 0.9992246 </div><div class='input'><span class='fu'><a href='g.range.html'>g.range</a></span>(<span class='no'>sbscal</span>)</div><div class='output co'>#&gt;     g.min     g.max 
 #&gt; 0.9992246 0.9992246 </div><div class='input'>
 <span class='co'># ...as it must be.</span>
@@ -836,11 +853,11 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; </div><div class='input'>
 <span class='co'># Now calibrate:</span>
   <span class='co'># 1) First, without any heteroskedasticy effect</span>
-  <span class='no'>sbscal1</span><span class='kw'>&lt;-</span><span class='fu'>e.calibrate</span>(<span class='no'>sbsdes</span>,<span class='no'>pop</span>,<span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"linear"</span>,<span class='kw'>bounds</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>3</span>),
+  <span class='no'>sbscal1</span><span class='kw'>&lt;-</span><span class='fu'>e.calibrate</span>(<span class='no'>sbsdes</span>,<span class='no'>pop</span>,<span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"linear"</span>,<span class='kw'>bounds</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>3</span>),
            <span class='kw'>sigma2</span><span class='kw'>=</span><span class='kw'>NULL</span>)
 
   <span class='co'># 2) Then, with heteroskedastic effect proportional to emp.num:</span>
-  <span class='no'>sbscal2</span><span class='kw'>&lt;-</span><span class='fu'>e.calibrate</span>(<span class='no'>sbsdes</span>,<span class='no'>pop</span>,<span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"linear"</span>,<span class='kw'>bounds</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>3</span>),
+  <span class='no'>sbscal2</span><span class='kw'>&lt;-</span><span class='fu'>e.calibrate</span>(<span class='no'>sbsdes</span>,<span class='no'>pop</span>,<span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"linear"</span>,<span class='kw'>bounds</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>3</span>),
            <span class='kw'>sigma2</span><span class='kw'>=</span>~<span class='no'>emp.num</span>)
 
 <span class='co'># Compute the g-weights for both the calibrated objects:</span>
@@ -849,7 +866,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
 <span class='co'># Now visually compare the absolute deviations from 1 of the g-weights</span>
 <span class='co'># as a function of emp.num:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log10</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.num</span>),<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>g1</span>-<span class='fl'>1</span>), <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"blue"</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>points</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log10</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.num</span>),<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>g2</span>-<span class='fl'>1</span>), <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='img'><img src='e.calibrate-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log10</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.num</span>),<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>(<span class='no'>g1</span>-<span class='fl'>1</span>), <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"blue"</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log10</a></span>(<span class='no'>sbs</span>$<span class='no'>emp.num</span>),<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>(<span class='no'>g2</span>-<span class='fl'>1</span>), <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='img'><img src='e.calibrate-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>#...as emp.num grows red points clearly tend to stay closer to</span>
 <span class='co'># the horizontal axis than blue ones, as expected.</span>
 
@@ -869,17 +886,17 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt;     fpc = ~fpc)</div><div class='input'>
 <span class='co'># Let's assume that for some reason we want to prevent the *highest* initial</span>
 <span class='co'># weights from being altered by calibration:</span>
-<span class='no'>dmax</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Extremes'>max</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>))
+<span class='no'>dmax</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>))
 <span class='no'>dmax</span></div><div class='output co'>#&gt; [1] 19.75</div><div class='input'>
 <span class='co'># The relevent units are the following 4:</span>
-<span class='no'>to.keep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/which'>which</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>) <span class='kw'>==</span> <span class='no'>dmax</span>)
+<span class='no'>to.keep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>) <span class='kw'>==</span> <span class='no'>dmax</span>)
 <span class='no'>to.keep</span></div><div class='output co'>#&gt; 877 878 879 880 
 #&gt; 877 878 879 880 </div><div class='input'>
 <span class='co'># Now, let's prepare a convenience variable (to be later bound to the 'sigma2'</span>
 <span class='co'># argument of e.calibrate) whose values are set to a very high value (say 1E12)</span>
 <span class='co'># for those units whose initial weight must be preserved, and to 1 otherwise.</span>
 <span class='co'># For definiteness, let's call such variable 'fixed':</span>
-<span class='no'>sbsdes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>, <span class='kw'>fixed</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ifelse'>ifelse</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>) <span class='kw'>==</span> <span class='no'>dmax</span>, <span class='fl'>1E12</span>, <span class='fl'>1</span>))
+<span class='no'>sbsdes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>, <span class='kw'>fixed</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>) <span class='kw'>==</span> <span class='no'>dmax</span>, <span class='fl'>1E12</span>, <span class='fl'>1</span>))
 
 <span class='co'># Now, let's perform a calibration process which exploits as auxiliary</span>
 <span class='co'># information the total number of employees (emp.num)</span>
@@ -929,7 +946,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'>##############################################################</span>
 
 <span class='co'># Load household data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 
 <span class='co'># Define the survey design: </span>
 <span class='no'>exdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,
@@ -943,7 +960,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'>## 'houdensity': to estimate households counts</span>
   <span class='co'>## 'ones':       to estimate individuals counts</span>
 <span class='no'>exdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>exdes</span>,
-                   <span class='kw'>houdensity</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ave'>ave</a></span>(<span class='no'>famcod</span>,<span class='no'>famcod</span>,<span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>/<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>x</span>)),
+                   <span class='kw'>houdensity</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/ave.html'>ave</a></span>(<span class='no'>famcod</span>,<span class='no'>famcod</span>,<span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>/<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>x</span>)),
                    <span class='kw'>ones</span><span class='kw'>=</span><span class='fl'>1</span>)
 
 <span class='co'># Let's see how it's possible to calibrate *simultaneously* on:</span>
@@ -959,13 +976,13 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
                     <span class='kw'>partition</span><span class='kw'>=</span>~<span class='no'>regcod</span>)
 
   <span class='co'># Add a random uniform perturbation to these numbers:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>12345</span>)   <span class='co'># Fix the RNG seed for reproducibility</span>
-  <span class='no'>xx</span>[,-<span class='fl'>1</span>]<span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>(<span class='no'>xx</span>[,-<span class='fl'>1</span>]*<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/prod'>prod</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='no'>xx</span>[,-<span class='fl'>1</span>])),<span class='fl'>0.8</span>,<span class='fl'>1.2</span>))
+  <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>12345</span>)   <span class='co'># Fix the RNG seed for reproducibility</span>
+  <span class='no'>xx</span>[,-<span class='fl'>1</span>]<span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>xx</span>[,-<span class='fl'>1</span>]*<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>xx</span>[,-<span class='fl'>1</span>])),<span class='fl'>0.8</span>,<span class='fl'>1.2</span>))
 
 <span class='co'># Now we have at hand our artificial population totals, and</span>
 <span class='co'># we can proceed with the calibration task:</span>
 <span class='no'>excal</span><span class='kw'>&lt;-</span><span class='fu'>e.calibrate</span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>exdes</span>,<span class='kw'>df.population</span><span class='kw'>=</span><span class='no'>xx</span>,<span class='kw'>calfun</span><span class='kw'>=</span> <span class='st'>"linear"</span>,
-                   <span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>3</span>),<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>)
+                   <span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>3</span>),<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>)
 
 <span class='co'># To perceive the effect of calibration, let's e.g. compare the HT and</span>
 <span class='co'># calibrated estimates of the average number of individuals per household</span>
@@ -1002,7 +1019,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'>#####################</span>
 
   <span class='co'># Load household data:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 
   <span class='co'># Define the survey design:</span>
   <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
@@ -1014,7 +1031,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
   <span class='co'># First, add to the survey design a new numeric variable with value 1</span>
   <span class='co'># for unmarried people and 0 otherwise:</span>
-  <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>des</span>,<span class='kw'>unmarried</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>marstat</span><span class='kw'>==</span><span class='st'>"unmarried"</span>))
+  <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>des</span>,<span class='kw'>unmarried</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>marstat</span><span class='kw'>==</span><span class='st'>"unmarried"</span>))
 
   <span class='co'># Second, prepare a template to store the known "unmarried" people count:</span>
   <span class='no'>pop</span><span class='kw'>&lt;-</span><span class='fu'><a href='pop.template.html'>pop.template</a></span>(<span class='no'>des</span>,<span class='kw'>calmodel</span><span class='kw'>=</span>~<span class='no'>unmarried</span>-<span class='fl'>1</span>)
@@ -1038,7 +1055,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'>###############################</span>
 
   <span class='co'># Load sbs data:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 
   <span class='co'># Define the survey design:</span>
   <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,<span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
@@ -1051,15 +1068,15 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'># First, add to the survey design new variables identifying the domains</span>
   <span class='co'># where "incomplete" totals 2. and 3. are known:</span>
   <span class='co'>## 2. -&gt; nace.macro = 'Industry'</span>
-  <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>Industry</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Industry"</span>))
+  <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>Industry</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Industry"</span>))
   <span class='co'>## 3. -&gt; nace.macro = 'Commerce'</span>
-  <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>Commerce</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Commerce"</span>))
+  <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>Commerce</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Commerce"</span>))
 
   <span class='co'># Do the same for the sampling frame:</span>
   <span class='co'>## 2. -&gt; nace.macro = 'Industry'</span>
-  <span class='no'>sbs.frame</span>$<span class='no'>Industry</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Industry"</span>)
+  <span class='no'>sbs.frame</span>$<span class='no'>Industry</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Industry"</span>)
   <span class='co'>## 3. -&gt; nace.macro = 'Commerce'</span>
-  <span class='no'>sbs.frame</span>$<span class='no'>Commerce</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Commerce"</span>)
+  <span class='no'>sbs.frame</span>$<span class='no'>Commerce</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>nace.macro</span><span class='kw'>==</span><span class='st'>"Commerce"</span>)
 
   <span class='co'># Second, prepare a template to store the totals listed in 1., 2. and 3.;</span>
   <span class='co'># to this purpose one can e.g. compute HT estimates of the involved auxiliary</span>
@@ -1149,19 +1166,23 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

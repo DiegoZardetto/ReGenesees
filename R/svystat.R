@@ -53,8 +53,8 @@ if (!is.null(group) && !inherits(group, "formula"))
 # DEBUG 14/11/2017
 # Handle special case: kind = 'B' with either of 'by' and 'group' not NULL.
 # This is because function svystatB does NOT have a 'by' argument.
-if ( (kind == "B") && by.is.NULL && is.null(group) ) {
-     stop("When kind == 'B' cannot specify 'by' nor 'group' (see ?svystatB)")
+if ( (kind == "B") && ( !by.is.NULL || !is.null(group) ) ) {
+     stop("When kind == 'B' cannot specify 'by' nor 'group' (because of possible aliasing issues, see ?svystatB)")
     }
 
 by.var <- all.vars(by)

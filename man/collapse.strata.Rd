@@ -23,9 +23,9 @@ collapse.strata(design, block.vars = NULL, sim.score = NULL)
 }
 
 \details{
-Lonely PSUs (i.e. PSUs which are alone inside a not self-representing stratum) are a concern from the viewpoint of variance estimation. As a general solution, the \pkg{ReGenesees} package can handle the lonely PSUs problem by setting proper variance estimation options (see \code{\link{ReGenesees.options}}). The \code{collapse.strata} function implements a widely used alternative: the so called collapsed strata technique. The basic idea is to build artificial \emph{"superstrata"} by aggregating strata containing lonely PSUs to other strata, and then to use such superstrata for variance estimation (see e.g. [Wolter 85] and [Rust, Kalton 87]).
+Lonely PSUs (i.e. PSUs which are alone inside a not self-representing stratum) are a concern from the viewpoint of variance estimation. As a general solution, the \pkg{ReGenesees} package can handle the lonely PSUs problem by setting proper variance estimation options (see \code{\link{ReGenesees.options}}). The \code{collapse.strata} function implements a widely used alternative: the so called collapsed strata technique. The basic idea is to build artificial \emph{\dQuote{superstrata}} by aggregating strata containing lonely PSUs to other strata, and then to use such superstrata for variance estimation (see e.g. [Wolter 85] and [Rust, Kalton 87]).
 
-The optional argument \code{block.vars} identifies \emph{"blocking variables"} that can be used to constrain the way lonely strata are collapsed to form superstrata. More specifically: first, blocking variables are used to partition sample data in \emph{"blocks"} via factor crossing, then, only lonely strata belonging to the same block are aggregated. If \code{block.vars=NULL} (the default option), no constraint will act on collapsing. The \code{design} variables referenced by \code{block.vars} (if any) should be of type \code{factor}. Errors will be raised if (i) blocks cut across strata, or (ii) \code{block.vars} generate any non-aggregable strata (i.e. lonely strata which are a singleton inside a block).
+The optional argument \code{block.vars} identifies \emph{\dQuote{blocking variables}} that can be used to constrain the way lonely strata are collapsed to form superstrata. More specifically: first, blocking variables are used to partition sample data in \emph{\dQuote{blocks}} via factor crossing, then, only lonely strata belonging to the same block are aggregated. If \code{block.vars=NULL} (the default option), no constraint will act on collapsing. The \code{design} variables referenced by \code{block.vars} (if any) should be of type \code{factor}. Errors will be raised if (i) blocks cut across strata, or (ii) \code{block.vars} generate any non-aggregable strata (i.e. lonely strata which are a singleton inside a block).
 
 The optional argument \code{sim.score} can be used to specify a similarity score for strata aggregation. This means that each lonely stratum will be collapsed with the stratum that has the most similar value of variable \code{sim.score} inside the block. Thus the similarity of two strata is actually measured by the (absolute value of the) difference among the corresponding \code{sim.score} values. Only one \code{design} variable can be referenced by the \code{sim.score} formula: (i) it must be of type \code{numeric}, (ii) it must be constant inside each stratum, and (iii) it should be positive (otherwise its \code{abs()} will be silently used). Note that if no similarity score is specified (i.e. \code{sim.score=NULL}), the achieved strata aggregation will depend on the ordering of input sample data in \code{design}.
 
@@ -51,9 +51,9 @@ An object of the same class as \code{design}, without strata containing lonely P
 }
 
 \references{
-Wolter, K.M. (2007) \emph{"Introduction to Variance Estimation"}, Second Edition, Springer-Verlag, New York.
+Wolter, K.M. (2007) \emph{\dQuote{Introduction to Variance Estimation}}, Second Edition, Springer-Verlag, New York.
 
-Rust, K., Kalton, G. (1987) \emph{"Strategies for Collapsing Strata for Variance Estimation"}, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.
+Rust, K., Kalton, G. (1987) \emph{\dQuote{Strategies for Collapsing Strata for Variance Estimation}}, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.
 }
 
 \author{

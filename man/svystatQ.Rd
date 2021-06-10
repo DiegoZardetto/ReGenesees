@@ -47,7 +47,7 @@ The mandatory argument \code{y} identifies the variable of interest, that is the
 
 The optional argument \code{probs} specifies the probability values (\code{0.001<=probs[i]<=0.999}) corresponding to the quantiles one wants to estimate; the default option selects quartiles.
 
-The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatTM} refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatQ} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
+The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatQ} refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatQ} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
 
 The \code{conf.int} argument allows to request the confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is the confidence intervals are not provided. 
 
@@ -67,9 +67,9 @@ Diego Zardetto
 }
 
 \references{
-Woodruff, R.S. (1952) \emph{"Confidence Intervals for Medians and Other Position Measures"}, Journal of the American Statistical Association, Vol. 47, No. 260, pp. 635-646.
+Woodruff, R.S. (1952) \emph{\dQuote{Confidence Intervals for Medians and Other Position Measures}}, Journal of the American Statistical Association, Vol. 47, No. 260, pp. 635-646.
 
-Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{"Model Assisted Survey Sampling"}, Springer Verlag.
+Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Survey Sampling}}, Springer Verlag.
 }
 
 \seealso{

@@ -1,16 +1,44 @@
 Changes in ReGenesees version 2.1
 
  - THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.
+ - This release of ReGenesees introduces support for "Special Purpose
+   Calibration" tasks, i.e. facilities to calibrate survey weights so as to
+   match complex, non-linear population parameters, instead of ordinary
+   population totals.
+   NOTE: To date, support is limited to calibration on Multiple Regression
+   Coefficients, which includes calibration on Means as a notable special case.
+   Further support will likely be provided in future extensions.
+ - New functions prep.calBeta and pop.calBeta: prepare survey data and control
+   totals to run a calibration task on *multiple regression coefficients*.
+   NOTE: These functions enable users to:
+   (i)  Calibrate on regression coefficients of *different linear models*, each
+        known at the *overall population level*.
+   (ii) Calibrate on regression coefficients of a *single linear model*, known
+        possibly for *different subpopulations*.
+ - New function pop.fuse: allows to solve jointly a *special purpose
+   calibration* task and an *ordinary calibration* task, by fusing their
+   respective control totals data frames.
+ - New method of function pop.desc for class 'spc.pop': provides a natural
+   language description of the control totals dataframes for "special purpose
+   calibration" tasks. Handles both *simple* and *fused* control totals.
+ - e.calibrate, check.cal, bounds.hint: code update to cope with "special
+   purpose calibration" tasks.
+ - svystatB: added 'by' argument. Estimates and sampling errors for multiple
+   regression coefficients are now available for subpopulations too. Please have
+   a look at the "Collinearity, Aliasing and Impacts in Domain Estimation"
+   section of the related help page (?svystatB).
+ - write.svystat: code update to accomodate changes induced by new argument 'by'
+   of svystatB.
  - e.calibrate, bounds.hint, aux.estimates: equality of model.formulae was
    checked with all.equal() (which was a good idea) but if clauses didn't use
-   the right construct (i.e. isTRUE(all.equal())). Fixed. 
+   the right construct (i.e. isTRUE(all.equal())). Fixed.
 
 
 Changes in ReGenesees version 2.0
 
  - The main purpose of this version is to ensure a safe transition of ReGenesees
    to the "R 4.x" series. Indeed R 4.0.0. brought in some potentially disruptive
-   changes: see, e.g., the following NOTEs. 
+   changes: see, e.g., the following NOTEs.
  - NOTE: Under R 4.0.0 or later, old versions of the ReGenesees package need to
    be re-installed from sources (i.e. local .tar.gz files). Binary distributions
    of old versions (i.e. local .zip files) are expected not to work under
@@ -152,7 +180,7 @@ Changes in ReGenesees version 1.7
  - Function drop.gvf.points has been substantially enriched: 1) now observations
    to be dropped can be identified by specifying a threshold for the absolute
    values of the residuals; 2) both standardized and studentized residuals
-   can be used; 3) moreover, observations to be dropped can still be identified 
+   can be used; 3) moreover, observations to be dropped can still be identified
    interactively by clicking on a plot, but now both 'Observed vs Fitted' and
    'Residuals vs Fitted' can be used.
  - Added methods rstandard and rstudent for (sets of) fitted GVF models (see
@@ -338,7 +366,7 @@ Changes in ReGenesees version 1.2
    partition the rownames indicate the position of non-convergence cells
    (if any) in population totals dataframe 'df.population'.
    Moreover, diagnostics on calibration results is now richer for unbounded
-   linear calibration (due to parameter 'epsilon', see item above). 
+   linear calibration (due to parameter 'epsilon', see item above).
  - svystatTM, svystatR, svystatQ, svystatL, aux.estimates: now the return
    objects of all summary statistics functions carry a "design" attribute
    storing the name of the design input object. This way, computed statistics
@@ -378,7 +406,7 @@ Changes in ReGenesees version 1.0
 Changes in ReGenesees version 0.9.1
 
  - First external release, available since middle November 2011
-   at the OSOR repository (subsequently migrated towards JOINUP).   
+   at the OSOR repository (subsequently migrated towards JOINUP).
  - No user-visible changes.
 
 

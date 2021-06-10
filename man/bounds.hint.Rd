@@ -25,7 +25,7 @@ bounds.hint(design, df.population,
 }
 
 \details{
-The function \code{bounds.hint} returns a \code{bounds} value for which \code{e.calibtrate} is \emph{likely} to converge. This interval is just a sound hint, \emph{not} an exact result (see \sQuote{Note}).
+Function \code{bounds.hint} returns a \code{bounds} value for which \code{e.calibtrate} is \emph{likely} to converge. This interval is just a sound hint, \emph{not} an exact result (see \sQuote{Note}).
 
 The mandatory argument \code{design} identifies the \code{analytic} object on which the calibration problem is defined.
 
@@ -43,21 +43,21 @@ A numeric vector of length 2, representing the \emph{suggested} value for the \c
 }
 
 \note{
-Assessing the feasibility of an arbitrary calibration problem is not an easy task. The problem is even more difficult whenever additional \emph{"range restrictions"} are imposed. Indeed, even if one assumes that the calibration constraints define a consistent system, one also has to choose the \code{bounds} such that the feasible region is non-empty.
+Assessing the feasibility of an arbitrary calibration problem is not an easy task. The problem is even more difficult whenever additional \emph{\dQuote{range restrictions}} are imposed. Indeed, even if one assumes that the calibration constraints define a consistent system, one also has to choose the \code{bounds} such that the feasible region is non-empty.
 
 One can argue that there must exist a minimum-length interval \eqn{I=[L,U]} such that, if it is covered by \code{bounds}, the specified calibration problem is feasible. Unfortunately in order to compute exactly that minimum-length interval \eqn{I} one should solve a big linear programming problem [Vanderhoeft 01]. As an alternative, a trial and error procedure has been frequently proposed [Deville et al. 1993; Sautory 1993]: (i) start with a very large interval \code{bounds.0}; (ii) if convergence is achieved, shrink it so as to obtain a new interval \code{bounds.1}; (iii) repeat until you get a sufficiently tight feasible interval \code{bounds.n}. The drawback is that this procedure can cost a lot of computer time since, for each choice of the \code{bounds}, the full calibration problem has to be solved.
 
-A rather easy task is, on the contrary, the one of finding at least a given specific interval \eqn{I^*=[L^*,U^*]} such that, if it is \emph{not} covered by \code{bounds}, the current calibration problem is \emph{surely unfeasible}. This means that any feasible \code{bounds} value must necessarily contain the \eqn{I^*} interval. The function \code{bounds.hint}: (i) first identifies such an \eqn{I^*} interval (by computing the range of the ratios between known population totals and corresponding direct Horvitz-Thompson estimates), (ii) then builds a new interval \eqn{I^{sugg}} with same midpoint and double length. The latter is the \emph{suggested} value for the \code{bounds} argument of \code{e.calibrate}. The return value of \code{bounds.hint} should be understood as a useful starting guess for \code{bounds}, even though there is definitely no warranty that the calibration algorithm will actually converge.
+However, when both the benchmark population totals and the corresponding Horvitz-Thompson estimates are \emph{all non-negative}, it is easy to find at least a given specific interval \eqn{I^*=[L^*,U^*]} such that, if it is \emph{not} covered by \code{bounds}, the current calibration problem is \emph{surely unfeasible}. This means that any feasible \code{bounds} value must necessarily contain the \eqn{I^*} interval. Function \code{bounds.hint}: (i) first identifies such an \eqn{I^*} interval (by computing the range of the ratios between known population totals and corresponding direct Horvitz-Thompson estimates), (ii) then builds a new interval \eqn{I^{sugg}} with same midpoint and double length. The latter is the \emph{suggested} value for the \code{bounds} argument of \code{e.calibrate}. The return value of \code{bounds.hint} should be understood as a useful starting guess for \code{bounds}, even though there is definitely no warranty that the calibration algorithm will actually converge.
 }
 
 \author{Diego Zardetto}
 
 \references{
-Vanderhoeft, C. (2001) \emph{"Generalized Calibration at Statistic Belgium"}, Statistics Belgium Working Paper n. 3.
+Vanderhoeft, C. (2001) \emph{\dQuote{Generalized Calibration at Statistic Belgium}}, Statistics Belgium Working Paper n. 3.
 
-Deville, J.C., Sarndal, C.E. and Sautory, O. (1993) \emph{"Generalized Raking Procedures in Survey Sampling"}, Journal of the American Statistical Association, Vol. 88, No. 423, pp.1013-1020.
+Deville, J.C., Sarndal, C.E. and Sautory, O. (1993) \emph{\dQuote{Generalized Raking Procedures in Survey Sampling}}, Journal of the American Statistical Association, Vol. 88, No. 423, pp.1013-1020.
 
-Sautory, O. (1993) \emph{"La macro CALMAR: Redressement d'un Echantillon par Calage sur Marges"}, Document de travail de la Direction des Statistiques Demographiques et Sociales, no. F9310.
+Sautory, O. (1993) \emph{\dQuote{La macro CALMAR: Redressement d'un Echantillon par Calage sur Marges}}, Document de travail de la Direction des Statistiques Demographiques et Sociales, no. F9310.
 }
 
 \seealso{

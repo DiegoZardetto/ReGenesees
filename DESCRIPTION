@@ -13,13 +13,17 @@ Description: Design-Based and Model-Assisted analysis of complex sampling survey
         Estimators. Design Covariance and Correlation. Estimates, standard errors,
         confidence intervals and design effects for user-defined analytic estimators.
         Estimates and sampling errors for subpopulations. Consistent trimming of
-        calibration weights. Generalized Variance Functions (GVF) method for
-        predicting variance estimates.
+        calibration weights. Calibration on complex population parameters, e.g.
+        multiple regression coefficients. Generalized Variance Functions (GVF)
+        method for predicting variance estimates.
 Version: 2.1
 Author: Diego Zardetto [aut, cre]
 Maintainer: Diego Zardetto <zardetto@istat.it>
 Authors@R: person("Diego", "Zardetto", role = c("aut", "cre"), email = "zardetto@istat.it")
 License: EUPL
+URL: https://diegozardetto.github.io/ReGenesees/,
+     https://github.com/DiegoZardetto/ReGenesees/
+BugReports:	https://github.com/DiegoZardetto/ReGenesees/issues/
 Imports: stats, MASS
 Depends: R (>= 2.14.0)
 ByteCompile: TRUE

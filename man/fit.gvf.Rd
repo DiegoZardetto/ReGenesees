@@ -86,7 +86,7 @@ Let's first focus on input objects of class \code{gvf.input}.\cr
 If \code{model} specifies a single GVF model, the output object will be of class \code{gvf.fit} and inherit from class \code{\link{lm}}.\cr
 If \code{model} specifies many GVF models, the output object will be of class \code{gvf.fits} and inherit from class \code{\link{list}}. Hence, it will be possible to subset \code{gvf.fits} objects via methods \code{[} and \code{[[}. Note, moreover, that each component (in the sense of class \code{\link{list}}) of a \code{gvf.fits} object will be of class \code{gvf.fit}.
 
-When, instead, the input object has class \code{\link{gvf.input.gr}}, i.e. it stores \emph{"grouped"} estimates and errors, model fitting is performed \emph{separately} for different groups. Therefore, applying \code{fit.gvf} \emph{always} results in \emph{many} fitted GVF models.\cr
+When, instead, the input object has class \code{\link{gvf.input.gr}}, i.e. it stores \emph{\dQuote{grouped}} estimates and errors, model fitting is performed \emph{separately} for different groups. Therefore, applying \code{fit.gvf} \emph{always} results in \emph{many} fitted GVF models.\cr
 If \code{model} specifies a single GVF model, the output object will be of class \code{gvf.fit.gr} and inherit from class \code{\link{list}}. Each slot of the list will contain the same GVF model fitted to a specific group.\cr
 If \code{model} specifies many GVF models, the output object will be of class \code{gvf.fits.gr} and again inherit from class \code{\link{list}}. Each slot of the list will now contain \emph{a second list} storing different GVF models fitted to a specific group.\cr
 }

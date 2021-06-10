@@ -1,4 +1,4 @@
-svystatB <- function(design, model,
+svystatB <- function(design, model, by = NULL,
                      vartype = c("se", "cv", "cvpct", "var"),
                      conf.int = FALSE, conf.lev = 0.95, deff = FALSE,
                      na.rm = FALSE){
@@ -14,6 +14,9 @@ if (!inherits(design, "analytic"))
      stop("Object 'design' must inherit from class analytic")
 if (!inherits(model, "formula"))
     stop("Linear regression model must be specified as a formula")
+# Get response variable name
+respName <- get.respName(model)
+
 if (missing(vartype)) vartype <- "se"
 vartype <- match.arg(vartype, several.ok = TRUE)
 vartype <- unique(vartype)
@@ -27,6 +30,38 @@ if (conf.int) {
         stop("conf.lev must fall inside [0,1]")
     }
 
+if (!is.null(by)) {
+    if (!inherits(by, "formula")) 
+        stop("If specified, 'by' must be supplied as a formula")
+    model.vars <- all.vars(model)
+    by.vars <- all.vars(by)
+    if (any(by.vars %in% model.vars))
+         stop("Variables referenced by argument 'by' must not appear in the input 'model' formula!")
+    stat <- svyby(formula = model, by = by, design = design, FUN = svylinB,
+                  deff = deff, keep.var = TRUE, keep.names = TRUE,
+                  verbose = FALSE, vartype = vartype, ci.lev = conf.lev,
+                  drop.empty.groups = TRUE, covmat = FALSE, na.rm = na.rm,
+                  return.replicates = FALSE)
+
+    # Handle unfortunate list output cases caused by different aliasing in 'by'
+    # subpops
+    if (inherits(stat, "svyby.list")) {
+         class(stat) <- c("svystatB.by.list", class(stat))
+        } else {
+         # Better column names -> embed response variable name separated by "_"
+         # See below for function better.namesB()
+         stat.names <- names(stat)
+         regcoef.vars <- attr(stat,"svyby")$variables
+         by.vars <- stat.names[attr(stat,"svyby")$margins]
+         names(stat) <- better.namesB(regcoef.vars, by.vars, stat.names, respName)
+         class(stat) <- c("svystatB.by", class(stat))
+        }
+    attr(stat,"model") <- model
+    attr(stat,"respName") <- respName
+    attr(stat,"design") <- design.expr
+    return(stat)
+    }
+else {
 # Compute estimates and errors of multiple regression coefficients
     stat <- svyby(formula = model, by = rep(1, nrow(design)), design = design, FUN = svylinB,
                   deff = deff, keep.var = TRUE, keep.names = TRUE,
@@ -54,8 +89,8 @@ if (conf.int) {
     # Colnames are Estimator type + Variability measures
     o.vartypes <- c("se","ci","ci","cv","cvpct","var")
     varia.name  <- o.vartypes[o.vartypes %in% attr(stat, "svyby")$vartype]
-    resp.name <- gsub(" ", "", deparse(model[[2]]))
-    est.name <- paste("RegCoef", resp.name, sep=".")
+    # resp.name <- gsub(" ", "", deparse(model[[2]]))
+    est.name <- paste("RegCoef", respName, sep=".")
     colnames(stat.mat) <- c(est.name, varia.name, if (attr(stat, "svyby")$deffs) "DEff")
     # Cast into a data.frame
     stat.df <- as.data.frame(stat.mat)
@@ -73,10 +108,34 @@ if (conf.int) {
     }
     names(stat.df) <- tmp.names
     attr(stat.df,"model") <- model
+    attr(stat.df,"respName") <- respName
     attr(stat.df,"design") <- design.expr
     stat.df
+    }
 }
 
+get.respName <- function(formula){
+###################################################
+# Get the name of the response term of a formula. #
+# NOTE: The function checks that the formula:     #
+#       1) do have a response term                #
+#       2) the response term is a variable with   #
+#          a name (not, e.g., an expression)      #
+###################################################
+  if (length(formula) < 3)
+     stop(paste("The specified model does not have a response term: ", form.to.char(formula), sep = ""))
+     respName <- formula[[2]]
+
+  if (!is.name(respName))
+     stop("Response term is not a named variable!")
+
+  respName <- as.character(respName)
+
+  return(respName)
+}
+
+
+## Accessor functions for overall population and *ordinary* domain estimates ##
 
 coef.svystatB <- function(object, ...){
     by.object <- attr(object, "origin")
@@ -120,6 +179,9 @@ confint.svystatB <- function(object, ...){
     ci
 }
 
+
+## summary method for overall population estimates ##
+
 summary.svystatB <- function(object, ...){
 # Compute Z statistics for estimated regression coefficients
 object[["z value"]] <- coef(object)/unlist(SE(object))
@@ -129,4 +191,122 @@ printCoefmat(object, signif.stars = TRUE, signif.legend = TRUE,
                      P.values = TRUE, has.Pvalue = TRUE, ...)
 cat("\nNOTE: the distribution of regression coefficients estimators has been assumed normal\n\n")
 invisible(object)
+}
+
+
+## summary method for *ordinary* domain estimates ##
+
+summary.svystatB.by <- function(object, ...){
+# Build a lm-like coefficients matrix...
+RegCoefs <- cbind(coef(object))
+colnames(RegCoefs) <- paste("RegCoef", attr(object, "respName"), sep = ".")
+cmat <- cbind(RegCoefs, "SE" = unlist(SE(object)))
+# Compute Z statistics for estimated regression coefficients
+z_val <- coef(object)/unlist(SE(object))
+# Compute p values for the test b=0
+Pr.gt.z <- 2*(1 - pnorm(abs(z_val)))
+# Add columns to cmat
+cmat <- cbind(cmat, "z value" = z_val, "Pr(>|z|)" = Pr.gt.z)
+printCoefmat(cmat, signif.stars = TRUE, signif.legend = TRUE,
+                     P.values = TRUE, has.Pvalue = TRUE, ...)
+cat("\nNOTE: the distribution of regression coefficients estimators has been assumed normal\n\n")
+invisible(cmat)
+}
+
+
+## Non-ordinary domain estimates:
+## Print method that drops attributes
+print.svystatB.by.list <- function(x, ...){
+out <- x
+attributes(out) <- NULL
+names(out) <- names(x)
+print(out)
+return(invisible(x))
+}
+
+
+## Non-ordinary domain estimates:
+## No accessor functions for svyby.list objects (yet)
+
+coef.svystatB.by.list <- function(object, ...){
+cat("\nNo 'coef' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+vcov.svystatB.by.list <- function(object, ...){
+cat("\nNo 'vcov' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+SE.svystatB.by.list <- function(object, ...){
+cat("\nNo 'SE' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+VAR.svystatB.by.list <- function(object, ...){
+cat("\nNo 'VAR' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+cv.svystatB.by.list <- function(object, ...){
+cat("\nNo 'cv' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+deff.svystatB.by.list <- function(object, ...){
+cat("\nNo 'deff' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+confint.svystatB.by.list <- function(object, ...){
+cat("\nNo 'confint' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+
+## Non-ordinary domain estimates:
+## No summary method for svyby.list objects (yet)
+
+summary.svystatB.by.list <- function(object, ...){
+cat("\nNo 'summary' method available for this class, sorry.\n\n")
+invisible(NULL)
+}
+
+
+
+better.namesB <- function(y.vars, by.vars, stat.names, prefix, sepchar = "_"){
+###########################################################
+# Build better column names for svyby output by embedding #
+# a customizable prefix (e.g. the model response name).   #
+###########################################################
+
+# Identify stat.names referring to y.vars statistics
+is.ystat <- !(stat.names %in% by.vars)
+ystat <- stat.names[is.ystat]
+
+# Order y.vars by decreasing length (to avoid double updates for partial matches)
+y.vars <- y.vars[order(sapply(y.vars, nchar), decreasing = TRUE)]
+
+tmp.names <- old.names <- ystat
+# First process names of variance measures (i.e. containing string ".yvars[i]")
+for (y in y.vars){
+     dot.y <- paste(sepchar, y, sep="")
+     tmp.names[tmp.names==old.names] <- sub(dot.y, paste(sepchar, prefix, dot.y, sep=""),
+                                            tmp.names[tmp.names==old.names], fixed = TRUE)
+    }
+# Then process names of estimates for quantitative vars (i.e. exact matches to "yvars[i]")
+for (y in y.vars){
+     tmp.names[tmp.names==y] <- paste(prefix, y, sep=sepchar)
+     }
+# Lastly process names of estimates for factor vars (i.e. partial matches to "yvars[i]")
+for (y in y.vars){
+     tmp.names[tmp.names==old.names] <- sub(y, paste(prefix, y, sep=sepchar),
+                                            tmp.names[tmp.names==old.names], fixed = TRUE)
+    }
+
+# Check if all names have been processed
+if (any(tmp.names==old.names))
+    warning("Check output column names: some could be wrong/non-standard!")
+stat.names[is.ystat] <- tmp.names
+stat.names
 }

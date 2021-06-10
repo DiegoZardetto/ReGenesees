@@ -8,6 +8,13 @@
 
 <title>A Hint for Range Restricted Calibration — bounds.hint • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -122,10 +138,10 @@
     </div>
 
     <pre class="usage"><span class='fu'>bounds.hint</span>(<span class='no'>design</span>, <span class='no'>df.population</span>,
-    <span class='kw'>calmodel</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
-                   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/attr'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"calmodel"</span>),
-    <span class='kw'>partition</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
-                    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/attr'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"partition"</span>) <span class='kw'>else</span> <span class='fl'>FALSE</span>,
+    <span class='kw'>calmodel</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
+                   <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"calmodel"</span>),
+    <span class='kw'>partition</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='no'>df.population</span>, <span class='st'>"pop.totals"</span>))
+                    <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>df.population</span>, <span class='st'>"partition"</span>) <span class='kw'>else</span> <span class='fl'>FALSE</span>,
     <span class='kw'>msg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -155,7 +171,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function <code>bounds.hint</code> returns a <code>bounds</code> value for which <code>e.calibtrate</code> is <em>likely</em> to converge. This interval is just a sound hint, <em>not</em> an exact result (see &#8216;Note&#8217;).</p>
+    <p>Function <code>bounds.hint</code> returns a <code>bounds</code> value for which <code>e.calibtrate</code> is <em>likely</em> to converge. This interval is just a sound hint, <em>not</em> an exact result (see &#8216;Note&#8217;).</p>
 <p>The mandatory argument <code>design</code> identifies the <code>analytic</code> object on which the calibration problem is defined.</p>
 <p>The mandatory argument <code>df.population</code> identifies the known totals data frame.</p>
 <p>The argument <code>calmodel</code> symbolically defines the calibration model you want to use: it identifies the auxiliary variables and the constraints for the calibration problem. The <code>design</code> variables referenced by <code>calmodel</code> must be <code>numeric</code> or <code>factor</code> and must not contain any missing value (<code>NA</code>). The argument can be omitted provided <code>df.population</code> is an object of class <code>pop.totals</code> (see <code><a href='population.check.html'>population.check</a></code>).</p>
@@ -166,21 +182,21 @@
     <p>A numeric vector of length 2, representing the <em>suggested</em> value for the <code>bounds</code> argument of <code>e.calibrate</code>. The attributes of that vector store additional information, which can lead to better understand why a given calibration problem is (un)feasible (see &#8216;Examples&#8217;).</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Assessing the feasibility of an arbitrary calibration problem is not an easy task. The problem is even more difficult whenever additional <em>"range restrictions"</em> are imposed. Indeed, even if one assumes that the calibration constraints define a consistent system, one also has to choose the <code>bounds</code> such that the feasible region is non-empty.</p>
+    <p>Assessing the feasibility of an arbitrary calibration problem is not an easy task. The problem is even more difficult whenever additional <em>&#8220;range restrictions&#8221;</em> are imposed. Indeed, even if one assumes that the calibration constraints define a consistent system, one also has to choose the <code>bounds</code> such that the feasible region is non-empty.</p>
 <p>One can argue that there must exist a minimum-length interval \(I=[L,U]\) such that, if it is covered by <code>bounds</code>, the specified calibration problem is feasible. Unfortunately in order to compute exactly that minimum-length interval \(I\) one should solve a big linear programming problem [Vanderhoeft 01]. As an alternative, a trial and error procedure has been frequently proposed [Deville et al. 1993; Sautory 1993]: (i) start with a very large interval <code>bounds.0</code>; (ii) if convergence is achieved, shrink it so as to obtain a new interval <code>bounds.1</code>; (iii) repeat until you get a sufficiently tight feasible interval <code>bounds.n</code>. The drawback is that this procedure can cost a lot of computer time since, for each choice of the <code>bounds</code>, the full calibration problem has to be solved.</p>
-<p>A rather easy task is, on the contrary, the one of finding at least a given specific interval \(I^*=[L^*,U^*]\) such that, if it is <em>not</em> covered by <code>bounds</code>, the current calibration problem is <em>surely unfeasible</em>. This means that any feasible <code>bounds</code> value must necessarily contain the \(I^*\) interval. The function <code>bounds.hint</code>: (i) first identifies such an \(I^*\) interval (by computing the range of the ratios between known population totals and corresponding direct Horvitz-Thompson estimates), (ii) then builds a new interval \(I^{sugg}\) with same midpoint and double length. The latter is the <em>suggested</em> value for the <code>bounds</code> argument of <code>e.calibrate</code>. The return value of <code>bounds.hint</code> should be understood as a useful starting guess for <code>bounds</code>, even though there is definitely no warranty that the calibration algorithm will actually converge.</p>
+<p>However, when both the benchmark population totals and the corresponding Horvitz-Thompson estimates are <em>all non-negative</em>, it is easy to find at least a given specific interval \(I^*=[L^*,U^*]\) such that, if it is <em>not</em> covered by <code>bounds</code>, the current calibration problem is <em>surely unfeasible</em>. This means that any feasible <code>bounds</code> value must necessarily contain the \(I^*\) interval. Function <code>bounds.hint</code>: (i) first identifies such an \(I^*\) interval (by computing the range of the ratios between known population totals and corresponding direct Horvitz-Thompson estimates), (ii) then builds a new interval \(I^{sugg}\) with same midpoint and double length. The latter is the <em>suggested</em> value for the <code>bounds</code> argument of <code>e.calibrate</code>. The return value of <code>bounds.hint</code> should be understood as a useful starting guess for <code>bounds</code>, even though there is definitely no warranty that the calibration algorithm will actually converge.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Vanderhoeft, C. (2001) <em>"Generalized Calibration at Statistic Belgium"</em>, Statistics Belgium Working Paper n. 3.</p>
-<p>Deville, J.C., Sarndal, C.E. and Sautory, O. (1993) <em>"Generalized Raking Procedures in Survey Sampling"</em>, Journal of the American Statistical Association, Vol. 88, No. 423, pp.1013-1020.</p>
-<p>Sautory, O. (1993) <em>"La macro CALMAR: Redressement d'un Echantillon par Calage sur Marges"</em>, Document de travail de la Direction des Statistiques Demographiques et Sociales, no. F9310.</p>
+    <p>Vanderhoeft, C. (2001) <em>&#8220;Generalized Calibration at Statistic Belgium&#8221;</em>, Statistics Belgium Working Paper n. 3.</p>
+<p>Deville, J.C., Sarndal, C.E. and Sautory, O. (1993) <em>&#8220;Generalized Raking Procedures in Survey Sampling&#8221;</em>, Journal of the American Statistical Association, Vol. 88, No. 423, pp.1013-1020.</p>
+<p>Sautory, O. (1993) <em>&#8220;La macro CALMAR: Redressement d'un Echantillon par Calage sur Marges&#8221;</em>, Document de travail de la Direction des Statistiques Demographiques et Sociales, no. F9310.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating weights, <code><a href='pop.template.html'>pop.template</a></code> for constructing known totals data frames in compliance with the standard required by <code>e.calibrate</code>, <code><a href='population.check.html'>population.check</a></code> to check that the known totals data frame satisfies that standard, <code><a href='g.range.html'>g.range</a></code> to compute the range of the obtained g-weights, and <code><a href='check.cal.html'>check.cal</a></code> to check if calibration constraints have been fulfilled.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Creation of the object to be calibrated:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
      <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>)
 
@@ -200,11 +216,13 @@
            <span class='kw'>bounds</span><span class='kw'>=</span><span class='no'>hint</span>,<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>)
 
 <span class='co'># Now let's verify that calibration fails, if bounds don't cover</span>
-<span class='co'># the interval [0.611, 1.394]:</span></div><span class='co'># NOT RUN {</span>
+<span class='co'># the interval [0.611, 1.394]:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>descal06p</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>des</span>,<span class='kw'>df.population</span><span class='kw'>=</span><span class='no'>pop06p</span>,
            <span class='kw'>calmodel</span><span class='kw'>=</span>~<span class='no'>age5c</span>-<span class='fl'>1</span>,<span class='kw'>partition</span><span class='kw'>=</span>~<span class='no'>procod</span>,<span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,
-           <span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.62</span>,<span class='fl'>1.50</span>),<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>force</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='co'># }</span><div class='input'><span class='co'># The warning message raised by e.calibrate tells that</span>
+           <span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.62</span>,<span class='fl'>1.50</span>),<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>force</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+}
+<span class='co'># The warning message raised by e.calibrate tells that</span>
 <span class='co'># the population total of variable age5c5 (i.e. the fifth</span>
 <span class='co'># age class frequency) was not matched.</span>
 
@@ -216,7 +234,7 @@
 #&gt; </div><div class='input'>
 <span class='co'># this is easily explained by inspecting the "bounds"</span>
 <span class='co'># attribute of the bounds.hint output object:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/attr'>attr</a></span>(<span class='no'>hint</span>,<span class='st'>"bounds"</span>)</div><div class='output co'>#&gt; $lower
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>hint</span>,<span class='st'>"bounds"</span>)</div><div class='output co'>#&gt; $lower
 #&gt;                  8        9        10        11        30        31       32
 #&gt; original 0.6773532 0.651573 0.8013544 0.8404024 0.6109341 0.6937631 1.002463
 #&gt; all      0.6773532 0.651573 0.8013544 0.8404024 0.6109341 0.6937631 1.002463
@@ -239,7 +257,7 @@
 <span class='co'># would not converge:</span>
 <span class='no'>descal06p.forced</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>des</span>,<span class='kw'>df.population</span><span class='kw'>=</span><span class='no'>pop06p</span>,
                   <span class='kw'>calmodel</span><span class='kw'>=</span>~<span class='no'>age5c</span>-<span class='fl'>1</span>,<span class='kw'>partition</span><span class='kw'>=</span>~<span class='no'>procod</span>,<span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,
-                  <span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.62</span>,<span class='fl'>1.50</span>),<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>force</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0148268907563025 in 51 iterations (variable age5c5), see ecal.status.</span></div><div class='input'>
+                  <span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.62</span>,<span class='fl'>1.50</span>),<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>force</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0148268907563025 in 51 iterations (variable age5c5), see ecal.status.</span></div><div class='input'>
 <span class='co'># Notice, also, that forced sub-tasks can be tracked down by</span>
 <span class='co'># directly looking at ecal.status...</span>
 <span class='no'>ecal.status</span></div><div class='output co'>#&gt; $return.code
@@ -285,19 +303,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

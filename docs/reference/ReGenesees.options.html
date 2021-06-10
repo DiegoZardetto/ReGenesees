@@ -8,6 +8,13 @@
 
 <title>Variance Estimation Options for the ReGenesees Package — ReGenesees.options • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -52,6 +61,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -76,7 +86,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +110,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -108,6 +123,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -133,9 +149,9 @@
     - <code>RG.lonely.psu</code><br />
     - <code>RG.adjust.domain.lonely</code><br />
     - <code>RG.warn.domain.lonely</code><br /></p>    
-<p>When <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("RG.ultimate.cluster")</a></code> is <code>TRUE</code>,
-    the <span class="pkg">ReGenesees</span> package adopts the so called <em>"Ultimate
-    Cluster Approximation"</em> [Kalton 79]. Under this approximation, the overall
+<p>When <code><a href='https://rdrr.io/r/base/options.html'>options("RG.ultimate.cluster")</a></code> is <code>TRUE</code>,
+    the <span class="pkg">ReGenesees</span> package adopts the so called <em>&#8220;Ultimate
+    Cluster Approximation&#8221;</em> [Kalton 79]. Under this approximation, the overall
     sampling variance for a multistage sampling design is estimated by
     taking into account only the contribution arising from the estimated PSU
     totals (thus simply ignoring any available information about subsequent
@@ -145,10 +161,10 @@
     underestimation error becomes negligible if the PSUs' sampling fractions
     across strata are very small. When sampling with replacement, the Ultimate
     Cluster approach is no longer an approximation, but rather an exact result.
-    Hence, be <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("RG.ultimate.cluster")</a></code> <code>TRUE</code> or <code>FALSE</code>,
+    Hence, be <code><a href='https://rdrr.io/r/base/options.html'>options("RG.ultimate.cluster")</a></code> <code>TRUE</code> or <code>FALSE</code>,
     if one does not specify first-stage finite population corrections, <span class="pkg">ReGenesees</span>
     will produce exactly the same variance estimates.</p>    
-<p>When <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("RG.ultimate.cluster")</a></code> is <code>FALSE</code>,
+<p>When <code><a href='https://rdrr.io/r/base/options.html'>options("RG.ultimate.cluster")</a></code> is <code>FALSE</code>,
     each sampling stage contributes and variances get estimated by means
     of a recursive algorithm [Bellhouse, 85] inherited and adapted from
     package <span class="pkg">survey</span> [Lumley 06]. Notice that the results obtained
@@ -161,7 +177,7 @@
     the strata aggregation technique (see e.g. [Wolter 07] and [Rust, Kalton 87])
     provided in function <code><a href='collapse.strata.html'>collapse.strata</a></code>.
     As a possible alternative, you can get rid of lonely PSUs also by setting
-    proper variance estimation options via <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("RG.lonely.psu")</a></code>.
+    proper variance estimation options via <code><a href='https://rdrr.io/r/base/options.html'>options("RG.lonely.psu")</a></code>.
     The default setting is <code>"fail"</code>, which raises an error if a lonely PSU
     is met. Option <code>"remove"</code> simply causes the software to ignore lonely PSUs
     for variance computation purposes. Option <code>"adjust"</code> means that
@@ -175,21 +191,21 @@
 <p>The variance formulae for domain estimation give well-defined,
     positive results when a stratum contains only a single PSU with
     observations falling in the domain, but are not unbiased.<br />
-    If <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("RG.adjust.domain.lonely")</a></code> is <code>TRUE</code>
-    and <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("RG.lonely.psu")</a></code> is <code>"average"</code> or
+    If <code><a href='https://rdrr.io/r/base/options.html'>options("RG.adjust.domain.lonely")</a></code> is <code>TRUE</code>
+    and <code><a href='https://rdrr.io/r/base/options.html'>options("RG.lonely.psu")</a></code> is <code>"average"</code> or
     <code>"adjust"</code> the same adjustment for lonely PSUs will be used
     within a domain. Note that this adjustment is not available for
     calibrated designs.</p>    
-<p>If <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("RG.warn.domain.lonely")</a></code> is set to <code>TRUE</code>, a
+<p>If <code><a href='https://rdrr.io/r/base/options.html'>options("RG.warn.domain.lonely")</a></code> is set to <code>TRUE</code>, a
     warning message is raised whenever an estimation domain happens to
     contain just a single PSU belonging to a stratum. The default is <code>FALSE</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Kalton, G. (1979). <em>"Ultimate cluster sampling"</em>, Journal of the Royal Statistical Society, Series A, 142, pp. 210-222.</p>
-<p>Bellhouse, D. R. (1985). <em>"Computing Methods for Variance Estimation in Complex Surveys"</em>. Journal of Official Statistics, Vol. 1, No. 3, pp. 323-329.</p>
-<p>Lumley, T. (2006) <em>"survey: analysis of complex survey samples"</em>, <a href='http://cran.at.r-project.org/web/packages/survey/index.html'>http://cran.at.r-project.org/web/packages/survey/index.html</a>.</p>
-<p>Wolter, K.M. (2007) <em>"Introduction to Variance Estimation"</em>, Second Edition, Springer-Verlag, New York.</p>
-<p>Rust, K., Kalton, G. (1987) <em>"Strategies for Collapsing Strata for Variance Estimation"</em>, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.</p>
+    <p>Kalton, G. (1979). <em>&#8220;Ultimate cluster sampling&#8221;</em>, Journal of the Royal Statistical Society, Series A, 142, pp. 210-222.</p>
+<p>Bellhouse, D. R. (1985). <em>&#8220;Computing Methods for Variance Estimation in Complex Surveys&#8221;</em>. Journal of Official Statistics, Vol. 1, No. 3, pp. 323-329.</p>
+<p>Lumley, T. (2006) <em>&#8220;survey: analysis of complex survey samples&#8221;</em>, <a href='http://cran.at.r-project.org/web/packages/survey/index.html'>http://cran.at.r-project.org/web/packages/survey/index.html</a>.</p>
+<p>Wolter, K.M. (2007) <em>&#8220;Introduction to Variance Estimation&#8221;</em>, Second Edition, Springer-Verlag, New York.</p>
+<p>Rust, K., Kalton, G. (1987) <em>&#8220;Strategies for Collapsing Strata for Variance Estimation&#8221;</em>, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='e.svydesign.html'>e.svydesign</a></code> and its <code>self.rep.str</code> argument for a 
@@ -201,31 +217,31 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Define a two-stage stratified cluster sampling without </span>
 <span class='co'># replacement:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>fpcdat</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fpcdat</span>)
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>fpcdat</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>psu</span>+<span class='no'>ssu</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>,
      <span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc1</span>+<span class='no'>fpc2</span>)
 
 <span class='co'># Now compare SE (or CV%) sizes under different settings:</span>
 
 <span class='co'>## 1) Default setting, i.e. Ultimate Cluster Approximation is off</span>
-<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  158.6328 15.78174
 #&gt; y   976.2417  235.1718 24.08951
 #&gt; z 19180.1349 3306.6124 17.23978</div><div class='input'>
 <span class='co'>## 2) Turn on the Ultimate Cluster Approximation, thus missing</span>
 <span class='co'>##    the variance contribution from the second stage</span>
 <span class='co'>##    (hence SR strata give no contribution at all):</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.ultimate.cluster"</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.ultimate.cluster"</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  152.2222 15.14398
 #&gt; y   976.2417  231.5724 23.72081
-#&gt; z 19180.1349 3258.6512 16.98972</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+#&gt; z 19180.1349 3258.6512 16.98972</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
 <span class='co'>## 3) The "compromise solution" (see ?e.svydesign) i.e. retaining</span>
 <span class='co'>##    only the leading contribution to the sampling variance (namely</span>
 <span class='co'>##    the one arising from SSUs in SR strata and PSUs in not-SR strata):</span>
 <span class='no'>des2</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>fpcdat</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>psu</span>+<span class='no'>ssu</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>,
-      <span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc1</span>+<span class='no'>fpc2</span>, <span class='kw'>self.rep.str</span><span class='kw'>=</span>~<span class='no'>sr</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Sampling variance estimation for this design will take into account only leading contributions, i.e. PSUs in not-SR strata and SSUs in SR strata (see ?e.svydesign and ?ReGenesees.options for details)</span></div><div class='input'><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des2</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+      <span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc1</span>+<span class='no'>fpc2</span>, <span class='kw'>self.rep.str</span><span class='kw'>=</span>~<span class='no'>sr</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Sampling variance estimation for this design will take into account only leading contributions, i.e. PSUs in not-SR strata and SSUs in SR strata (see ?e.svydesign and ?ReGenesees.options for details)</span></div><div class='input'><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des2</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  152.4536 15.16700
 #&gt; y   976.2417  231.7568 23.73970
 #&gt; z 19180.1349 3268.6730 17.04197</div><div class='input'>
@@ -235,30 +251,32 @@
 
 <span class='co'># Under default settings lonely PSUs produce errors in standard</span>
 <span class='co'># errors estimation (notice we didn't pass the fpcs):</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>fpcdat</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fpcdat</span>)
 <span class='no'>des.lpsu</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>fpcdat</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>psu</span>+<span class='no'>ssu</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,
-          <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>)</div><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))
-<span class='co'># }</span><div class='input'>
+          <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>)
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))
+}
+
 <span class='co'># This can be circumvented in different ways, namely:</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)
-<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)
+<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  175.6944 17.47913
 #&gt; y   976.2417  257.2732 26.35343
-#&gt; z 19180.1349 3813.7155 19.88367</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+#&gt; z 19180.1349 3813.7155 19.88367</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
 <span class='co'># or:</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"average"</span>)
-<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"average"</span>)
+<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  220.1591 21.90275
 #&gt; y   976.2417  328.8805 33.68843
-#&gt; z 19180.1349 4741.9620 24.72330</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+#&gt; z 19180.1349 4741.9620 24.72330</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
 <span class='co'># or otherwise by collapsing strata inside planned</span>
 <span class='co'># estimation domains:</span>
 <span class='no'>des.clps</span><span class='kw'>&lt;-</span><span class='fu'><a href='collapse.strata.html'>collapse.strata</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>des.lpsu</span>,<span class='kw'>block.vars</span><span class='kw'>=</span>~<span class='no'>pl.domain</span>)</div><div class='output co'>#&gt; 
 #&gt; # All lonely strata (2) successfully collapsed!
-#&gt; </div><div class='output co'>#&gt; <span class='warning'>Warning: No similarity score specified: achieved strata aggregation depends on the ordering of sample data</span></div><div class='input'><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.clps</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+#&gt; </div><div class='output co'>#&gt; <span class='warning'>Warning: No similarity score specified: achieved strata aggregation depends on the ordering of sample data</span></div><div class='input'><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des.clps</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  199.2386 19.82145
 #&gt; y   976.2417  272.4241 27.90540
 #&gt; z 19180.1349 4154.4085 21.65995</div></pre>
@@ -275,19 +293,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

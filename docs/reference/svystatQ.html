@@ -8,6 +8,13 @@
 
 <title>Estimation of Quantiles in Subpopulations — svystatQ • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,13 +137,13 @@
     <p>Calculates estimates, standard errors and confidence intervals for Quantiles of numeric variables in subpopulations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>svystatQ</span>(<span class='no'>design</span>, <span class='no'>y</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>), <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-         <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>, <span class='st'>"cv"</span>, <span class='st'>"cvpct"</span>, <span class='st'>"var"</span>),
+    <pre class="usage"><span class='fu'>svystatQ</span>(<span class='no'>design</span>, <span class='no'>y</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>), <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+         <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>, <span class='st'>"cv"</span>, <span class='st'>"cvpct"</span>, <span class='st'>"var"</span>),
          <span class='kw'>conf.lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-         <span class='kw'>ties</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"discrete"</span>, <span class='st'>"rounded"</span>))
+         <span class='kw'>ties</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"discrete"</span>, <span class='st'>"rounded"</span>))
 
 <span class='co'># S3 method for svystatQ</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatQ</span>
 <span class='fu'><a href='extractors.html'>SE</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatQ</span>
@@ -135,7 +151,7 @@
 <span class='co'># S3 method for svystatQ</span>
 <span class='fu'><a href='extractors.html'>cv</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatQ</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -182,8 +198,8 @@
       <td><p>An object of class <code>svystatQ</code>.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
-      <td><p>Additional arguments to <code>coef</code>, &#8230;, <code>confint</code> methods (if any).</p></td>
+      <th>...</th>
+      <td><p>Additional arguments to <code>coef</code>, ..., <code>confint</code> methods (if any).</p></td>
     </tr>
     </table>
 
@@ -193,7 +209,7 @@
 <p>Standard errors are calculated using the so-called "Woodruff method" [Woodruff 52][Sarndal, Swensson, Wretman 92]: (i) first a confidence interval (at a given confidence level 1-a) is constructed for the relative frequency of units with values below the estimated quantile, (ii) then the inverse of the estimated cumulative relative frequency distribution (ECDF) is used to map this interval to a confidence interval for the quantile, (iii) lastly the desired standard error is estimated by dividing the length of the obtained confidence interval by the value 2*qnorm(1-a/2). Notice that the procedure above builds, in general, asymmetric confidence intervals around the estimated quantiles.</p>
 <p>The mandatory argument <code>y</code> identifies the variable of interest, that is the variable for which estimates of quantiles have to be calculated. The <code>design</code> variable referenced by <code>y</code> must be <code>numeric</code>.</p>
 <p>The optional argument <code>probs</code> specifies the probability values (<code>0.001&lt;=probs[i]&lt;=0.999</code>) corresponding to the quantiles one wants to estimate; the default option selects quartiles.</p>
-<p>The optional argument <code>by</code> specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If <code>by=NULL</code> (the default option), the estimates produced by <code>svystatTM</code> refer to the whole population. Estimation domains must be defined by a formula: for example the statement <code>by=~B1:B2</code> selects as estimation domains the subpopulations determined by crossing the modalities of variables <code>B1</code> and <code>B2</code>. Notice that a formula like <code>by=~B1+B2</code> will be automatically translated into the factor-crossing formula <code>by=~B1:B2</code>: if you need to compute estimates for domains <code>B1</code> and <code>B2</code> <em>separately</em>, you have to call <code>svystatQ</code> twice. The <code>design</code> variables referenced by <code>by</code> (if any) should be of type <code>factor</code>, otherwise they will be coerced.</p>
+<p>The optional argument <code>by</code> specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If <code>by=NULL</code> (the default option), the estimates produced by <code>svystatQ</code> refer to the whole population. Estimation domains must be defined by a formula: for example the statement <code>by=~B1:B2</code> selects as estimation domains the subpopulations determined by crossing the modalities of variables <code>B1</code> and <code>B2</code>. Notice that a formula like <code>by=~B1+B2</code> will be automatically translated into the factor-crossing formula <code>by=~B1:B2</code>: if you need to compute estimates for domains <code>B1</code> and <code>B2</code> <em>separately</em>, you have to call <code>svystatQ</code> twice. The <code>design</code> variables referenced by <code>by</code> (if any) should be of type <code>factor</code>, otherwise they will be coerced.</p>
 <p>The <code>conf.int</code> argument allows to request the confidence intervals for the estimates. By default <code>conf.int=FALSE</code>, that is the confidence intervals are not provided.</p>
 <p>Whenever confidence intervals are requested (i.e. <code>conf.int=TRUE</code>), the desired confidence level can be specified by means of the <code>conf.lev</code> argument. The <code>conf.lev</code> value must represent a probability (<code>0&lt;=conf.lev&lt;=1</code>) and its default is chosen to be <code>0.95</code>.</p>
 <p>Missing values (<code>NA</code>) in interest variables should be avoided. If <code>na.rm=FALSE</code> (the default) they generate NAs in estimates (or even an error, if <code>design</code> is calibrated). If <code>na.rm=TRUE</code>, observations containing NAs are dropped, and estimates gets computed on non missing values only. This implicitly assumes that missing values hit interest variables <em>completely at random</em>: should this be not the case, computed estimates would be <em>biased</em>.</p>
@@ -203,21 +219,21 @@
     <p>An object inheriting from the <code>data.frame</code> class, whose detailed structure depends on input parameters' values.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Woodruff, R.S. (1952) <em>"Confidence Intervals for Medians and Other Position Measures"</em>, Journal of the American Statistical Association, Vol. 47, No. 260, pp. 635-646.</p>
-<p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>"Model Assisted Survey Sampling"</em>, Springer Verlag.</p>
+    <p>Woodruff, R.S. (1952) <em>&#8220;Confidence Intervals for Medians and Other Position Measures&#8221;</em>, Journal of the American Statistical Association, Vol. 47, No. 260, pp. 635-646.</p>
+<p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>&#8220;Model Assisted Survey Sampling&#8221;</em>, Springer Verlag.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Estimators of Totals and Means <code><a href='svystatTM.html'>svystatTM</a></code>, Ratios between Totals <code><a href='svystatR.html'>svystatR</a></code>, Shares <code><a href='svystatS.html'>svystatS</a></code>, Ratios between Shares <code><a href='svystatSR.html'>svystatSR</a></code>, Multiple Regression Coefficients <code><a href='svystatB.html'>svystatB</a></code>, Complex Analytic Functions of Totals and/or Means <code><a href='svystatL.html'>svystatL</a></code>, and all of the above <code><a href='svystat.html'>svystat</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Creation of a design object:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
      <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>)
 
 <span class='co'># Estimate of the deciles of the income variable for</span>
 <span class='co'># the whole population:</span>
-<span class='fu'>svystatQ</span>(<span class='no'>des</span>,~<span class='no'>income</span>,<span class='kw'>probs</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0.1</span>,<span class='fl'>0.9</span>,<span class='fl'>0.1</span>),<span class='kw'>ties</span><span class='kw'>=</span><span class='st'>"rounded"</span>)</div><div class='output co'>#&gt;           income.Q[p]        SE CI.l(95%) CI.u(95%)
+<span class='fu'>svystatQ</span>(<span class='no'>des</span>,~<span class='no'>income</span>,<span class='kw'>probs</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.1</span>,<span class='fl'>0.9</span>,<span class='fl'>0.1</span>),<span class='kw'>ties</span><span class='kw'>=</span><span class='st'>"rounded"</span>)</div><div class='output co'>#&gt;           income.Q[p]        SE CI.l(95%) CI.u(95%)
 #&gt; p = 0.100    713.0867 13.383999  687.5816  740.0459
 #&gt; p = 0.200    888.0190  8.790575  868.0873  902.5458
 #&gt; p = 0.300   1021.8314 10.066114 1002.7788 1042.2373
@@ -229,7 +245,7 @@
 #&gt; p = 0.900   1826.9735 14.051038 1803.4479 1858.5269</div><div class='input'>
 
 <span class='co'># Another design object:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,
      <span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
 
@@ -248,7 +264,7 @@
 #&gt; Services                    443.8254           5.096160</div><div class='input'>
 <span class='co'># Estimation of the Interquartile Range (IQR) of the number</span>
 <span class='co'># of employees for economic activity macro-sectors:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/apply'>apply</a></span>(<span class='fu'>svystatQ</span>(<span class='no'>des</span>,~<span class='no'>emp.num</span>,<span class='kw'>probs</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.25</span>,<span class='fl'>0.75</span>),<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>nace.macro</span>)[,<span class='fl'>2</span>:<span class='fl'>3</span>],<span class='fl'>1</span>,<span class='no'>diff</span>)</div><div class='output co'>#&gt; Agriculture    Industry    Commerce    Services 
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'>svystatQ</span>(<span class='no'>des</span>,~<span class='no'>emp.num</span>,<span class='kw'>probs</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.25</span>,<span class='fl'>0.75</span>),<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>nace.macro</span>)[,<span class='fl'>2</span>:<span class='fl'>3</span>],<span class='fl'>1</span>,<span class='no'>diff</span>)</div><div class='output co'>#&gt; Agriculture    Industry    Commerce    Services 
 #&gt;          15          44           9          24 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -267,19 +283,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

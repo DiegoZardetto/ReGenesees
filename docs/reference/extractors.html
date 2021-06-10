@@ -8,6 +8,13 @@
 
 <title>Extractor Functions for Variability Statistics — extractors • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -34,7 +43,7 @@
 
 
 <meta property="og:title" content="Extractor Functions for Variability Statistics — extractors" />
-<meta property="og:description" content="These functions extract standard errors (SE), variances (VAR), coefficients of variation (cv) and design effects (deff) from an object which has been returned by a survey statistic function (e.g. svystatTM, svystatR, svystatS, svystatSR, svystatB, svystatQ, svystatL, svystat, &amp;#8230;)." />
+<meta property="og:description" content="These functions extract standard errors (SE), variances (VAR), coefficients of variation (cv) and design effects (deff) from an object which has been returned by a survey statistic function (e.g. svystatTM, svystatR, svystatS, svystatSR, svystatB, svystatQ, svystatL, svystat, ...)." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -49,6 +58,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -118,7 +134,7 @@
     </div>
 
     <div class="ref-description">
-    <p>These functions extract standard errors (<code>SE</code>), variances (<code>VAR</code>), coefficients of variation (<code>cv</code>) and design effects (<code>deff</code>) from an object which has been returned by a survey statistic function (e.g. <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code>, <code><a href='svystatL.html'>svystatL</a></code>, <code><a href='svystat.html'>svystat</a></code>, &#8230;).</p>
+    <p>These functions extract standard errors (<code>SE</code>), variances (<code>VAR</code>), coefficients of variation (<code>cv</code>) and design effects (<code>deff</code>) from an object which has been returned by a survey statistic function (e.g. <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code>, <code><a href='svystatL.html'>svystatL</a></code>, <code><a href='svystat.html'>svystat</a></code>, ...).</p>
     </div>
 
     <pre class="usage"><span class='fu'>SE</span>(<span class='no'>object</span>, <span class='no'>...</span>)
@@ -134,7 +150,7 @@
       <td><p>An object containing survey statistics.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>Arguments for future expansion.</p></td>
     </tr>
     </table>
@@ -147,14 +163,14 @@
     <p>A data structure (typically inheriting from classes <code>matrix</code> or <code>data.frame</code>) storing the requested information.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Package <span class="pkg">ReGenesees</span> provides extensions of methods <code><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></code> and <code><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></code> (originally from package <span class="pkg">stats</span>) that can be used to extract estimates and confidence intervals respectively.</p>
+    <p>Package <span class="pkg">ReGenesees</span> provides extensions of methods <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> and <code><a href='https://rdrr.io/r/stats/confint.html'>confint</a></code> (originally from package <span class="pkg">stats</span>) that can be used to extract estimates and confidence intervals respectively.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Function <code><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></code> to extract estimates and function <code><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></code> to extract confidence intervals. Estimators of Totals and Means <code><a href='svystatTM.html'>svystatTM</a></code>, Ratios between Totals <code><a href='svystatR.html'>svystatR</a></code>, Shares <code><a href='svystatS.html'>svystatS</a></code>, Ratios between Shares <code><a href='svystatSR.html'>svystatSR</a></code>, Multiple Regression Coefficients <code><a href='svystatB.html'>svystatB</a></code>, Quantiles <code><a href='svystatQ.html'>svystatQ</a></code>, Complex Analytic Functions of Totals and/or Means <code><a href='svystatL.html'>svystatL</a></code>, and all of the above <code><a href='svystat.html'>svystat</a></code>.</p></div>
+    <div class='dont-index'><p>Function <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code> to extract estimates and function <code><a href='https://rdrr.io/r/stats/confint.html'>confint</a></code> to extract confidence intervals. Estimators of Totals and Means <code><a href='svystatTM.html'>svystatTM</a></code>, Ratios between Totals <code><a href='svystatR.html'>svystatR</a></code>, Shares <code><a href='svystatS.html'>svystatS</a></code>, Ratios between Shares <code><a href='svystatSR.html'>svystatSR</a></code>, Multiple Regression Coefficients <code><a href='svystatB.html'>svystatB</a></code>, Quantiles <code><a href='svystatQ.html'>svystatQ</a></code>, Complex Analytic Functions of Totals and/or Means <code><a href='svystatL.html'>svystatL</a></code>, and all of the above <code><a href='svystat.html'>svystat</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Creation of a design object:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,
      <span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
 
@@ -172,20 +188,21 @@
 #&gt; 1  0.0179623</div><div class='input'><span class='co'>## 3) VAR</span>
 <span class='fu'>VAR</span>(<span class='no'>VA.avg</span>)</div><div class='output co'>#&gt;   VAR.va.imp2
 #&gt; 1    3409.186</div><div class='input'>
-# Design effects have to be requested in advance,
-# i.e. the following invocation produces an error:
-</div><span class='co'># NOT RUN {</span>
+<span class='co'># Design effects have to be requested in advance,</span>
+<span class='co'># i.e. the following invocation produces an error:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>deff</span>(<span class='no'>VA.avg</span>)
-<span class='co'># }</span><div class='input'><span class='co'># ...while the following works:</span>
+}
+<span class='co'># ...while the following works:</span>
 <span class='no'>VA.avg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>va.imp2</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>,<span class='kw'>deff</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'>deff</span>(<span class='no'>VA.avg</span>)</div><div class='output co'>#&gt;   DEff.va.imp2
 #&gt; 1    0.4426447</div><div class='input'>
 <span class='co'># Further examples:</span>
 <span class='co'>## extract the statistic:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>VA.avg</span>)</div><div class='output co'>#&gt;  va.imp2 
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>VA.avg</span>)</div><div class='output co'>#&gt;  va.imp2 
 #&gt; 3250.599 </div><div class='input'><span class='co'>## extract the confidence interval at 90%</span>
 <span class='co'>## confidence level (the default would be 95%):</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></span>(<span class='no'>VA.avg</span>, <span class='kw'>conf.lev</span><span class='kw'>=</span><span class='fl'>0.9</span>)</div><div class='output co'>#&gt;            2.5 %   97.5 %
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>VA.avg</span>, <span class='kw'>conf.lev</span><span class='kw'>=</span><span class='fl'>0.9</span>)</div><div class='output co'>#&gt;            2.5 %   97.5 %
 #&gt; va.imp2 3136.161 3365.038</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -204,19 +221,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

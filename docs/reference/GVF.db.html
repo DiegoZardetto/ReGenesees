@@ -8,6 +8,13 @@
 
 <title>Archive of Registered GVF Models — GVF.db • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -169,7 +185,9 @@
     <dt><code>GVF.model</code></dt><dd><p>A character string specifying the GVF model formula, <code>character</code>. See also &#8216;Details&#8217;.</p></dd>
     <dt><code>Estimator.kind</code></dt><dd><p>A character string identifying the kind of estimators for which the GVF model is deemed to be appropriate, <code>character</code>. See also &#8216;Details&#8217;.</p></dd>
     <dt><code>Resp.to.CV</code></dt><dd><p>A character string which represents the function mapping the response of the GVF model (namely: variable 'resp') to the coefficient of variation (namely: variable 'CV'), <code>character</code>. See also &#8216;Details&#8217;.</p></dd>
-  </dl>
+  
+</dl>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>GVF.db</code> stores information about Generalized Variance Functions models supported by <span class="pkg">ReGenesees</span>. When starting a new work session with <span class="pkg">ReGenesees</span>, <code>GVF.db</code> contains few built-in GVF models (currently 5, see sections &#8216;Source&#8217; and &#8216;Examples&#8217;). The content of <code>GVF.db</code> can be customized by means of special accessor functions:</p><pre>
@@ -186,9 +204,10 @@
   GVF.db$reset............Reset GVF.db to its default version (i.e. the one with
                           built-in GVF models only)
 </pre>
-    <p>Information about registered GVF models stored inside <code>GVF.db</code> will be accessed and used by <span class="pkg">ReGenesees</span> Generalized Variance Functions facilities, e.g. functions <code><a href='fit.gvf.html'>fit.gvf</a></code> or <code><a href='predictCV.html'>predictCV</a></code>.<br /><br /></p>
+
+<p>Information about registered GVF models stored inside <code>GVF.db</code> will be accessed and used by <span class="pkg">ReGenesees</span> Generalized Variance Functions facilities, e.g. functions <code><a href='fit.gvf.html'>fit.gvf</a></code> or <code><a href='predictCV.html'>predictCV</a></code>.<br /><br /></p>
 <p><strong>GVF.db$insert()</strong><br />
-Function <code>GVF.db$insert</code> has just a single mandatory argument: <code>GVF.model</code>. This can be either a two-sided formula or a character string which would be transformed into a (well formed) two-sided formula by function <code><a href='https://www.rdocumentation.org/packages/stats/topics/formula'>as.formula</a></code>.</p>
+Function <code>GVF.db$insert</code> has just a single mandatory argument: <code>GVF.model</code>. This can be either a two-sided formula or a character string which would be transformed into a (well formed) two-sided formula by function <code><a href='https://rdrr.io/r/stats/formula.html'>as.formula</a></code>.</p>
 <p>The <code>GVF.model</code> formula to be inserted into <code>GVF.db</code> must be <em>new</em> (i.e. not already present into the archive) and can involve only variables contained inside <code><a href='gvf.input.html'>gvf.input</a></code> objects, namely:</p><pre>
  (1)  'Y'
  (2)  'SE'
@@ -214,21 +233,25 @@ Function <code>GVF.db$insert</code> has just a single mandatory argument: <code>
 <p>Note that while <code>Resp.to.CV</code> is passed as a character string, that string is expected to represent a well-formed mathematical expression (otherwise function <code><a href='predictCV.html'>predictCV</a></code> would not work). Moreover, only variables <code>'resp'</code> and <code>'Y'</code> are allowed to appear inside <code>Resp.to.CV</code> (which is enough, since <code>'VAR'</code> and <code>'SE'</code> can be expressed in terms of <code>'CV'</code> and <code>'Y'</code>).</p>
 <p>If the user does not specify <code>Resp.to.CV</code> when registering a new GVF model, he will be not able to use function <code><a href='predictCV.html'>predictCV</a></code> for predicting CV values based on the fitted GVF model.</p>
 <p>Lastly, note that the <code>Model.id</code> of a newly inserted GVF model will automatically be set, by adding 1 to the previous maximum of <code>Model.id</code>.<br /><br /></p>
-    <p><strong>GVF.db$delete()</strong><br />
+
+<p><strong>GVF.db$delete()</strong><br />
 Function <code>GVF.db$delete</code> has just a single mandatory argument: <code>Model.id</code>. It must match the integer key of the (already existing) GVF model you want to drop from <code>GVF.db</code>.</p>
-<p>Note that, after deleting a GVF model from <code>GVF.db</code>, values of column <code>Model.id</code> will be automatically renumbered, so as to range always from <code>1</code> to <code><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow(GVF.db)</a></code>.<br /><br /></p>
-    <p><strong>GVF.db$get()</strong><br />
+<p>Note that, after deleting a GVF model from <code>GVF.db</code>, values of column <code>Model.id</code> will be automatically renumbered, so as to range always from <code>1</code> to <code><a href='https://rdrr.io/r/base/nrow.html'>nrow(GVF.db)</a></code>.<br /><br /></p>
+
+<p><strong>GVF.db$get()</strong><br />
 Function <code>GVF.db$get</code> has no mandatory arguments. When invoked, the function returns the <em>current</em> content of <code>GVF.db</code>, so that it can be assigned and saved/exported for later usage (see &#8216;Examples&#8217;). Should the <em>current</em> content of <code>GVF.db</code> happen to be empty, the function would inform the user and return <code>NULL</code>. The return value of <code>GVF.db$get</code> has class <code>"GVF.db_exported"</code>, and inherits from class <code>"data.frame"</code>.<br /><br /></p>
-    <p><strong>GVF.db$assign()</strong><br />
+
+<p><strong>GVF.db$assign()</strong><br />
 Function <code>GVF.db$assign</code> has just a single mandatory argument: <code>value</code>. The object passed to argument <code>value</code> can only be a previously exported copy of <code>GVF.db</code>, i.e. an object of class <code>GVF.db_exported</code>. The function overwrites the <em>current</em> version of <code>GVF.db</code> with <code>value</code>. As a result, after invoking <code>GVF.db$assign</code>, the content of <code>GVF.db</code> is <code>value</code>.<br /><br /></p>
-    <p><strong>GVF.db$reset()</strong><br />
+
+<p><strong>GVF.db$reset()</strong><br />
 Function <code>GVF.db$reset</code> has no mandatory arguments and simply restores the default version of <code>GVF.db</code> (i.e. the one containing built-in GVF models only).<br /><br /></p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>Built-in GVF models for frequencies (i.e. those with <code>Model.id</code> <code>1</code>, <code>2</code>, and <code>3</code>) are discussed in Chapter 7 of [Wolter 07], along with their theoretical justification. Built-in GVF models for totals (i.e. those with <code>Model.id</code> <code>4</code>, and <code>5</code>) lack a rigorous justification, but have sometimes been used successfully on a purely empirical basis. For instance, Istat surveys on structural business statistics adopted models of that kind to summarize standard errors in publications and to allow their approximate evaluation on a custom basis.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Wolter, K.M. (2007) <em>"Introduction to Variance Estimation"</em>, Second Edition, Springer-Verlag, New York.</p>
+    <p>Wolter, K.M. (2007) <em>&#8220;Introduction to Variance Estimation&#8221;</em>, Second Edition, Springer-Verlag, New York.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='estimator.kind.html'>estimator.kind</a></code> to assess what kind of estimates are stored inside a survey statistic object, <code><a href='gvf.input.html'>gvf.input</a></code> and <code><a href='svystat.html'>svystat</a></code> to prepare the input for GVF model fitting, <code><a href='fit.gvf.html'>fit.gvf</a></code> to fit GVF models, <code><a href='plot.gvf.fit.html'>plot.gvf.fit</a></code> to get diagnostic plots for fitted GVF models, <code><a href='drop.gvf.points.html'>drop.gvf.points</a></code> to drop alleged outliers from a fitted GVF model and simultaneously refit it, and <code><a href='predictCV.html'>predictCV</a></code> to predict CV values via fitted GVF models.</p></div>
@@ -247,11 +270,11 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 #&gt; 5        5          CV ~ I(1/Y) + Y          Total            resp
 #&gt; </div><div class='input'>
 <span class='co'># Inspect the structure of the GVF.db data frame:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.class'>data.class</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; [1] "GVF.db"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; 'data.frame':	5 obs. of  4 variables:
+<span class='fu'><a href='https://rdrr.io/r/base/data.class.html'>data.class</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; [1] "GVF.db"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; 'data.frame':	5 obs. of  4 variables:
 #&gt;  $ Model.id      : int  1 2 3 4 5
 #&gt;  $ GVF.model     : chr  "log(CV^2) ~ log(Y)" "CV^2 ~ I(1/Y)" "CV^2 ~ I(1/Y) + I(1/Y^2)" "SE ~ Y + I(Y^2)" ...
 #&gt;  $ Estimator.kind: chr  "Frequency" "Frequency" "Frequency" "Total" ...
-#&gt;  $ Resp.to.CV    : chr  "sqrt(exp(resp))" "sqrt(resp)" "sqrt(resp)" "resp/Y" ...</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; [1] 5 4</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; [1] 5</div><div class='input'>
+#&gt;  $ Resp.to.CV    : chr  "sqrt(exp(resp))" "sqrt(resp)" "sqrt(resp)" "resp/Y" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; [1] 5 4</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>GVF.db</span>)</div><div class='output co'>#&gt; [1] 5</div><div class='input'>
 
 <span class='co'>######################</span>
 <span class='co'># Accessor functions #</span>
@@ -296,7 +319,7 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 #&gt; 5        5          CV ~ I(1/Y) + Y          Total            resp
 #&gt; </div><div class='input'>
 <span class='co'># Insert a new tentative GVF model for Totals:</span>
-<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='no'>CV</span> ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>^<span class='fl'>2</span>) + <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>) + <span class='no'>Y</span> + <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='no'>Y</span>^<span class='fl'>2</span>), <span class='st'>"Total"</span>, <span class='st'>"resp"</span>)</div><div class='output co'>#&gt; 
+<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='no'>CV</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>^<span class='fl'>2</span>) + <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>) + <span class='no'>Y</span> + <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>Y</span>^<span class='fl'>2</span>), <span class='st'>"Total"</span>, <span class='st'>"resp"</span>)</div><div class='output co'>#&gt; 
 #&gt; # New GVF model has been registered
 #&gt; </div><div class='input'><span class='no'>GVF.db</span></div><div class='output co'>#&gt; 
 #&gt; # Registered GVF models currently available:
@@ -319,19 +342,20 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 <span class='co'>### START</span>
   <span class='co'># 1. You must first get a copy of it, by using accessor function</span>
   <span class='co'>#    GVF.db$get:</span>
-<span class='no'>myGVF.db</span> <span class='kw'>&lt;-</span> <span class='no'>GVF.db</span>$<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/get'>get</a></span>()
+<span class='no'>myGVF.db</span> <span class='kw'>&lt;-</span> <span class='no'>GVF.db</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>()
 <span class='no'>myGVF.db</span></div><div class='output co'>#&gt;   Model.id                           GVF.model Estimator.kind      Resp.to.CV
 #&gt; 1        1                  log(CV^2) ~ log(Y)      Frequency sqrt(exp(resp))
 #&gt; 2        2                       CV^2 ~ I(1/Y)      Frequency      sqrt(resp)
 #&gt; 3        3            CV^2 ~ I(1/Y) + I(1/Y^2)      Frequency      sqrt(resp)
 #&gt; 4        4                     SE ~ Y + I(Y^2)          Total          resp/Y
 #&gt; 5        5                     CV ~ I(1/Y) + Y          Total            resp
-#&gt; 6        6 CV ~ I(1/Y^2) + I(1/Y) + Y + I(Y^2)          Total            resp</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.class'>data.class</a></span>(<span class='no'>myGVF.db</span>)</div><div class='output co'>#&gt; [1] "GVF.db_exported"</div><div class='input'>
-  # 2. Then, you must save the copy to a .RData workspace, in order
-  #    to be able to load it later when needed, e.g.:
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/save'>save</a></span>(<span class='no'>myGVF.db</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='st'>"custom.GVF.Archive.RData"</span>)
-<span class='co'># }</span><div class='input'>
+#&gt; 6        6 CV ~ I(1/Y^2) + I(1/Y) + Y + I(Y^2)          Total            resp</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/data.class.html'>data.class</a></span>(<span class='no'>myGVF.db</span>)</div><div class='output co'>#&gt; [1] "GVF.db_exported"</div><div class='input'>
+  <span class='co'># 2. Then, you must save the copy to a .RData workspace, in order</span>
+  <span class='co'>#    to be able to load it later when needed, e.g.:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/save.html'>save</a></span>(<span class='no'>myGVF.db</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='st'>"custom.GVF.Archive.RData"</span>)
+}
+
   <span class='co'># 3. Starting a new ReGenesees session will set the default GVF.db,</span>
   <span class='co'>#    which we can simulate in this example as follows:</span>
 <span class='no'>GVF.db</span>$<span class='fu'>reset</span>()</div><div class='output co'>#&gt; 
@@ -346,10 +370,11 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 #&gt; 4        4          SE ~ Y + I(Y^2)          Total          resp/Y
 #&gt; 5        5          CV ~ I(1/Y) + Y          Total            resp
 #&gt; </div><div class='input'>
-  # 4. Now you can load your previously saved customized GVF.db...
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/load'>load</a></span>(<span class='st'>"custom.GVF.Archive.RData"</span>)
-<span class='co'># }</span><div class='input'>  <span class='co'># ...so that myGVF.db is back into your .GlobalEnv:</span>
+  <span class='co'># 4. Now you can load your previously saved customized GVF.db...</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span>(<span class='st'>"custom.GVF.Archive.RData"</span>)
+}
+  <span class='co'># ...so that myGVF.db is back into your .GlobalEnv:</span>
 <span class='no'>myGVF.db</span></div><div class='output co'>#&gt;   Model.id                           GVF.model Estimator.kind      Resp.to.CV
 #&gt; 1        1                  log(CV^2) ~ log(Y)      Frequency sqrt(exp(resp))
 #&gt; 2        2                       CV^2 ~ I(1/Y)      Frequency      sqrt(resp)
@@ -359,7 +384,7 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 #&gt; 6        6 CV ~ I(1/Y^2) + I(1/Y) + Y + I(Y^2)          Total            resp</div><div class='input'>
   <span class='co'># 5. Lastly, you must overwrite GVF.db with your custom</span>
   <span class='co'>#    GVF archive myGVF.db via function GVF.db$assign:</span>
-<span class='no'>GVF.db</span>$<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/assign'>assign</a></span>(<span class='no'>myGVF.db</span>)</div><div class='output co'>#&gt; 
+<span class='no'>GVF.db</span>$<span class='fu'><a href='https://rdrr.io/r/base/assign.html'>assign</a></span>(<span class='no'>myGVF.db</span>)</div><div class='output co'>#&gt; 
 #&gt; # GVF models db overwritten
 #&gt; </div><div class='input'><span class='no'>GVF.db</span></div><div class='output co'>#&gt; 
 #&gt; # Registered GVF models currently available:
@@ -391,13 +416,14 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 #&gt; 4        4          SE ~ Y + I(Y^2)          Total          resp/Y
 #&gt; 5        5          CV ~ I(1/Y) + Y          Total            resp
 #&gt; </div><div class='input'>
-# GVF model must be "syntactically new"...
-</div><span class='co'># NOT RUN {</span>
-<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>CV</span>^<span class='fl'>2</span>) ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>Y</span>))
-<span class='co'># }</span><div class='input'><span class='co'># ...if this is the case, it can even be "equivalent" to old ones: e.g.</span>
+<span class='co'># GVF model must be "syntactically new"...</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>CV</span>^<span class='fl'>2</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>Y</span>))
+}
+<span class='co'># ...if this is the case, it can even be "equivalent" to old ones: e.g.</span>
 <span class='co'># the following is identical to model number 5 and will produces identical </span>
 <span class='co'># estimates and predictions (as you may want to check):</span>
-<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>VAR</span>)/<span class='no'>Y</span>) ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>) + <span class='no'>Y</span>, <span class='st'>"Total"</span>, <span class='kw'>Resp.to.CV</span> <span class='kw'>=</span> <span class='st'>"resp"</span>)</div><div class='output co'>#&gt; 
+<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>VAR</span>)/<span class='no'>Y</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>) + <span class='no'>Y</span>, <span class='st'>"Total"</span>, <span class='kw'>Resp.to.CV</span> <span class='kw'>=</span> <span class='st'>"resp"</span>)</div><div class='output co'>#&gt; 
 #&gt; # New GVF model has been registered
 #&gt; </div><div class='input'><span class='no'>GVF.db</span></div><div class='output co'>#&gt; 
 #&gt; # Registered GVF models currently available:
@@ -410,22 +436,26 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 #&gt; 5        5             CV ~ I(1/Y) + Y          Total            resp
 #&gt; 6        6 I(sqrt(VAR)/Y) ~ I(1/Y) + Y          Total            resp
 #&gt; </div><div class='input'>
-# GVF model must have a response term
-</div><span class='co'># NOT RUN {</span>
-<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>Y</span>))
-<span class='co'># }</span><div class='input'>
-# GVF model response must involve some of 'SE', 'CV', 'VAR'
-</div><span class='co'># NOT RUN {</span>
-<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='no'>DEFF</span> ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>Y</span>))
-<span class='co'># }</span><div class='input'>
-# GVF model predictor must involve 'Y'
-</div><span class='co'># NOT RUN {</span>
+<span class='co'># GVF model must have a response term</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(~ <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>Y</span>))
+}
+
+<span class='co'># GVF model response must involve some of 'SE', 'CV', 'VAR'</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='no'>DEFF</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>Y</span>))
+}
+
+<span class='co'># GVF model predictor must involve 'Y'</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='no'>VAR</span> ~ <span class='no'>SE</span>)
-<span class='co'># }</span><div class='input'>
-# If passed, Resp.to.CV can only involve 'resp' and 'Y'
-</div><span class='co'># NOT RUN {</span>
-<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>VAR</span>)/<span class='no'>Y</span>) ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>) + <span class='no'>Y</span> + <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='no'>Y</span>^<span class='fl'>2</span>), <span class='kw'>Resp.to.CV</span> <span class='kw'>=</span> <span class='st'>"sqrt(VAR)/Y"</span>)
-<span class='co'># }</span><div class='input'>
+}
+
+<span class='co'># If passed, Resp.to.CV can only involve 'resp' and 'Y'</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>VAR</span>)/<span class='no'>Y</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>) + <span class='no'>Y</span> + <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>Y</span>^<span class='fl'>2</span>), <span class='kw'>Resp.to.CV</span> <span class='kw'>=</span> <span class='st'>"sqrt(VAR)/Y"</span>)
+}
+
 <span class='co'># Examples end: reset GVF.db to its default values:</span>
 <span class='no'>GVF.db</span>$<span class='fu'>reset</span>()</div><div class='output co'>#&gt; 
 #&gt; # Default GVF models db restored
@@ -448,19 +478,23 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

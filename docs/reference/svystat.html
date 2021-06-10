@@ -8,6 +8,13 @@
 
 <title>Compute Many Estimates and Errors in Just a Single Shot — svystat • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,15 +137,15 @@
     <p>Computes many estimates and errors (e.g. for disparate estimation domains) in just a single shot, primarily to use them in fitting GVF models. Can handle estimators of all kinds.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>svystat</span>(<span class='no'>design</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"TM"</span>, <span class='st'>"R"</span>, <span class='st'>"S"</span>, <span class='st'>"SR"</span>, <span class='st'>"B"</span>, <span class='st'>"Q"</span>, <span class='st'>"L"</span>),
+    <pre class="usage"><span class='fu'>svystat</span>(<span class='no'>design</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TM"</span>, <span class='st'>"R"</span>, <span class='st'>"S"</span>, <span class='st'>"SR"</span>, <span class='st'>"B"</span>, <span class='st'>"Q"</span>, <span class='st'>"L"</span>),
         <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>forGVF</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
         <span class='kw'>combo</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for gvf.input.gr</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for svystat.gr</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystat.gr</span>
 <span class='fu'><a href='extractors.html'>SE</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystat.gr</span>
@@ -139,7 +155,7 @@
 <span class='co'># S3 method for svystat.gr</span>
 <span class='fu'><a href='extractors.html'>deff</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystat.gr</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,7 +191,7 @@
                determined by crossing the <code>by</code> variables <em>up to</em> a given order (see &#8216;Details&#8217;).</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>For function <code>svystat</code>, additional arguments to the summary statistic function implied by <code>kind</code>.
                Otherwise, further arguments passed to or from other methods.</p></td>
     </tr>
@@ -193,7 +209,7 @@
 
     <p>This function can compute <em>all</em> the summary statistics provided by <span class="pkg">ReGenesees</span>, and is principally meant to return a lot of them in just a single shot.</p>
 <p>If <code>forGVF = TRUE</code> the output will be ready to feed <span class="pkg">ReGenesees</span> GVF fitting infrastructure, otherwise it will consist simply of a set of summary statistic objects.</p>
-<p>Use argument <code>kind</code> to specify the summary statistic you need. The default value <code>'TM'</code> selects function <code><a href='svystatTM.html'>svystatTM</a></code>, which yields Totals and Means. All the arguments needed by the summary statistic function implied by <code>kind</code> (e.g. argument <code>y</code> for <code>svystatTM</code> when <code>kind = 'TM'</code>) will be passed on through argument &#8216;<code>&#8230;</code>&#8217;.</p>
+<p>Use argument <code>kind</code> to specify the summary statistic you need. The default value <code>'TM'</code> selects function <code><a href='svystatTM.html'>svystatTM</a></code>, which yields Totals and Means. All the arguments needed by the summary statistic function implied by <code>kind</code> (e.g. argument <code>y</code> for <code>svystatTM</code> when <code>kind = 'TM'</code>) will be passed on through argument &#8216;<code>...</code>&#8217;.</p>
 <p>As usual in summary statistics, argument <code>by</code> can be used to request domain estimates.</p>
 <p>The <code>group</code> formula (if any) specifies a way of partitioning the population into groups: the output will be reported separately for each group. In the GVF context, a <em>&#8220;grouped&#8221;</em> output will permit to fit <em>separate</em> GVF models inside different groups (and hence to compute separate variance predictions for different groups).</p>
 <p>Note that <code>group</code> and <code>by</code> share identical syntax and semantics as model formulae, despite they have different purposes in function <code>svystat</code> (as explained above).</p>
@@ -208,8 +224,9 @@
   m =  n........combinations of any order, the maximum being the one with
                 all 'by' variables interacting simultaneously.
 </pre>
-    <p>The <code>plot</code> method can be used <em>only</em> when <code>forGVF = TRUE</code> and produces a matrix (or many matrices, if <code>group</code> is passed) of scatterplots with polynomial smoothers.</p>
-<p>Methods <code><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></code>, <code><a href='extractors.html'>SE</a></code>, <code><a href='extractors.html'>VAR</a></code>, <code><a href='extractors.html'>cv</a></code>, <code><a href='extractors.html'>deff</a></code>, and <code><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></code> can be used <em>only</em> when <code>forGVF = FALSE</code>, to extract estimates and variability statistics.</p>
+
+<p>The <code>plot</code> method can be used <em>only</em> when <code>forGVF = TRUE</code> and produces a matrix (or many matrices, if <code>group</code> is passed) of scatterplots with polynomial smoothers.</p>
+<p>Methods <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code>, <code><a href='extractors.html'>SE</a></code>, <code><a href='extractors.html'>VAR</a></code>, <code><a href='extractors.html'>cv</a></code>, <code><a href='extractors.html'>deff</a></code>, and <code><a href='https://rdrr.io/r/stats/confint.html'>confint</a></code> can be used <em>only</em> when <code>forGVF = FALSE</code>, to extract estimates and variability statistics.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object storing estimates and errors, whose detailed structure depends on input parameters' values.</p>
@@ -222,7 +239,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load sbs data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 
 <span class='co'># Create a design object:</span>
 <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,<span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
@@ -439,7 +456,7 @@
 <span class='co'># Understanding syntax and semantics of argument 'combo' #</span>
 <span class='co'>##########################################################</span>
 <span class='co'># Load household data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 
 <span class='co'># Create a design object:</span>
 <span class='no'>houdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
@@ -537,12 +554,13 @@
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "svystat.gr" "list"      </div><div class='input'>
-   # combo = 3
-   # -> yields an error, as 'combo' cannot exceed the number of 'by' variables
-   #    (2 in this example)
-</div><span class='co'># NOT RUN {</span>
+   <span class='co'># combo = 3</span>
+   <span class='co'># -&gt; yields an error, as 'combo' cannot exceed the number of 'by' variables</span>
+   <span class='co'>#    (2 in this example)</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
    <span class='fu'>svystat</span>(<span class='no'>houdes</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>ones</span>,<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>age5c</span>:<span class='no'>sex</span>,<span class='kw'>forGVF</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>combo</span><span class='kw'>=</span><span class='fl'>3</span>)
-<span class='co'># }</span><div class='input'>
+}
+
 
 <span class='co'>######################################################################</span>
 <span class='co'># svystat as an alternative way to prepare input data for GVF models #</span>
@@ -868,13 +886,13 @@
 <span class='co'>##       exponentially with the number of by variables.</span>
 <span class='co'>##       See, for instance, the following example:</span>
 <span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>svystat</span>(<span class='no'>houdes</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>ones</span>,<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>age5c</span>:<span class='no'>marstat</span>:<span class='no'>sex</span>:<span class='no'>regcod</span>,<span class='kw'>combo</span><span class='kw'>=</span><span class='fl'>4</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; [1] 283   5</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt;     name        Y        SE         CV       VAR
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; [1] 283   5</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt;     name        Y        SE         CV       VAR
 #&gt; 1   ones 924101.3 17172.681 0.01858312 294900983
 #&gt; 2 1:ones 128928.4  6855.457 0.05317259  46997295
 #&gt; 3 2:ones 294575.1  9646.795 0.03274817  93060661
 #&gt; 4 3:ones 356463.9  9354.653 0.02624292  87509530
 #&gt; 5 4:ones 122897.6  8022.848 0.06528075  64366083
-#&gt; 6 5:ones  21236.3  2728.266 0.12847181   7443435</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='no'>out</span>)</div><div class='img'><img src='svystat-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; 6 5:ones  21236.3  2728.266 0.12847181   7443435</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out</span>)</div><div class='img'><img src='svystat-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>##################################################</span>
 <span class='co'># Minor details: accessor functions and plotting #</span>
@@ -891,7 +909,7 @@
 #&gt; Agriculture         0.05500097
 #&gt; Industry            0.01372657
 #&gt; Commerce            0.05683984
-#&gt; Services            0.01563336</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt;                                 2.5 %    97.5 %
+#&gt; Services            0.01563336</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt;                                 2.5 %    97.5 %
 #&gt; Agriculture:va.imp2/emp.num  52.27665  64.90929
 #&gt; Industry:va.imp2/emp.num     46.64680  49.22613
 #&gt; Commerce:va.imp2/emp.num    201.70294 252.27829
@@ -943,7 +961,7 @@
 #&gt; South.Industry            0.03639643
 #&gt; South.Commerce            0.15118269
 #&gt; South.Services            0.04041685
-#&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; $North
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; $North
 #&gt;                                       2.5 %    97.5 %
 #&gt; North.Agriculture:va.imp2/emp.num  53.03985  68.43642
 #&gt; North.Industry:va.imp2/emp.num     49.99085  53.17882
@@ -969,11 +987,11 @@
 <span class='co'># Counts of individuals by sex, marstat and age5c, and all their interactions:</span>
 <span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>svystat</span>(<span class='no'>houdes</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>ones</span>,<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>age5c</span>:<span class='no'>marstat</span>:<span class='no'>sex</span>,<span class='kw'>combo</span><span class='kw'>=</span><span class='fl'>3</span>)
 <span class='co'># Plot GVF input:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='no'>out</span>)</div><div class='img'><img src='svystat-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out</span>)</div><div class='img'><img src='svystat-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># The same as above, grouped by region:</span>
 <span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>svystat</span>(<span class='no'>houdes</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>ones</span>,<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>age5c</span>:<span class='no'>marstat</span>:<span class='no'>sex</span>,<span class='kw'>combo</span><span class='kw'>=</span><span class='fl'>3</span>,<span class='kw'>group</span><span class='kw'>=</span>~<span class='no'>regcod</span>)
 <span class='co'># Plot GVF inputs, separately by groups (regions):</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='no'>out</span>)</div><div class='img'><img src='svystat-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='svystat-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='svystat-5.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out</span>)</div><div class='img'><img src='svystat-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='svystat-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='svystat-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -990,19 +1008,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

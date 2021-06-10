@@ -23,7 +23,9 @@ expressed as an analytic function of Horvitz-Thompson or Calibration estimators
 of Totals or Means, by automatically linearizing them. The Design Covariance and
 Correlation between Complex Estimators is also provided. All analyses above can
 be carried out for arbitrary subpopulations. In addition, \pkg{ReGenesees} can
-trim calibration weights while preserving all the calibration constraints.
+trim calibration weights while preserving all the calibration constraints, and
+perform \sQuote{special purpose calibration} tasks, i.e. can calibrate on
+complex population parameters like Multiple Regression Coefficients.
 Lastly, \pkg{ReGenesees} offers a Generalized Variance Functions (GVF)
 infrastructure, i.e. facilities for defining, fitting, testing and plotting GVF
 models, and to exploit them to predict variance estimates.
@@ -117,6 +119,17 @@ manual}.\cr\cr
 }
 }
 
+\subsection{Special Purpose Calibration}{
+\preformatted{
+  .  prep.calBeta.........Prepare a Survey Design to Calibration on
+                          Multiple Regression Coefficients
+  .  pop.calBeta..........Prepare Control Totals for Calibration on
+                          Multiple Regression Coefficients
+  .  pop.fuse.............Fuse Control Totals Data Frames for Special
+                          Purpose and Ordinary Calibration Tasks
+}
+}
+
 \subsection{Estimates and Sampling Errors}{
 \preformatted{
 ***  svystatTM............Estimation of Totals and Means in
@@ -124,7 +137,8 @@ manual}.\cr\cr
 ***  svystatR.............Estimation of Ratios in Subpopulations
 ***  svystatS.............Estimation of Shares in Subpopulations
 ***  svystatSR............Estimation of Share Ratios in Subpopulations
-***  svystatB.............Estimation of Population Regression Coefficients
+***  svystatB.............Estimation of Population Regression Coefficients in
+                          Subpopulations
 ***  svystatQ.............Estimation of Quantiles in Subpopulations
 ***  svystatL.............Estimation of Complex Estimators in
                           Subpopulations

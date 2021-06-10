@@ -1,0 +1,523 @@
+
+
+#  ReGenesees 2.1
+
+*  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.
+
+*  This release of ReGenesees introduces support for "Special Purpose
+   Calibration" tasks, i.e. facilities to calibrate survey weights so as to
+   match complex, non-linear population parameters, instead of ordinary
+   population totals.
+
+*  NOTE: To date, support is limited to calibration on Multiple Regression
+   Coefficients, which includes calibration on Means as a notable special case.
+   Further support will likely be provided in future extensions.
+
+*  New functions prep.calBeta and pop.calBeta: prepare survey data and control
+   totals to run a calibration task on *multiple regression coefficients*.
+   These functions enable users to:
+   (i)  Calibrate on regression coefficients of *different linear models*, each
+        known at the *overall population level*.
+   (ii) Calibrate on regression coefficients of a *single linear model*, known
+        possibly for *different subpopulations*.
+
+*  New function pop.fuse: allows to solve jointly a *special purpose
+   calibration* task and an *ordinary calibration* task, by fusing their
+   respective control totals data frames.
+
+*  New method of function pop.desc for class 'spc.pop': provides a natural
+   language description of the control totals dataframes for "special purpose
+   calibration" tasks. Handles both *simple* and *fused* control totals.
+
+*  e.calibrate, check.cal, bounds.hint: code update to cope with "special
+   purpose calibration" tasks.
+
+*  svystatB: added 'by' argument. Estimates and sampling errors for multiple
+   regression coefficients are now available for subpopulations too. Please have
+   a look at the "Collinearity, Aliasing and Impacts in Domain Estimation"
+   section of the related help page (?svystatB).
+
+*  write.svystat: code update to accomodate changes induced by new argument 'by'
+   of svystatB.
+
+*  e.calibrate, bounds.hint, aux.estimates: equality of model.formulae was
+   checked with all.equal() (which was a good idea) but if clauses didn't use
+   the right construct (i.e. isTRUE(all.equal())). Fixed.
+
+
+#  ReGenesees 2.0
+
+*  The main purpose of this version is to ensure a safe transition of ReGenesees
+   to the "R 4.x" series. Indeed R 4.0.0. brought in some potentially disruptive
+   changes: see, e.g., the following NOTEs.
+
+*  NOTE: Under R 4.0.0 or later, old versions of the ReGenesees package need to
+   be re-installed from sources (i.e. local .tar.gz files). Binary distributions
+   of old versions (i.e. local .zip files) are expected not to work under
+   R 4.0.0 or later.
+
+*  NOTE: R 4.0.0 changed the default value of argument 'stringsAsFactors', which
+   enters functions data.frame(), as.data.frame(), read.table() and possibly
+   many others. The new default is now: *stringsAsFactors = FALSE*.
+   This new behavior has to be kept in mind when preparing data to be later
+   processed by ReGenesees, as most ReGenesees functions *require* categorical
+   variables be represented as *factors*. The companion package ReGenesees.GUI
+   will, of course, keep automatically converting character columns into factors
+   when importing data from external files.
+
+*  ReGenesees is now also available from GITHUB at the following URL:
+   https://github.com/DiegoZardetto/ReGenesees
+
+*  ReGenesees has now a brand new website (built with pkgdown) hosted on GITHUB
+   pages at the following URL: https://diegozardetto.github.io/ReGenesees
+
+*  e.calibrate, bounds.hint, aux.estimates: now equality of model.formulae is
+   checked with all.equal() instead of identical(), so that environment
+   mismatches are neglected. This is desirable when the model.formulae being
+   compared have been generated within the body of different functions, but are
+   equal when deparsed.
+
+*  estimator.kind: the test that the input statistic 'stat' actually comes from
+   the input 'design' object did not work properly in *very special* cases (i.e.
+   when 'stat' was generated within the body a function). Fixed.
+
+*  svystat: an explicit error message now informs that one cannot specify 'by'
+   nor 'group' when kind is 'B'. This is because svystatB does not have a 'by'
+   argument (see ?svystatB). Fixed.
+
+
+#  ReGenesees 1.9
+
+*  This is a wrap-up release, whose main purpose is to ensure a safe transition
+   to the "R 3.4.x" series.
+
+*  New function trimcal: allows to *trim calibration weights* while
+   simultaneously *preserving all the calibration constraints*.
+
+*  e.calibrate: now the attributes of the output object store more calibration
+   metadata than before ('calmodel', 'partition' and 'aggregate.stage' have
+   been added). This is intended to benefit ReGenesees' new function trimcal.
+
+*  cal.estimates: no longer prints on screen to notify that design object
+   and calibration model formulae (or template) are coherent.
+
+*  e.calibrate: enriched documentation (see 'Details' and 'Examples' sections)
+   showing how to exploit the 'sigma2' argument to prevent some initial weights
+   from being altered by calibration.
+
+*  e.calibrate: error conditions on weights and sigma2 varying within clusters
+   selected at stage aggregate.stage were raised correctly, but the example
+   clusters signaled as affected by those errors were not always the intended
+   ones. Fixed.
+
+*  e.svydesign: error condition on self.rep.str varying within strata was raised
+   correctly, but the example stratum signaled as affected by that error was not
+   always the intended one. Fixed.
+
+*  get.residuals: the 'Examples' section of the help has been edited to fix a
+   cut & paste error (namely 'WITH' when 'WITHOUT' was actually intended).
+
+*  Package startup messages moved from onLoad to onAttach.
+
+
+#  ReGenesees 1.8.1
+
+*  This is a patched version, whose main purpose is to ensure a safe transition
+   to the "R 3.3.x" series.
+
+*  Summary method for objects of class 'analytic' (and 'cal.analytic') is now
+   exported and documented (see ?e.svydesign and ?e.calibrate).
+
+*  ext.calibrated: an explicit error message now informs that *negative*
+   external calibration weights cannot be handled yet (see also the related help
+   page ?ext.calibrated).
+
+*  bounds.hint: diagnostic object 'last.hint' (created into the .GlobalEnv) now
+   has a 'call' attribute only if function bounds.hint gets called from the
+   command line (i.e. not from ReGenesees.GUI).
+
+*  Fixed minor, non-harmful bugs in internal functions as.fpc and multistage.
+
+
+#  ReGenesees 1.8
+
+*  New function ext.calibrated: enables ReGenesses to digest calibration weights
+   that have been computed externally (e.g. by other software), so as to provide
+   correct variance estimates, i.e. appropriate to calibration estimators.
+
+*  New function svystatS: computes estimates and errors for the shares of a
+   numeric variable held by specific population groups, possibly within domains.
+   This, incidentally, provides yet another alternative means to estimate
+   *joint* relative frequencies within ReGenesees (see ?svystatTM).
+
+*  New function svystatSR: computes estimates and errors for ratios between
+   shares of a numeric variable held by specific population groups, possibly
+   within domains.
+
+*  New function pop.desc: provides a natural language description of the
+   structure of known totals dataframes to be used for calibration. This can be
+   useful to, and has been intended mainly for, users who cannot exploit
+   function fill.template since they lack a sampling frame to compute population
+   totals from.
+
+*  e.calibrate: now an explicit error message is printed if the design object
+   undergoing calibration is already calibrated and has negative weights (i.e.
+   negative calibration weights generated at the previous calibration step).
+
+*  svystatTM: better handling of missing values in estimating totals. A (very
+   simple) model-based estimator is used now, based on the MCAR assumption.
+
+*  svystatL: I decided to restore the function's ability to handle complex
+   estimators whose mathematical expression depends on "parameters" (i.e. fixed
+   non-random values). This ability is mandatory whenever the actual values of
+   these parameters cannot be directly typed inside the call to svystatL by the
+   user (e.g. for batch jobs or simulations).
+
+*  estimator.kind: very elusive (and not harmful) bug found when argument 'stat'
+   was generated by svystat with forGVF = FALSE *and* group = NULL. Fixed.
+
+*  drop.gvf.points: method for "grouped" models (i.e. objects of class
+   gvf.fit.gr) had an erroneous default value for argument 'labels.id'. The only
+   effect of this bug was to attach wrong labels to alleged outliers: all
+   computations were correct. Fixed.
+
+*  predictCV: method for "grouped" models (i.e. objects of class gvf.fit.gr and
+   gvf.fits.gr) now has the following, useful exception: if dataframe 'new.Y'
+   has just the 'Y' column, then CVs will be predicted for all groups.
+
+*  Print method for survey design objects: if first stage fpc is always zero
+   (or Inf), print on screen '(with replacement)' (as has always been the case
+   when PSU's fpc was not specified).
+
+*  aux.estimates: do not warn anymore if the names of the dataframes
+   used to build the design object and the known totals template differ,
+   whenever the template have been built using the current design object.
+
+
+#  ReGenesees 1.7
+
+*  ReGenesees GVF infrastructure - to which I have been working since ReGenesees
+   version 1.4 - is now complete and fully documented (hopefully).
+
+*  Command citation("ReGenesees") gained a new reference, to a paper which has
+   been recently published by JOS.
+
+*  Added new file DESIDERATA in directory inst. It provides a list of possible
+   ReGenesees extensions I would like to work on. Please, feel free to send me
+   your ideas on these topics: I would appreciate it.
+
+*  New function svystat: a protean utility to compute many estimates and errors
+   in just a single shot, primarily to use them in fitting GVF models. This
+   function can handle estimators of all kinds and is often a better alternative
+   to function 'gvf.input'. It also enables fitting separate GVF models to
+   estimates and errors pertaining to different population "groups".
+
+*  Utility function estimator.kind and extractor functions SE, VAR, cv, deff,
+   confint, etc.: extended to handle correctly "grouped" summary statistics
+   as returned by new function svystat.
+
+*  The whole GVF infrastructure has been enriched to cope with one or more
+   GVF models fitted to "grouped data" (namely, estimates and errors returned
+   by new function svystat). GVF models are fitted, and later analysed,
+   separately within each group. All methods available for older classes
+   gvf.fit and gvf.fits have been extended to new classes for "grouped" models:
+   gvf.fit.gr and gvf.fits.gr.
+
+*  Function drop.gvf.points has been substantially enriched: 1) now observations
+   to be dropped can be identified by specifying a threshold for the absolute
+   values of the residuals; 2) both standardized and studentized residuals
+   can be used; 3) moreover, observations to be dropped can still be identified 
+   interactively by clicking on a plot, but now both 'Observed vs Fitted' and
+   'Residuals vs Fitted' can be used.
+
+*  Added methods rstandard and rstudent for (sets of) fitted GVF models (see
+   ?gvf.misc for the complete list of currently available methods).
+
+*  GVF.db$insert: very long GVF model formulae would have produced an error, due
+   to a bad conversion to character: fixed.
+
+*  drop.gvf.points: return object mistakenly inherited from the input object its
+   'gvf.input' attribute instead of its 'gvf.input.expr' attribute: luckily this
+   potentially disruptive copy-and-paste generated bug has been fixed.
+
+*  fit.gvf, GVF.db$insert: more checks (both substantive and formal) have been
+   implemented on passed GVF models.
+
+*  Added file index.html in directory inst/doc. This is now linked from the HTML
+   help entry 'User guides, package vignettes and other documentation'.
+
+*  When exporting estimated quantiles to text files, function write.svystat now
+   strips redundant common prefix 'p = ' in column 'Probability'.
+
+*  Extractor function confint was not behaving correctly on class svystatQ.by
+   (i.e. for quantiles computed in domains): fixed.
+
+*  All error messages raised by passed arguments with wrong classes now avoid
+   using 'substitute': formal arguments bound to erroneous objects are quoted,
+   instead. This solution is safe even when functions are not invoked by the
+   command line, but rather by the GUI.
+
+*  e.calibrate, bounds.hint: do not warn anymore if the names of the dataframes
+   used to build the design object and the population totals differ, whenever
+   the population totals have been built using the current design object.
+
+
+#  ReGenesees 1.6
+
+*  GVF.db is the archive of registered (i.e. built-in and/or user-defined)
+   Generalized Variance Functions (GVF) models supported by ReGenesees.
+   Special accessor functions allow to customize, maintain, extend, update, save
+   and reset such archive.
+
+*  New function gvf.input: transforms a set of computed survey statistics into a
+   suitable (data.frame-like) data structure, in order to fit a GVF model. A
+   dedicated plot method is provided.
+
+*  New utility function estimator.kind: identifies what kind of estimator has
+   been used to compute a (set of) survey static(s).
+
+*  New function fit.gvf: fits one or more GVF models to a set of survey
+   statistics. Subsetting, printing and summary methods are provided for
+   (sets of) fitted GVF models. Other available methods for (sets of) fitted GVF
+   models are listed in ?gvf.misc, namely: coef, residuals, fitted, predict,
+   effects, anova, and vcov.
+
+*  New functions plot.gvf.fit and plot.gvf.fits: provide diagnostics plots for a
+   single GVF model and plots to compare several GVF models fitted on the same
+   data.
+
+*  New functions drop.gvf.points: enables to interactively drop outliers by
+   clicking on them on a plot, and simultaneously refits the GVF model.
+   The change in quality measures (R2, adj. R2, AIC, and BIC) after re-fitting
+   is printed on screen as a side effect.
+
+*  New functions getR2, AIC, BIC: provide quality measures on (sets of) fitted
+   GVF models.
+
+*  New functions getBest: identify the best-fit model among a set of GVF fitted
+   models according to a given quality criterion.
+
+*  New function predictCV: given a set of estimates, predicts their CV values
+   (and the corresponding confidence or prediction limits) based on one or more
+   fitted GVF models.
+
+*  New data AF.gvf: provides example data (namely, estimates and sampling errors
+   of Absolute Frequencies) for GVF model fitting.
+
+
+#  ReGenesees 1.5
+
+*  New function des.merge: safely merges the original survey data contained into
+   a design object (even a calibrated one) with new data, by hinging upon a
+   common key variable. This allows, e.g., to tackle the task of computing
+   estimates and errors on target variables made available only after the
+   calibration step, without any need of repeating the calibration.
+
+*  New function get.residuals: computes (scaled) residuals of a set of interest
+   variables w.r.t. the calibration model adopted to build the input object.
+   This function has been designed for programmers willing to build upon
+   ReGenesees (e.g. Istat SMART project team), whereas typical users are not
+   expected to feel much need of it.
+
+*  New ReGenesees option "RG.warn.domain.lonely" (by default FALSE). If it is
+   set to TRUE, a warning message is raised whenever an estimation domain
+   happens to contain just a single PSU belonging to a stratum. Note that this
+   has been the standard ReGenesees behaviour till now.
+
+*  e.calibrate: the threshold for triggering 'program-level' garbage collection
+   is now defined as in function fill.template: some efficiency gain is expected
+   in low resources Windows environments for big calibration tasks.
+
+*  e.calibrate: for unbounded linear calibration a new warning is printed when,
+   after switching to ginv due to collinearity, the algorithm does not converge.
+   The suggested alternative is to resort to Newton-Raphson algorithm
+   by calibrating with very loose bounds, e.g. bounds=c(-1E12, 1E12).
+
+*  e.calibrate: slightly more efficient handling of empty levels arising from
+   interactions between factors in the calibration model.
+
+*  e.calibrate, collapse.strata: implemented a trick to keep assigning
+   diagnostic structures into the .GlobalEnv without making 'R CMD check' angry.
+
+*  svystatB, svystatL: most essential checks on input type have been lifted from
+   inner functions to the caller. This should make error messages easier to
+   understand (mainly for ReGenesees.GUI users).
+
+*  svystatTM: enriched documentation with examples showing how to estimate
+   totals in domains for "incomplete" partitions, via the AsIs operator I().
+
+*  e.svydesign, bounds.hint, des.addvars: some documentation tidy up here and
+   there.
+
+
+#  ReGenesees 1.4
+
+*  This is essentially a maintenance release, with few user-visible changes.
+   The major goal was to verify that the transition of ReGenesees to the
+   "R 3.x" realm would have been safe. To date, everything seems to be ok.
+
+*  I'm currently developing a framework to bring into ReGenesees the Generalized
+   Variance Functions (GVF) method.
+
+*  svystatTM: output object has new attributes "y.vars" and "by.vars". These
+   are intended to be used by the forthcoming GVF infrastructure.
+
+*  New utility function Zapsmall: by operating column-wise on dataframes, puts
+   to zero values "close" to zero.
+
+*  e.svydesign: enriched documentation on PPS designs.
+
+*  ReGenesees.options: enriched documentation on the Ultimate Cluster
+   Approximation.
+
+*  ?data.examples was not working, due to a missing alias in the .Rd source.
+
+*  Corrected some typos here and there in the manual.
+
+
+#  ReGenesees 1.3
+
+*  First release with ByteCompile build: unless something unexpected is
+   signalled, this will be the standard from now on.
+
+*  New function svystatB: computes estimates, standard errors and confidence
+   intervals for multiple regression coefficients. summary() method gives
+   p-values and significance codes for the component-wise test b=0.
+
+*  New functions Cov and Corr: compute the design covariance and correlation
+   between pairs of complex estimators (i.e. any smooth function of HT or
+   Calibration estimators).
+
+*  New function find.lon.strata (originally a private function intended to be
+   called only by function collapse.strata). It's a simple, though maybe
+   sometimes useful, diagnostic tool whose purpose is to identify the levels
+   of the strata containing lonely PSUs (if any).
+
+*  svystatR, svystatL: when the linearized variable corresponding to a non
+   linear estimator is ill defined (because the estimator gradient is singular
+   at the Taylor series expansion point - a typical case is when, perhaps only
+   inside a single estimation domain, the estimate of the denominator total in
+   a ratio is zero) an unhandled error was generated for calibrated designs.
+   This error arises from the fact that Fortran routine qr.resid cannot cope
+   with NaN, Inf and NA values. Such behaviour has been fixed: NaN is returned
+   for SE, with a warning, but no errors (i.e. computation ends normally).
+
+*  population.check: a row.names mismatch is now tolerated (under the hypothesis
+   that everything else is ok).
+
+*  vcov: all methods do not warn anymore if only diagonal elements are present.
+
+*  svystatTM, svystatR, e.calibrate: added examples on how to handle
+   cluster-level variables in estimation and calibration tasks (2-stage
+   household surveys are a natural playground for such techniques).
+
+*  e.calibrate: added example on how to simultaneously reduce nonresponse bias
+   and estimators variance with a single calibration step.
+
+*  svystatL: enriched documentation with examples on how to estimate simple
+   regression coefficients, harmonic and geometric means.
+
+*  collapse.strata: enriched documentation with examples providing a simple way
+   for defining the strata similarity scores, when a strata clustering has been
+   obtained.
+
+
+#  ReGenesees 1.2
+
+*  Better diagnostics on possible Deff anomalies arising from negative
+   calibrated weights (if any).
+
+*  e.svydesign: formulae not referencing survey data variables (e.g. ids=~1)
+   have been intentionally inhibited (rationale: survey data is master,
+   formulae are slaves).
+
+*  pop.template, population.check, e.calibrate, aux.estimates, ...: partition
+   formula (if any) must reference some survey data variables. Thus, e.g.,
+   partition=~1 has been inhibited. Obviously, a pure intercept calibration
+   model (i.e. calmodel=~1) remains completely legal.
+
+*  e.svydesign, pop.template, fill.template: all functions now check whether any
+   factor variable in input data has empty levels, and (in case) drop them.
+
+*  e.svydesign: 0 direct weights are now forbidden (formerly, direct weights
+   were only required to be non negative). A suggestion to people using
+   ReGenesees infrastructure to build jackknife sampling variance estimates:
+   substitute illegal 0 direct weights with some negligibly small cutoff value
+   (e.g. 1E-12).
+
+*  ReGenesees now has its own contrasts handling facilities (i.e. new functions
+   contrasts.RG, contrasts.off and contrasts.reset). Contrasts can deeply affect
+   the behaviour of several ReGenesees functions (e.g. e.calibrate,
+   pop.template, fill.template, aux.estimates), so please read *carefully* the
+   related help pages (?contrasts.RG).
+
+*  e.calibrate: parameters 'epsilon' and 'force' are now meaningful also for
+   unbounded linear calibration (with the same meaning as in all the remaining
+   cases, for which Newton-Raphson algorithm applies). This allows to handle
+   possible approximate solutions obtained when switching to ginv() due to
+   collinearity issues. Note that collinearity is very likely to manifest
+   whenever you choose to switch-off contrasts (see ?contrasts.RG).
+
+*  check.cal, ecal.status, e.calibrate: diagnostics dataframe (which assesses
+   calibration constraints violation) gains new useful rownames: for each
+   partition the rownames indicate the position of non-convergence cells
+   (if any) in population totals dataframe 'df.population'.
+   Moreover, diagnostics on calibration results is now richer for unbounded
+   linear calibration (due to parameter 'epsilon', see item above). 
+
+*  svystatTM, svystatR, svystatQ, svystatL, aux.estimates: now the return
+   objects of all summary statistics functions carry a "design" attribute
+   storing the name of the design input object. This way, computed statistics
+   are almost (namely, excluding possible global options effects) completely
+   self-documenting.
+
+*  ReGenesees now has a (concise) package documentation shell (see ?ReGenesees).
+   I warmly recommend the reading of this shell to new users, mainly because it
+   provides a 'quick reading guide' to the reference manual, along with a
+   meaningful 'table of contents'.
+
+
+#  ReGenesees 1.1
+
+*  NA handling facilities in summary statistics functions (svystatTM, svystatR,
+   ...) has been completely revised. An elusive bug entangling NA treatment and
+   lonely PSU treatment (when lonely.psu='average') has been fixed.
+
+*  svystatL did not pass to inner function linearize the na.rm argument
+   value: fixed.
+
+*  Inadvisable (albeit not harmful) code (signalled by Prof Brian Ripley) has
+   been eliminated from .onLoad.
+
+*  Few partial arguments matching in function calls (as signalled by R CMD CHECK
+   under R 2.15.x) have been removed.
+
+*  Further calibration examples added: calibration to soften nonresponse
+   bias and multi-step calibration.
+
+
+#  ReGenesees 1.0
+
+*  Stable release, published for general availability in December 2011 on:
+    - Istat official website: http://www.istat.it/en/tools/methods-and-it-tools/processing-tools/regenesees
+
+    - JOINUP (The European Commission open source software repository): https://joinup.ec.europa.eu/software/regenesees/description
+
+*  No user-visible changes.
+
+
+#  ReGenesees 0.9.1
+
+*  First external release, available since middle November 2011
+   at the OSOR repository (subsequently migrated towards JOINUP).   
+
+*  No user-visible changes.
+
+
+#  ReGenesees 0.9 
+
+*  Release-candidate version: it is almost 1.0 complete.
+
+*  It has been published in the Istat intranet on 8/11/2011.
+
+

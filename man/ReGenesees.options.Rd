@@ -19,8 +19,8 @@
     - \code{RG.warn.domain.lonely}\cr
     
     When \code{options("RG.ultimate.cluster")} is \code{TRUE},
-    the \pkg{ReGenesees} package adopts the so called \emph{"Ultimate
-    Cluster Approximation"} [Kalton 79]. Under this approximation, the overall
+    the \pkg{ReGenesees} package adopts the so called \emph{\dQuote{Ultimate
+    Cluster Approximation}} [Kalton 79]. Under this approximation, the overall
     sampling variance for a multistage sampling design is estimated by
     taking into account only the contribution arising from the estimated PSU
     totals (thus simply ignoring any available information about subsequent
@@ -75,15 +75,15 @@
     }
 
    \references{
-    Kalton, G. (1979). \emph{"Ultimate cluster sampling"}, Journal of the Royal Statistical Society, Series A, 142, pp. 210-222.
+    Kalton, G. (1979). \emph{\dQuote{Ultimate cluster sampling}}, Journal of the Royal Statistical Society, Series A, 142, pp. 210-222.
 
-    Bellhouse, D. R. (1985). \emph{"Computing Methods for Variance Estimation in Complex Surveys"}. Journal of Official Statistics, Vol. 1, No. 3, pp. 323-329.
+    Bellhouse, D. R. (1985). \emph{\dQuote{Computing Methods for Variance Estimation in Complex Surveys}}. Journal of Official Statistics, Vol. 1, No. 3, pp. 323-329.
 
-    Lumley, T. (2006) \emph{"survey: analysis of complex survey samples"}, \url{http://cran.at.r-project.org/web/packages/survey/index.html}.
+    Lumley, T. (2006) \emph{\dQuote{survey: analysis of complex survey samples}}, \url{http://cran.at.r-project.org/web/packages/survey/index.html}.
 
-    Wolter, K.M. (2007) \emph{"Introduction to Variance Estimation"}, Second Edition, Springer-Verlag, New York.
+    Wolter, K.M. (2007) \emph{\dQuote{Introduction to Variance Estimation}}, Second Edition, Springer-Verlag, New York.
 
-    Rust, K., Kalton, G. (1987) \emph{"Strategies for Collapsing Strata for Variance Estimation"}, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.
+    Rust, K., Kalton, G. (1987) \emph{\dQuote{Strategies for Collapsing Strata for Variance Estimation}}, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.
     }
 
   \seealso{

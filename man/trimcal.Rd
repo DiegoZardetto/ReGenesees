@@ -54,15 +54,15 @@ Trimming the calibration weights can result in introducing a \emph{bias} in cali
 \author{Diego Zardetto}
 
 \references{
-Potter, F.J. (1990) \emph{"A study of procedures to identify and trim extreme sampling weights"}. Proceedings of the Survey Research Methods Section, American Statistical Association, pp. 225-230.
+Potter, F.J. (1990) \emph{\dQuote{A study of procedures to identify and trim extreme sampling weights}}. Proceedings of the Survey Research Methods Section, American Statistical Association, pp. 225-230.
 
-Folsom, R.E., Singh, A.C. (2000) \emph{"The generalized exponential model for sampling weight calibration for extreme values, nonresponse, and poststratification"}. Proceedings of the Section on Survey Research Methods, American Statistical Association, pp. 598-603.
+Folsom, R.E., Singh, A.C. (2000) \emph{\dQuote{The generalized exponential model for sampling weight calibration for extreme values, nonresponse, and poststratification}}. Proceedings of the Section on Survey Research Methods, American Statistical Association, pp. 598-603.
 
 Verma, V., Betti, G., Ghellini, G. (2007) \emph{Cross-sectional and longitudinal weighting in a rotational household panel: applications to EU-SILC}, Statistics in Transition, 8(1), pp. 5-50.
 
-Valliant, R., Dever, J., Kreuter, F. (2013) \emph{"Practical Tools for Designing and Weighting Survey Samples"}. Springer-Verlag, New York.
+Valliant, R., Dever, J., Kreuter, F. (2013) \emph{\dQuote{Practical Tools for Designing and Weighting Survey Samples}}. Springer-Verlag, New York.
 
-EUROSTAT (2016) \emph{"EU statistics on income and living conditions (EU-SILC) methodology - data quality"}, \url{http://ec.europa.eu/eurostat/statistics-explained/index.php/EU_statistics_on_income_and_living_conditions_(EU-SILC)_methodology_%E2%80%93_data_quality
+EUROSTAT (2016) \emph{\dQuote{EU statistics on income and living conditions (EU-SILC) methodology - data quality}}, \url{http://ec.europa.eu/eurostat/statistics-explained/index.php/EU_statistics_on_income_and_living_conditions_(EU-SILC)_methodology_%E2%80%93_data_quality
  }.
 }
 

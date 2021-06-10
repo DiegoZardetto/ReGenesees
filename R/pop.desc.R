@@ -1,4 +1,13 @@
-`pop.desc` <- function(pop.totals){
+`pop.desc` <- function(pop.totals, ...)
+#################################################
+# Generic function. Describe population totals. #
+#################################################
+{
+UseMethod("pop.desc")
+}
+
+
+`pop.desc.pop.totals` <- function(pop.totals, ...){
 ###########################################################################
 # This function provides a natural language description of a known totals #
 # data frame to be used for a calibration task.                           #

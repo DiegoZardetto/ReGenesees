@@ -44,7 +44,7 @@ Diego Zardetto
 }
 
 \references{
-Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{"Model Assisted Survey Sampling"}, Springer Verlag.
+Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Survey Sampling}}, Springer Verlag.
 }
 
 \seealso{

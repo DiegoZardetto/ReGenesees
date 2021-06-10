@@ -73,6 +73,12 @@ function (design, df.population,
     ids.char <- all.vars(ids)
     weights <- attr(design, "weights")
     weights.char <- all.vars(weights)
+
+    # If HT estimates or population benchmarks are *negative*, then
+    # suggested interval is not expected to be reliable.
+    # Thus must track those cases...
+    negatives <- FALSE
+
     mk.bounds <- function(df.population,partition,partition.names=NULL){
     ############################################################
     # Crea la lista 'bounds' con tre componenti:               #
@@ -155,6 +161,9 @@ function (design, df.population,
         gc.here(need.gc)
         interval <- ez.ranger(design = des, population = as.numeric(df.population), 
             formula = calmodel)
+        if (isTRUE(attr(interval, "negatives"))) {
+             negatives <- TRUE
+            }
         gc.here(need.gc)
         sub.task <- (sub.task+1)
         upd.bounds(sub.task,interval)
@@ -188,6 +197,9 @@ function (design, df.population,
                   partition.vars))]
                 interval.g <- ez.ranger(design = des.g, population = as.numeric(pop.g), 
                   formula = calmodel)
+                if (isTRUE(attr(interval.g, "negatives"))) {
+                     negatives <<- TRUE
+                    }
                 gc.here(need.gc)
                 sub.task <<- (sub.task+1)
                 upd.bounds(sub.task,interval.g)
@@ -249,6 +261,7 @@ else {
 
 attr(suggestion, "star.interval") <- c(smallest, greatest)
 attr(suggestion, "bounds") <- bounds
+attr(suggestion, "negatives") <- negatives
 class(suggestion) <- c("bounds.hint", class(suggestion))
 
 if (isTRUE(msg)){
@@ -257,9 +270,11 @@ if (isTRUE(msg)){
                L.sugg, ", ", U.sugg, ")\n", sep=""))
     cat("\n")
     cat("Remark: this is just a hint, not an exact result\n")
-    cat(paste("Feasible bounds for calibration problem must cover the interval [",
-                 round(smallest,3),", ", round(greatest,3),"]\n",sep=""))
-    cat("\n")
+    if (!negatives) {
+         cat(paste("Feasible bounds for calibration problem must cover the interval [",
+                   round(smallest,3),", ", round(greatest,3),"]\n",sep=""))
+         cat("\n")
+        }
     }
 
 invisible(suggestion)
@@ -272,12 +287,15 @@ U.sugg <- x[2]
 star <- attr(x, "star.interval")
 smallest <- star[1]
 greatest <- star[2]
+negatives <- attr(x, "negatives")
 cat("\n")
 cat(paste("A starting suggestion: try to calibrate with bounds=c(",
            L.sugg, ", ", U.sugg, ")\n", sep=""))
 cat("\n")
 cat("Remark: this is just a hint, not an exact result\n")
-cat(paste("Feasible bounds for calibration problem must cover the interval [",
-             round(smallest,3),", ", round(greatest,3),"]\n",sep=""))
-cat("\n")
+if (!negatives) {
+     cat(paste("Feasible bounds for calibration problem must cover the interval [",
+                round(smallest,3),", ", round(greatest,3),"]\n",sep=""))
+     cat("\n")
+    }
 }

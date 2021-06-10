@@ -8,6 +8,13 @@
 
 <title>Collapse Strata Technique for Eliminating Lonely PSUs — collapse.strata • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -147,9 +163,9 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Lonely PSUs (i.e. PSUs which are alone inside a not self-representing stratum) are a concern from the viewpoint of variance estimation. As a general solution, the <span class="pkg">ReGenesees</span> package can handle the lonely PSUs problem by setting proper variance estimation options (see <code><a href='ReGenesees.options.html'>ReGenesees.options</a></code>). The <code>collapse.strata</code> function implements a widely used alternative: the so called collapsed strata technique. The basic idea is to build artificial <em>"superstrata"</em> by aggregating strata containing lonely PSUs to other strata, and then to use such superstrata for variance estimation (see e.g. [Wolter 85] and [Rust, Kalton 87]).</p>
-<p>The optional argument <code>block.vars</code> identifies <em>"blocking variables"</em> that can be used to constrain the way lonely strata are collapsed to form superstrata. More specifically: first, blocking variables are used to partition sample data in <em>"blocks"</em> via factor crossing, then, only lonely strata belonging to the same block are aggregated. If <code>block.vars=NULL</code> (the default option), no constraint will act on collapsing. The <code>design</code> variables referenced by <code>block.vars</code> (if any) should be of type <code>factor</code>. Errors will be raised if (i) blocks cut across strata, or (ii) <code>block.vars</code> generate any non-aggregable strata (i.e. lonely strata which are a singleton inside a block).</p>
-<p>The optional argument <code>sim.score</code> can be used to specify a similarity score for strata aggregation. This means that each lonely stratum will be collapsed with the stratum that has the most similar value of variable <code>sim.score</code> inside the block. Thus the similarity of two strata is actually measured by the (absolute value of the) difference among the corresponding <code>sim.score</code> values. Only one <code>design</code> variable can be referenced by the <code>sim.score</code> formula: (i) it must be of type <code>numeric</code>, (ii) it must be constant inside each stratum, and (iii) it should be positive (otherwise its <code><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs()</a></code> will be silently used). Note that if no similarity score is specified (i.e. <code>sim.score=NULL</code>), the achieved strata aggregation will depend on the ordering of input sample data in <code>design</code>.</p>
+    <p>Lonely PSUs (i.e. PSUs which are alone inside a not self-representing stratum) are a concern from the viewpoint of variance estimation. As a general solution, the <span class="pkg">ReGenesees</span> package can handle the lonely PSUs problem by setting proper variance estimation options (see <code><a href='ReGenesees.options.html'>ReGenesees.options</a></code>). The <code>collapse.strata</code> function implements a widely used alternative: the so called collapsed strata technique. The basic idea is to build artificial <em>&#8220;superstrata&#8221;</em> by aggregating strata containing lonely PSUs to other strata, and then to use such superstrata for variance estimation (see e.g. [Wolter 85] and [Rust, Kalton 87]).</p>
+<p>The optional argument <code>block.vars</code> identifies <em>&#8220;blocking variables&#8221;</em> that can be used to constrain the way lonely strata are collapsed to form superstrata. More specifically: first, blocking variables are used to partition sample data in <em>&#8220;blocks&#8221;</em> via factor crossing, then, only lonely strata belonging to the same block are aggregated. If <code>block.vars=NULL</code> (the default option), no constraint will act on collapsing. The <code>design</code> variables referenced by <code>block.vars</code> (if any) should be of type <code>factor</code>. Errors will be raised if (i) blocks cut across strata, or (ii) <code>block.vars</code> generate any non-aggregable strata (i.e. lonely strata which are a singleton inside a block).</p>
+<p>The optional argument <code>sim.score</code> can be used to specify a similarity score for strata aggregation. This means that each lonely stratum will be collapsed with the stratum that has the most similar value of variable <code>sim.score</code> inside the block. Thus the similarity of two strata is actually measured by the (absolute value of the) difference among the corresponding <code>sim.score</code> values. Only one <code>design</code> variable can be referenced by the <code>sim.score</code> formula: (i) it must be of type <code>numeric</code>, (ii) it must be constant inside each stratum, and (iii) it should be positive (otherwise its <code><a href='https://rdrr.io/r/base/MathFun.html'>abs()</a></code> will be silently used). Note that if no similarity score is specified (i.e. <code>sim.score=NULL</code>), the achieved strata aggregation will depend on the ordering of input sample data in <code>design</code>.</p>
 <p>The collapsing algorithm will, whenever possible, build superstrata by pairing a lonely stratum to another not-yet-aggregated stratum. Therefore, in general, superstrata will contain only two design strata. Rare exceptions can arise, e.g. due to constraints, with at most three design strata inside a superstratum. The choice to collapse strata in pairs has been taken because it is known to be appropriate for large-scale surveys with many strata (at least for national level estimates, see e.g. [Rust, Kalton 87]).</p>
 <p>The <code>collapse.strata</code> function handles correctly finite population corrections. If <code>design</code> has been built by passing strata sampling fractions via the <code>fpc</code> argument, the function re-computes sampling fractions inside superstrata by exploiting the achieved mapping of strata to superstrata and the <code>fpc</code> slot of <code>design</code>.</p>
     <h2 class="hasAnchor" id="strata-collapse-process-diagnostics"><a class="anchor" href="#strata-collapse-process-diagnostics"></a>Strata Collapse Process Diagnostics</h2>
@@ -165,8 +181,8 @@
     <p>An object of the same class as <code>design</code>, without strata containing lonely PSUs.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Wolter, K.M. (2007) <em>"Introduction to Variance Estimation"</em>, Second Edition, Springer-Verlag, New York.</p>
-<p>Rust, K., Kalton, G. (1987) <em>"Strategies for Collapsing Strata for Variance Estimation"</em>, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.</p>
+    <p>Wolter, K.M. (2007) <em>&#8220;Introduction to Variance Estimation&#8221;</em>, Second Edition, Springer-Verlag, New York.</p>
+<p>Rust, K., Kalton, G. (1987) <em>&#8220;Strategies for Collapsing Strata for Variance Estimation&#8221;</em>, Journal of Official Statistics, Vol. 3, No. 1, pp. 69-81.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='ReGenesees.options.html'>ReGenesees.options</a></code> for a different way to handle the lonely PSUs problem (namely by setting variance estimation options).</p></div>
@@ -177,7 +193,7 @@
 <span class='co'>##############################################</span>
 
 <span class='co'># Build a survey design with lonely PSU strata:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 <span class='no'>exdes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span> <span class='no'>example</span>, <span class='kw'>ids</span><span class='kw'>=</span> ~ <span class='no'>towcod</span>+<span class='no'>famcod</span>,
          <span class='kw'>strata</span><span class='kw'>=</span> ~ <span class='no'>stratum</span>, <span class='kw'>weights</span><span class='kw'>=</span> ~ <span class='no'>weight</span>)
 <span class='no'>exdes</span></div><div class='output co'>#&gt; Stratified 2 - Stage Cluster Sampling Design (with replacement)
@@ -213,11 +229,11 @@
 #&gt;     weights = ~weight)</div><div class='input'>
   <span class='co'># 3) A WRONG strategy: compute strata similarity score by using</span>
   <span class='co'>#    sample estimates of the interest variable (y1) inside strata:</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"remove"</span>)
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"remove"</span>)
 <span class='no'>stat.score</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span> <span class='no'>exdes</span>, ~<span class='no'>y1</span>, <span class='kw'>by</span><span class='kw'>=</span> ~ <span class='no'>stratum</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 <span class='no'>exdes2</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>exdes</span>,
-                    <span class='kw'>sim.score</span><span class='kw'>=</span><span class='no'>stat.score</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/match'>match</a></span>(<span class='no'>stratum</span>,<span class='no'>stat.score</span>$<span class='no'>stratum</span>),<span class='fl'>2</span>])
+                    <span class='kw'>sim.score</span><span class='kw'>=</span><span class='no'>stat.score</span>[<span class='fu'><a href='https://rdrr.io/r/base/match.html'>match</a></span>(<span class='no'>stratum</span>,<span class='no'>stat.score</span>$<span class='no'>stratum</span>),<span class='fl'>2</span>])
 <span class='no'>exdes.clps3</span> <span class='kw'>&lt;-</span> <span class='fu'>collapse.strata</span>(<span class='no'>exdes2</span>,~<span class='no'>sr</span>:<span class='no'>procod</span>,~<span class='no'>sim.score</span>)</div><div class='output co'>#&gt; 
 #&gt; # All lonely strata (45) successfully collapsed!
 #&gt; </div><div class='input'><span class='no'>exdes.clps3</span></div><div class='output co'>#&gt; Stratified 2 - Stage Cluster Sampling Design (with replacement)
@@ -239,15 +255,15 @@
 <span class='co'># Compute the same estimates by using two alternatives</span>
 <span class='co'># to handle lonely PSUs:</span>
   <span class='co'># "adjust" option</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)
 <span class='no'>stat.adj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span> <span class='no'>exdes</span>, <span class='kw'>y</span><span class='kw'>=</span> ~ <span class='no'>y1</span>, <span class='kw'>by</span><span class='kw'>=</span> ~ <span class='no'>procod</span>,
             <span class='kw'>estimator</span><span class='kw'>=</span> <span class='st'>"Total"</span>, <span class='kw'>vartype</span><span class='kw'>=</span> <span class='st'>"cvpct"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
  <span class='co'># "average" option</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"average"</span>)
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"average"</span>)
 <span class='no'>stat.ave</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span> <span class='no'>exdes</span>, <span class='kw'>y</span><span class='kw'>=</span> ~ <span class='no'>y1</span>, <span class='kw'>by</span><span class='kw'>=</span> ~ <span class='no'>procod</span>,
             <span class='kw'>estimator</span><span class='kw'>=</span> <span class='st'>"Total"</span>, <span class='kw'>vartype</span><span class='kw'>=</span> <span class='st'>"cvpct"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
 <span class='co'># Lastly, compare achieved estimates for CV percentages:</span>
 <span class='no'>stat.clps1</span></div><div class='output co'>#&gt;    procod Total.y1 CV%.Total.y1
@@ -316,7 +332,7 @@
 <span class='co'># You can do as follows:</span>
 
   <span class='co'># Load some data:</span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>fpcdat</span>)
+    <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fpcdat</span>)
 
   <span class='co'># Build a design object:</span>
     <span class='no'>fpcdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>fpcdat</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>psu</span>+<span class='no'>ssu</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>)
@@ -332,7 +348,7 @@
     <span class='fu'><a href='find.lon.strata.html'>find.lon.strata</a></span>(<span class='no'>fpcdes</span>)</div><div class='output co'>#&gt; [1] "S.3" "S.5"</div><div class='input'>
   <span class='co'># Now, suppose that factor variable pl.domain identifies clusters of</span>
   <span class='co'># similar strata... </span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/table'>table</a></span>(<span class='no'>fpcdat</span>$<span class='no'>stratum</span>,<span class='no'>fpcdat</span>$<span class='no'>pl.domain</span>)</div><div class='output co'>#&gt;      
+    <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>fpcdat</span>$<span class='no'>stratum</span>,<span class='no'>fpcdat</span>$<span class='no'>pl.domain</span>)</div><div class='output co'>#&gt;      
 #&gt;       pd.1 pd.2 pd.3
 #&gt;   S.1    7    0    0
 #&gt;   S.2    0    8    0
@@ -340,7 +356,7 @@
 #&gt;   S.4    0    0    6
 #&gt;   S.5    0    0    3</div><div class='input'>
   <span class='co'># ...hence, the similarity score can be obtained simply...</span>
-    <span class='no'>fpcdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>fpcdes</span>,<span class='kw'>score</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>unclass</a></span>(<span class='no'>pl.domain</span>))
+    <span class='no'>fpcdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>fpcdes</span>,<span class='kw'>score</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>unclass</a></span>(<span class='no'>pl.domain</span>))
 
   <span class='co'># ...and readily be used to drive the strata collapsing:</span>
     <span class='no'>fpcdes.clps</span><span class='kw'>&lt;-</span><span class='fu'>collapse.strata</span>(<span class='no'>fpcdes</span>,<span class='kw'>sim.score</span><span class='kw'>=</span>~<span class='no'>score</span>)</div><div class='output co'>#&gt; 
@@ -385,15 +401,16 @@
 #&gt; 4     G     S.5      1          G.clps.2
 #&gt; </div><div class='input'>
 
-#################################################################
-# Few examples to inspect the clps.strata.status list generated # 
-# for diagnostics purposes.                                     #
-#################################################################
+<span class='co'>#################################################################</span>
+<span class='co'># Few examples to inspect the clps.strata.status list generated # </span>
+<span class='co'># for diagnostics purposes.                                     #</span>
+<span class='co'>#################################################################</span>
 
-  # 1) Ill defined blocks: cutting across strata:
-</div><span class='co'># NOT RUN {</span>
+  <span class='co'># 1) Ill defined blocks: cutting across strata:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>clps.err1</span> <span class='kw'>&lt;-</span> <span class='fu'>collapse.strata</span>(<span class='no'>exdes</span>,~<span class='no'>sex</span>)
-<span class='co'># }</span><div class='input'><span class='no'>clps.strata.status</span></div><div class='output co'>#&gt; $message
+}
+<span class='no'>clps.strata.status</span></div><div class='output co'>#&gt; $message
 #&gt; [1] "All lonely strata (2) successfully collapsed!"
 #&gt; 
 #&gt; $clps.table
@@ -403,10 +420,11 @@
 #&gt; 3     G     S.2      0          G.clps.2
 #&gt; 4     G     S.5      1          G.clps.2
 #&gt; </div><div class='input'>
-  # 2) Ill defined blocks: generating non-aggregable strata
-</div><span class='co'># NOT RUN {</span>
+  <span class='co'># 2) Ill defined blocks: generating non-aggregable strata</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>clps.err2</span> <span class='kw'>&lt;-</span> <span class='fu'>collapse.strata</span>(<span class='no'>exdes</span>,~<span class='no'>regcod</span>:<span class='no'>stratum</span>)
-<span class='co'># }</span><div class='input'><span class='no'>clps.strata.status</span></div><div class='output co'>#&gt; $message
+}
+<span class='no'>clps.strata.status</span></div><div class='output co'>#&gt; $message
 #&gt; [1] "All lonely strata (2) successfully collapsed!"
 #&gt; 
 #&gt; $clps.table
@@ -497,19 +515,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

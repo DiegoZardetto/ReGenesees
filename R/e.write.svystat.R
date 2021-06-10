@@ -1,10 +1,9 @@
 `write.svystat` <-
 function(x, ...)
 {
-OK.classes <- c("svystatTM",       "svystatR",    "svystatL",    "svystatQ",    "svystatS",    "svystatSR",
-                "svystatTM.by", "svystatR.by", "svystatL.by", "svystatQ.by", "svystatS.by", "svystatSR.by",
-                "CoV",                 "Corr",
-                "svystatB",           "svyby")
+OK.classes <- c("svystatTM",       "svystatR",    "svystatL",    "svystatQ",    "svystatS",    "svystatSR",    "svystatB",
+                "svystatTM.by", "svystatR.by", "svystatL.by", "svystatQ.by", "svystatS.by", "svystatSR.by", "svystatB.by",
+                "CoV",                 "Corr",       "svyby")
 check.classes <- sapply(OK.classes, function(class) inherits(x, class))
 if (!any(check.classes))
     stop("Object has not the right class (should be ",paste(OK.classes, collapse=" or "),")")

@@ -58,12 +58,12 @@ ww <- weights(design)
 
 # Check for non-positive weights: if any, "drop" corresponding cases
 ww.ko <- (ww <= 0)
-N.ww.ko <- sum(ww.ko)
-if (N.ww.ko > 0) {
-     warning("Detected ", N.ww.ko,
-             " observations with weight <= 0: they will be ignored!", sep="")
-     ww[ww.ko] <- 0
+N.ww.neg <- sum(ww < 0)
+if (N.ww.neg > 0) {
+     warning("Detected ", N.ww.neg,
+             " observations with weight < 0: they will be ignored!", sep="")
     }
+ww[ww.ko] <- 0
 
 ## Missing values treatment
  # Check for NAs

@@ -335,9 +335,56 @@ if (is.trimmed(design)) {
     }
 
 # Add calibration diagnostics
-attr(design, "ecal.status") <- get("ecal.status", envir = .GlobalEnv)
+attr(design, "ecal.status") <- s <- get("ecal.status", envir = .GlobalEnv)
 attr(design, "epsilon") <- epsilon
 attr(design, "N.cal.constr") <- N.cal.constr
+failed <- any(s$return.code != 0)
+
+## SPC ZONE - START
+# If design has just been calibrated under a *special purpose calibration* task
+# but is *not* currently being calibrated under another spc:
+#  (0) remove the "expired" 'spc.justdone' token
+if (isTRUE(attr(design, "spc.justdone"))) {
+     attr(design, "spc.justdone") <- NULL
+    }
+# If design was prepared for a *special purpose calibration* task that is *now
+# being completed*:
+#  (1) attach to design an 'spc.justdone' token for usage by other functions
+#      (e.g. check.cal)
+#  (2) If required, drop the synthetic linearized z variables just used for
+#      calibration from design (to save space)
+#  (3) remove the original "spec.purp.calib" attribute (to save space and for
+#      information hiding)
+#  (4) check for possible *false convergence* (i.e. all w.cal ~ 0), if the task
+#      involves *simple* (i.e. *non-fused*) control totals.
+#      NOTE: For *fused* control totals, all w.cal ~ 0 would likely cause some
+#            internal function to raise a message signaling lack of convergence.
+if ( is.spc(design) && inherits(df.population, "spc.pop") ) {
+     # (1)
+     attr(design, "spc.justdone") <- TRUE
+     if (isTRUE(attr(design, "spec.purp.calib")$drop.z)) {
+     # (2)
+         design$variables[, all.vars(attr(df.population, "spec.purp.calib")$calmodel)] <- NULL
+         gc.here(need.gc)
+        }
+     # (3)
+     attr(design, "spec.purp.calib") <- NULL
+     if (!is.fused.spc(df.population)) {
+     # (4)
+        # Here, the threshold for condition (all w.cal ~ 0) is set in such a way
+        # that the calibrated estimate of the population count would drop below
+        # one: N.cal < 1
+         if ( sum(abs(w.cal)) < 1 ) {
+             if (!failed) {
+                 warning("All calibration weights collapsed to (nearly) zero! This indicates a FALSE CONVERGENCE of the *special purpose calibration* task.")
+                } else {
+                 warning("All calibration weights collapsed to (nearly) zero!")
+                }
+            }
+        }
+    }
+## SPC ZONE - END
+
 # Define cal.analytic class
 if (inherits(design, "cal.analytic")) {
     design$call <- c(sys.call(), design$call)

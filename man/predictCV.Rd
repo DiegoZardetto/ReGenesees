@@ -67,7 +67,7 @@ Of course, lower and upper bounds for CVs will be reported only when \code{inter
 }
 
 \references{
-Wolter, K.M. (2007) \emph{"Introduction to Variance Estimation"}, Second Edition, Springer-Verlag, New York.
+Wolter, K.M. (2007) \emph{\dQuote{Introduction to Variance Estimation}}, Second Edition, Springer-Verlag, New York.
 }
 
 \author{

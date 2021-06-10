@@ -124,7 +124,7 @@ Built-in GVF models for frequencies (i.e. those with \code{Model.id} \code{1}, \
 }
 
 \references{
-Wolter, K.M. (2007) \emph{"Introduction to Variance Estimation"}, Second Edition, Springer-Verlag, New York.
+Wolter, K.M. (2007) \emph{\dQuote{Introduction to Variance Estimation}}, Second Edition, Springer-Verlag, New York.
 }
 
 \author{

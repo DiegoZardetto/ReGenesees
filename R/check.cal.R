@@ -28,5 +28,23 @@ function (cal.design)
         cat("\n")
        }
     s$eps <- eps
+
+## SPC ZONE - START
+# If cal.design has just undergone a *special purpose calibration task*,
+# check for possible *false convergence* (i.e. all w.cal ~ 0)
+    if ( isTRUE(attr(cal.design, "spc.justdone")) ) {
+        # Here, the threshold for condition (all w.cal ~ 0) is set in such a way
+        # that the calibrated estimate of the population count would drop below
+        # one: N.cal < 1
+         if ( sum(abs(weights(cal.design))) < 1 ) {
+             if (!failed) { 
+                 warning("All calibration weights collapsed to (nearly) zero! This indicates a FALSE CONVERGENCE of the *special purpose calibration* task.")
+                } else {
+                 warning("All calibration weights collapsed to (nearly) zero!")
+                }
+            }
+        }
+## SPC ZONE - END
+
     invisible(s)
 }

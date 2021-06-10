@@ -8,6 +8,13 @@
 
 <title>Compress Nested Factors — %into% • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -159,9 +175,9 @@ If <code>inner</code> and <code>outer</code> do not fulfill the conditions above
 <span class='co'>#################################################</span>
  <span class='co'># First build a small data frame with 2 nested factors representing</span>
  <span class='co'># regions and provinces:</span>
-<span class='no'>dd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(
-                 <span class='kw'>reg</span>  <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>3</span>], <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>3</span>, <span class='fl'>1</span>)) ),
-                 <span class='kw'>prov</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>)) )
+<span class='no'>dd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+                 <span class='kw'>reg</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>3</span>], <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>3</span>, <span class='fl'>1</span>)) ),
+                 <span class='kw'>prov</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>)) )
                 )
 <span class='no'>dd</span></div><div class='output co'>#&gt;    reg prov
 #&gt; 1    A    a
@@ -185,19 +201,20 @@ If <code>inner</code> and <code>outer</code> do not fulfill the conditions above
  <span class='co'># a given region. This means that the the two factors below are identical (up</span>
  <span class='co'># to levels' labels):</span>
 <span class='no'>dd</span>$<span class='no'>prov</span></div><div class='output co'>#&gt;  [1] a a a b b c d d e f
-#&gt; Levels: a b c d e f</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interaction'>interaction</a></span>(<span class='no'>prov.in.reg</span>,<span class='no'>dd</span>$<span class='no'>reg</span>,<span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;  [1] 1.A 1.A 1.A 2.A 2.A 3.A 1.B 1.B 2.B 1.C
-#&gt; Levels: 1.A 2.A 3.A 1.B 2.B 1.C</div><div class='input'> 
- # Note that all the statements below generate errors:
-</div><span class='co'># NOT RUN {</span>
+#&gt; Levels: a b c d e f</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/interaction.html'>interaction</a></span>(<span class='no'>prov.in.reg</span>,<span class='no'>dd</span>$<span class='no'>reg</span>,<span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;  [1] 1.A 1.A 1.A 2.A 2.A 3.A 1.B 1.B 2.B 1.C
+#&gt; Levels: 1.A 2.A 3.A 1.B 2.B 1.C</div><div class='input'>
+ <span class='co'># Note that all the statements below generate errors:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>dd</span>$<span class='no'>reg</span>  <span class='kw'>%into%</span> <span class='no'>dd</span>$<span class='no'>prov</span>
 <span class='no'>dd</span>$<span class='no'>reg</span>  <span class='kw'>%into%</span> <span class='no'>dd</span>$<span class='no'>reg</span>
 <span class='no'>dd</span>$<span class='no'>prov</span> <span class='kw'>%into%</span> <span class='no'>dd</span>$<span class='no'>prov</span>
-<span class='co'># }</span><div class='input'>
+}
+
 <span class='co'>######################################################################</span>
 <span class='co'>## A more useful (and complex) example from the calibration context. #</span>
 <span class='co'>######################################################################</span>
  <span class='co'># First define a design object:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 <span class='no'>exdes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
 <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>)
 
@@ -222,19 +239,19 @@ If <code>inner</code> and <code>outer</code> do not fulfill the conditions above
  <span class='co'>#</span>
  <span class='co'>## 1) Global calibration (i.e. calmodel=~(procod:age5c + regcod:age10c - 1):sex,</span>
   <span class='co'># no partition variable, known totals stored in pop07):</span>
-<span class='no'>t</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.time'>system.time</a></span>(
+<span class='no'>t</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span>(
                <span class='no'>cal07</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>exdes</span>,<span class='kw'>df.population</span><span class='kw'>=</span><span class='no'>pop07</span>,
                       <span class='kw'>calmodel</span><span class='kw'>=</span>~(<span class='no'>procod</span>:<span class='no'>age5c</span> + <span class='no'>regcod</span>:<span class='no'>age10c</span> - <span class='fl'>1</span>):<span class='no'>sex</span>,
-                      <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>1.8</span>))
+                      <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>1.8</span>))
                )
 
  <span class='co'>## 2) Partitioned calibration on the self evident variable sex only</span>
   <span class='co'># (i.e. calmodel=~procod:age5c + regcod:age10c - 1, partition=~sex,</span>
   <span class='co'># known totals stored in pop07p):</span>
-<span class='no'>tp</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.time'>system.time</a></span>(
+<span class='no'>tp</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span>(
                 <span class='no'>cal07p</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>exdes</span>,<span class='kw'>df.population</span><span class='kw'>=</span><span class='no'>pop07p</span>,
                         <span class='kw'>calmodel</span><span class='kw'>=</span>~<span class='no'>procod</span>:<span class='no'>age5c</span> + <span class='no'>regcod</span>:<span class='no'>age10c</span> - <span class='fl'>1</span>,<span class='kw'>partition</span><span class='kw'>=</span>~<span class='no'>sex</span>,
-                        <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>1.8</span>))
+                        <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>1.8</span>))
                 )
 
  <span class='co'>## 3) Full partitioned calibration on variables sex, regcod and age5c</span>
@@ -249,21 +266,21 @@ If <code>inner</code> and <code>outer</code> do not fulfill the conditions above
   <span class='co'># Now calibrate exploiting the new variables</span>
   <span class='co'># (i.e. calmodel=~procod.in.regcod + age10c.in.age5c - 1,</span>
   <span class='co'># partition=~sex:regcod:age5c, known totals stored inside cal07pp)</span>
-<span class='no'>tpp</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.time'>system.time</a></span>(
+<span class='no'>tpp</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span>(
                  <span class='no'>cal07pp</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>exdes</span>,<span class='kw'>df.population</span><span class='kw'>=</span><span class='no'>pop07pp</span>,
                           <span class='kw'>calmodel</span><span class='kw'>=</span>~<span class='no'>procod.in.regcod</span> + <span class='no'>age10c.in.age5c</span> - <span class='fl'>1</span>,
                           <span class='kw'>partition</span><span class='kw'>=</span>~<span class='no'>sex</span>:<span class='no'>regcod</span>:<span class='no'>age5c</span>,
-                          <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>1.8</span>))
+                          <span class='kw'>calfun</span><span class='kw'>=</span><span class='st'>"logit"</span>,<span class='kw'>bounds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>1.8</span>))
                 )
 
  <span class='co'># Now compare execution times:</span>
 <span class='no'>t</span></div><div class='output co'>#&gt;    user  system elapsed 
-#&gt;    0.65    0.00    0.65 </div><div class='input'><span class='no'>tp</span></div><div class='output co'>#&gt;    user  system elapsed 
-#&gt;    0.19    0.00    0.19 </div><div class='input'><span class='no'>tpp</span></div><div class='output co'>#&gt;    user  system elapsed 
-#&gt;    0.16    0.00    0.16 </div><div class='input'>
+#&gt;    1.34    0.00    1.34 </div><div class='input'><span class='no'>tp</span></div><div class='output co'>#&gt;    user  system elapsed 
+#&gt;    0.39    0.00    0.39 </div><div class='input'><span class='no'>tpp</span></div><div class='output co'>#&gt;    user  system elapsed 
+#&gt;    0.33    0.00    0.33 </div><div class='input'>
  <span class='co'># thus, tpp &lt; tp &lt; t, as expected.</span>
  <span class='co'># Notice also that we obtained identical calibrated weights:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/all.equal'>all.equal</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07</span>),<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07p</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/all.equal'>all.equal</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07</span>),<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07pp</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07</span>),<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07p</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07</span>),<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>cal07pp</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
  # as it must be.
 </div></pre>
   </div>
@@ -282,19 +299,23 @@ If <code>inner</code> and <code>outer</code> do not fulfill the conditions above
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

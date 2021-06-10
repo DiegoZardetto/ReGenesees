@@ -19,5 +19,11 @@ function (design, formula, population)
         sample.total <- sample.total[!zz]
     }
     smallest.int <- range(population/sample.total)
+    if ( any(population < 0) || any(sample.total < 0) ) {
+         # If HT estimates or population benchmarks are *negative*, then
+         # suggested interval is not expected to be reliable.
+         # Thus must track those cases...
+         attr(smallest.int, "negatives") <- TRUE
+     }
     smallest.int
 }

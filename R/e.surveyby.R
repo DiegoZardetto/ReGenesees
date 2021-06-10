@@ -41,7 +41,7 @@ svyby.default<-function(formula, by, design, FUN,..., deff=FALSE, keep.var=TRUE,
 # Following <if> clause has been   #
 # ADDED to correctly manage svylin #
 ####################################
-if (!(inherits (formula,"expression") && identical(FUN, svylin))){
+if (!(inherits(formula,"expression") && identical(FUN, svylin))){
   ask.svylin <- FALSE
 
   ## some people insist on using vectors rather than formulas
@@ -95,6 +95,8 @@ else {
     }
   
   if (keep.var){
+  ## NOTE: This must happen always!
+  ##       Because ReGenesees do NOT allow users to set keep.var = FALSE
       unwrap <-function(x){
         rval<-c(coef(x))
         nvar<-length(rval)
@@ -146,6 +148,37 @@ else {
                               deff=deff,alpha=ci.alpha,ci=ci.quant,...)
                          # }
                       })
+
+      ## NOTE 13/05/2021: Below the added if clause, one assumes results to have
+      ##                  constant dim for all 'by' subpops. This could be NOT
+      ##                  TRUE for svystatB, due to different aliasing in 'by'
+      ##	              subpops. The if clause should handle this corner case.
+      if (identical(FUN, svylinB)) {
+         results2df <- lapply(results, as.data.frame)
+         results2df.dims <- lapply(results2df, dim)
+         # If dims are not ALL the same, cannot unwrap to eventually produce a
+         # a dataframe in output!
+         # Therefore: build a list and return it as output!
+         if (length(unique(results2df.dims)) > 1) {
+             # Get the dataframe of unique by levels
+             by.df <- byfactors[uniques, , drop = FALSE]
+             # Use it to build meaningful list names
+             by.names <- apply(by.df, 1, FUN = function(x) paste(colnames(by.df), x, collapse=":", sep="."))
+             names(results2df) <- by.names
+             # Order the list the same way rows of ordinary (i.e. matrix like)
+             # output objects would be ordered
+             results2df <- results2df[order(byfactor[uniques])]
+             # Attach minimal attributes to the list
+             attr(results2df, "call") <- sys.call()
+             # Define a new class for svyby output that are unfortunately lists
+             # NOTE: Perhaps one should think to special accessor functions
+             #       (coef, SE, ..., summary) for this class!!!!!!!!!!!!!!!!!!!!
+             class(results2df) <- c("svyby.list", class(results2df))
+             # Return the list
+             return(results2df)
+            }
+        }
+
       rval<-t(sapply(results, unwrap))
       # No replicated designs!
       # if (covmat || return.replicates) {
@@ -153,6 +186,8 @@ else {
       #   covmat.mat<-svrVar(replicates,design$scale,design$rscales)
       # }
     } else {
+      ## NOTE: This should never happen!
+      ##       Because ReGenesees do NOT allow users to set keep.var = FALSE
       unwrap2 <- function(x){
           if(!is.null(attr(x, "deff")))
               c(statistic = unclass(x),
@@ -174,7 +209,8 @@ else {
                        data<-subset(formula, byfactor %in% byfactor[i])
                      unwrap2(FUN(data,
                                  design[byfactor %in% byfactor[i],],
-                                 deff=deff,alpha=ci.alpha,ci=ci.quant,...))}
+                                 deff=deff,alpha=ci.alpha,ci=ci.quant,...))
+                    }
                    )
       if (is.matrix(rval)) rval<-t(rval)
   }

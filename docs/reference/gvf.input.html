@@ -8,6 +8,13 @@
 
 <title>Prepare Input Data to Fit GVF Models — gvf.input • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,10 +137,10 @@
     <p>Transforms a set of computed survey statistics into a suitable (<code>data.frame</code>-like) data structure, in order to fit a Generalized Variance Function model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gvf.input</span>(<span class='no'>design</span>, <span class='no'>...</span>, <span class='kw'>stats</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>...</span>))
+    <pre class="usage"><span class='fu'>gvf.input</span>(<span class='no'>design</span>, <span class='no'>...</span>, <span class='kw'>stats</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>...</span>))
 
 <span class='co'># S3 method for gvf.input</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,7 +150,7 @@
       <td><p>The design object (of class <code>analytic</code> or inheriting from it) from which the input survey statics are supposed to have been derived.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
+      <th>...</th>
       <td><p>For function <code>gvf.input</code>, objects containing survey statistics. For <code>plot</code>, further arguments passed to or from other methods.</p></td>
     </tr>
     <tr>
@@ -149,10 +165,10 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Given a set of survey statistic objects (via arguments &#8216;<code>&#8230;</code>&#8217; or <code>stats</code>) and a design object (<code>design</code>) from which those statics are supposed to have been derived, function <code>gvf.input</code> builds a data structure that can be fed to <span class="pkg">ReGenesees</span> GVF model fitting function <code><a href='fit.gvf.html'>fit.gvf</a></code>.</p>
-<p>Argument &#8216;<code>&#8230;</code>&#8217; can be bound to an arbitrary number of objects. These objects must be output of survey statistics functions, i.e. <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code>, and <code><a href='svystatL.html'>svystatL</a></code>.<br />
-All input objects passed to &#8216;<code>&#8230;</code>&#8217; must derive from estimators of the <em>same</em> kind (as returned by function <code><a href='estimator.kind.html'>estimator.kind</a></code>). For the same reason, objects of <em>mixed</em> kind (see <code><a href='estimator.kind.html'>estimator.kind</a></code>) are not allowed. Since function <code><a href='svystatL.html'>svystatL</a></code> can actually handle estimators of <em>different</em> kinds, objects of kind &#8216;<code>Complex Estimator</code>&#8217; are the only exception to the rule.</p>
-<p>Argument <code>stats</code> can be used as an alternative to argument &#8216;<code>&#8230;</code>&#8217;: one has only to store the survey statistic objects into a <code>list</code> and bind such list to <code>stats</code>. Note that, if both are passed, argument <code>stats</code> will prevail on &#8216;<code>&#8230;</code>&#8217; (see &#8216;Examples&#8217;).</p>
+    <p>Given a set of survey statistic objects (via arguments &#8216;<code>...</code>&#8217; or <code>stats</code>) and a design object (<code>design</code>) from which those statics are supposed to have been derived, function <code>gvf.input</code> builds a data structure that can be fed to <span class="pkg">ReGenesees</span> GVF model fitting function <code><a href='fit.gvf.html'>fit.gvf</a></code>.</p>
+<p>Argument &#8216;<code>...</code>&#8217; can be bound to an arbitrary number of objects. These objects must be output of survey statistics functions, i.e. <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code>, and <code><a href='svystatL.html'>svystatL</a></code>.<br />
+All input objects passed to &#8216;<code>...</code>&#8217; must derive from estimators of the <em>same</em> kind (as returned by function <code><a href='estimator.kind.html'>estimator.kind</a></code>). For the same reason, objects of <em>mixed</em> kind (see <code><a href='estimator.kind.html'>estimator.kind</a></code>) are not allowed. Since function <code><a href='svystatL.html'>svystatL</a></code> can actually handle estimators of <em>different</em> kinds, objects of kind &#8216;<code>Complex Estimator</code>&#8217; are the only exception to the rule.</p>
+<p>Argument <code>stats</code> can be used as an alternative to argument &#8216;<code>...</code>&#8217;: one has only to store the survey statistic objects into a <code>list</code> and bind such list to <code>stats</code>. Note that, if both are passed, argument <code>stats</code> will prevail on &#8216;<code>...</code>&#8217; (see &#8216;Examples&#8217;).</p>
 <p>Should <em>any</em> input object be a survey statistic derived from a design object <em>other than</em> <code>design</code>, the function would raise an error.</p>
 <p>The <code>plot</code> method for <code>gvf.input</code> objects produces a matrix of scatterplots with polynomial smoothers.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -166,7 +182,8 @@ The data frame has the following structure:</p><dl class='dl-horizontal'>
     <dt><code>CV</code></dt><dd><p>The coefficient of variation of the original estimate, <code>numeric</code>.</p></dd>
     <dt><code>VAR</code></dt><dd><p>The variance of the original estimate, <code>numeric</code>.</p></dd>
     <dt><code>DEFF</code></dt><dd><p>The design effect of the original estimate (if available), <code>numeric</code>.</p></dd>
-  </dl>
+  
+</dl>
 
 <p>Note that by inspecting the <em>attributes</em> of a <code>gvf.input</code> object, one can always identify which design object and which kind of estimator generated that object (see &#8216;Examples&#8217;).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -175,7 +192,7 @@ The data frame has the following structure:</p><dl class='dl-horizontal'>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load sbs data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 
 <span class='co'># Create a design object...</span>
 <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,<span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
@@ -218,7 +235,7 @@ The data frame has the following structure:</p><dl class='dl-horizontal'>
 #&gt; 25     53:va.imp2    71104.66   15903.39 0.22366164 2.529177e+08
 #&gt; 26     61:va.imp2   253466.99   52830.99 0.20843341 2.791113e+09
 #&gt; 27     62:va.imp2    76083.79   20809.48 0.27350745 4.330346e+08
-#&gt; 28     63:va.imp2    64764.31   26085.19 0.40277104 6.804370e+08</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>ee</span>)   <span class='co'># Note the "design" and "stats.kind" attributes</span></div><div class='output co'>#&gt; Classes ‘gvf.input’ and 'data.frame':	28 obs. of  5 variables:
+#&gt; 28     63:va.imp2    64764.31   26085.19 0.40277104 6.804370e+08</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>ee</span>)   <span class='co'># Note the "design" and "stats.kind" attributes</span></div><div class='output co'>#&gt; Classes ‘gvf.input’ and 'data.frame':	28 obs. of  5 variables:
 #&gt;  $ name: chr  "va.imp2" "North:va.imp2" "Center:va.imp2" "South:va.imp2" ...
 #&gt;  $ Y   : num  56293880 40024019 8664311 7605550 19676130 ...
 #&gt;  $ SE  : num  1011167 878183 324914 381688 675016 ...
@@ -226,14 +243,14 @@ The data frame has the following structure:</p><dl class='dl-horizontal'>
 #&gt;  $ VAR : num  1.02e+12 7.71e+11 1.06e+11 1.46e+11 4.56e+11 ...
 #&gt;  - attr(*, "y.vars")= chr "va.imp2"
 #&gt;  - attr(*, "stats.kind")= chr "Total"
-#&gt;  - attr(*, "has.Deff")= logi FALSE</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='no'>ee</span>)</div><div class='img'><img src='gvf.input-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt;  - attr(*, "has.Deff")= logi FALSE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>ee</span>)</div><div class='img'><img src='gvf.input-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Note that, instead of argument '...', you could have used argument 'stats'</span>
 <span class='co'># as follows:</span>
-<span class='no'>va.list</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>va</span>,<span class='no'>va.reg</span>,<span class='no'>va.area</span>)
+<span class='no'>va.list</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>va</span>,<span class='no'>va.reg</span>,<span class='no'>va.area</span>)
 <span class='no'>ee2</span><span class='kw'>&lt;-</span><span class='fu'>gvf.input</span>(<span class='no'>sbsdes</span>,<span class='kw'>stats</span><span class='kw'>=</span><span class='no'>va.list</span>)
 
 <span class='co'># ...obtaining exactly the same result:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span>(<span class='no'>ee</span>,<span class='no'>ee2</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='no'>ee</span>,<span class='no'>ee2</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># Note also that, if both are passed, argument 'stats' prevails on '...':</span>
   <span class='co'># indeed, while:</span>
   <span class='fu'>gvf.input</span>(<span class='no'>sbsdes</span>,<span class='no'>va.reg</span>)</div><div class='output co'>#&gt;             name        Y       SE         CV          VAR
@@ -286,19 +303,23 @@ The data frame has the following structure:</p><dl class='dl-horizontal'>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

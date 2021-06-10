@@ -8,6 +8,13 @@
 
 <title>Trim Calibration Weights while Preserving Calibration Constraints — trimcal • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,7 +137,7 @@
     <p>This function trims calibration weights to a bounded interval, while preserving all the calibration constraints.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>trimcal</span>(<span class='no'>cal.design</span>, <span class='kw'>w.range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>Inf</span>, <span class='fl'>Inf</span>),
+    <pre class="usage"><span class='fu'>trimcal</span>(<span class='no'>cal.design</span>, <span class='kw'>w.range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>Inf</span>, <span class='fl'>Inf</span>),
         <span class='kw'>maxit</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>epsilon</span> <span class='kw'>=</span> <span class='fl'>1e-07</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -134,7 +150,7 @@
     <tr>
       <th>w.range</th>
       <td><p>The interval to which trimmed calibration weights must be bound (see &#8216;Details&#8217;).
-                 The default is <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(-Inf,Inf)</a></code>, which would leave the calibration weights <em>unchanged</em>.</p></td>
+                 The default is <code><a href='https://rdrr.io/r/base/c.html'>c(-Inf,Inf)</a></code>, which would leave the calibration weights <em>unchanged</em>.</p></td>
     </tr>
     <tr>
       <th>maxit</th>
@@ -171,11 +187,11 @@
     <p>Trimming the calibration weights can result in introducing a <em>bias</em> in calibration estimates. Of course, one must hope that this <em>unknown</em> bias will turn out to be small compared to the <em>unknown</em> gain in precision obtained by trimming. In any case - since the actual effect of trimming weights on the MSE of the estimators is unclear - function <code>trimcal</code> should be used sparingly and carefully.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Potter, F.J. (1990) <em>"A study of procedures to identify and trim extreme sampling weights"</em>. Proceedings of the Survey Research Methods Section, American Statistical Association, pp. 225-230.</p>
-<p>Folsom, R.E., Singh, A.C. (2000) <em>"The generalized exponential model for sampling weight calibration for extreme values, nonresponse, and poststratification"</em>. Proceedings of the Section on Survey Research Methods, American Statistical Association, pp. 598-603.</p>
+    <p>Potter, F.J. (1990) <em>&#8220;A study of procedures to identify and trim extreme sampling weights&#8221;</em>. Proceedings of the Survey Research Methods Section, American Statistical Association, pp. 225-230.</p>
+<p>Folsom, R.E., Singh, A.C. (2000) <em>&#8220;The generalized exponential model for sampling weight calibration for extreme values, nonresponse, and poststratification&#8221;</em>. Proceedings of the Section on Survey Research Methods, American Statistical Association, pp. 598-603.</p>
 <p>Verma, V., Betti, G., Ghellini, G. (2007) <em>Cross-sectional and longitudinal weighting in a rotational household panel: applications to EU-SILC</em>, Statistics in Transition, 8(1), pp. 5-50.</p>
-<p>Valliant, R., Dever, J., Kreuter, F. (2013) <em>"Practical Tools for Designing and Weighting Survey Samples"</em>. Springer-Verlag, New York.</p>
-<p>EUROSTAT (2016) <em>"EU statistics on income and living conditions (EU-SILC) methodology - data quality"</em>.</p>
+<p>Valliant, R., Dever, J., Kreuter, F. (2013) <em>&#8220;Practical Tools for Designing and Weighting Survey Samples&#8221;</em>. Springer-Verlag, New York.</p>
+<p>EUROSTAT (2016) <em>&#8220;EU statistics on income and living conditions (EU-SILC) methodology - data quality&#8221;</em>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating survey weights within <span class="pkg">ReGenesees</span> and <code><a href='check.cal.html'>check.cal</a></code> to check if calibration constraints have been fulfilled.</p></div>
@@ -185,7 +201,7 @@
 <span class='co'>## Data preparation ##</span>
 <span class='co'>######################</span>
 <span class='co'># Load sbs data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 <span class='co'># Build a design object:</span>
 <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,<span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
 <span class='co'># Build a population totals template and fill it with actual known totals:</span>
@@ -195,7 +211,7 @@
 #&gt; </div><div class='input'><span class='co'># Calibrate:</span>
 <span class='no'>sbscal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='no'>sbsdes</span>, <span class='no'>pop</span>)
 <span class='co'># Have a look at the calibration weights distribution:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal</span>))</div><div class='output co'>#&gt;     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal</span>))</div><div class='output co'>#&gt;     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 #&gt; -0.01354  1.00000  1.48804  2.50659  2.66081 23.59199 </div><div class='input'>
 
 <span class='co'>#######################</span>
@@ -204,7 +220,7 @@
 <span class='co'>## Example 1</span>
 <span class='co'># Now suppose we want to trim these calibration weights to, say, the bounded</span>
 <span class='co'># interval [0.5, 20]. Let's use our trimcal() function:</span>
-<span class='no'>sbstrim</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>sbscal</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>20</span>))
+<span class='no'>sbstrim</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>sbscal</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>20</span>))
 
 <span class='co'># Have a look at the trimmed object:</span>
 <span class='no'>sbstrim</span></div><div class='output co'>#&gt; Calibrated, Stratified Independent Unit Sampling Design
@@ -216,7 +232,7 @@
 #&gt; 1: e.calibrate(sbsdes, pop)</div><div class='input'>
 <span class='co'># Let's first verify that the trimmed calibration weights actually obey the</span>
 <span class='co'># imposed range restrictions...</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;   0.500   1.000   1.487   2.507   2.661  20.000 </div><div class='input'><span class='co'># ...ok, as it must be.</span>
 
 <span class='co'># Second, let's verify that the trimmed object still preserves all the</span>
@@ -224,12 +240,12 @@
 <span class='fu'><a href='check.cal.html'>check.cal</a></span>(<span class='no'>sbstrim</span>)</div><div class='output co'>#&gt; All Calibration Constraints (120) fulfilled (at tolerance level epsilon = 1e-07).
 #&gt; </div><div class='input'>
 <span class='co'># or, more explicitly:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/all.equal'>all.equal</a></span>(<span class='fu'><a href='cal.estimates.html'>aux.estimates</a></span>(<span class='no'>sbscal</span>,  <span class='kw'>template</span><span class='kw'>=</span><span class='no'>pop</span>),
+<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span>(<span class='fu'><a href='cal.estimates.html'>aux.estimates</a></span>(<span class='no'>sbscal</span>,  <span class='kw'>template</span><span class='kw'>=</span><span class='no'>pop</span>),
           <span class='fu'><a href='cal.estimates.html'>aux.estimates</a></span>(<span class='no'>sbstrim</span>, <span class='kw'>template</span><span class='kw'>=</span><span class='no'>pop</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># ...ok, as it must be.</span>
 
 <span class='co'># Let's have a look at the scatterplots of calibrated and trimmed weights:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>), <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal</span>), <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Direct weights"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Calibration (red) and Trimmed (blue) weights"</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>points</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>), <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim</span>), <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"blue"</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/abline'>abline</a></span>(<span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>20</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"green"</span>)</div><div class='img'><img src='trimcal-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>), <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal</span>), <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
+     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Direct weights"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Calibration (red) and Trimmed (blue) weights"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbsdes</span>), <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim</span>), <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"blue"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>20</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"green"</span>)</div><div class='img'><img src='trimcal-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Last, compute estimates and estimated sampling errors on the trimmed object</span>
 <span class='co'># as you would do on ordinary calibrated objects, e.g.</span>
   <span class='co'># before trimming:</span>
@@ -246,9 +262,9 @@
 
 <span class='co'>## Example 2</span>
 <span class='co'># If w.range is too tight, constrained trimming can fail:</span>
-<span class='no'>sbstrim2</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>sbscal</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>20</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0511613108495048 in 51 iterations (variable ent:emp.cl(49,99]:nace.macroAgriculture), see ecal.status.</span></div><div class='input'>
+<span class='no'>sbstrim2</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>sbscal</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>20</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Failed to converge: worst achieved epsilon= 0.0511613108495048 in 51 iterations (variable ent:emp.cl(49,99]:nace.macroAgriculture), see ecal.status.</span></div><div class='input'>
 <span class='co'># As a consequence, the trimmed weights will respect the range restrictions...</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim2</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim2</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;   1.000   1.000   1.484   2.507   2.657  20.000 </div><div class='input'>
 <span class='co'># ...but some of the calibration constraints will be broken:</span>
 <span class='fu'><a href='check.cal.html'>check.cal</a></span>(<span class='no'>sbstrim2</span>)</div><div class='output co'>#&gt; Calibration Constraints missed (at tolerance level epsilon = 1e-07): 2 out of 120
@@ -275,7 +291,7 @@
 <span class='co'># will hold true for the trimmed calibration weights.</span>
 
 <span class='co'># Load household data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 
 <span class='co'># Define a survey design object:</span>
 <span class='no'>des</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
@@ -288,46 +304,49 @@
                       <span class='kw'>bounds</span><span class='kw'>=</span><span class='no'>bounds</span>,<span class='kw'>aggregate.stage</span><span class='kw'>=</span><span class='fl'>2</span>)
 
 <span class='co'># Have a look at the calibration weights distribution:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>descal</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>descal</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;   91.34  222.52  314.50  305.82  361.00  931.20 </div><div class='input'>
 <span class='co'># Trim the calibration weights to, say, the bounded interval [150, 850]</span>
-<span class='no'>destrim</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>descal</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>150</span>, <span class='fl'>850</span>))
+<span class='no'>destrim</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>descal</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>150</span>, <span class='fl'>850</span>))
 
 <span class='co'># Do trimmed calibration weights obey the imposed range restrictions?</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>destrim</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>destrim</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;   150.0   222.5   314.5   306.4   361.0   850.0 </div><div class='input'>
 <span class='co'># Verify that trimmed weights are still equal within households:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/any'>any</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tapply'>tapply</a></span>( <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>destrim</span>), <span class='no'>destrim</span>$<span class='no'>variables</span>$<span class='no'>famcod</span>,
-             <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='no'>x</span>)) <span class='kw'>&gt;</span> <span class='fl'>1</span>} ) )</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-# FALSE, as it must be.
+<span class='fu'><a href='https://rdrr.io/r/base/any.html'>any</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/tapply.html'>tapply</a></span>( <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>destrim</span>), <span class='no'>destrim</span>$<span class='no'>variables</span>$<span class='no'>famcod</span>,
+             <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>x</span>)) <span class='kw'>&gt;</span> <span class='fl'>1</span>} ) )</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='co'># FALSE, as it must be.</span>
 
 
-#############################################
-## Allowed and forbidden trimming policies ##
-#############################################
-# Let's illustrate some design restrictions on function trimcal():
-# 1) Trimming limits must be both positive:
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>trimcal</span>(<span class='no'>sbscal</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.05</span>, <span class='fl'>18</span>))
-<span class='co'># }</span><div class='input'>
-# 2) Trimming design (or direct, or initial) weights is not allowed, you can
-#    only trim calibration weights:
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>trimcal</span>(<span class='no'>sbsdes</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>18</span>))
-<span class='co'># }</span><div class='input'>
-# 3) You cannot trim further weights that have just been trimmed:
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>trimcal</span>(<span class='no'>sbstrim</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>18</span>))
-<span class='co'># }</span><div class='input'>
+<span class='co'>#############################################</span>
+<span class='co'>## Allowed and forbidden trimming policies ##</span>
+<span class='co'>#############################################</span>
+<span class='co'># Let's illustrate some design restrictions on function trimcal():</span>
+<span class='co'># 1) Trimming limits must be both positive:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>trimcal</span>(<span class='no'>sbscal</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.05</span>, <span class='fl'>18</span>))
+}
+
+<span class='co'># 2) Trimming design (or direct, or initial) weights is not allowed, you can</span>
+<span class='co'>#    only trim calibration weights:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>trimcal</span>(<span class='no'>sbsdes</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>18</span>))
+}
+
+<span class='co'># 3) You cannot trim further weights that have just been trimmed:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>trimcal</span>(<span class='no'>sbstrim</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>18</span>))
+}
+
 <span class='co'># 4) You can calibrate again trimmed weights...</span>
 <span class='no'>pop2</span><span class='kw'>&lt;-</span><span class='fu'><a href='pop.template.html'>pop.template</a></span>(<span class='no'>sbsdes</span>, <span class='kw'>calmodel</span><span class='kw'>=</span>~(<span class='no'>emp.num</span>+<span class='no'>ent</span>):<span class='no'>area</span>-<span class='fl'>1</span>)
 <span class='no'>pop2</span><span class='kw'>&lt;-</span><span class='fu'><a href='fill.template.html'>fill.template</a></span>(<span class='no'>sbs.frame</span>,<span class='no'>pop2</span>)</div><div class='output co'>#&gt; 
 #&gt; # Coherence check between 'universe' and 'template': OK
 #&gt; </div><div class='input'><span class='no'>sbscal2</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='no'>sbstrim</span>, <span class='no'>pop2</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal2</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal2</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt; -0.2346  1.0157  1.4902  2.5066  2.7079 22.8329 </div><div class='input'>
 <span class='co'># ...after that, a further trimming step is allowed:</span>
-<span class='no'>sbstrim2</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>sbscal2</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.6</span>, <span class='fl'>19</span>))
+<span class='no'>sbstrim2</span> <span class='kw'>&lt;-</span> <span class='fu'>trimcal</span>(<span class='no'>sbscal2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.6</span>, <span class='fl'>19</span>))
 <span class='no'>sbstrim2</span></div><div class='output co'>#&gt; Calibrated, Stratified Independent Unit Sampling Design
 #&gt; - [664] strata
 #&gt; - [6909] units
@@ -336,7 +355,7 @@
 #&gt; 4: trimcal(sbscal2, c(0.6, 19))
 #&gt; 3: e.calibrate(sbstrim, pop2)
 #&gt; 2: trimcal(sbscal, c(0.5, 20))
-#&gt; 1: e.calibrate(sbsdes, pop)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim2</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#&gt; 1: e.calibrate(sbsdes, pop)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbstrim2</span>))</div><div class='output co'>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;   0.600   1.016   1.488   2.507   2.710  19.000 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -357,19 +376,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -8,6 +8,13 @@
 
 <title>Estimation of Totals and Means in Subpopulations — svystatTM • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,13 +137,13 @@
     <p>Computes estimates, standard errors and confidence intervals for Totals and Means in subpopulations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>svystatTM</span>(<span class='no'>design</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Total"</span>, <span class='st'>"Mean"</span>),
-          <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>, <span class='st'>"cv"</span>, <span class='st'>"cvpct"</span>, <span class='st'>"var"</span>),
+    <pre class="usage"><span class='fu'>svystatTM</span>(<span class='no'>design</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Total"</span>, <span class='st'>"Mean"</span>),
+          <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>, <span class='st'>"cv"</span>, <span class='st'>"cvpct"</span>, <span class='st'>"var"</span>),
           <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>deff</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
           <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for svystatTM</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatTM</span>
 <span class='fu'><a href='extractors.html'>SE</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatTM</span>
@@ -137,7 +153,7 @@
 <span class='co'># S3 method for svystatTM</span>
 <span class='fu'><a href='extractors.html'>deff</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatTM</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,21 +205,21 @@
       <td><p>An object of class <code>svystatTM</code>.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
-      <td><p>Additional arguments to <code>coef</code>, &#8230;, <code>confint</code> methods (if any).</p></td>
+      <th>...</th>
+      <td><p>Additional arguments to <code>coef</code>, ..., <code>confint</code> methods (if any).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function computes weighted estimates for Totals and Means using suitable weights depending on the class of <code>design</code>: calibrated weights for class <code>cal.analytic</code> and direct weights otherwise. Standard errors for nonlinear estimators (e.g. calibration estimators) are calculated using the Taylor linearization technique.</p>
-<p>The mandatory argument <code>y</code> identifies the variables of interest, that is the variables for which estimates are to be calculated. The corresponding formula should be of the type <code>y=~var1+&#8230;+varn</code>. The <code>design</code> variables referenced by <code>y</code> should be <code>numeric</code> or <code>factor</code> (variables of other types - e.g. <code>character</code> - will be coerced). It is admissible to specify for <code>y</code> "mixed" formulae that simultaneously contain quantitative (<code>numeric</code>) variables and qualitative (<code>factor</code>) variables.</p>
-<p>To override the restriction to formulae of the type <code>y=~var1+&#8230;+varn</code>, the AsIs operator <code><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I()</a></code> can be used (see &#8216;Examples&#8217;). Though the latter opportunity could appear quite useful in some occasion, actually it should be almost always possible to find a work-around by using other functions of the <span class="pkg">ReGenesees</span> package.</p>
+<p>The mandatory argument <code>y</code> identifies the variables of interest, that is the variables for which estimates are to be calculated. The corresponding formula should be of the type <code>y=~var1+...+varn</code>. The <code>design</code> variables referenced by <code>y</code> should be <code>numeric</code> or <code>factor</code> (variables of other types - e.g. <code>character</code> - will be coerced). It is admissible to specify for <code>y</code> "mixed" formulae that simultaneously contain quantitative (<code>numeric</code>) variables and qualitative (<code>factor</code>) variables.</p>
+<p>To override the restriction to formulae of the type <code>y=~var1+...+varn</code>, the AsIs operator <code><a href='https://rdrr.io/r/base/AsIs.html'>I()</a></code> can be used (see &#8216;Examples&#8217;). Though the latter opportunity could appear quite useful in some occasion, actually it should be almost always possible to find a work-around by using other functions of the <span class="pkg">ReGenesees</span> package.</p>
 <p>The optional argument <code>by</code> specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If <code>by=NULL</code> (the default option), the estimates produced by <code>svystatTM</code> refer to the whole population. Estimation domains must be defined by a formula: for example the statement <code>by=~B1:B2</code> selects as estimation domains the subpopulations determined by crossing the modalities of variables <code>B1</code> and <code>B2</code>. Notice that a formula like <code>by=~B1+B2</code> will be automatically translated into the factor-crossing formula <code>by=~B1:B2</code>: if you need to compute estimates for domains <code>B1</code> and <code>B2</code> <em>separately</em>, you have to call <code>svystatTM</code> twice. The <code>design</code> variables referenced by <code>by</code> (if any) should be of type <code>factor</code>, otherwise they will be coerced.</p>
 <p>The optional argument <code>estimator</code> makes it possible to select the desired estimator. If<br /> <code>estimator="Total"</code> (the default option), <code>svystatTM</code> calculates, for a given variable of interest <code>vark</code>, the estimate of the total (when <code>vark</code> is <code>numeric</code>) or the estimate of the absolute frequency distribution (when <code>vark</code> is <code>factor</code>). Similarly, if <code>estimator="Mean"</code>, the function calculates the estimate of the mean (when <code>vark</code> is <code>numeric</code>) or the the estimate of the relative frequency distribution (when <code>vark</code> is <code>factor</code>).</p>
 <p>The <code>conf.int</code> argument allows to request the confidence intervals for the estimates. By default <code>conf.int=FALSE</code>, that is the confidence intervals are not provided.</p>
 <p>Whenever confidence intervals are requested (i.e. <code>conf.int=TRUE</code>), the desired confidence level can be specified by means of the <code>conf.lev</code> argument. The <code>conf.lev</code> value must represent a probability (<code>0&lt;=conf.lev&lt;=1</code>) and its default is chosen to be <code>0.95</code>.</p>
-<p>The optional argument <code>deff</code> allows to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling <em>"with replacement"</em>, one must use <code>deff="replace"</code>.<br />
+<p>The optional argument <code>deff</code> allows to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling <em>&#8220;with replacement&#8221;</em>, one must use <code>deff="replace"</code>.<br />
 Understanding what 'equivalent' estimator actually means is straightforward when dealing with Horvitz-Thompson estimators of Totals and Means. This is not the case when, on the contrary, the estimator to which the deff refers is a nonlinear estimator (e.g. for Calibration estimators of Totals and Means). In such cases, the standard approach is to use as 'equivalent' estimator the linearized version of the original estimator (that is: the estimator of the total of the linearized variable, aka "Woodruff transform").<br />
 When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out <em>within</em> that subpopulation. This is the same as the <code>srssubpop</code> option for Stata's function <code>estat</code>.</p>
 <p>Missing values (<code>NA</code>) in interest variables should be avoided. If <code>na.rm=FALSE</code> (the default) they generate NAs in estimates (or even an error, if <code>design</code> is calibrated). If <code>na.rm=TRUE</code>, observations containing NAs are dropped, and estimates gets computed on non missing values only. This implicitly assumes that missing values hit interest variables <em>completely at random</em>: should this be not the case, computed estimates would be <em>biased</em>. Notice that the <code>na.rm=TRUE</code> option is only allowed if <code>y</code> references a <em>single</em> interest variable.</p>
@@ -212,15 +228,15 @@ When dealing with domain estimation, the design effects referring to a given sub
     <p>An object inheriting from the <code>data.frame</code> class, whose detailed structure depends on input parameters' values.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>"Model Assisted Survey Sampling"</em>, Springer Verlag.</p>
-<p>Kish, L. (1995). <em>"Methods for design effects"</em>. Journal of Official Statistics, Vol. 11, pp. 55-77.</p>
+    <p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>&#8220;Model Assisted Survey Sampling&#8221;</em>, Springer Verlag.</p>
+<p>Kish, L. (1995). <em>&#8220;Methods for design effects&#8221;</em>. Journal of Official Statistics, Vol. 11, pp. 55-77.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Estimators of Ratios between Totals <code><a href='svystatR.html'>svystatR</a></code>, Shares <code><a href='svystatS.html'>svystatS</a></code>, Ratios between Shares <code><a href='svystatSR.html'>svystatSR</a></code>, Quantiles <code><a href='svystatQ.html'>svystatQ</a></code>, Multiple Regression Coefficients <code><a href='svystatB.html'>svystatB</a></code>, Complex Analytic Functions of Totals and/or Means <code><a href='svystatL.html'>svystatL</a></code>, and all of the above <code><a href='svystat.html'>svystat</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load survey data:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 
 <span class='co'># Creation of a design object:</span>
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
@@ -236,7 +252,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 
 <span class='co'># Estimation of the total of the same 3 variables by region, with SE</span>
 <span class='co'># and CV%: </span>
-<span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='no'>y1</span>+<span class='no'>y2</span>+<span class='no'>y3</span>,~<span class='no'>regcod</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;    regcod Total.y1 Total.y2 Total.y3 SE.Total.y1 SE.Total.y2 SE.Total.y3
+<span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='no'>y1</span>+<span class='no'>y2</span>+<span class='no'>y3</span>,~<span class='no'>regcod</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;    regcod Total.y1 Total.y2 Total.y3 SE.Total.y1 SE.Total.y2 SE.Total.y3
 #&gt; 6       6 127263.2 120685.6   6577.6    5795.431    5844.851    1518.427
 #&gt; 7       7 158181.1 145929.1  12252.0    8740.133    7849.983    2253.128
 #&gt; 10     10  95667.5  90018.8   5648.7    5790.963    5897.502    1202.009
@@ -291,7 +307,7 @@ When dealing with domain estimation, the design effects referring to a given sub
   <span class='co'># Estimation of the relative frequency of the joint distribution of sex</span>
   <span class='co'># and marstat:</span>
     <span class='co'># *First Solution* (using the AsIs operator I()):</span>
-    <span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='no'>sex</span>:<span class='no'>marstat</span>),<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;                                 Mean          SE
+    <span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>sex</span>:<span class='no'>marstat</span>),<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;                                 Mean          SE
 #&gt; I(sex:marstat)f:married   0.29603854 0.008526480
 #&gt; I(sex:marstat)f:unmarried 0.17221175 0.007805405
 #&gt; I(sex:marstat)f:widowed   0.04041776 0.004296936
@@ -358,15 +374,15 @@ When dealing with domain estimation, the design effects referring to a given sub
 <span class='co'># the AsIs operator I()</span>
 
   <span class='co'># Estimation of the total income (plus cvpct) ONLY in region 7:</span>
-  <span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='no'>income</span>*(<span class='no'>regcod</span><span class='kw'>==</span><span class='st'>"7"</span>)),<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                                 Total      CV%
+  <span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>income</span>*(<span class='no'>regcod</span><span class='kw'>==</span><span class='st'>"7"</span>)),<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                                 Total      CV%
 #&gt; I(income * (regcod == "7")) 525145767 3.421359</div><div class='input'>  <span class='co'># Alternative solution (adding a new variable to des):</span>
-  <span class='no'>des2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>des</span>, <span class='kw'>inc_reg7</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='no'>income</span>*(<span class='no'>regcod</span><span class='kw'>==</span><span class='st'>"7"</span>)))
+  <span class='no'>des2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>des</span>, <span class='kw'>inc_reg7</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>income</span>*(<span class='no'>regcod</span><span class='kw'>==</span><span class='st'>"7"</span>)))
   <span class='fu'>svystatTM</span>(<span class='no'>des2</span>,~<span class='no'>inc_reg7</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;              Total      CV%
 #&gt; inc_reg7 525145767 3.421359</div><div class='input'>
   <span class='co'># Estimation of the total income (plus cvpct) ONLY in regions 6 and 10:</span>
-  <span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='no'>income</span>*<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>regcod</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"6"</span>,<span class='st'>"10"</span>))),<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                                                      Total      CV%
+  <span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>income</span>*<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>regcod</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"6"</span>,<span class='st'>"10"</span>))),<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                                                      Total      CV%
 #&gt; I(income * as.numeric(regcod %in% c("6", "10"))) 635678881 2.093386</div><div class='input'>  <span class='co'># Alternative solution (adding a new variable to des):</span>
-  <span class='no'>des2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>des</span>, <span class='kw'>inc_reg6.10</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/AsIs'>I</a></span>(<span class='no'>income</span>*(<span class='no'>regcod</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"6"</span>,<span class='st'>"10"</span>))))
+  <span class='no'>des2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>des</span>, <span class='kw'>inc_reg6.10</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>income</span>*(<span class='no'>regcod</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"6"</span>,<span class='st'>"10"</span>))))
   <span class='fu'>svystatTM</span>(<span class='no'>des2</span>,~<span class='no'>inc_reg6.10</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                 Total      CV%
 #&gt; inc_reg6.10 635678881 2.093386</div><div class='input'>
   <span class='co'># Compare with the corresponding estimates for the "complete" partition,</span>
@@ -378,24 +394,26 @@ When dealing with domain estimation, the design effects referring to a given sub
 
 <span class='co'># Under default settings lonely PSUs produce errors in standard</span>
 <span class='co'># errors estimation (notice we didn't pass the fpcs):</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>fpcdat</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fpcdat</span>)
 <span class='no'>des.lpsu</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>fpcdat</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>psu</span>+<span class='no'>ssu</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,
-          <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>)</div><span class='co'># NOT RUN {</span>
-<span class='fu'>svystatTM</span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))
-<span class='co'># }</span><div class='input'>
+          <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>)
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>svystatTM</span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))
+}
+
 <span class='co'># This can be circumvented in different ways, namely:</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)
-<span class='fu'>svystatTM</span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)
+<span class='fu'>svystatTM</span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  175.6944 17.47913
 #&gt; y   976.2417  257.2732 26.35343
-#&gt; z 19180.1349 3813.7155 19.88367</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+#&gt; z 19180.1349 3813.7155 19.88367</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
 <span class='co'># or otherwise:</span>
-<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"average"</span>)
-<span class='fu'>svystatTM</span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
+<span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"average"</span>)
+<span class='fu'>svystatTM</span>(<span class='no'>des.lpsu</span>,~<span class='no'>x</span>+<span class='no'>y</span>+<span class='no'>z</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>))</div><div class='output co'>#&gt;        Total        SE      CV%
 #&gt; x  1005.1667  220.1591 21.90275
 #&gt; y   976.2417  328.8805 33.68843
-#&gt; z 19180.1349 4741.9620 24.72330</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>old.op</span>)
+#&gt; z 19180.1349 4741.9620 24.72330</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
 <span class='co'># but see also ?collapse.strata for a better alternative.</span>
 
@@ -415,7 +433,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 <span class='co'># involve only individual values. Some examples are given below.</span>
 
   <span class='co'># Load survey data:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 
   <span class='co'># Define the survey design (variable famcod identifies households) </span>
   <span class='no'>exdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,
@@ -431,8 +449,8 @@ When dealing with domain estimation, the design effects referring to a given sub
     <span class='co'>## 'houdensity': to estimate households counts</span>
   <span class='no'>exdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>exdes</span>,
                      <span class='kw'>ones</span><span class='kw'>=</span><span class='fl'>1</span>,
-                     <span class='kw'>housize</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ave'>ave</a></span>(<span class='no'>famcod</span>,<span class='no'>famcod</span>,<span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>length</span>)),
-                     <span class='kw'>houdensity</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ave'>ave</a></span>(<span class='no'>famcod</span>,<span class='no'>famcod</span>,<span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>/<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>x</span>))
+                     <span class='kw'>housize</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/ave.html'>ave</a></span>(<span class='no'>famcod</span>,<span class='no'>famcod</span>,<span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>length</span>)),
+                     <span class='kw'>houdensity</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/ave.html'>ave</a></span>(<span class='no'>famcod</span>,<span class='no'>famcod</span>,<span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>/<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>x</span>))
                     )
 
   <span class='co'># Estimate the total number of households:</span>
@@ -444,7 +462,7 @@ When dealing with domain estimation, the design effects referring to a given sub
   <span class='no'>nind</span></div><div class='output co'>#&gt;         Total      CV%
 #&gt; ones 924101.3 2.215888</div><div class='input'>
   <span class='co'># Thus the average number of individuals per household is:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>nind</span>)/<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>nhou</span>)</div><div class='output co'>#&gt;     ones 
+  <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>nind</span>)/<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>nhou</span>)</div><div class='output co'>#&gt;     ones 
 #&gt; 1.259284 </div><div class='input'>
   <span class='co'># ...which can be obtained also as a ratio (along with</span>
   <span class='co'># its estimated sampling variability):</span>
@@ -473,7 +491,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 #&gt; 4       4           1630.7            43.582008</div><div class='input'>
   <span class='co'># Notice that estimates of individuals and household counts are consistent,</span>
   <span class='co'># indeed:</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>nind.by.housize</span>)/<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>nhou.by.housize</span>)</div><div class='output co'>#&gt; housize1 housize2 housize3 housize4 
+  <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>nind.by.housize</span>)/<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>nhou.by.housize</span>)</div><div class='output co'>#&gt; housize1 housize2 housize3 housize4 
 #&gt;        1        2        3        4 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -492,19 +510,23 @@ When dealing with domain estimation, the design effects referring to a given sub
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

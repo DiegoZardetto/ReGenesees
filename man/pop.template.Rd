@@ -4,7 +4,7 @@
 \title{Template Data Frame for Known Population Totals}
 
 \description{
-Constructs a \emph{"template"} data frame to store known population totals for a calibration problem.
+Constructs a \emph{\dQuote{template}} data frame to store known population totals for a calibration problem.
 }
 
 \usage{
@@ -28,9 +28,9 @@ The optional argument \code{partition} specifies the variables that define the c
 }
 
 \value{
-An object of class \code{pop.totals}. The data frame it contains is a \emph{"template"} in the sense that all the known totals it must be able to store are missing (\code{NA}). However, this data frame has a structure that complies with the standard required by \code{e.calibrate} (provided the latter is invoked with the same \code{calmodel} and \code{partition} values used to create the template).
+An object of class \code{pop.totals}. The data frame it contains is a \emph{\dQuote{template}} in the sense that all the known totals it must be able to store are missing (\code{NA}). However, this data frame has a structure that complies with the standard required by \code{e.calibrate} (provided the latter is invoked with the same \code{calmodel} and \code{partition} values used to create the template).
 
-The operation of filling the template's \code{NA}s with the actual values of the corresponding population totals has, obviously, to be done by the user. If the user has access to a \emph{"sampling frame"} (that is a data frame containing the complete list of the units belonging to the target population along with the corresponding values of the auxiliary variables), then he can exploit the function \code{\link{fill.template}} to automatically fill the template.
+The operation of filling the template's \code{NA}s with the actual values of the corresponding population totals has, obviously, to be done by the user. If the user has access to a \emph{\dQuote{sampling frame}} (that is a data frame containing the complete list of the units belonging to the target population along with the corresponding values of the auxiliary variables), then he can exploit function \code{\link{fill.template}} to automatically fill the template.
 
 The \code{pop.totals} class is a specialization of the \code{data.frame} class; this means that an object built by \code{pop.template} inherits from the \code{data.frame} class and you can use on it every method defined on that class.
 }

@@ -8,6 +8,13 @@
 
 <title>Estimation of Complex Estimators in Subpopulations — svystatL • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -122,12 +138,12 @@
     </div>
 
     <pre class="usage"><span class='fu'>svystatL</span>(<span class='no'>design</span>, <span class='no'>expr</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-         <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"se"</span>, <span class='st'>"cv"</span>, <span class='st'>"cvpct"</span>, <span class='st'>"var"</span>),
+         <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>, <span class='st'>"cv"</span>, <span class='st'>"cvpct"</span>, <span class='st'>"var"</span>),
          <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>deff</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
          <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for svystatL</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatL</span>
 <span class='fu'><a href='extractors.html'>SE</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatL</span>
@@ -137,7 +153,7 @@
 <span class='co'># S3 method for svystatL</span>
 <span class='fu'><a href='extractors.html'>deff</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)
 <span class='co'># S3 method for svystatL</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/confint'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,15 +200,15 @@
       <td><p>An object of class <code>svystatL</code>.</p></td>
     </tr>
     <tr>
-      <th>&#8230;</th>
-      <td><p>Additional arguments to <code>coef</code>, &#8230;, <code>confint</code> methods (if any).</p></td>
+      <th>...</th>
+      <td><p>Additional arguments to <code>coef</code>, ..., <code>confint</code> methods (if any).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function computes weighted estimates for Complex Estimators using suitable weights depending on the class of <code>design</code>: calibrated weights for class <code>cal.analytic</code> and direct weights otherwise. Standard errors are calculated using the Taylor linearization technique.</p>
-<p>The mandatory argument <code>expr</code>, which identifies the Complex Estimator, must be an object of class <code>expression</code>. It can be specified just a single Complex Estimator at a time, i.e. <code><a href='https://www.rdocumentation.org/packages/base/topics/length'>length(expr)</a></code> must be equal to <code>1</code>. Any analytic function of estimators of Totals and Means is allowed.<br />
+<p>The mandatory argument <code>expr</code>, which identifies the Complex Estimator, must be an object of class <code>expression</code>. It can be specified just a single Complex Estimator at a time, i.e. <code><a href='https://rdrr.io/r/base/length.html'>length(expr)</a></code> must be equal to <code>1</code>. Any analytic function of estimators of Totals and Means is allowed.<br />
 Inside <code>expr</code> the estimator of the Total of a variable is simply represented by the <em>name</em> of the variable itself. To represent the estimator of the Mean of a variable <code>y</code>, the expression <code>y/ones</code> has to be used (<code>ones</code> being the convenience name of an artificial variable whose value is <code>1</code> for each sampling unit, so that its Total estimator actually estimates the population total). Variables referenced inside <code>expr</code> have obviously to belong to <code>design</code> and must be <code>numeric</code>.<br />
 At a minimal level, <code>svystatL</code> can be used to estimate Totals, Means and Ratios, thus reproducing the same results achieved by using the corresponding dedicated functions <code>svystatTM</code> and <code>svystatR</code>. For instance, calling <code>svystatL(design, expression(y/x))</code> is equivalent to invoking <code><a href='svystatR.html'>svystatR(design, ~y, ~x)</a></code>, while using <code>svystatL(design, expression(y/ones))</code> or<br />
 <code><a href='svystatTM.html'>svystatTM(design, ~y, estimator = "Mean")</a></code> achieves an identical result.</p>
@@ -200,7 +216,7 @@ At a minimal level, <code>svystatL</code> can be used to estimate Totals, Means 
 <p>The optional argument <code>by</code> specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If <code>by=NULL</code> (the default option), the estimates produced by <code>svystatL</code> refer to the whole population. Estimation domains must be defined by a formula: for example the statement <code>by=~B1:B2</code> selects as estimation domains the subpopulations determined by crossing the modalities of variables <code>B1</code> and <code>B2</code>. Notice that a formula like <code>by=~B1+B2</code> will be automatically translated into the factor-crossing formula <code>by=~B1:B2</code>: if you need to compute estimates for domains <code>B1</code> and <code>B2</code> <em>separately</em>, you have to call <code>svystatL</code> twice. The <code>design</code> variables referenced by <code>by</code> (if any) should be of type <code>factor</code>, otherwise they will be coerced.</p>
 <p>The <code>conf.int</code> argument allows to request the confidence intervals for the estimates. By default <code>conf.int=FALSE</code>, that is the confidence intervals are not provided.</p>
 <p>Whenever confidence intervals are requested (i.e. <code>conf.int=TRUE</code>), the desired confidence level can be specified by means of the <code>conf.lev</code> argument. The <code>conf.lev</code> value must represent a probability (<code>0&lt;=conf.lev&lt;=1</code>) and its default is chosen to be <code>0.95</code>.</p>
-<p>The optional argument <code>deff</code> allows to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling <em>"with replacement"</em>, one must use <code>deff="replace"</code>.<br />
+<p>The optional argument <code>deff</code> allows to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling <em>&#8220;with replacement&#8221;</em>, one must use <code>deff="replace"</code>.<br />
 For nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is for the estimator of the total of the linearized variable, aka "Woodruff transform").<br />
 When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out <em>within</em> that subpopulation. This is the same as the <code>srssubpop</code> option for Stata's function <code>estat</code>.</p>
 <p>Missing values (<code>NA</code>) in interest variables should be avoided. If <code>na.rm=FALSE</code> (the default) they generate NAs in estimates (or even an error, if <code>design</code> is calibrated). If <code>na.rm=TRUE</code>, observations containing NAs are dropped, and estimates gets computed on non missing values only. This implicitly assumes that missing values hit interest variables <em>completely at random</em>: should this be not the case, computed estimates would be <em>biased</em>.</p>
@@ -212,8 +228,8 @@ When dealing with domain estimation, the design effects referring to a given sub
     <p>When the linearized variable corresponding to a Complex Estimator is ill defined (because the estimator gradient is singular at the Taylor series expansion point), SE estimates returned by <code>svystatL</code> are <code>NaN</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>"Model Assisted Survey Sampling"</em>, Springer Verlag.</p>
-<p>Kish, L. (1995). <em>"Methods for design effects"</em>. Journal of Official Statistics, Vol. 11, pp. 55-77.</p>
+    <p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>&#8220;Model Assisted Survey Sampling&#8221;</em>, Springer Verlag.</p>
+<p>Kish, L. (1995). <em>&#8220;Methods for design effects&#8221;</em>. Journal of Official Statistics, Vol. 11, pp. 55-77.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Estimators of Totals and Means <code><a href='svystatTM.html'>svystatTM</a></code>, Ratios between Totals <code><a href='svystatR.html'>svystatR</a></code>, Shares <code><a href='svystatS.html'>svystatS</a></code>, Ratios between Shares <code><a href='svystatSR.html'>svystatSR</a></code>, Multiple Regression Coefficients <code><a href='svystatB.html'>svystatB</a></code>, Quantiles <code><a href='svystatQ.html'>svystatQ</a></code>, and all of the above <code><a href='svystat.html'>svystat</a></code>.</p></div>
@@ -224,7 +240,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 <span class='co'>#####################################################</span>
 
 <span class='co'># Creation of a design object:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>data.examples</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)
 <span class='no'>des</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>example</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>towcod</span>+<span class='no'>famcod</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>SUPERSTRATUM</span>,
      <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>)
 
@@ -236,11 +252,11 @@ When dealing with domain estimation, the design effects referring to a given sub
 
 <span class='co'># To obtain the ratio estimator of total income, you can do as follows:</span>
   <span class='co'>## A) Directly plug the numeric value of pop into expr</span>
-<span class='fu'>svystatL</span>(<span class='no'>des</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='fl'>1E6</span> * (<span class='no'>income</span>/<span class='no'>ones</span>)), <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                          Complex       CV%
+<span class='fu'>svystatL</span>(<span class='no'>des</span>, <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='fl'>1E6</span> * (<span class='no'>income</span>/<span class='no'>ones</span>)), <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                          Complex       CV%
 #&gt; 1e+06 * (income/ones) 1256166016 0.6808451</div><div class='input'>
   <span class='co'>## B) Treat pop as a parameter and let R find its actual value (1E6) inside</span>
   <span class='co'>##    the calling environment of svystatL (the .GlobalEnv)</span>
-<span class='fu'>svystatL</span>(<span class='no'>des</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='no'>pop</span> * (<span class='no'>income</span>/<span class='no'>ones</span>)), <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(x): object 'pop' not found</span></div><div class='input'>
+<span class='fu'>svystatL</span>(<span class='no'>des</span>, <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='no'>pop</span> * (<span class='no'>income</span>/<span class='no'>ones</span>)), <span class='kw'>vartype</span> <span class='kw'>=</span> <span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(x): object 'pop' not found</span></div><div class='input'>
 <span class='co'># NOTE: Method B) can be very useful for simulation purposes, as it avoids</span>
 <span class='co'>#       having to directly type in numbers when invoking svystatL (something</span>
 <span class='co'>#       that only a human in an interactive R session could do).</span>
@@ -250,7 +266,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 #&gt; income 1160824648 1.926082</div><div class='input'>
 <span class='co'># ...one can appreciate the variance reduction stemming from the correlation</span>
 <span class='co'># between numerator and denominator:</span>
-<span class='fu'><a href='Corr.html'>Corr</a></span>(<span class='no'>des</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='no'>income</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='no'>ones</span>))</div><div class='output co'>#&gt;   Corr(income, ones)
+<span class='fu'><a href='Corr.html'>Corr</a></span>(<span class='no'>des</span>, <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='no'>income</span>), <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='no'>ones</span>))</div><div class='output co'>#&gt;   Corr(income, ones)
 #&gt; 1          0.9358866</div><div class='input'>
 
 <span class='co'>############################################################</span>
@@ -259,14 +275,14 @@ When dealing with domain estimation, the design effects referring to a given sub
 <span class='co'>############################################################</span>
 
 <span class='co'># Creation of another design object:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>sbs</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>strata</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>weight</span>,
         <span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
 
 <span class='co'># Suppose you want to estimate the standard deviation of the</span>
 <span class='co'># population distribution of value added (va.imp2):</span>
 <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>va.imp2.sq</span><span class='kw'>=</span><span class='no'>va.imp2</span>^<span class='fl'>2</span>)
-<span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>( (<span class='no'>ones</span>/(<span class='no'>ones</span>-<span class='fl'>1</span>))*
+<span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>( (<span class='no'>ones</span>/(<span class='no'>ones</span>-<span class='fl'>1</span>))*
                                   ( (<span class='no'>va.imp2.sq</span>/<span class='no'>ones</span>)-(<span class='no'>va.imp2</span>/<span class='no'>ones</span>)^<span class='fl'>2</span> )
                                 )
                           ), <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                                                                   Complex
@@ -281,7 +297,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 <span class='co'># involves the estimate of the sampling variance of the complex</span>
 <span class='co'># estimator) turn out to be very sound: indeed the TRUE value of the</span>
 <span class='co'># parameter is:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>va.imp2</span>)</div><div class='output co'>#&gt; [1] 9211.955</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>va.imp2</span>)</div><div class='output co'>#&gt; [1] 9211.955</div><div class='input'>
 
 <span class='co'>###############################################</span>
 <span class='co'># Estimation of Geometric and Harmonic Means. #</span>
@@ -293,28 +309,28 @@ When dealing with domain estimation, the design effects referring to a given sub
  <span class='co'># to get a survey estimate of the harmonic mean of emp.num,</span>
  <span class='co'># you can do as follows:</span>
 <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>emp.num.m1</span><span class='kw'>=</span><span class='fl'>1</span>/<span class='no'>emp.num</span>)
-<span class='no'>h</span><span class='kw'>&lt;-</span><span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>( <span class='no'>ones</span>/<span class='no'>emp.num.m1</span> ),
+<span class='no'>h</span><span class='kw'>&lt;-</span><span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>( <span class='no'>ones</span>/<span class='no'>emp.num.m1</span> ),
             <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='no'>h</span></div><div class='output co'>#&gt;                  Complex         SE CI.l(95%) CI.u(95%)
 #&gt; ones/emp.num.m1 13.29062 0.04474827  13.20291  13.37832</div><div class='input'>
  <span class='co'># You can easily verify that the obtained estimate is close</span>
  <span class='co'># to the true value (as computed from the sampling frame) and</span>
  <span class='co'># covered by the 95% confidence interval:</span>
-<span class='fl'>1</span>/<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='fl'>1</span>/<span class='no'>sbs.frame</span>$<span class='no'>emp.num</span>)</div><div class='output co'>#&gt; [1] 13.30253</div><div class='input'>
+<span class='fl'>1</span>/<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='fl'>1</span>/<span class='no'>sbs.frame</span>$<span class='no'>emp.num</span>)</div><div class='output co'>#&gt; [1] 13.30253</div><div class='input'>
 <span class='co'>## 2. Geometric Mean</span>
  <span class='co'># Recall that the the geometric mean of a non negative variable,</span>
  <span class='co'># say z, can be computed as exp(mean(log(z))). Thus, for instance,</span>
  <span class='co'># to get a survey estimate of the geometric mean of emp.num,</span>
  <span class='co'># you can do as follows:</span>
-<span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>log.emp.num</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>emp.num</span>))
-<span class='no'>g</span><span class='kw'>&lt;-</span><span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>( <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>exp</a></span>(<span class='no'>log.emp.num</span>/<span class='no'>ones</span>) ),
+<span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>log.emp.num</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>emp.num</span>))
+<span class='no'>g</span><span class='kw'>&lt;-</span><span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>(<span class='no'>log.emp.num</span>/<span class='no'>ones</span>) ),
             <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='no'>g</span></div><div class='output co'>#&gt;                        Complex         SE CI.l(95%) CI.u(95%)
 #&gt; exp(log.emp.num/ones) 20.51558 0.06077714  20.39646   20.6347</div><div class='input'>
  <span class='co'># You can easily verify that the obtained estimate is close</span>
  <span class='co'># to the true value (as computed from the sampling frame) and</span>
  <span class='co'># covered by the 95% confidence interval:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>exp</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>emp.num</span>)))</div><div class='output co'>#&gt; [1] 20.5362</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>sbs.frame</span>$<span class='no'>emp.num</span>)))</div><div class='output co'>#&gt; [1] 20.5362</div><div class='input'>
 <span class='co'>## 3. Comparison with the arithmetic mean</span>
  <span class='co'># If you compute the arithmetic mean estimate:</span>
 <span class='no'>a</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>sbsdes</span>,~<span class='no'>emp.num</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>)
@@ -322,10 +338,10 @@ When dealing with domain estimation, the design effects referring to a given sub
 #&gt; emp.num 56.88635 0.08207154</div><div class='input'>
  <span class='co'>#...you easily verify the expected hierachy,</span>
  <span class='co'># i.e. harmonic &lt;= geometric &lt;= arithmetic:</span>
-<span class='no'>H</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>h</span>)
-<span class='no'>G</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>g</span>)
-<span class='no'>A</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>a</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/stopifnot'>stopifnot</a></span>(<span class='no'>H</span> <span class='kw'>&lt;=</span> <span class='no'>G</span> <span class='kw'>&amp;&amp;</span> <span class='no'>G</span> <span class='kw'>&lt;=</span> <span class='no'>A</span>)
+<span class='no'>H</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>h</span>)
+<span class='no'>G</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>g</span>)
+<span class='no'>A</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>a</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span>(<span class='no'>H</span> <span class='kw'>&lt;=</span> <span class='no'>G</span> <span class='kw'>&amp;&amp;</span> <span class='no'>G</span> <span class='kw'>&lt;=</span> <span class='no'>A</span>)
 
 
 <span class='co'>#################################################################</span>
@@ -340,18 +356,18 @@ When dealing with domain estimation, the design effects referring to a given sub
    <span class='co'># Get survey estimate:</span>
    <span class='no'>sbsdes</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>sbsdes</span>,<span class='kw'>y4emp.num</span><span class='kw'>=</span><span class='no'>y</span>*<span class='no'>emp.num</span>,
                               <span class='kw'>emp.num.sq</span><span class='kw'>=</span><span class='no'>emp.num</span>^<span class='fl'>2</span>)
-   <span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='no'>y4emp.num</span>/<span class='no'>emp.num.sq</span>),
+   <span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='no'>y4emp.num</span>/<span class='no'>emp.num.sq</span>),
             <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                       Complex          SE CI.l(95%) CI.u(95%)
 #&gt; y4emp.num/emp.num.sq 17.54959 0.009214501  17.53153  17.56765</div><div class='input'>
    <span class='co'># Compare with the actual slope from the population fit:</span>
-   <span class='no'>pop.fit</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>y</span>~<span class='no'>emp.num</span>-<span class='fl'>1</span>,<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs.frame</span>)
-   <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>pop.fit</span>)</div><div class='output co'>#&gt;  emp.num 
+   <span class='no'>pop.fit</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>y</span>~<span class='no'>emp.num</span>-<span class='fl'>1</span>,<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs.frame</span>)
+   <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>pop.fit</span>)</div><div class='output co'>#&gt;  emp.num 
 #&gt; 17.53945 </div><div class='input'>
    <span class='co'># ...a very good agreement.</span>
 
   <span class='co'>## 2. The model with intercept: y ~ emp.num</span>
    <span class='co'># Get survey estimate:</span>
-   <span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(  (<span class='no'>ones</span>*<span class='no'>y4emp.num</span>  - <span class='no'>y</span>*<span class='no'>emp.num</span>)/
+   <span class='fu'>svystatL</span>(<span class='no'>sbsdes</span>,<span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(  (<span class='no'>ones</span>*<span class='no'>y4emp.num</span>  - <span class='no'>y</span>*<span class='no'>emp.num</span>)/
                                 (<span class='no'>ones</span>*<span class='no'>emp.num.sq</span> - <span class='no'>emp.num</span>^<span class='fl'>2</span>)
                              ),
             <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                                                                  Complex
@@ -363,8 +379,8 @@ When dealing with domain estimation, the design effects referring to a given sub
 #&gt;                                                                  CI.u(95%)
 #&gt; (ones * y4emp.num - y * emp.num)/(ones * emp.num.sq - emp.num^2)  16.94554</div><div class='input'>
    <span class='co'># Compare with the actual slope from the population fit:</span>
-   <span class='no'>pop.fit</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>y</span>~<span class='no'>emp.num</span>,<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs.frame</span>)
-   <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/coef'>coef</a></span>(<span class='no'>pop.fit</span>)</div><div class='output co'>#&gt; (Intercept)     emp.num 
+   <span class='no'>pop.fit</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>y</span>~<span class='no'>emp.num</span>,<span class='kw'>data</span><span class='kw'>=</span><span class='no'>sbs.frame</span>)
+   <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>pop.fit</span>)</div><div class='output co'>#&gt; (Intercept)     emp.num 
 #&gt;   569.83949    16.94948 </div><div class='input'>
    <span class='co'># ...again a very good agreement.</span>
 
@@ -400,19 +416,23 @@ When dealing with domain estimation, the design effects referring to a given sub
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

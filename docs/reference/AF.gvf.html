@@ -8,6 +8,13 @@
 
 <title>Example Data for GVF Model Fitting — AF.gvf • ReGenesees</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,6 +60,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -75,7 +85,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DiegoZardetto/ReGenesees">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,7 +137,7 @@
     <p>File <code>AF.gvf</code> contains a set of summary statistics that can be used to illustrate <span class="pkg">ReGenesees</span> facilities for fitting Generalized Variance Functions models. These summary statistics have kind &#8216;Absolute Frequency&#8217; (see function <code><a href='estimator.kind.html'>estimator.kind</a></code>), i.e. involve estimates and errors of counts.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>AF.gvf</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>AF.gvf</span>)</pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -132,7 +148,9 @@
     <dt><code>SE</code></dt><dd><p>The standard error of the original estimate, <code>numeric</code>.</p></dd>
     <dt><code>CV</code></dt><dd><p>The coefficient of variation of the original estimate, <code>numeric</code>.</p></dd>
     <dt><code>VAR</code></dt><dd><p>The variance of the original estimate, <code>numeric</code>.</p></dd>
-  </dl>
+  
+</dl>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Object <code>AF</code> is a list storing estimates and errors of counts (namely, summary statistics of kind &#8216;Absolute Frequency&#8217;) computed on survey design object <code>exdes</code>. The names of the slots of list <code>AF</code> indicate the nature of the corresponding estimates, e.g. element <code>AF[["sex.marstat"]]</code> stores estimates and errors of the joint absolute frequency distribution of variables <code>sex</code> and <code>marstat</code> (see &#8216;Examples&#8217;).</p>
@@ -142,10 +160,10 @@
     <div class='dont-index'><p><code><a href='estimator.kind.html'>estimator.kind</a></code> to assess what kind of estimates are stored inside a survey statistic object, <code><a href='GVF.db.html'>GVF.db</a></code> to manage <span class="pkg">ReGenesees</span> archive of registered GVF models, <code><a href='gvf.input.html'>gvf.input</a></code> and <code><a href='svystat.html'>svystat</a></code> to prepare the input for GVF model fitting, <code><a href='fit.gvf.html'>fit.gvf</a></code> to fit GVF models, <code><a href='plot.gvf.fit.html'>plot.gvf.fit</a></code> to get diagnostic plots for fitted GVF models, <code><a href='drop.gvf.points.html'>drop.gvf.points</a></code> to drop alleged outliers from a fitted GVF model and simultaneously refit it, and <code><a href='predictCV.html'>predictCV</a></code> to predict CV values via fitted GVF models.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>AF.gvf</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>AF.gvf</span>)
 
 <span class='co'># Inspect object AF</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>AF</span>)</div><div class='output co'>#&gt; [1] "list"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>AF</span>)</div><div class='output co'>#&gt; [1] 17</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>AF</span>)</div><div class='output co'>#&gt;  [1] "ind"                      "sex"                     
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>AF</span>)</div><div class='output co'>#&gt; [1] "list"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>AF</span>)</div><div class='output co'>#&gt; [1] 17</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>AF</span>)</div><div class='output co'>#&gt;  [1] "ind"                      "sex"                     
 #&gt;  [3] "marstat"                  "age5c"                   
 #&gt;  [5] "age10c"                   "regcod"                  
 #&gt;  [7] "procod"                   "sex.marstat"             
@@ -159,15 +177,15 @@
 #&gt; I(sex:marstat)f:widowed    37350.1 4005.659
 #&gt; I(sex:marstat)m:married   263110.6 9690.125
 #&gt; I(sex:marstat)m:unmarried 153513.4 7509.333
-#&gt; I(sex:marstat)m:widowed    37416.5 3631.664</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>AF</span>$<span class='no'>sex.marstat</span>)</div><div class='output co'>#&gt; [1] "svystatTM"  "data.frame"</div><div class='input'>
+#&gt; I(sex:marstat)m:widowed    37416.5 3631.664</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>AF</span>$<span class='no'>sex.marstat</span>)</div><div class='output co'>#&gt; [1] "svystatTM"  "data.frame"</div><div class='input'>
 <span class='co'># Inspect gvf.input object ee.AF</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>ee.AF</span>)</div><div class='output co'>#&gt;               name        Y        SE         CV       VAR
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>ee.AF</span>)</div><div class='output co'>#&gt;               name        Y        SE         CV       VAR
 #&gt; 1              ind 924101.3 17172.681 0.01858312 294900983
 #&gt; 2             sexf 470060.8 12796.386 0.02722283 163747492
 #&gt; 3             sexm 454040.5 11359.582 0.02501887 129040102
 #&gt; 4   marstatmarried 536680.2 13970.474 0.02603128 195174152
 #&gt; 5 marstatunmarried 312654.5 11180.844 0.03576102 125011282
-#&gt; 6   marstatwidowed  74766.6  5880.564 0.07865228  34581029</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>ee.AF</span>)</div><div class='output co'>#&gt; Classes ‘gvf.input’ and 'data.frame':	349 obs. of  5 variables:
+#&gt; 6   marstatwidowed  74766.6  5880.564 0.07865228  34581029</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>ee.AF</span>)</div><div class='output co'>#&gt; Classes ‘gvf.input’ and 'data.frame':	349 obs. of  5 variables:
 #&gt;  $ name: Factor w/ 349 levels "age10c1","age10c10",..: 331 348 349 332 333 334 11 12 13 14 ...
 #&gt;  $ Y   : num  924101 470061 454041 536680 312655 ...
 #&gt;  $ SE  : num  17173 12796 11360 13970 11181 ...
@@ -176,7 +194,7 @@
 #&gt;  - attr(*, "y.vars")= chr [1:7] "ind" "sex" "marstat" "age5c" ...
 #&gt;  - attr(*, "stats.kind")= chr "Absolute Frequency"
 #&gt;  - attr(*, "has.Deff")= logi FALSE
-#&gt;  - attr(*, "design")= symbol exdes</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/plot'>plot</a></span>(<span class='no'>ee.AF</span>)</div><div class='img'><img src='AF.gvf-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt;  - attr(*, "design")= symbol exdes</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>ee.AF</span>)</div><div class='img'><img src='AF.gvf-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># The design object used to compute ee.AF is the following:</span>
 <span class='no'>exdes</span></div><div class='output co'>#&gt; Stratified 2 - Stage Cluster Sampling Design (with replacement)
 #&gt; - [55] strata
@@ -187,7 +205,7 @@
 #&gt;     weights = ~weight, fpc = NULL, self.rep.str = NULL, check.data = TRUE)</div><div class='input'>
 <span class='co'># How has object ee.AF been built?</span>
 <span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gvf.input.html'>gvf.input</a></span>(<span class='no'>exdes</span>, <span class='kw'>stats</span> <span class='kw'>=</span> <span class='no'>AF</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span>(<span class='no'>ee.AF</span>, <span class='no'>foo</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='no'>ee.AF</span>, <span class='no'>foo</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -201,19 +219,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Diego Zardetto.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

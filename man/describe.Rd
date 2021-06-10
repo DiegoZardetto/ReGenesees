@@ -1,5 +1,7 @@
 \name{pop.desc}
 \alias{pop.desc}
+\alias{pop.desc.pop.totals}
+\alias{pop.desc.spc.pop}
 
 \title{Natural Language Description of Known Totals Templates}
 
@@ -8,11 +10,16 @@ Provides a natural language description of a known totals data frame to be used 
 }
 
 \usage{
-pop.desc(pop.totals)
+pop.desc(pop.totals, ...)
+
+\method{pop.desc}{pop.totals}(pop.totals, ...)
+\method{pop.desc}{spc.pop}(pop.totals, verbose = FALSE, ...)
 }
 
 \arguments{
-  \item{pop.totals}{An object of class \code{pop.totals}, be it a template or the actual known totals data frame for the calibration task.} 
+  \item{pop.totals}{An object of class \code{pop.totals}, be it a template or the actual known totals data frame for the calibration task.}
+  \item{verbose}{Fully describe the control totals of a special purpose calibration task?}
+  \item{\dots}{Parameters for future extensions (currently unused).}
 }
 
 \details{
@@ -122,7 +129,7 @@ sbspop<-pop.template(sbsdes,
 sbspop<-fill.template(universe=sbs.frame,template=sbspop)
 sbspop
 
-# ...and invoke function pop.desc on the filled known totals dataframe:
+# ...and invoke function pop.desc on the filled known totals data frame:
 pop.desc(sbspop)
 
 sbspop <- pop.template(data=sbsdes,

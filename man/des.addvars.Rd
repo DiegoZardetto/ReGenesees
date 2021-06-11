@@ -71,5 +71,10 @@ des <- des.addvars(des,
 svystatTM(des,~status,estimator="Mean")
 # Mean income for poor and non-poor:
 svystatTM(des,~income,~status,estimator="Mean")
+
+### NOTE: Procedure above yields *correct point estimates* of the share of poor
+###       population and their average income, while *variance estimation is
+###       approximated* since we neglected the sampling variability of the
+###       estimated poverty threshold.
 }
 \keyword{survey}

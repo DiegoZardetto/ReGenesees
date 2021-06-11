@@ -208,7 +208,12 @@
 #&gt; statuspoor     0.1157845 0.006131183</div><div class='input'><span class='co'># Mean income for poor and non-poor:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>income</span>,~<span class='no'>status</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;            status Mean.income SE.Mean.income
 #&gt; non-poor non-poor   1349.3443       7.855904
-#&gt; poor         poor    544.5881      10.161308</div></pre>
+#&gt; poor         poor    544.5881      10.161308</div><div class='input'>
+### NOTE: Procedure above yields *correct point estimates* of the share of poor
+###       population and their average income, while *variance estimation is
+###       approximated* since we neglected the sampling variability of the
+###       estimated poverty threshold.
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

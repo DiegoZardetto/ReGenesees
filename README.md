@@ -26,3 +26,9 @@ A [pkgdown website](https://DiegoZardetto.github.io/ReGenesees) for ReGenesees i
 ## Graphical User Interface
 A companion R package named **ReGenesees.GUI** is also available, which provides a user-friendly mouse-click graphical interface for ReGenesees. Find it e.g. on [GitHub](https://github.com/DiegoZardetto/ReGenesees.GUI) here:
 - <https://github.com/DiegoZardetto/ReGenesees.GUI>
+
+
+## Sponsors
+The ReGenesees project was conceived in **Istat** in late 2006, and Istat has been ReGenesees' primary sponsor ever since.
+
+From April 2021, development, maintenance and support of ReGenesees are also actively sponsored by the **World Bank**.

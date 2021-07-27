@@ -101,7 +101,12 @@ function (design, formula, population,
         g <- g[aggindex]
         sigma2 <- sigma2[aggindex]  # DEBUG 19/02/2017: Forgot to re-expand sigma2, fixed.
         ww <- ww[aggindex]          # DEBUG 19/02/2017: Same as above, fixed.
-        mm <- mm[aggindex, ]        # DEBUG 19/02/2017: Same as above, fixed.
+            # DEBUG 22/07/2021: I was mistakenly re-expanding *sums* instead of
+            #                   original *unit-level* values (see loc below)
+                                # mm <- mm[aggindex, ]  # DEBUG 19/02/2017: Same as above
+            # DEBUG 22/07/2021: This is the fix, simply take averages before
+            #                   re-expanding:
+        mm <- (mm / as.numeric(n.aggindex))[aggindex, ]
     }
 
     # Handle zero calibrated weights (if any): must provide a tiny cutoff

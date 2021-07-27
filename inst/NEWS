@@ -29,6 +29,16 @@ Changes in ReGenesees version 2.1
    section of the related help page (?svystatB).
  - write.svystat: code update to accomodate changes induced by new argument 'by'
    of svystatB.
+ - trimcal: fixed a bug in internal function ez.trim. The bug only affected
+   trimmed calibrated objects arising from multi-stage (>=2) survey designs that
+   had been calibrated asking for constant within-cluster weights (via argument
+   'aggregate.stage'). The bug likely had a small numerical impact most of the
+   times, with the exception of variance estimates of calibration control
+   totals. Due to the bug, the latter did not go (numerically) to zero as they
+   should have done (this is what led me to detect the bug). Although this is
+   definitely a non-negligible software consistency issue, fortunately - in
+   real-world applications - there is no point in estimating the variance of
+   of survey estimates of *known* population totals.
  - e.calibrate, bounds.hint, aux.estimates: equality of model.formulae was
    checked with all.equal() (which was a good idea) but if clauses didn't use
    the right construct (i.e. isTRUE(all.equal())). Fixed.

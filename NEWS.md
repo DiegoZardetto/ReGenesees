@@ -49,7 +49,7 @@
    should have done (this is what led me to detect the bug). Although this is
    definitely a non-negligible software consistency issue, fortunately - in
    real-world applications - there is no point in estimating the variance of
-   of survey estimates of *known* population totals.
+   survey estimates of *known* population totals.
 
 *  e.calibrate, bounds.hint, aux.estimates: equality of model.formulae was
    checked with all.equal() (which was a good idea) but if clauses didn't use

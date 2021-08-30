@@ -62,7 +62,7 @@ Verma, V., Betti, G., Ghellini, G. (2007) \emph{Cross-sectional and longitudinal
 
 Valliant, R., Dever, J., Kreuter, F. (2013) \emph{\dQuote{Practical Tools for Designing and Weighting Survey Samples}}. Springer-Verlag, New York.
 
-EUROSTAT (2016) \emph{\dQuote{EU statistics on income and living conditions (EU-SILC) methodology - data quality}}, \url{http://ec.europa.eu/eurostat/statistics-explained/index.php/EU_statistics_on_income_and_living_conditions_(EU-SILC)_methodology_%E2%80%93_data_quality
+EUROSTAT (2016) \emph{\dQuote{EU statistics on income and living conditions (EU-SILC) methodology - data quality}}, \url{https://ec.europa.eu/eurostat/statistics-explained/index.php/EU_statistics_on_income_and_living_conditions_(EU-SILC)_methodology_%E2%80%93_data_quality
  }.
 }
 

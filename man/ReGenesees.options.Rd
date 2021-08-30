@@ -79,7 +79,7 @@
 
     Bellhouse, D. R. (1985). \emph{\dQuote{Computing Methods for Variance Estimation in Complex Surveys}}. Journal of Official Statistics, Vol. 1, No. 3, pp. 323-329.
 
-    Lumley, T. (2006) \emph{\dQuote{survey: analysis of complex survey samples}}, \url{http://cran.at.r-project.org/web/packages/survey/index.html}.
+    Lumley, T. (2006) \emph{\dQuote{survey: analysis of complex survey samples}}, \url{https://CRAN.R-project.org/package=survey}.
 
     Wolter, K.M. (2007) \emph{\dQuote{Introduction to Variance Estimation}}, Second Edition, Springer-Verlag, New York.
 

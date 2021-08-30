@@ -73,7 +73,7 @@ The \code{analytic} class is a specialization of the \code{survey.design2} class
 \references{
 Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Survey Sampling}}, Springer Verlag.
 
-Lumley, T. (2006) \emph{\dQuote{survey: analysis of complex survey samples}}, \url{http://cran.at.r-project.org/web/packages/survey/index.html}.
+Lumley, T. (2006) \emph{\dQuote{survey: analysis of complex survey samples}}, \url{https://CRAN.R-project.org/package=survey}.
 }
 
 \seealso{

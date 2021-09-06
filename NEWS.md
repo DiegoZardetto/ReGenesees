@@ -2,7 +2,6 @@
 
 #  ReGenesees 2.1
 
-*  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.
 
 *  This release of ReGenesees introduces support for "Special Purpose
    Calibration" tasks, i.e. facilities to calibrate survey weights so as to

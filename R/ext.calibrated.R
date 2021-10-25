@@ -110,7 +110,10 @@ cosm.cal.char.new <- paste(weights.char, ".cal", sep = "")
       # appending a .old subfix
       names(design.new$variables)[names(design.new$variables) == cosm.cal.char.new] <- paste(cosm.cal.char.new, ".old", sep = "")
 names(design.new$variables)[names(design.new$variables) == cosm.cal.char] <- cosm.cal.char.new
-   # 2) Change names in metadata accordingly
+   # 2) Change metadata and their names accordingly
+   #    NOTE: Recall attribute 'allprob' stores the *initial weights* in ALL
+   #          ReGenesees weights-changing functions!
+design.new[["allprob"]] <- data[, weights.char]
 names(design.new[["allprob"]]) <- weights.char
 attr(design.new, "weights") <- as.formula(paste("~", cosm.cal.char.new, sep = ""), env = .GlobalEnv)
    # 3) Change sigma2 metadata

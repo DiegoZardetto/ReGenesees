@@ -1,5 +1,15 @@
 
 
+#  ReGenesees 2.2
+
+
+*  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.
+
+*  New function smooth.strat.jump: given a stratified one-stage unit sampling
+   design object, smooths survey weights to cope with estimation issues that may
+   arise from stratum jumpers.
+
+
 #  ReGenesees 2.1
 
 

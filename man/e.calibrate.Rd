@@ -88,7 +88,7 @@ Notice, lastly, that the \code{ecal.status} list will also be persistently bound
 }
 
 \value{
-An object of class \code{cal.analytic}. The data frame it contains includes (in addition to the data already stored in \code{design}) the calibrated weights columns. The name of this column is obtained by pasting the name of the initial weights column with the string \code{".cal"}.
+An object of class \code{cal.analytic}. The data frame it contains includes (in addition to the data already stored in \code{design}) the calibrated weights column. The name of this column is obtained by pasting the name of the initial weights column with the string \code{".cal"}.
 }
 
 \note{

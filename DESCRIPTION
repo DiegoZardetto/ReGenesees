@@ -16,7 +16,7 @@ Description: Design-Based and Model-Assisted analysis of complex sampling survey
         calibration weights. Calibration on complex population parameters, e.g.
         multiple regression coefficients. Generalized Variance Functions (GVF)
         method for predicting variance estimates.
-Version: 2.1
+Version: 2.2
 Author: Diego Zardetto [aut, cre]
 Maintainer: Diego Zardetto <zardetto@istat.it>
 Authors@R: person("Diego", "Zardetto", role = c("aut", "cre"), email = "zardetto@istat.it")

@@ -165,6 +165,11 @@ directly <- !( length(sys.calls()) > 1 )
             check.nest(data, ids.charvect, strata.char)
         # If there are self representing strata and the ultimate cluster approximation applies,
         # build variance PSUs and modify first stage fpc data (if any)
+        # NOTE: Even though (1) next to first stage fpc data (if any) are kept
+        #       as they were in the user's call, AND (2) even if the ultimate
+        #       cluster approximation is *switched off*, design with variance PSUs
+        #       will in any case undergo a *single stage variance estimation* (see
+        #       svyrecvar).
         if (!is.null(self.rep.str)) {
             if (!inherits(self.rep.str, "formula")) 
                 stop("If supplied, self.rep.str must be passed as a formula")

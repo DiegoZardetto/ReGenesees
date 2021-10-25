@@ -20,9 +20,9 @@ citEntry(
     author = "Diego Zardetto",
     year = "2021",
     title = "ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys",
-    note = "R package version 2.1",
+    note = "R package version 2.2",
     organization = "Istat",
     address = "Rome, Italy",
-    textVersion = "Zardetto D. (2021) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.1, Istat, Italy."
+    textVersion = "Zardetto D. (2021) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.2, Istat, Italy."
     )
 

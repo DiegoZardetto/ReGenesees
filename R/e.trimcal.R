@@ -268,6 +268,10 @@ function (cal.design, w.range = c(-Inf, Inf),
 # Aggiunge al dataframe interno a cal.design i pesi calibrati calcolati w.cal
 cal.design$variables[[cal.weights.char]] <- w.cal
 cal.design$prob <- 1/w.cal
+# NOTE: All ReGenesees function that *change* the weights of design objects (e.g.
+#       e.calibrate, trimcal, ...) do *not* update the *design$allprob* slot.
+#       Therefore, *design$allprob* acts as a persistent memory of the *initial*
+#       weights in arbitrary multi-step weights adjustment procedures!
 attr(cal.design, "weights") <- as.formula(paste("~", cal.weights.char, sep = ""), env = .GlobalEnv)
 if (!is.null(sigma2)){
     attr(cal.design, "sigma2")  <- sigma2

@@ -16,6 +16,17 @@ function(design,
 #       memory, sample data gets split in smaller chunks (see below).           #
 #       Parameter 'th.frac' fixes the memory threshold to 1/th.frac of maximum  #
 #       allocable memory. Actual choice th.frac=10 seems very good.             #
+#                                                                               #
+# NOTE: From a sw point of view, it is important to bear in mind that this      #
+#       function gets the values of the weights from *design$variables via      #
+#       attr(design, "weights")*, NOT from *weights(design)* NOR from           #
+#       *1/design$prob*. This is exactly what ALSO *e.calibrate* does.          #
+#       Therefore, all ReGenesees weights-changing functions MUST ALWAYS        #
+#       consistently update:                                                    #
+#       1) design$variables, by adding the new weights column                   #
+#       2) attr(design, "weights"), by updating the formula with the name of    #
+#          the new weight variable in 1)                                        #
+#       3) design$prob, by updating the vector with the new weights' values     #
 #################################################################################
 {
     # First verify if the function has been called inside another function:

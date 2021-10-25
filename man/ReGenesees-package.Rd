@@ -93,6 +93,7 @@ manual}.\cr\cr
                           Lonely PSUs
   *  des.addvars..........Add Variables to Design Objects
   *  des.merge............Merge New Survey Data into Design Objects
+ **  smooth.strat.jump....Smooth Weights to Cope with Stratum Jumpers
 }
 }
 

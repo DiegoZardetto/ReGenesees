@@ -234,7 +234,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <p>Notice, lastly, that the <code>ecal.status</code> list will also be persistently bound to the <code>e.calibrate</code> return object, stored inside a dedicated attribute. For the inspection of such diagnostics information the <code><a href='check.cal.html'>check.cal</a></code> function is available.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>cal.analytic</code>. The data frame it contains includes (in addition to the data already stored in <code>design</code>) the calibrated weights columns. The name of this column is obtained by pasting the name of the initial weights column with the string <code>".cal"</code>.</p>
+    <p>An object of class <code>cal.analytic</code>. The data frame it contains includes (in addition to the data already stored in <code>design</code>) the calibrated weights column. The name of this column is obtained by pasting the name of the initial weights column with the string <code>".cal"</code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>The <code>cal.analytic</code> class is a specialization of the <code><a href='e.svydesign.html'>analytic</a></code> class; this means that an object created by <code>e.calibrate</code> inherits from the <code><a href='e.svydesign.html'>analytic</a></code> class and you can use on it all methods defined on the latter class, e.g. <code>print</code>, <code>summary</code>, <code><a href='weights.html'>weights</a></code>. Moreover, a calibrated design can be passed again to <code>e.calibrate</code>, thus undergoing further calibration steps.</p>

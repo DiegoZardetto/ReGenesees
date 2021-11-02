@@ -48,7 +48,7 @@ Only the weights of stratum jumpers are smoothed, by setting their value to the 
 }
 The weights of all units are smoothed, by setting their value to the average weight of units belonging to the same \emph{current} stratum, with the exception of \emph{minimum weight} units, whose weights are left unchanged. Therefore all weights, exluding only minimum weights within each current stratum, are smoothed. Note that this smoothing affects all current strata, even those that do \emph{not} include any stratum jumper.\cr\cr
 
-In summary, both methods often lead to very similar smoothed weights for units that are stratum jumpers. However method \code{'Beaumont'} smooths the weights of all other (i.e. \emph{non} stratum jumpers) units much more aggressively than method \code{'MinChange'} (which only minimally alters them in step 2. to preserve the overall sum of weights). Moreover, method \code{'MinChange'} treats stratum jumpers that grew in size and those that decreased in size on the same footing, whereas method \code{'Beaumont'} typically smooths the weights of the former more than those of the latter (owing to its minimum weight preservation constraint).
+In summary, both methods often lead to very similar smoothed weights for units that are stratum jumpers. However method \code{'Beaumont'} smooths the weights of all other (i.e. \emph{non} stratum jumpers) units much more aggressively than method \code{'MinChange'} (which only minimally alters them in step 2. to preserve the overall sum of weights). Moreover, method \code{'MinChange'} treats stratum jumpers that grew in size and those that decreased in size on the same footing, whereas method \code{'Beaumont'} typically smooths the weights of the former more than those of the latter (owing to its minimum weight preservation constraint, see \sQuote{Examples}).
 
 Note that every call to \code{smooth.strat.jump} generates, by side effect, a diagnostics data structure named \code{strat.jump.status} into the \code{.GlobalEnv} (see \sQuote{Examples}). This is a data frame with one row for each stratum jumper unit, whith the following columns:
 \preformatted{
@@ -101,15 +101,16 @@ Beaumont, J. F., Rivest, L. P. (2009). Dealing with outliers in survey data. In 
 # and enhance it with:                                                           #
 # - a third stratum 'C' that, at survey time, does not contain stratum jumpers   #
 # - a fourth stratum 'D' that, at survey time, does not contain stratum jumpers  #
-# - a fifth stratum 'E' that, at survey time, contains one medium weight stratum #
-#   jumper received from design-stratum 'D'                                      #
+# - a fifth stratum 'E' that, at survey time, contains two stratum jumpers, both #
+#   received from design-stratum 'D', one with small and one with medium weight  #
 ##################################################################################
 BR <- data.frame(
        id = 1:90,
        des.strata =  factor(rep(c("A", "B", "C", "D", "E"), c(9, 41, 10, 20, 10))),
        curr.strata = factor(rep(c("A", "B", "C", "D", "E"), c(10, 40, 10, 19, 11))),
-       w = c(rep(c(1, 31), c(9, 41)), c(27, 28, 22, 26, 11, 12, 13, 30, 17, 21), 1:20, 10:1)
+       w = c(rep(c(1, 31), c(9, 41)), c(27, 28, 22, 26, 11, 12, 13, 30, 17, 21), 2:21, 11:2)
     )
+BR$curr.strata[61] <- "E"
 
 # Have a look at the data:
 BR
@@ -139,7 +140,7 @@ B.smooth
 # Inspect the effects of smoothing on the stratum jumpers:
 strat.jump.status
 
-## As anticipated, smoothed weights of stratum jumpers are almost identical for
+## As anticipated, smoothed weights of stratum jumpers are mostly similar for
 ## both methods. However the methods differ significantly when it comes to non
 ## stratum jumpers. This is clearly shown in the following plots.
 
@@ -147,28 +148,32 @@ strat.jump.status
 opar <- par("mfcol" = c(1, 2))
 
 # M.smooth
-with(M.smooth$variables, plot(w, w.smooth, pch = 19, col = 1 + is.jumper,
-     xlab = "Original Weights", ylab = "Smoothed Weights", main = "method: MinChange"))
+with(M.smooth$variables, plot(w, w.smooth, pch = c(19, 15)[1 + is.jumper],
+     col = c("black", "red")[1 + is.jumper], cex = c(1,1.2)[1 + is.jumper],
+     xlab = "Original Weights", ylab = "Smoothed Weights",
+     main = "method: MinChange"))
 abline(0:1, col = "limegreen", lwd = 2, lty = 2)
 
 legend("topleft", 
 legend = c("Stratum Jumper", "Non Stratum Jumper"), 
 col = c("red", "black"), 
-pch = c(19, 19),
+pch = c(15, 19),
 bty = "n", 
 text.col = "black", 
 inset = c(0.05, 0.05)
 )
 
 # B.smooth
-with(B.smooth$variables, plot(w, w.smooth, pch = 19, col = 1 + is.jumper,
-     xlab = "Original Weights", ylab = "Smoothed Weights", main = "method: Beaumont"))
+with(B.smooth$variables, plot(w, w.smooth, pch = c(19, 15)[1 + is.jumper],
+     col = c("black", "red")[1 + is.jumper], cex = c(1,1.2)[1 + is.jumper],
+     xlab = "Original Weights", ylab = "Smoothed Weights",
+     main = "method: Beaumont"))
 abline(0:1, col = "limegreen", lwd = 2, lty = 2)
 
 legend("topleft", 
 legend = c("Stratum Jumper", "Non Stratum Jumper"), 
 col = c("red", "black"), 
-pch = c(19, 19),
+pch = c(15, 19),
 bty = "n", 
 text.col = "black", 
 inset = c(0.05, 0.05)
@@ -207,5 +212,20 @@ inset = c(0.01, 0.01)
 )
 ## Plot 2 - END
 
+# Although, as seen above, non-negligible differences in smoothed weights exist
+# at unit level, both methods perform similarly in terms of strata averages...
+## Initial weights, design strata:
+with(BR, tapply(w, des.strata, mean))
+
+## Initial weights, current strata:
+with(BR, tapply(w, curr.strata, mean))
+
+## Smoothed weights, current strata, method MinChange:
+with(M.smooth$variables, tapply(w.smooth, curr.strata, mean))
+
+## Smoothed weights, current strata, method Beaumont:
+with(B.smooth$variables, tapply(w.smooth, curr.strata, mean))
+
+# ...as expected
 }
 \keyword{survey}

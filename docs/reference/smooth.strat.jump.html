@@ -175,7 +175,7 @@
 </ul><p>Only the weights of stratum jumpers are smoothed, by setting their value to the average weight of units belonging to the same <em>current</em> stratum. Weights of all other units are left unchanged.<br /></p><ul>
 <li><p><strong>&#8216;Beaumont&#8217;</strong></p></li>
 </ul><p>The weights of all units are smoothed, by setting their value to the average weight of units belonging to the same <em>current</em> stratum, with the exception of <em>minimum weight</em> units, whose weights are left unchanged. Therefore all weights, exluding only minimum weights within each current stratum, are smoothed. Note that this smoothing affects all current strata, even those that do <em>not</em> include any stratum jumper.<br /><br /></p>
-<p>In summary, both methods lead to very similar smoothed weights for units that are stratum jumpers. However method <code>'Beaumont'</code> smooths the weights of all other (i.e. <em>non</em> stratum jumpers) units much more aggressively than method <code>'MinChange'</code> (which only minimally alters them in step 2. to preserve the overall sum of weights). Moreover, method <code>'MinChange'</code> treats stratum jumpers that grew in size and those that decreased in size on the same footing, whereas method <code>'Beaumont'</code> typically smooths the weights of the former more than those of the latter (owing to its minimum weight preservation constraint).</p>
+<p>In summary, both methods often lead to very similar smoothed weights for units that are stratum jumpers. However method <code>'Beaumont'</code> smooths the weights of all other (i.e. <em>non</em> stratum jumpers) units much more aggressively than method <code>'MinChange'</code> (which only minimally alters them in step 2. to preserve the overall sum of weights). Moreover, method <code>'MinChange'</code> treats stratum jumpers that grew in size and those that decreased in size on the same footing, whereas method <code>'Beaumont'</code> typically smooths the weights of the former more than those of the latter (owing to its minimum weight preservation constraint, see &#8216;Examples&#8217;).</p>
 <p>Note that every call to <code>smooth.strat.jump</code> generates, by side effect, a diagnostics data structure named <code>strat.jump.status</code> into the <code>.GlobalEnv</code> (see &#8216;Examples&#8217;). This is a data frame with one row for each stratum jumper unit, whith the following columns:</p><pre>
   Column                 Meaning
   IDS....................Unit identifier
@@ -217,15 +217,16 @@
 <span class='co'># and enhance it with:                                                           #</span>
 <span class='co'># - a third stratum 'C' that, at survey time, does not contain stratum jumpers   #</span>
 <span class='co'># - a fourth stratum 'D' that, at survey time, does not contain stratum jumpers  #</span>
-<span class='co'># - a fifth stratum 'E' that, at survey time, contains one medium weight stratum #</span>
-<span class='co'>#   jumper received from design-stratum 'D'                                      #</span>
+<span class='co'># - a fifth stratum 'E' that, at survey time, contains two stratum jumpers, both #</span>
+<span class='co'>#   received from design-stratum 'D', one with small and one with medium weight  #</span>
 <span class='co'>##################################################################################</span>
 <span class='no'>BR</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
        <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>90</span>,
        <span class='kw'>des.strata</span> <span class='kw'>=</span>  <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>9</span>, <span class='fl'>41</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>10</span>))),
        <span class='kw'>curr.strata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>40</span>, <span class='fl'>10</span>, <span class='fl'>19</span>, <span class='fl'>11</span>))),
-       <span class='kw'>w</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>31</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>9</span>, <span class='fl'>41</span>)), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>27</span>, <span class='fl'>28</span>, <span class='fl'>22</span>, <span class='fl'>26</span>, <span class='fl'>11</span>, <span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>30</span>, <span class='fl'>17</span>, <span class='fl'>21</span>), <span class='fl'>1</span>:<span class='fl'>20</span>, <span class='fl'>10</span>:<span class='fl'>1</span>)
+       <span class='kw'>w</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>31</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>9</span>, <span class='fl'>41</span>)), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>27</span>, <span class='fl'>28</span>, <span class='fl'>22</span>, <span class='fl'>26</span>, <span class='fl'>11</span>, <span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>30</span>, <span class='fl'>17</span>, <span class='fl'>21</span>), <span class='fl'>2</span>:<span class='fl'>21</span>, <span class='fl'>11</span>:<span class='fl'>2</span>)
     )
+<span class='no'>BR</span>$<span class='no'>curr.strata</span>[<span class='fl'>61</span>] <span class='kw'>&lt;-</span> <span class='st'>"E"</span>
 
 <span class='co'># Have a look at the data:</span>
 <span class='no'>BR</span></div><div class='output co'>#&gt;    id des.strata curr.strata  w
@@ -289,43 +290,43 @@
 #&gt; 58 58          C           C 30
 #&gt; 59 59          C           C 17
 #&gt; 60 60          C           C 21
-#&gt; 61 61          D           D  1
-#&gt; 62 62          D           D  2
-#&gt; 63 63          D           D  3
-#&gt; 64 64          D           D  4
-#&gt; 65 65          D           D  5
-#&gt; 66 66          D           D  6
-#&gt; 67 67          D           D  7
-#&gt; 68 68          D           D  8
-#&gt; 69 69          D           D  9
-#&gt; 70 70          D           D 10
-#&gt; 71 71          D           D 11
-#&gt; 72 72          D           D 12
-#&gt; 73 73          D           D 13
-#&gt; 74 74          D           D 14
-#&gt; 75 75          D           D 15
-#&gt; 76 76          D           D 16
-#&gt; 77 77          D           D 17
-#&gt; 78 78          D           D 18
-#&gt; 79 79          D           D 19
-#&gt; 80 80          D           E 20
-#&gt; 81 81          E           E 10
-#&gt; 82 82          E           E  9
-#&gt; 83 83          E           E  8
-#&gt; 84 84          E           E  7
-#&gt; 85 85          E           E  6
-#&gt; 86 86          E           E  5
-#&gt; 87 87          E           E  4
-#&gt; 88 88          E           E  3
-#&gt; 89 89          E           E  2
-#&gt; 90 90          E           E  1</div><div class='input'>
+#&gt; 61 61          D           E  2
+#&gt; 62 62          D           D  3
+#&gt; 63 63          D           D  4
+#&gt; 64 64          D           D  5
+#&gt; 65 65          D           D  6
+#&gt; 66 66          D           D  7
+#&gt; 67 67          D           D  8
+#&gt; 68 68          D           D  9
+#&gt; 69 69          D           D 10
+#&gt; 70 70          D           D 11
+#&gt; 71 71          D           D 12
+#&gt; 72 72          D           D 13
+#&gt; 73 73          D           D 14
+#&gt; 74 74          D           D 15
+#&gt; 75 75          D           D 16
+#&gt; 76 76          D           D 17
+#&gt; 77 77          D           D 18
+#&gt; 78 78          D           D 19
+#&gt; 79 79          D           D 20
+#&gt; 80 80          D           E 21
+#&gt; 81 81          E           E 11
+#&gt; 82 82          E           E 10
+#&gt; 83 83          E           E  9
+#&gt; 84 84          E           E  8
+#&gt; 85 85          E           E  7
+#&gt; 86 86          E           E  6
+#&gt; 87 87          E           E  5
+#&gt; 88 88          E           E  4
+#&gt; 89 89          E           E  3
+#&gt; 90 90          E           E  2</div><div class='input'>
 <span class='co'># Have a look at the jumps:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>BR</span>, <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>des.strata</span>, <span class='no'>curr.strata</span>))</div><div class='output co'>#&gt;           curr.strata
 #&gt; des.strata  A  B  C  D  E
 #&gt;          A  9  0  0  0  0
 #&gt;          B  1 40  0  0  0
 #&gt;          C  0  0 10  0  0
-#&gt;          D  0  0  0 19  1
+#&gt;          D  0  0  0 18  2
 #&gt;          E  0  0  0  0 10</div><div class='input'>
 <span class='co'># Use the BR data frame to build a one stage stratified unit sampling design: </span>
 <span class='no'>BRdes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>BR</span>, <span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>id</span>, <span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>des.strata</span>, <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>)
@@ -334,7 +335,7 @@
 <span class='co'>## Now smooth the weights:</span>
 <span class='co'>## Method: MinChange (the default)</span>
 <span class='no'>M.smooth</span> <span class='kw'>&lt;-</span> <span class='fu'>smooth.strat.jump</span>(<span class='no'>BRdes</span>, ~<span class='no'>curr.strata</span>)</div><div class='output co'>#&gt; 
-#&gt; # Found 2 stratum jumpers (out of 90 units), see strat.jump.status
+#&gt; # Found 3 stratum jumpers (out of 90 units), see strat.jump.status
 #&gt; </div><div class='input'><span class='no'>M.smooth</span></div><div class='output co'>#&gt; Stratified Independent Unit Sampling Design (with replacement)
 #&gt; - [5] strata
 #&gt; - [90] units
@@ -343,22 +344,24 @@
 #&gt; smooth.strat.jump(BRdes, ~curr.strata)</div><div class='input'>
 <span class='co'># Have a look at the new columns:</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>M.smooth</span>$<span class='no'>variables</span>)</div><div class='output co'>#&gt;   id des.strata curr.strata w is.jumper w.smooth
-#&gt; 1  1          A           A 1     FALSE 1.023473
-#&gt; 2  2          A           A 1     FALSE 1.023473
-#&gt; 3  3          A           A 1     FALSE 1.023473
-#&gt; 4  4          A           A 1     FALSE 1.023473
-#&gt; 5  5          A           A 1     FALSE 1.023473
-#&gt; 6  6          A           A 1     FALSE 1.023473</div><div class='input'>
+#&gt; 1  1          A           A 1     FALSE 1.020229
+#&gt; 2  2          A           A 1     FALSE 1.020229
+#&gt; 3  3          A           A 1     FALSE 1.020229
+#&gt; 4  4          A           A 1     FALSE 1.020229
+#&gt; 5  5          A           A 1     FALSE 1.020229
+#&gt; 6  6          A           A 1     FALSE 1.020229</div><div class='input'>
 <span class='co'># Inspect the effects of smoothing on the stratum jumpers:</span>
 <span class='no'>strat.jump.status</span></div><div class='output co'>#&gt;    IDS  W DES_STR DES_STR_W_AVG CURR_STR CURR_STR_W_AVG N_JUMP_DES_CURR_STR
 #&gt; 10  10 31       B          31.0        A       4.000000                   1
-#&gt; 80  80 20       D          10.5        E       6.818182                   1
+#&gt; 61  61  2       D          11.5        E       7.333333                   2
+#&gt; 80  80 21       D          11.5        E       7.333333                   2
 #&gt;    W_SMOOTH_UNSC W_SMOOTH
-#&gt; 10      4.000000 4.093893
-#&gt; 80      6.818182 6.978226</div><div class='input'>
+#&gt; 10      4.000000 4.080916
+#&gt; 61      7.333333 7.481679
+#&gt; 80      7.333333 7.481679</div><div class='input'>
 <span class='co'>## Method: Beaumont</span>
 <span class='no'>B.smooth</span> <span class='kw'>&lt;-</span> <span class='fu'>smooth.strat.jump</span>(<span class='no'>BRdes</span>, ~<span class='no'>curr.strata</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"Beaumont"</span>)</div><div class='output co'>#&gt; 
-#&gt; # Found 2 stratum jumpers (out of 90 units), see strat.jump.status
+#&gt; # Found 3 stratum jumpers (out of 90 units), see strat.jump.status
 #&gt; </div><div class='input'><span class='no'>B.smooth</span></div><div class='output co'>#&gt; Stratified Independent Unit Sampling Design (with replacement)
 #&gt; - [5] strata
 #&gt; - [90] units
@@ -368,11 +371,13 @@
 <span class='co'># Inspect the effects of smoothing on the stratum jumpers:</span>
 <span class='no'>strat.jump.status</span></div><div class='output co'>#&gt;    IDS  W DES_STR DES_STR_W_AVG CURR_STR CURR_STR_W_AVG N_JUMP_DES_CURR_STR
 #&gt; 10  10 31       B          31.0        A       4.000000                   1
-#&gt; 80  80 20       D          10.5        E       6.818182                   1
+#&gt; 61  61  2       D          11.5        E       7.333333                   2
+#&gt; 80  80 21       D          11.5        E       7.333333                   2
 #&gt;    W_SMOOTH_UNSC W_SMOOTH
-#&gt; 10      4.000000 4.121185
-#&gt; 80      6.818182 7.024747</div><div class='input'>
-<span class='co'>## As anticipated, smoothed weights of stratum jumpers are almost identical for</span>
+#&gt; 10      4.000000 4.129461
+#&gt; 61      2.000000 2.064730
+#&gt; 80      7.333333 7.570678</div><div class='input'>
+<span class='co'>## As anticipated, smoothed weights of stratum jumpers are mostly similar for</span>
 <span class='co'>## both methods. However the methods differ significantly when it comes to non</span>
 <span class='co'>## stratum jumpers. This is clearly shown in the following plots.</span>
 
@@ -380,26 +385,30 @@
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfcol"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 
 <span class='co'># M.smooth</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>M.smooth</span>$<span class='no'>variables</span>, <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>w</span>, <span class='no'>w.smooth</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>19</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>1</span> + <span class='no'>is.jumper</span>,
-     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Original Weights"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Smoothed Weights"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"method: MinChange"</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>M.smooth</span>$<span class='no'>variables</span>, <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>w</span>, <span class='no'>w.smooth</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>19</span>, <span class='fl'>15</span>)[<span class='fl'>1</span> + <span class='no'>is.jumper</span>],
+     <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>)[<span class='fl'>1</span> + <span class='no'>is.jumper</span>], <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1.2</span>)[<span class='fl'>1</span> + <span class='no'>is.jumper</span>],
+     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Original Weights"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Smoothed Weights"</span>,
+     <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"method: MinChange"</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"limegreen"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/graphics/legend.html'>legend</a></span>(<span class='st'>"topleft"</span>,
 <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Stratum Jumper"</span>, <span class='st'>"Non Stratum Jumper"</span>),
 <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"black"</span>),
-<span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>19</span>, <span class='fl'>19</span>),
+<span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>15</span>, <span class='fl'>19</span>),
 <span class='kw'>bty</span> <span class='kw'>=</span> <span class='st'>"n"</span>,
 <span class='kw'>text.col</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
 <span class='kw'>inset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.05</span>, <span class='fl'>0.05</span>)
 )
 
 <span class='co'># B.smooth</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>B.smooth</span>$<span class='no'>variables</span>, <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>w</span>, <span class='no'>w.smooth</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>19</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>1</span> + <span class='no'>is.jumper</span>,
-     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Original Weights"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Smoothed Weights"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"method: Beaumont"</span>))</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"limegreen"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>B.smooth</span>$<span class='no'>variables</span>, <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>w</span>, <span class='no'>w.smooth</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>19</span>, <span class='fl'>15</span>)[<span class='fl'>1</span> + <span class='no'>is.jumper</span>],
+     <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>)[<span class='fl'>1</span> + <span class='no'>is.jumper</span>], <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1.2</span>)[<span class='fl'>1</span> + <span class='no'>is.jumper</span>],
+     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Original Weights"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Smoothed Weights"</span>,
+     <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"method: Beaumont"</span>))</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"limegreen"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/graphics/legend.html'>legend</a></span>(<span class='st'>"topleft"</span>,
 <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Stratum Jumper"</span>, <span class='st'>"Non Stratum Jumper"</span>),
 <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"black"</span>),
-<span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>19</span>, <span class='fl'>19</span>),
+<span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>15</span>, <span class='fl'>19</span>),
 <span class='kw'>bty</span> <span class='kw'>=</span> <span class='st'>"n"</span>,
 <span class='kw'>text.col</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
 <span class='kw'>inset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.05</span>, <span class='fl'>0.05</span>)
@@ -429,8 +438,23 @@
 <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>20</span>, <span class='fl'>0</span>),
 <span class='kw'>text.col</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
 <span class='kw'>inset</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>0.01</span>)
-)</div><div class='img'><img src='smooth.strat.jump-3.png' alt='' width='700' height='433' /></div><div class='input'>## Plot 2 - END
+)</div><div class='img'><img src='smooth.strat.jump-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## Plot 2 - END</span>
 
+<span class='co'># Although, as seen above, non-negligible differences in smoothed weights exist</span>
+<span class='co'># at unit level, both methods perform similarly in terms of strata averages...</span>
+<span class='co'>## Initial weights, design strata:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>BR</span>, <span class='fu'><a href='https://rdrr.io/r/base/tapply.html'>tapply</a></span>(<span class='no'>w</span>, <span class='no'>des.strata</span>, <span class='no'>mean</span>))</div><div class='output co'>#&gt;    A    B    C    D    E 
+#&gt;  1.0 31.0 20.7 11.5  6.5 </div><div class='input'>
+<span class='co'>## Initial weights, current strata:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>BR</span>, <span class='fu'><a href='https://rdrr.io/r/base/tapply.html'>tapply</a></span>(<span class='no'>w</span>, <span class='no'>curr.strata</span>, <span class='no'>mean</span>))</div><div class='output co'>#&gt;         A         B         C         D         E 
+#&gt;  4.000000 31.000000 20.700000 11.500000  7.333333 </div><div class='input'>
+<span class='co'>## Smoothed weights, current strata, method MinChange:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>M.smooth</span>$<span class='no'>variables</span>, <span class='fu'><a href='https://rdrr.io/r/base/tapply.html'>tapply</a></span>(<span class='no'>w.smooth</span>, <span class='no'>curr.strata</span>, <span class='no'>mean</span>))</div><div class='output co'>#&gt;         A         B         C         D         E 
+#&gt;  1.326298 31.627099 21.118740 11.732634  6.773187 </div><div class='input'>
+<span class='co'>## Smoothed weights, current strata, method Beaumont:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>B.smooth</span>$<span class='no'>variables</span>, <span class='fu'><a href='https://rdrr.io/r/base/tapply.html'>tapply</a></span>(<span class='no'>w.smooth</span>, <span class='no'>curr.strata</span>, <span class='no'>mean</span>))</div><div class='output co'>#&gt;         A         B         C         D         E 
+#&gt;  1.342075 32.003321 20.368566 11.384694  6.653020 </div><div class='input'>
+# ...as expected
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -18,7 +18,7 @@ smooth.strat.jump(design, curr.strata, method = c("MinChange", "Beaumont"))
 }
 
 \details{
-In business surveys, stratum jumpers are sampling units (e.g. firms or establishment) whose stratum information observed at survey-time happen to differ from the stratum information that was available in the sampling frame at design-time.
+In business surveys, stratum jumpers are sampling units (e.g. firms or establishments) whose stratum information observed at survey-time happen to differ from the stratum information that was available in the sampling frame at design-time.
 
 If the current value of the strata variable (i.e. the one observed at survey-time) is reliable, stratum jumpers are evidence of frame imperfections (typically, the frame was not up-to-date). Empirically, stratum jumpers are often units that underwent a fast growth in size from sampling-time to survey-time.
 
@@ -74,7 +74,7 @@ An object of the same class as \code{design}. The data frame it contains (stored
 \section{Methodological Remark}{
 Smoothing survey weights is a model-based approach, see [Beaumont 08] (e.g.\code{method = 'Beaumont'} basically models the smoothed weights as a function of the current strata using a one-way ANOVA model plus constraints). Therefore Horvitz-Thompson-like estimators that use smoothed weights - instead of design weights - cannot be guaranteed to be design-unbiased. Of course, the need to smooth the weights arises precisely because the existence of stratum jumpers already signals a departure from the ideal conditions of design-based inference.
 
-As the design-unbiasedness of Horvitz-Thompson estimators in probability sampling rests on using design weights that are reciprocals of inclusion probabilities, smoothing methods that change the design weights the least appear preferable in a design-based perspective. For this reason, function \code{smooth.strat.jump} adopts the \code{'MinChange'} method by default. One could, nonetheless, argue that the \code{'Beaumont'} method would sometimes perform better (e.g. lead to more efficient estimates) from a model-based perspective.
+As the design-unbiasedness of Horvitz-Thompson estimators in probability sampling rests on using design weights that are reciprocals of inclusion probabilities, smoothing methods that change the design weights the least appear preferable in a design-based perspective. For this reason, function \code{smooth.strat.jump} adopts the \code{'MinChange'} method by default. One could, nonetheless, argue that the \code{'Beaumont'} method could sometimes perform better (e.g. lead to more efficient estimates) from a model-based perspective.
 
 Regardless the choice of argument \code{method}, in order to reduce any possible design-bias introduced by smoothing the weights, users are advised to \emph{calibrate the smoothed weights} using any auxiliary information available from external sources that are \emph{more up-to-date} than the sampling frame.
 }

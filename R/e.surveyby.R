@@ -395,7 +395,7 @@ confint.svyby <- function(object, parm, level = 0.95, ...)
         #... check that level is actually equal to the original one
         lev.original <- as.numeric(attr(object,"svyby")$ci.lev)
         if (!isTRUE(all.equal(as.numeric(level), lev.original)))
-            stop("Need to re-run svyquantile to specify a confidence level different from the original one (",
+            stop("Need to re-run svystatQ to specify a confidence level different from the original one (",
                  lev.original,")!")
         return(extract.ci.by(object))
         }

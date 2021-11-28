@@ -287,7 +287,10 @@ if (!is.null(aggregate.stage)){
     attr(cal.design, "aggregate.stage")  <- aggregate.stage
     }
 # Add a token to testify trimming
+# NOTE: THIS TOKEN COULD (AND MUST) BE REMOVED BY ANY SUBSEQUENT CALL OF
+#       e.calibrate
 attr(cal.design, "trimmed") <- TRUE
+
 # Add calibration diagnostics
 attr(cal.design, "ecal.status") <- get("ecal.status", envir = .GlobalEnv)
 attr(cal.design, "epsilon") <- epsilon

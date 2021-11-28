@@ -71,6 +71,11 @@ if (data.class(design) != "analytic") {
      stop("Design object must be of class analytic!")
     }
 
+# Smoothing an already smoothed object must be avoided, in order to prevent
+# 'smoothing cycles'
+if (is.smoothed(design)) 
+     stop("Weights of object 'design' have already been smoothed!")
+	
 # Check if design is actually stratified
 if (!isTRUE(design$has.strata)) {
      stop("Design object must be stratified!")
@@ -213,6 +218,8 @@ attr(design, "weights") <- as.formula(paste("~", w.smooth.char, sep = ""), env =
 #       weights in arbitrary multi-step weights adjustment procedures!
 
 # Add a token to testify smoothing
+# NOTE: THIS TOKEN COULD (AND MUST) BE REMOVED BY ANY SUBSEQUENT CALL OF
+#       e.calibrate
 attr(design, "smoothed") <- TRUE
 
 # Store the current strata variable

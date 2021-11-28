@@ -111,13 +111,17 @@ cosm.cal.char.new <- paste(weights.char, ".cal", sep = "")
       names(design.new$variables)[names(design.new$variables) == cosm.cal.char.new] <- paste(cosm.cal.char.new, ".old", sep = "")
 names(design.new$variables)[names(design.new$variables) == cosm.cal.char] <- cosm.cal.char.new
    # 2) Change metadata and their names accordingly
-   #    NOTE: Recall attribute 'allprob' stores the *initial weights* in ALL
-   #          ReGenesees weights-changing functions!
-design.new[["allprob"]] <- data[, weights.char]
-names(design.new[["allprob"]]) <- weights.char
+   #    NOTE: Recall attribute 'allprob' stores the reciprocal of the 
+   #          *initial weights* in ALL ReGenesees weights-changing functions!
+design.new$allprob[[1]] <- 1 / data[, weights.char]
+names(design.new$allprob) <- weights.char
 attr(design.new, "weights") <- as.formula(paste("~", cosm.cal.char.new, sep = ""), env = .GlobalEnv)
    # 3) Change sigma2 metadata
 attr(design.new, "sigma2") <- sigma2
+# Add a token to testify external calibration
+# NOTE: THIS TOKEN COULD (AND MUST) BE REMOVED BY ANY SUBSEQUENT CALL OF
+#       e.calibrate
+attr(design.new, "ext.cal") <- TRUE
 ## END postprocessing
 
 # Catch the actual call and use it to update call slot of design.new 
@@ -126,3 +130,9 @@ design.new$call <- sys.call()
 # Return external calibrated object
 design.new
 }
+
+
+is.ext.cal <- function(design){
+  isTRUE(attr(design, "ext.cal"))
+}
+

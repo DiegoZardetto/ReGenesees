@@ -332,11 +332,26 @@ if (!is.null(aggregate.stage)){
     attr(design, "aggregate.stage")  <- aggregate.stage
     }
 
-# If design was trimmed, remove the trimming token (i.e. calibrating a trimmed
-# object generates an 'ordinary' calibrated output)
+#### REMOVE TOKENS TESTIFYING PREVIOUS WEIGHTS ADJUSTMENTS (if any) -- START
+# If design was tokenized:
+# 1) remove the token (i.e. calibrating a tokenized object generates an
+#    'ordinary' calibrated output)
+# 2) store a 'in.change' flag to recall the object is living within a weights
+#    changing pipeline
+in.change <- FALSE
 if (is.trimmed(design)) {
     attr(design, "trimmed") <- NULL
+    in.change <- TRUE
     }
+if (is.smoothed(design)) {
+    attr(design, "smoothed") <- NULL
+    in.change <- TRUE
+    }
+if (is.ext.cal(design)) {
+    attr(design, "ext.cal") <- NULL
+    in.change <- TRUE
+    }
+#### REMOVE TOKENS TESTIFYING PREVIOUS WEIGHTS ADJUSTMENTS (if any) -- STOP
 
 # Add calibration diagnostics
 attr(design, "ecal.status") <- s <- get("ecal.status", envir = .GlobalEnv)
@@ -395,7 +410,17 @@ if (inherits(design, "cal.analytic")) {
     gc.here(need.gc)
     }
 else {
-    design$call <- sys.call()
+    # $call slot
+    # NOTE: Here accumulate the original design object $call ALSO whenever it
+    #       contains weights that ALREADY underwent a previous modification
+    #       as recalled by the 'in.change' flag
+    if (in.change) {
+         # NOTE: IF CLAUSE ABOVE MUST INCLUDE ANY WEIGHTS MODIFICATOR FUNCTION
+         #       AVAILABLE IN ReGenesees
+         design$call <- c(sys.call(), design$call)
+        } else {
+         design$call <- sys.call()
+        }
     class(design) <- c("cal.analytic", class(design))
     gc.here(need.gc)
     }

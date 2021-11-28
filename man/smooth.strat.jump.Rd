@@ -18,7 +18,7 @@ smooth.strat.jump(design, curr.strata, method = c("MinChange", "Beaumont"))
 }
 
 \details{
-In business surveys, stratum jumpers are sampling units (e.g. firms or establishments) whose stratum information observed at survey-time happen to differ from the stratum information that was available in the sampling frame at design-time.
+In business surveys, stratum jumpers are sampling units (e.g. firms or establishments) whose stratum information observed at survey-time happens to differ from the stratum information that was available in the sampling frame at design-time.
 
 If the current value of the strata variable (i.e. the one observed at survey-time) is reliable, stratum jumpers are evidence of frame imperfections (typically, the frame was not up-to-date). Empirically, stratum jumpers are often units that underwent a fast growth in size from sampling-time to survey-time.
 
@@ -26,7 +26,7 @@ In most enterprise surveys the sampling design is such that smaller firms receiv
 
 Despite stratum jumpers are actually a concern only when both their design weight \code{w} and their \code{y} value (as measured at survey-time) conspire to yield an influential value of \code{w * y}, function \code{smooth.strat.jump} tries to mitigate their potential adverse impact by smoothing the weights \emph{without} using any information on \code{y}. Such a choiche is driven by two major aims. First, the methodology must preserve the universality of the weights (i.e. the same weights must be used to compute estimates for whatever interest variables \code{y}). Second, the methodology should not require explicit modeling efforts and be easy enough to scale to production settings that need automated and replicable procedures. 
 
-Argument \code{design} identifies the survey design object that is (possibly) affected by stratum jumpers and contains the weights that will be smoothed. In case no stratum jumpers are found, the function will raise an error. Object \code{design} can only be a one-stage unit sampling design. Moreover, it must be a non-calibrated object. Should any of these conditions be false, the function would raise an error.
+Argument \code{design} identifies the survey design object that is (possibly) affected by stratum jumpers and contains the weights that will be smoothed. In case no stratum jumpers are found, the function will raise an error. Object \code{design} can only be a one-stage unit sampling design. Moreover, it must be a non-calibrated object. Should any of these conditions be false, the function would raise an error. Note, lastly, that function \code{smooth.strat.jump} will not smooth further weights that have already been smoothed. This is a deliberate design choice, devised to discourage over-smoothing and cosmetic adjustments of the survey weights.
 
 Formula \code{curr.strata} defines the \emph{current} strata variable, as observed at survey-time. This is different from the \emph{design} strata variable used to build object \code{design} using function \code{\link{e.svydesign}}, as the latter was measured at sampling-time. Function \code{smooth.strat.jump} will flag as stratum jumpers all the units whose \emph{current} stratum differs from the \emph{design} one. Note that, in case \emph{current} strata become available only after object \code{design} was created, you may use function \code{\link{des.addvars}} to add this new column to the old object.
 
@@ -46,7 +46,7 @@ Only the weights of stratum jumpers are smoothed, by setting their value to the 
 \itemize{
  \item{\strong{\sQuote{Beaumont}}}
 }
-The weights of all units are smoothed, by setting their value to the average weight of units belonging to the same \emph{current} stratum, with the exception of \emph{minimum weight} units, whose weights are left unchanged. Therefore all weights, exluding only minimum weights within each current stratum, are smoothed. Note that this smoothing affects all current strata, even those that do \emph{not} include any stratum jumper.\cr\cr
+The weights of all units are smoothed, by setting their value to the average weight of units belonging to the same \emph{current} stratum, with the exception of \emph{minimum weight} units, whose weights are left unchanged. Therefore all weights, excluding only minimum weights within each current stratum, are smoothed. Note that this smoothing affects all current strata, even those that do \emph{not} include any stratum jumper.\cr\cr
 
 In summary, both methods often lead to very similar smoothed weights for units that are stratum jumpers. However method \code{'Beaumont'} smooths the weights of all other (i.e. \emph{non} stratum jumpers) units much more aggressively than method \code{'MinChange'} (which only minimally alters them in step 2. to preserve the overall sum of weights). Moreover, method \code{'MinChange'} treats stratum jumpers that grew in size and those that decreased in size on the same footing, whereas method \code{'Beaumont'} typically smooths the weights of the former more than those of the latter (owing to its minimum weight preservation constraint, see \sQuote{Examples}).
 

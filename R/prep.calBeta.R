@@ -601,9 +601,15 @@ if (!is.global) {
      spc.aux.totals <- spc.pop[, -(1:n.part.vars), drop = FALSE]
      # Fuse pop and spc.pop *data.frames*
      fused.df <- cbind(pop, spc.aux.totals)
+     # Store provenance of auxiliary variables
+     aux.origin <- rep(c("pop", "spc"), c(ncol(pop), ncol(spc.aux.totals)))
+     names(aux.origin) <- names(fused.df)
     } else {
      # Fuse pop and spc.pop *data.frames*
      fused.df <- cbind(pop, spc.pop)
+     # Store provenance of auxiliary variables
+     aux.origin <- rep(c("pop", "spc"), c(ncol(pop), ncol(spc.pop)))
+     names(aux.origin) <- names(fused.df)
     }
 
 ## Build the *fused* calmodel
@@ -633,12 +639,17 @@ fused.pop <- pop.template(design, calmodel, partition)
 
 # Copy fused.df values inside fused.pop *taking into account the columns order*
 fused.pop[, names(fused.df)] <- fused.df[, names(fused.df)]
+# Sort provenance of auxiliary variables
+aux.origin <- aux.origin[names(fused.pop)]
 
 # Attach original calmodel attributes of 'pop' to fused.pop
 attr(fused.pop, "pop.calmodel") <- pop.calmodel 
 
 # Attach all the "spec.purp.calib" attributes of 'spc.pop' to fused.pop
 attr(fused.pop, "spec.purp.calib") <- attr(spc.pop, "spec.purp.calib")
+
+# Attach auxiliary variables' provenance attribute
+attr(fused.pop, "aux.origin") <- aux.origin
 
 # New class "spc.pop"
 class(fused.pop) <- c("spc.pop", class(fused.pop))

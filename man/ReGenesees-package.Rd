@@ -105,6 +105,8 @@ manual}.\cr\cr
                           Templates
  **  fill.template........Fill the Known Totals Template for a
                           Calibration Task
+  *  pop.plot.............Plot Calibration Control Totals vs Current
+                          Estimates
   *  bounds.hint..........A Hint for Range Restricted Calibration
 ***  e.calibrate..........Calibration of Survey Weights
   *  check.cal............Calibration Convergence Check
@@ -171,8 +173,9 @@ manual}.\cr\cr
 }
 }
 
-\subsection{Utilities}{
+\subsection{Diagnostics and Utilities}{
 \preformatted{
+  *  UWE...................Unequal Weighting Effect
   *  Zapsmall..............Zapsmall Data Frame Columns and Numeric Vectors
 }
 }

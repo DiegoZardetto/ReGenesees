@@ -4,7 +4,7 @@ importFrom("grDevices", "dev.flush", "dev.hold", "dev.new",
            "devAskNewPage", "extendrange")
 
 importFrom("graphics", "abline", "identify", "mtext", "panel.smooth",
-           "par", "plot", "strheight", "text")
+           "par", "plot", "strheight", "text", "arrows", "axis", "barplot", "points")
 
 importFrom("utils", "combn", "memory.limit", "object.size", "str")
 
@@ -13,7 +13,7 @@ svystatB, write.svystat, SE, VAR, cv, deff, des.addvars, bounds.hint, g.range, "
 find.lon.strata, fill.template, aux.estimates, check.cal, weights, contr.off, contrasts.RG, contrasts.off,
 contrasts.reset, CoV, Corr, Zapsmall, get.residuals, des.merge, estimator.kind, GVF.db, gvf.input,
 fit.gvf, getR2, getBest, predictCV, drop.gvf.points, svystat, pop.desc, svystatS, svystatSR, ext.calibrated,
-trimcal, prep.calBeta, pop.calBeta, pop.fuse, smooth.strat.jump)
+trimcal, prep.calBeta, pop.calBeta, pop.fuse, smooth.strat.jump, UWE, pop.plot)
 
 S3method(print,summary.survey.design)
 S3method(print,summary.survey.design2)
@@ -261,3 +261,6 @@ S3method(getBest, gvf.fits.gr)
 
 S3method(pop.desc, pop.totals)
 S3method(pop.desc, spc.pop)
+
+S3method(pop.plot, pop.totals)
+S3method(pop.plot, spc.pop)

@@ -2,7 +2,7 @@
 # - [Kish 92]
 # Kish, L. (1992). Weighting for unequal Pi. Journal of Official Statistics, 8, 183-200.
 
-UWE <- function(design, by = NULL) {
+`UWE` <- function(design, by = NULL) {
 ############################################################################
 # Compute the UWE for the current (w) and initial (w0) weights of a design # 
 # object, plus the corresponding VAR.infl factor induced by w0 -> w.       #
@@ -12,7 +12,7 @@ UWE <- function(design, by = NULL) {
 #                                                                          #
 # NOTE: Initial weights w0 are:                                            #
 #       - equal to w if design is an initial design object                 #
-#       - equal the *starting weights* (i.e. the reciprocals of the        #
+#       - equal to the *starting weights* (i.e. the reciprocals of the     #
 #         $allprob slot of design) if design was obtained by the           #
 #         application of an arbitrary *chain* of ReGenesees functions that #
 #         modify the weights (e.g. smooth.strat.jump, e.calibrate,         #
@@ -59,7 +59,7 @@ UWE <- function(design, by = NULL) {
   return(out)
 }
 
-UWE.all <- function(w, w0) {
+`UWE.all` <- function(w, w0) {
 #################################################
 # Compute UWE and for w and w0 and the VAR.infl #
 # factor induced by w0 -> w.                    #
@@ -82,12 +82,13 @@ UWE.all <- function(w, w0) {
   w0.var <- ((n - 1) / n) * var(w0)
   w0.UWE <- 1 + w0.var / (w0.avg^2)
 
-  out <- c("UWE.curr" = w.UWE, "UWE.ini" = w0.UWE, "VAR.infl" = w.UWE / w0.UWE)
+  out <- data.frame("UWE.curr" = w.UWE, "UWE.ini" = w0.UWE, "VAR.infl" = w.UWE / w0.UWE)
+  rownames(out) <- "ALL"
   return(out)
 }
 
 
-G.WADJ <- function(design, eps = 1e-12) {
+`G.wadj` <- function(design, eps = 1e-12) {
 ###################################################################
 # Get the current (w) and initial (w0) weights of a design object #
 # that was generated in a weights changing pipeline, and compute  #
@@ -120,3 +121,17 @@ G.WADJ <- function(design, eps = 1e-12) {
   G[is.G.eps] <- (ww.eps / ww0.eps)[is.G.eps]
   G
  }
+ 
+ 
+
+`is.selfweighted` <- function(design, tol = 1E-6, ...) {
+     w <- weights(design)
+     sw.dist <- ( abs(diff(range(w))) / abs(mean(w)) )
+     if ( sw.dist > tol) {
+         ans <- FALSE
+        } else {
+         ans <- TRUE
+        }
+     attr(ans, "sw.dist") <- sw.dist
+     return(ans)
+    }

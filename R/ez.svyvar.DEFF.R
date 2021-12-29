@@ -25,7 +25,7 @@ z.svyvar <- function (x, design, na.rm = FALSE, ...)
     xbar <- z.svymean(x, design, na.rm = na.rm)
     if (NCOL(x) == 1) {
         x <- x - xbar
-        v <- z.svymean(x * x * n/(n - 1), design, na.rm = na.rm)
+        v <- z.svymean(x * x * n/(n - 1), design, na.rm = na.rm, deff = TRUE)
         attr(v, "statistic") <- "variance"
         return(v)
     }
@@ -33,13 +33,13 @@ z.svyvar <- function (x, design, na.rm = FALSE, ...)
     p <- NCOL(x)
     a <- matrix(rep(x, p), ncol = p * p)
     b <- x[, rep(1:p, each = p)]
-    v <- z.svymean(a * b * n/(n - 1), design, na.rm = na.rm)
+    v <- z.svymean(a * b * n/(n - 1), design, na.rm = na.rm, deff = TRUE)
     v <- matrix(v, ncol = p)
     attr(v, "statistic") <- "variance"
     v
 }
 
-z.svymean <- function(x,design, na.rm=FALSE,deff=FALSE,...){
+z.svymean <- function(x,design, na.rm=FALSE, deff=FALSE,...){
 ################################################################
 # Similar to the original svymean, without Variance estimation #
 # which is not necessary for DEFF estimation.                  #
@@ -97,15 +97,14 @@ z.svymean <- function(x,design, na.rm=FALSE,deff=FALSE,...){
   pweights<-1/design$prob
   psum<-sum(pweights)
   average<-colSums(x*pweights/psum)
-  ######################################################################
-  # What follows would give the "standard" formula for the HT estimate #
-  # of the variance of a total under a SRSWOR of units (with fpc and   #
-  # population size "rescaled" if the design is calibrated).           #
-  # SHOULD DISCUSS THIS SOLUTION!!!                                    # 
-  ######################################################################
-  ## If z.svyvar has been called on a subset get n from the domain index
+  ## > DEFF STUDY 5/12/2021 < ##
+  ## If z.svymean has been called on a subset get n from the domain index
   ## else compute it for the whole sample:
-  #  if (is.null(di <- attr(design, "domain.index"))) n <- NROW(x) else n <- length(di)
-  #  average<-colSums(x/n)
+  if (is.null(di <- attr(design, "domain.index"))) n <- NROW(x) else n <- length(di)
+  if ( ( abs(diff(range(pweights))) / abs(mean(pweights)) ) > 1E-6) {
+     if (isTRUE(deff)) {
+         average <- ( psum / (psum - 1) ) * ( (n - 1) / n ) * average
+        }
+    }
   return(average)
   }

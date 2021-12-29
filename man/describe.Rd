@@ -13,6 +13,7 @@ Provides a natural language description of a known totals data frame to be used 
 pop.desc(pop.totals, ...)
 
 \method{pop.desc}{pop.totals}(pop.totals, ...)
+
 \method{pop.desc}{spc.pop}(pop.totals, verbose = FALSE, ...)
 }
 

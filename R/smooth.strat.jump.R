@@ -98,9 +98,17 @@ if(n != un){
 data <- design$variables
 
 # Get *design strata* variable (i.e. measured at sampling time by the sampling 
-# frame)
-des.strata <- design$strata[, 1]
+# frame)... 
+# ... paying attention to handle well *collapsed strata* design (DEBUG 9/12/2021)
+is.clps <- !is.null(attr(design, "collapse.strata"))
+# get strata variable name
 des.strata.char <- all.vars(attr(design, "strata"))
+# get strata variable values
+if (!is.clps) {
+     des.strata <- design$strata[, 1]
+    } else {
+     des.strata <- design$variables[[des.strata.char]]
+    }
 
 # Get the *current strata* variable (i.e. measured at survey time by answers to
 # questionnaire items)
@@ -123,12 +131,28 @@ if (!is.factor(data[, curr.strata.char])) {
 curr.strata <- data[, curr.strata.char]
 
 # Warn if design and current strata have different levels
-if (!identical(levels(des.strata), levels(curr.strata))) {
-     warning("Design strata and current strata factors have different levels. Please double-check!")
+des.strl <- levels(des.strata)
+curr.strl <- levels(curr.strata)
+if (!identical(des.strl, curr.strl)) {
+     # get unmatched design strata
+     des.unml <- des.strl[!(des.strl %in% curr.strl)]
+     n.des.unml <- length(des.unml)
+     # get unmatched current strata
+     curr.unml <- curr.strl[!(curr.strl %in% des.strl)]
+     n.curr.unml <- length(curr.unml)
+     # build warning message
+     warn <- ""
+     if (n.des.unml > 0) warn <- paste(warn, "\n# Unmatched design strata found (",n.des.unml,"): ", paste(des.unml, collapse = ", "), "\n", sep = "")
+     if (n.curr.unml > 0) warn <- paste(warn, "\n# Unmatched current strata found (",n.curr.unml,"): ", paste(curr.unml, collapse = ", "), "\n", sep = "")
+     warning("Design strata and current strata factors have different levels. Please double-check!\n", warn)
     }
 
-# Identify stratum jumpers
-is.jumper <- (curr.strata != des.strata)
+# Identify stratum jumpers...
+# ... paying attention to handle well cases where des.strata and curr.strata have
+#     different *number of levels* (DEBUG 9/12/2021), i.e.
+#     - some des.strata disappeared at survey-time
+#     - some curr.strata are brand new and did not exist at sampling-time
+is.jumper <- ( as.character(curr.strata) != as.character(des.strata) )
 
 # How many stratum jumpers?
 n.jumpers <- sum(is.jumper)

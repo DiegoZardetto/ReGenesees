@@ -137,6 +137,9 @@
 <ul>
 <li><p>THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.</p></li>
 <li><p>New function smooth.strat.jump: given a stratified one-stage unit sampling design object, smooths survey weights to cope with estimation issues that may arise from stratum jumpers.</p></li>
+<li><p>New function UWE: computes the Unequal Weighting Effect of design objects. If the input design is the outcome of a ‘weight-changing pipeline’, w0 -&gt; w1 -&gt; … -&gt; w, i.e. was obtained by applying an arbitrary chain of ReGenesees functions that modify the weights (e.g. smooth.strat.jump, e.calibrate, ext.calibrated, trimcal, …), then the function computes the UWE of the overall, cumulative weight adjustment from w0 to w.</p></li>
+<li><p>New function pop.plot: draws a scatter plot of calibration control totals vs current estimates. This plot may provide a first-level, rough assessment of how hard the calibration problem at hand will turn out to be in terms of constrained optimization.</p></li>
+<li><p>All estimation functions now use a slightly better estimate of design effects for sampling designs that are not self-weighting.</p></li>
 </ul>
 </div>
     <div id="regenesees-21" class="section level1">

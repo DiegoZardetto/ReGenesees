@@ -669,7 +669,7 @@ VAR.default<-function(object,...){
 cv<-function(object,...) UseMethod("cv")
 
 # |> ALIVE <| #
-cv.default<-function(object, warn=TRUE, ...){
+cv.default<-function(object, warn=FALSE, ...){
   rval<-SE(object)/coef(object)
   if (warn && any(coef(object)<0,na.rm=TRUE)) warning("CV may not be useful for negative statistics")
   rval

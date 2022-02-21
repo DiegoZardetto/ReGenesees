@@ -11,7 +11,7 @@ svyby.default<-function(formula, by, design, FUN,..., deff=FALSE, keep.var=TRUE,
 # MODIFIED things:                                   #
 # 1. Unwrap was not correctly working for svyratio   #
 # 2. Treat 'formula' argument to cope with svylin    #
-#    (which as an expression as first argument)      #
+#    (which has an expression as first argument)     #
 # 3. If formula is not an object of class formula,   #
 #    svyby was not correctly working whenever design #
 #    happened to be a calibrated object              # 
@@ -319,7 +319,7 @@ VAR.svyby <-function(object,...){
   rval
 }
 
-cv.svyby <-function(object, warn=TRUE, ...){
+cv.svyby <-function(object, warn=FALSE, ...){
   rval<-SE(object)/coef(object)
   if (!is.null(nam.old <- names(rval))) names(rval) <- sub("SE.", "CV.", x = nam.old, fixed = TRUE)
   # If substitution did not happen, force it  24/02/2016

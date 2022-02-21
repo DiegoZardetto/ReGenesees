@@ -21,6 +21,10 @@
 # NOTE: Levels of by variables follow the same ordering that svyby would   #
 #       generate.                                                          #
 ############################################################################
+# Check on design
+if (!inherits(design, "analytic")) {
+     stop("Object 'design' must inherit from class analytic")
+    }
 
   w <- as.numeric(weights(design))
   w0 <- 1 / design$allprob[[1]]
@@ -31,6 +35,9 @@
      if (!inherits(by, "formula")) {
              stop("If specified, 'by' must be supplied as a formula")
         }
+
+     # Check on NAs in by variables
+     na.Fail(design$variables, all.vars(by))
 
      ## All combinations that actually occur in this design
      byfactors <- model.frame(by, model.frame(design), na.action = na.pass)

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2</span>
       </span>
     </div>
 
@@ -230,6 +230,7 @@ When dealing with domain estimation, the design effects referring to a given sub
 
     <p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>&#8220;Model Assisted Survey Sampling&#8221;</em>, Springer Verlag.</p>
 <p>Kish, L. (1995). <em>&#8220;Methods for design effects&#8221;</em>. Journal of Official Statistics, Vol. 11, pp. 55-77.</p>
+<p>European Commission, Eurostat, (2013). <em>&#8220;Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition&#8221;</em>, Publications Office. doi: 10.2785/13579</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Estimators of Ratios between Totals <code><a href='svystatR.html'>svystatR</a></code>, Shares <code><a href='svystatS.html'>svystatS</a></code>, Ratios between Shares <code><a href='svystatSR.html'>svystatSR</a></code>, Quantiles <code><a href='svystatQ.html'>svystatQ</a></code>, Multiple Regression Coefficients <code><a href='svystatB.html'>svystatB</a></code>, Complex Analytic Functions of Totals and/or Means <code><a href='svystatL.html'>svystatL</a></code>, and all of the above <code><a href='svystat.html'>svystat</a></code>.</p></div>
@@ -280,11 +281,11 @@ When dealing with domain estimation, the design effects referring to a given sub
 <span class='co'># Estimation of the absolute frequency distribution of the qualitative</span>
 <span class='co'># variable age5c for the whole population, with the design effect:</span>
 <span class='fu'>svystatTM</span>(<span class='no'>des</span>,~<span class='no'>age5c</span>,<span class='kw'>deff</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;           Total       SE     DEff
-#&gt; age5c1 128928.4 6855.457 1.379277
-#&gt; age5c2 294575.1 9646.795 1.509889
-#&gt; age5c3 356463.9 9354.653 1.301240
-#&gt; age5c4 122897.6 8022.848 1.966796
-#&gt; age5c5  21236.3 2728.266 1.168047</div><div class='input'>
+#&gt; age5c1 128928.4 6855.457 1.379735
+#&gt; age5c2 294575.1 9646.795 1.510391
+#&gt; age5c3 356463.9 9354.653 1.301673
+#&gt; age5c4 122897.6 8022.848 1.967450
+#&gt; age5c5  21236.3 2728.266 1.168435</div><div class='input'>
 <span class='co'># MARGINAL relative frequency distributions</span>
   <span class='co'># Estimation of the relative frequency distribution of the qualitative</span>
   <span class='co'># variable age5c for the whole population:</span>

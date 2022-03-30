@@ -13,7 +13,7 @@ svystatB, write.svystat, SE, VAR, cv, deff, des.addvars, bounds.hint, g.range, "
 find.lon.strata, fill.template, aux.estimates, check.cal, weights, contr.off, contrasts.RG, contrasts.off,
 contrasts.reset, CoV, Corr, Zapsmall, get.residuals, des.merge, estimator.kind, GVF.db, gvf.input,
 fit.gvf, getR2, getBest, predictCV, drop.gvf.points, svystat, pop.desc, svystatS, svystatSR, ext.calibrated,
-trimcal, prep.calBeta, pop.calBeta, pop.fuse, smooth.strat.jump, UWE, pop.plot)
+trimcal, prep.calBeta, pop.calBeta, pop.fuse, smooth.strat.jump, UWE, pop.plot, svyDelta, details)
 
 S3method(print,summary.survey.design)
 S3method(print,summary.survey.design2)
@@ -42,6 +42,8 @@ S3method(coef,svystatQ)
 S3method(coef,svystatB)
 S3method(coef,svystatB.by.list)
 S3method(coef,svystat.gr)
+S3method(coef,svydelta)
+S3method(coef,svyDelta)
 
 S3method(SE,default)
 S3method(SE,svyratio)
@@ -56,6 +58,7 @@ S3method(SE,svystatQ)
 S3method(SE,svystatB)
 S3method(SE,svystatB.by.list)
 S3method(SE,svystat.gr)
+S3method(SE,svyDelta)
 
 S3method(VAR,default)
 S3method(VAR,svyby)
@@ -68,6 +71,7 @@ S3method(VAR,svystatQ)
 S3method(VAR,svystatB)
 S3method(VAR,svystatB.by.list)
 S3method(VAR,svystat.gr)
+S3method(VAR,svyDelta)
 
 S3method(cv,default)
 S3method(cv,svyby)
@@ -81,6 +85,7 @@ S3method(cv,svystatQ)
 S3method(cv,svystatB)
 S3method(cv,svystatB.by.list)
 S3method(cv,svystat.gr)
+S3method(cv,svyDelta)
 
 S3method(deff,default)
 S3method(deff,svyratio)
@@ -103,6 +108,7 @@ S3method(confint,svystatQ)
 S3method(confint,svystatB)
 S3method(confint,svystatB.by.list)
 S3method(confint,svystat.gr)
+S3method(confint,svyDelta)
 
 S3method(vcov,svystat)
 S3method(vcov,svyratio)
@@ -117,6 +123,7 @@ S3method(vcov,svystatQ)
 S3method(vcov,svystatB)
 S3method(vcov,svystatB.by.list)
 S3method(vcov,svystat.gr)
+S3method(vcov,svyDelta)
 
 S3method(summary,svystatB)
 S3method(summary,svystatB.by)
@@ -144,6 +151,7 @@ S3method(svyquantile,survey.design)
 S3method(svyquantile,analytic)
 
 S3method(svyby,default)
+S3method(svyby,svydelta)
 
 S3method(Zapsmall,default)
 S3method(Zapsmall,data.frame)
@@ -162,6 +170,7 @@ S3method(model.frame,survey.design)
 S3method(as.data.frame,svystat)
 S3method(`[`, survey.design)
 S3method(`[`, survey.design2)
+S3method(`[`, cal.analytic)
 S3method(`[<-`, survey.design)
 
 S3method(print,GVF.db)

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>With the exception of <code>deff</code>, all extractor functions can be used on any object returned by a survey statistic function: the correct answer will be obtained whatever the call that generated the object. For getting the design effect, <code>object</code> must have been built with option <code>deff = TRUE</code>.</p>
+    <p>With the exception of <code>deff</code>, all extractor functions can be used on any object returned by a survey statistic function: the correct answer will be obtained whatever the call that generated the object. For getting the design effect, <code>object</code> must have been built with option <code>deff = TRUE</code> or <code>deff = "replace"</code>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data structure (typically inheriting from classes <code>matrix</code> or <code>data.frame</code>) storing the requested information.</p>
@@ -196,14 +196,15 @@
 <span class='co'># ...while the following works:</span>
 <span class='no'>VA.avg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>va.imp2</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>,<span class='kw'>deff</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'>deff</span>(<span class='no'>VA.avg</span>)</div><div class='output co'>#&gt;   DEff.va.imp2
-#&gt; 1    0.4426447</div><div class='input'>
+#&gt; 1    0.4426832</div><div class='input'>
 <span class='co'># Further examples:</span>
-<span class='co'>## extract the statistic:</span>
+<span class='co'>## Extract the statistic:</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>VA.avg</span>)</div><div class='output co'>#&gt;  va.imp2 
-#&gt; 3250.599 </div><div class='input'><span class='co'>## extract the confidence interval at 90%</span>
+#&gt; 3250.599 </div><div class='input'><span class='co'>## Extract the confidence interval at 90%</span>
 <span class='co'>## confidence level (the default would be 95%):</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>VA.avg</span>, <span class='kw'>conf.lev</span><span class='kw'>=</span><span class='fl'>0.9</span>)</div><div class='output co'>#&gt;            2.5 %   97.5 %
-#&gt; va.imp2 3136.161 3365.038</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='no'>VA.avg</span>, <span class='kw'>level</span><span class='kw'>=</span><span class='fl'>0.9</span>)</div><div class='output co'>#&gt;              5 %     95 %
+#&gt; va.imp2 3154.559 3346.639</div><div class='input'>## note the argument 'level', which comes from confint function in package stats
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

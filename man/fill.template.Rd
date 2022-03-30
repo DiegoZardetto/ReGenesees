@@ -30,7 +30,7 @@ Argument \code{mem.frac} (whose value must be numeric and non-negative) triggers
 \section{Performance}{
 Real-world calibration tasks (e.g. in the field of Official Statistics) can simultaneously involve hundreds of auxiliary variables and refer to target populations of several million units. In such circumstances, the naive aggregation of the calibration \code{model.matrix} of \code{universe} may turn out to be too memory-demanding (at least in ordinary PC environments) and determine a memory-failure error.
 
-The alternative implemented in \code{fill.template} is to: (i) split \code{universe} in chunks, (ii) compute partial sums of auxiliary variables chunk-by-chunk, (iii) update \code{template} by adding progressively such partial sums. This alternative is triggered by parameter \code{mem.frac}, which also implicitly controls the number of chunks. The function estimates the memory that would be used to store the \emph{full} \code{model.matrix} of \code{universe} and compares it to the maximum memory allocable on the machine (as returned by \code{\link{memory.limit}}): if the resulting ratio is bigger than \code{1/mem.frac}, the memory-efficient algorithm starts; the number of chunks in which \code{universe} will then be split is determined in such a way that the memory needed to store the \code{model.matrix} of \emph{each} chunk does not exceed a fraction \code{1/mem.frac} of the maximum allocable memory.
+The alternative implemented in \code{fill.template} is to: (i) split \code{universe} in chunks, (ii) compute partial sums of auxiliary variables chunk-by-chunk, (iii) update \code{template} by adding progressively such partial sums. This alternative is triggered by parameter \code{mem.frac}, which also implicitly controls the number of chunks. The function estimates the memory that would be used to store the \emph{full} \code{model.matrix} of \code{universe} and compares it to 4 GB: if the resulting ratio is bigger than \code{1/mem.frac}, the memory-efficient algorithm starts; the number of chunks in which \code{universe} will then be split is determined in such a way that the memory needed to store the \code{model.matrix} of \emph{each} chunk does not exceed a fraction \code{1/mem.frac} of 4 GB.
 
 Whenever \code{fill.template} switches to the memory-efficient "chunking" algorithm, a warning message will signal it and will specify as well the number of chunks that are being processed.
 }
@@ -39,6 +39,10 @@ Whenever \code{fill.template} switches to the memory-efficient "chunking" algori
 An object of class \code{pop.totals} storing the \emph{actual} values of the population totals for the specified calibration task, ready to be safely passed to \code{\link{e.calibrate}}.}
 
 \author{Diego Zardetto}
+
+\references{
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+}
 
 \seealso{
 \code{\link{e.calibrate}} for calibrating weights, \code{\link{pop.template}} for the definition of the class \code{pop.totals} and to build a "template" data frame for known population totals, \code{\link{pop.desc}} to provide a natural language description of the template structure, and \code{\link{\%into\%}} for the compression operator for nested factors.

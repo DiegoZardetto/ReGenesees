@@ -115,7 +115,9 @@ function(design,
     if (Sys.info()["sysname"] == "Windows"){
         naux  <- if (identical(partition, FALSE)) ncol(template) else (ncol(template) - length(partition.vars))
         nrec <- nrow(dataset)
-        MEM.mega <- memory.limit()
+        # MEM.mega <- memory.limit()
+        # See the NOTE on memory.limit() after 4.2.0 in e.calibrate
+        MEM.mega <- 4096
         th.frac <- 10
         need.fetch <- ( ((8 * nrec * naux )/(1024^2))  > (MEM.mega / th.frac) )
     }

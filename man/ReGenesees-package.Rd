@@ -14,16 +14,20 @@ unequally weighted survey designs. Sampling variance estimation for nonlinear
 (smooth) estimators is obtained by Taylor-series linearization. Sampling
 variance estimation for multistage designs can be obtained both under the
 Ultimate Cluster approximation or by means of an actual multistage computation.
-Estimates, standard errors, confidence intervals and design effects are provided
-for: Totals, Means, absolute and relative Frequency Distributions (marginal,
+\pkg{ReGenesees} offers comprehensive and advanced functionalities for
+calibration of survey weights. Estimates, standard errors, confidence intervals
+and design effects are provided for Horvitz-Thompson and Calibration estimators
+of: Totals, Means, absolute and relative Frequency Distributions (marginal,
 conditional and joint), Ratios, Shares and Ratios of Shares, Multiple Regression
 Coefficients and Quantiles (variance via the Woodruff method). \pkg{ReGenesees}
 also handles Complex Estimators, i.e. any user-defined estimator that can be
 expressed as an analytic function of Horvitz-Thompson or Calibration estimators
 of Totals or Means, by automatically linearizing them. The Design Covariance and
-Correlation between Complex Estimators is also provided. All analyses above can
-be carried out for arbitrary subpopulations. In addition, \pkg{ReGenesees} can
-trim calibration weights while preserving all the calibration constraints, and
+Correlation between Complex Estimators is also provided. Moreover, the package
+can compute estimates and sampling errors of complex Measures of Change derived
+from two not necessarily independent samples. All the analyses above can be
+carried out for arbitrary subpopulations. In addition, \pkg{ReGenesees} can trim
+calibration weights while preserving all the calibration constraints, and
 perform \sQuote{special purpose calibration} tasks, i.e. can calibrate on
 complex population parameters like Multiple Regression Coefficients.
 Lastly, \pkg{ReGenesees} offers a Generalized Variance Functions (GVF)
@@ -145,6 +149,9 @@ manual}.\cr\cr
 ***  svystatQ.............Estimation of Quantiles in Subpopulations
 ***  svystatL.............Estimation of Complex Estimators in
                           Subpopulations
+***  svyDelta.............Estimation of a Measure of Change from Two
+                          Not Necessarily Independent Samples
+  *  details..............Details on svyDelta results
  **  aux.estimates........Quick Estimates of Auxiliary Variables Totals
  **  CoV, Corr............Design Covariance and Correlation of Complex
                           Estimators in Subpopulations
@@ -186,6 +193,10 @@ manual}.\cr\cr
  **  fpcdat...............A Small But Not Trivial Artificial Sample
                           Data Set
  **  sbs..................Artificial Structural Business Statistics Data
+ **  Delta.el.............Two Artificial Samples of Elementary Units for
+                          Estimation of Change
+ **  Delta.clus...........Two Artificial Cluster Samples for Estimation
+                          of Change
  **  AF.gvf...............Example Data for GVF Model Fitting
 }
 }
@@ -201,4 +212,9 @@ sampling errors for functions of Horvitz-Thompson estimators), as well as on
 objects created by \code{\link{e.calibrate}} (yielding estimates and sampling
 errors for functions of Calibration estimators).
 }
+
+\references{
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+}
+
 \keyword{package}

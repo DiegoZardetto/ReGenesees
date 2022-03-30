@@ -28,12 +28,12 @@ Despite stratum jumpers are actually a concern only when both their design weigh
 
 Argument \code{design} identifies the survey design object that is (possibly) affected by stratum jumpers and contains the weights that will be smoothed. In case no stratum jumpers are found, the function will raise an error. Object \code{design} can only be a one-stage unit sampling design. Moreover, it must be a non-calibrated object. Should any of these conditions be false, the function would raise an error. Note, lastly, that function \code{smooth.strat.jump} will not smooth further weights that have already been smoothed. This is a deliberate design choice, devised to discourage over-smoothing and cosmetic adjustments of the survey weights.
 
-Formula \code{curr.strata} defines the \emph{current} strata variable, as observed at survey-time. This is different from the \emph{design} strata variable used to build object \code{design} using function \code{\link{e.svydesign}}, as the latter was measured at sampling-time. Function \code{smooth.strat.jump} will flag as stratum jumpers all the units whose \emph{current} stratum differs from the \emph{design} one. Note that, in case \emph{current} strata become available only after object \code{design} was created, you may use function \code{\link{des.addvars}} to add this new column to the old object.
+Formula \code{curr.strata} defines the \emph{current} strata variable, as observed at survey-time. This is different from the \emph{design} strata variable used to build object \code{design} using function \code{\link{e.svydesign}}, as the latter was measured at sampling-time. Function \code{smooth.strat.jump} will flag as stratum jumpers all the units whose \emph{current} stratum differs from the \emph{design} one. Note that the function will handle properly even \code{design} objects whose strata were collapsed for variance estimation purposes (via \code{\link{collapse.strata}}), by accessing and using the original \emph{non-collapsed} design strata. Note that, in case \emph{current} strata become available only after object \code{design} was created, you may use function \code{\link{des.addvars}} to add this new column to the old object.
 
 The weight smoothing process entails two steps:
 \enumerate{
-  \item {The weights are smoothed according to a given method (see below): \code{w -> w1}}
-  \item {The weights \code{w1} of all units are scaled by a global factor so as to preserve the initial overall sum of weights: \code{w1 -> w2 = scale * w1} with  \code{scale = sum(w)/sum(w1)}}
+  \item{The weights are smoothed according to a given method (see below): \code{w -> w1}}
+  \item{The weights \code{w1} of all units are scaled by a global factor so as to preserve the initial overall sum of weights: \code{w1 -> w2 = scale * w1} with  \code{scale = sum(w)/sum(w1)}}
 }
 
 Argument \code{method} controls the smoothing algorithm. Two methods can be selected: \code{'MinChange'} (the default) and \code{'Beaumont'} (which implements the proposal of [Beaumont, Rivest 09]). Note that the methods only differ with respect to step 1., as step 2. is identical for both of them.

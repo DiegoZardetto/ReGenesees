@@ -48,9 +48,11 @@ svystatL(design, expr, by = NULL,
 \details{
 This function computes weighted estimates for Complex Estimators using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and direct weights otherwise. Standard errors are calculated using the Taylor linearization technique.
 
+Function \code{svystatL} can handle any user-defined estimator that can be expressed as an analytic function of Horvitz-Thompson or Calibration estimators of Totals or Means, by automatically linearizing them (see [Zardetto, 15] for details).
+
 The mandatory argument \code{expr}, which identifies the Complex Estimator, must be an object of class \code{expression}. It can be specified just a single Complex Estimator at a time, i.e. \code{length(expr)} must be equal to \code{1}. Any analytic function of estimators of Totals and Means is allowed.\cr
-Inside \code{expr} the estimator of the Total of a variable is simply represented by the \emph{name} of the variable itself. To represent the estimator of the Mean of a variable \code{y}, the expression \code{y/ones} has to be used (\code{ones} being the convenience name of an artificial variable whose value is \code{1} for each sampling unit, so that its Total estimator actually estimates the population total). Variables referenced inside \code{expr} have obviously to belong to \code{design} and must be \code{numeric}.\cr
-At a minimal level, \code{svystatL} can be used to estimate Totals, Means and Ratios, thus reproducing the same results achieved by using the corresponding dedicated functions \code{svystatTM} and \code{svystatR}. For instance, calling \code{svystatL(design, expression(y/x))} is equivalent to invoking \code{svystatR(design, ~y, ~x)}, while using \code{svystatL(design, expression(y/ones))} or\cr
+Inside \code{expr} the estimator of the Total of a variable is simply represented by the \emph{name} of the variable itself. To represent the estimator of the Mean of a variable \code{y}, the expression \code{y/ones} has to be used (\code{ones} being the convenience name of an artificial variable - created on-the-fly - whose value is \code{1} for each elementary sampling unit, so that its Total estimator actually estimates the size of the population). Variables referenced inside \code{expr} must obviously belong to \code{design} and must be \code{numeric}.\cr
+At a minimal level, \code{svystatL} can be used to estimate Totals, Means, Ratios, etc., thus reproducing the same results achieved by using the corresponding dedicated functions \code{svystatTM}, \code{svystatR}, etc. For instance, calling \code{svystatL(design, expression(y/x))} is equivalent to invoking \code{svystatR(design, ~y, ~x)}, while using \code{svystatL(design, expression(y/ones))} or\cr
 \code{svystatTM(design, ~y, estimator = "Mean")} achieves an identical result.
 
 The mathematical expression of a Complex Estimator, as specified by argument \code{expr}, can involve \emph{'parameters'}, that is \emph{symbols} representing given, non-random, scalar, numeric \emph{values}. For each parameter appearing in \code{expr}, the value corresponding to its symbol will be searched following \R standard scoping rules, see e.g. the first example in Section \sQuote{Examples} for a practical illustration.
@@ -83,7 +85,11 @@ Diego Zardetto
 \references{
 Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Survey Sampling}}, Springer Verlag.
 
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+
 Kish, L. (1995). \emph{\dQuote{Methods for design effects}}. Journal of Official Statistics, Vol. 11, pp. 55-77.
+
+European Commission, Eurostat, (2013). \emph{\dQuote{Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition}}, Publications Office. doi: 10.2785/13579
 }
 
 \seealso{

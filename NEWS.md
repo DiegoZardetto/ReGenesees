@@ -5,6 +5,14 @@
 
 *  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.
 
+*  New function svyDelta: computes estimates and sampling errors of a Measure of
+   Change from two *not necessarily independent* samples. The function handles
+   any *complex* Measure of Change, i.e. arbitrary analytic functions of
+   Horvitz-Thompson or Calibration estimators derived from the two samples.
+   When the two samples are *not independent*, sampling covariance terms are
+   properly taken into account in the estimation of the sampling variance of the
+   Measure of Change.
+
 *  New function smooth.strat.jump: given a stratified one-stage unit sampling
    design object, smooths survey weights to cope with estimation issues that may
    arise from stratum jumpers.
@@ -21,8 +29,19 @@
    how hard the calibration problem at hand will turn out to be in terms of
    constrained optimization.
 
-*  All estimation functions now use a slightly better estimate of design effects
-   for sampling designs that are not self-weighting.
+*  All estimation functions (svystatTM, ..., svystatL) now use a slightly better
+   estimate of design effects for sampling designs that are not self-weighting
+   (see the added reference to Eurostat's Handbook).
+
+*  R versions >= 4.2.0 will no longer support 32-bit versions of Windows, thus
+   memory.limit() is going to disappear. Some ReGenesees functions, which used
+   the function to improve memory management in low performance Windows 32-bit
+   environments, have been modified accordingly (aux.estimates, bounds.hint,
+   e.calibrate, trimcal, and fill.template.R).
+
+*  Fixed a typo in documentation of ?extractors: confint() example was wrongly
+   using argument 'conf.lev' instead of the right one, 'level', which comes from
+   package stats.
 
 
 #  ReGenesees 2.1

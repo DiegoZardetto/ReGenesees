@@ -40,6 +40,10 @@ The \code{population.check} function can be used to convert a known totals data 
 
 \author{Diego Zardetto}
 
+\references{
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+}
+
 \seealso{
 \code{\link{e.calibrate}} for calibrating weights, \code{\link{pop.template}} for the definition of the class \code{pop.totals} and to build a "template" data frame for known population totals, \code{\link{fill.template}} to automatically fill the template when a sampling frame is available.
 }

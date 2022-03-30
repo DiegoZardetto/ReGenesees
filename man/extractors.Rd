@@ -23,7 +23,7 @@ deff(object, ...)
   \item{\dots}{Arguments for future expansion.}
 }
 \details{
-With the exception of \code{deff}, all extractor functions can be used on any object returned by a survey statistic function: the correct answer will be obtained whatever the call that generated the object. For getting the design effect, \code{object} must have been built with option \code{deff = TRUE}.  
+With the exception of \code{deff}, all extractor functions can be used on any object returned by a survey statistic function: the correct answer will be obtained whatever the call that generated the object. For getting the design effect, \code{object} must have been built with option \code{deff = TRUE} or \code{deff = "replace"}.  
 }
 \value{
 A data structure (typically inheriting from classes \code{matrix} or \code{data.frame}) storing the requested information.
@@ -70,11 +70,12 @@ VA.avg <- svystatTM(des,~va.imp2,estimator="Mean",deff=TRUE)
 deff(VA.avg)
 
 # Further examples:
-## extract the statistic:
+## Extract the statistic:
 coef(VA.avg)
-## extract the confidence interval at 90%
+## Extract the confidence interval at 90%
 ## confidence level (the default would be 95%):
-confint(VA.avg, conf.lev=0.9)
+confint(VA.avg, level=0.9)
+## note the argument 'level', which comes from confint function in package stats
 }
 
 \keyword{survey}

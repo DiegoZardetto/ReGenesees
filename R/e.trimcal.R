@@ -172,13 +172,15 @@ function (cal.design, w.range = c(-Inf, Inf),
                      (ncol(df.population) - length(all.vars(partition)))
                     }
         nrec <- nrow(e.df)
-        MEM.mega <- memory.limit()
+        # MEM.mega <- memory.limit()
+        # See the NOTE on memory.limit() after 4.2.0 in e.calibrate
+        MEM.mega <- 4096
         mem.frac <- 10                 #Default value
         need.gc <- ( ((8 * nrec * naux )/(1024^2))  > (MEM.mega / mem.frac) )
     }
     if (need.gc) 
         warning("Complete calibration model-matrix ", if (identical(partition, FALSE)) "takes" else "would take",
-                " up more than 1/10 of maximum allocable memory", immediate. = TRUE)
+                " up more than 0.4 GB of allocable memory", immediate. = TRUE)
 
     gc.here <- function(doit) {
     #################################################

@@ -51,16 +51,20 @@ unequally weighted survey designs. Sampling variance estimation for nonlinear
 (smooth) estimators is obtained by Taylor-series linearization. Sampling
 variance estimation for multistage designs can be obtained both under the
 Ultimate Cluster approximation or by means of an actual multistage computation.
-Estimates, standard errors, confidence intervals and design effects are provided
-for: Totals, Means, absolute and relative Frequency Distributions (marginal,
+ReGenesees offers comprehensive and advanced functionalities for
+calibration of survey weights. Estimates, standard errors, confidence intervals
+and design effects are provided for Horvitz-Thompson and Calibration estimators
+of: Totals, Means, absolute and relative Frequency Distributions (marginal,
 conditional and joint), Ratios, Shares and Ratios of Shares, Multiple Regression
 Coefficients and Quantiles (variance via the Woodruff method). ReGenesees
 also handles Complex Estimators, i.e. any user-defined estimator that can be
 expressed as an analytic function of Horvitz-Thompson or Calibration estimators
 of Totals or Means, by automatically linearizing them. The Design Covariance and
-Correlation between Complex Estimators is also provided. All analyses above can
-be carried out for arbitrary subpopulations. In addition, ReGenesees can
-trim calibration weights while preserving all the calibration constraints, and
+Correlation between Complex Estimators is also provided. Moreover, the package
+can compute estimates and sampling errors of complex Measures of Change derived
+from two not necessarily independent samples. All the analyses above can be
+carried out for arbitrary subpopulations. In addition, ReGenesees can trim
+calibration weights while preserving all the calibration constraints, and
 perform &amp;#8216;special purpose calibration&amp;#8217; tasks, i.e. can calibrate on
 complex population parameters like Multiple Regression Coefficients.
 Lastly, ReGenesees offers a Generalized Variance Functions (GVF)
@@ -169,16 +173,20 @@ unequally weighted survey designs. Sampling variance estimation for nonlinear
 (smooth) estimators is obtained by Taylor-series linearization. Sampling
 variance estimation for multistage designs can be obtained both under the
 Ultimate Cluster approximation or by means of an actual multistage computation.
-Estimates, standard errors, confidence intervals and design effects are provided
-for: Totals, Means, absolute and relative Frequency Distributions (marginal,
+<span class="pkg">ReGenesees</span> offers comprehensive and advanced functionalities for
+calibration of survey weights. Estimates, standard errors, confidence intervals
+and design effects are provided for Horvitz-Thompson and Calibration estimators
+of: Totals, Means, absolute and relative Frequency Distributions (marginal,
 conditional and joint), Ratios, Shares and Ratios of Shares, Multiple Regression
 Coefficients and Quantiles (variance via the Woodruff method). <span class="pkg">ReGenesees</span>
 also handles Complex Estimators, i.e. any user-defined estimator that can be
 expressed as an analytic function of Horvitz-Thompson or Calibration estimators
 of Totals or Means, by automatically linearizing them. The Design Covariance and
-Correlation between Complex Estimators is also provided. All analyses above can
-be carried out for arbitrary subpopulations. In addition, <span class="pkg">ReGenesees</span> can
-trim calibration weights while preserving all the calibration constraints, and
+Correlation between Complex Estimators is also provided. Moreover, the package
+can compute estimates and sampling errors of complex Measures of Change derived
+from two not necessarily independent samples. All the analyses above can be
+carried out for arbitrary subpopulations. In addition, <span class="pkg">ReGenesees</span> can trim
+calibration weights while preserving all the calibration constraints, and
 perform &#8216;special purpose calibration&#8217; tasks, i.e. can calibrate on
 complex population parameters like Multiple Regression Coefficients.
 Lastly, <span class="pkg">ReGenesees</span> offers a Generalized Variance Functions (GVF)
@@ -302,6 +310,9 @@ manual</strong>.<br /><br /></p>
 ***  svystatQ.............Estimation of Quantiles in Subpopulations
 ***  svystatL.............Estimation of Complex Estimators in
                           Subpopulations
+***  svyDelta.............Estimation of a Measure of Change from Two
+                          Not Necessarily Independent Samples
+  *  details..............Details on svyDelta results
  **  aux.estimates........Quick Estimates of Auxiliary Variables Totals
  **  CoV, Corr............Design Covariance and Correlation of Complex
                           Estimators in Subpopulations
@@ -346,6 +357,10 @@ manual</strong>.<br /><br /></p>
  **  fpcdat...............A Small But Not Trivial Artificial Sample
                           Data Set
  **  sbs..................Artificial Structural Business Statistics Data
+ **  Delta.el.............Two Artificial Samples of Elementary Units for
+                          Estimation of Change
+ **  Delta.clus...........Two Artificial Cluster Samples for Estimation
+                          of Change
  **  AF.gvf...............Example Data for GVF Model Fitting
 </pre>
 
@@ -360,6 +375,9 @@ used on objects created by <code><a href='e.svydesign.html'>e.svydesign</a></cod
 sampling errors for functions of Horvitz-Thompson estimators), as well as on
 objects created by <code><a href='e.calibrate.html'>e.calibrate</a></code> (yielding estimates and sampling
 errors for functions of Calibration estimators).</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Zardetto, D. (2015) <em>&#8220;ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys&#8221;</em>. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -367,6 +385,7 @@ errors for functions of Calibration estimators).</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#a-quick-reading-guide-to-the-reference-manual">A Quick Reading Guide to the Reference Manual</a></li>
       <li><a href="#table-of-contents">TABLE OF CONTENTS</a></li>
+      <li><a href="#references">References</a></li>
     </ul>
 
   </div>

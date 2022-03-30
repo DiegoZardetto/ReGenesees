@@ -20,10 +20,11 @@ emptylev.check <- function (data){
     #############################################################
     need.gc <- FALSE
     if (Sys.info()["sysname"] == "Windows"){
-        need.gc <- ((object.size(data)/(1024^2)) > memory.limit()/10)
+        need.gc <- ((object.size(data)/(1024^2)) > 4096/10)
+        # See the NOTE on memory.limit() after 4.2.0 in e.calibrate
     }
     if (need.gc) 
-        warning("Input data frame takes up more than 1/10 of maximum allocable memory",
+        warning("Input analytic object takes up more than 0.4 GB of allocable memory", 
                 immediate. = TRUE)
     gc.here <- function(doit) {
     #################################################

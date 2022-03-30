@@ -97,6 +97,8 @@ Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Sur
 
 Kish, L. (1995). \emph{\dQuote{Methods for design effects}}. Journal of Official Statistics, Vol. 11, pp. 55-77.
 
+European Commission, Eurostat, (2013). \emph{\dQuote{Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition}}, Publications Office. doi: 10.2785/13579
+
 Korn, E.L., Graubard, B.I. (1990) \emph{\dQuote{Simultaneous testing of regression coefficients with complex survey
 data: Use of Bonferroni t statistics}}. The American Statistician, 44, 270-276.
 }

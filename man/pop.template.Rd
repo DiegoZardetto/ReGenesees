@@ -41,6 +41,10 @@ The \code{pop.totals} class is a specialization of the \code{data.frame} class; 
 \code{\link{e.calibrate}} for calibrating weights, \code{\link{population.check}} to check that the known totals data frame satisfies the standard required by \code{e.calibrate}, \code{\link{pop.desc}} to provide a natural language description of the template structure, and \code{\link{fill.template}} to automatically fill the template when a sampling frame is available.
 }
 
+\references{
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+}
+
 \examples{
 # Creation of population totals template data frames for different
 # calibration problems (if the calibration models can be factorized 

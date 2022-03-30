@@ -1,5 +1,5 @@
 `svyDelta` <- function(expr, design1, design2, by = NULL,
-                       rho.UNSTRAT = FALSE, des.INDEP = FALSE,
+                       des.INDEP = FALSE, rho.STRAT = c("Full", "noJump", "noStrat"),
                        vartype = c("se", "cv", "cvpct", "var"), conf.int = FALSE, conf.lev = 0.95) {
 
 # First verify if the function has been called inside another function:
@@ -53,6 +53,11 @@ if (!is.null(by)) {
     }
 
 ## Stratification
+# Approach to handle strata in estimation of rho
+rho.STRAT <- match.arg(rho.STRAT)
+rho.UNSTRAT <- isTRUE(rho.STRAT == "noStrat")
+rho.NOSTRATJUMP <- isTRUE(rho.STRAT == "noJump")
+
 has.strata1 <- design1$has.strata
 has.strata2 <- design2$has.strata
 if (has.strata1 && has.strata2){
@@ -67,12 +72,17 @@ if (has.strata1 && has.strata2){
         }
     }
 
-## In case of stratification, should we use it to compute RHO?
-if (has.strata1 || has.strata2) {
-     if (isTRUE(rho.UNSTRAT) && !des.INDEP) {
-         warning("Stratification of input design objects disregarded in estimating design correlations")
-        }
-    }
+## In case of stratification, should we use it to compute RHO? And how?
+# if (has.strata1 || has.strata2) {
+#      if (isTRUE(rho.UNSTRAT) && !des.INDEP) {
+#          # Not sure wheter a warning is appropriate for a user tunable option...
+#          warning("Stratification of input design objects disregarded in estimating sampling correlations")
+#         }
+#      if (isTRUE(rho.NOSTRATJUMP) && !des.INDEP) {
+#          # Not sure wheter a warning is appropriate for a user tunable option...
+#          warning("Units that changed stratum from 'design1' to 'design2' (if any) disregarded in estimating sampling correlations")
+#         }
+#     }
 use.strata <- has.strata && !isTRUE(rho.UNSTRAT)
 
 ## Clustering
@@ -91,7 +101,7 @@ if (is.element1 && is.element2){
 ## Domain estimation
 if (!is.null(by)) {
      stat <- svyby.svydelta(expr = expr, by = by, design1 = design1, design2 = design2,
-                   has.strata = use.strata, is.element = is.element, are.indep = des.INDEP,
+                   has.strata = use.strata, is.element = is.element, are.indep = des.INDEP, no.strat.jump = rho.NOSTRATJUMP,
                    keep.names = TRUE, verbose = FALSE,
                    vartype = vartype, ci.lev = conf.lev,
                    drop.empty.groups = TRUE, covmat = FALSE, na.rm = na.rm)
@@ -104,7 +114,7 @@ if (!is.null(by)) {
      design1 <- des.addvars(design1, FaKe.by = factor(1))
      design2 <- des.addvars(design2, FaKe.by = factor(1))
      stat <- svyby.svydelta(expr = expr, by = ~FaKe.by, design1 = design1, design2 = design2,
-                   has.strata = use.strata, is.element = is.element, are.indep = des.INDEP,
+                   has.strata = use.strata, is.element = is.element, are.indep = des.INDEP, no.strat.jump = rho.NOSTRATJUMP,
                    keep.names = TRUE, verbose = FALSE,
                    vartype = vartype, ci.lev = conf.lev,
                    drop.empty.groups = TRUE, covmat = FALSE, na.rm = na.rm)
@@ -230,12 +240,15 @@ if (!is.null(by)) {
   details <- attr(object, "details")
   if ("msg" %in% colnames(details)) {
      details <- unique(details[["msg"]])
+     cat(details, "\n", sep="")
+    } else {
+     print(details)
     }
-  print(details)
+  return(invisible(details))
 }
 
 
-`svyby.svydelta` <- function(expr, by, design1, design2, has.strata, is.element, ..., 
+`svyby.svydelta` <- function(expr, by, design1, design2, has.strata, is.element, are.indep, no.strat.jump, ..., 
                              keep.names=TRUE, verbose=FALSE,
                              vartype=c("se","ci","ci","cv","cvpct","var"), ci.lev=0.95,
                              drop.empty.groups=TRUE, covmat=FALSE){
@@ -312,7 +325,7 @@ if (!is.null(by)) {
                         FUN = function(i, j){
                                 if(verbose) print(as.character(byfactor1[i]))
                                 svydelta(expr, design1[byfactor1 %in% byfactor1[i], ], design2[byfactor2 %in% byfactor2[j], ],
-                                         has.strata = has.strata, is.element = is.element, ...
+                                         has.strata = has.strata, is.element = is.element, are.indep = are.indep, no.strat.jump = no.strat.jump, ...
                                         )
                             }, SIMPLIFY = FALSE
                     )

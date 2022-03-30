@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2</span>
       </span>
     </div>
 
@@ -165,11 +165,14 @@
     <h2 class="hasAnchor" id="performance"><a class="anchor" href="#performance"></a>Performance</h2>
 
     <p>Real-world calibration tasks (e.g. in the field of Official Statistics) can simultaneously involve hundreds of auxiliary variables and refer to target populations of several million units. In such circumstances, the naive aggregation of the calibration <code>model.matrix</code> of <code>universe</code> may turn out to be too memory-demanding (at least in ordinary PC environments) and determine a memory-failure error.</p>
-<p>The alternative implemented in <code>fill.template</code> is to: (i) split <code>universe</code> in chunks, (ii) compute partial sums of auxiliary variables chunk-by-chunk, (iii) update <code>template</code> by adding progressively such partial sums. This alternative is triggered by parameter <code>mem.frac</code>, which also implicitly controls the number of chunks. The function estimates the memory that would be used to store the <em>full</em> <code>model.matrix</code> of <code>universe</code> and compares it to the maximum memory allocable on the machine (as returned by <code><a href='https://rdrr.io/r/utils/memory.size.html'>memory.limit</a></code>): if the resulting ratio is bigger than <code>1/mem.frac</code>, the memory-efficient algorithm starts; the number of chunks in which <code>universe</code> will then be split is determined in such a way that the memory needed to store the <code>model.matrix</code> of <em>each</em> chunk does not exceed a fraction <code>1/mem.frac</code> of the maximum allocable memory.</p>
+<p>The alternative implemented in <code>fill.template</code> is to: (i) split <code>universe</code> in chunks, (ii) compute partial sums of auxiliary variables chunk-by-chunk, (iii) update <code>template</code> by adding progressively such partial sums. This alternative is triggered by parameter <code>mem.frac</code>, which also implicitly controls the number of chunks. The function estimates the memory that would be used to store the <em>full</em> <code>model.matrix</code> of <code>universe</code> and compares it to 4 GB: if the resulting ratio is bigger than <code>1/mem.frac</code>, the memory-efficient algorithm starts; the number of chunks in which <code>universe</code> will then be split is determined in such a way that the memory needed to store the <code>model.matrix</code> of <em>each</em> chunk does not exceed a fraction <code>1/mem.frac</code> of 4 GB.</p>
 <p>Whenever <code>fill.template</code> switches to the memory-efficient "chunking" algorithm, a warning message will signal it and will specify as well the number of chunks that are being processed.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code>pop.totals</code> storing the <em>actual</em> values of the population totals for the specified calibration task, ready to be safely passed to <code><a href='e.calibrate.html'>e.calibrate</a></code>.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Zardetto, D. (2015) <em>&#8220;ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys&#8221;</em>. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating weights, <code><a href='pop.template.html'>pop.template</a></code> for the definition of the class <code>pop.totals</code> and to build a "template" data frame for known population totals, <code><a href='describe.html'>pop.desc</a></code> to provide a natural language description of the template structure, and <code><a href='into.html'>%into%</a></code> for the compression operator for nested factors.</p></div>
@@ -297,6 +300,7 @@
       <li><a href="#details">Details</a></li>
       <li><a href="#performance">Performance</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#references">References</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

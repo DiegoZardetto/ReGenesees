@@ -218,7 +218,7 @@ Delta
 }
 
 
-`svydelta` <- function(expr, design1, design2, has.strata, is.element, are.indep, ...){
+`svydelta` <- function(expr, design1, design2, has.strata, is.element, are.indep, no.strat.jump, ...){
 ################################################################################
 # Compute RHO along the lines of Berger and Priam 2016.                        #
 ################################################################################
@@ -361,6 +361,9 @@ data <- merge(data1, data2, all = TRUE)
 # data1
 data$Z1 <- data$ones1
 data$Z1[is.na(data$Z1)] <- 0
+# NOTE: To save memory for stratified designs will use a more parsimonious
+#       multivariate regression model than proposed by Berger & Priam's Z1 * Z2
+data$z1 <- data$Z1
 if (has.strata) {
      data$Z1 <- data$strata1
      data$Z1 <- as.character(data$Z1)
@@ -370,6 +373,9 @@ if (has.strata) {
 # data2
 data$Z2 <- data$ones2
 data$Z2[is.na(data$Z2)] <- 0
+# NOTE: To save memory for stratified designs will use a more parsimonious
+#       multivariate regression model than proposed by Berger & Priam's Z1 * Z2
+data$z2 <- data$Z2
 if (has.strata) {
      data$Z2 <- data$strata2
      data$Z2 <- as.character(data$Z2)
@@ -398,6 +404,10 @@ data <- merge(data1, data2, all = TRUE)
 # data1
 data$Z1 <- data$ones1
 data$Z1[is.na(data$Z1)] <- 0
+# NOTE: To save memory for stratified designs, if no.strat.jump = TRUE, will use
+#       a more parsimonious multivariate regression model than proposed by
+#       Berger & Priam's Z1 * Z2
+data$z1 <- data$Z1
 if (has.strata) {
      data$Z1 <- data$strata1
      data$Z1 <- as.character(data$Z1)
@@ -407,6 +417,10 @@ if (has.strata) {
 # data2
 data$Z2 <- data$ones2
 data$Z2[is.na(data$Z2)] <- 0
+# NOTE: To save memory for stratified designs, if no.strat.jump = TRUE, will use
+#       a more parsimonious multivariate regression model than proposed by
+#       Berger & Priam's Z1 * Z2
+data$z2 <- data$Z2
 if (has.strata) {
      data$Z2 <- data$strata2
      data$Z2 <- as.character(data$Z2)
@@ -454,17 +468,46 @@ nc <- sum(data$ones1 * data$ones2, na.rm = TRUE)
 # merge of design1 and design2 (nm = n1 + n2 - nc)
 nm <- NROW(data)
 # Overlap rate
-overlap.rate <- nc / mean(n1, n2)
+overlap.rate <- nc / mean(c(n1, n2))
 
 # Is the overlap full?
 full.overlap <- ( n1 == n2 ) && ( nm == n1 )
 
-if ( !has.strata && full.overlap ) {
-     mm <- lm(formula = cbind(wy1, wy2) ~ Z1 - 1, data = data)
-    } else {
-     # When has.strata meaningful to keep strata interactions even if overlap
-     # is full, to take care of dynamic strata (e.g. stratum jumpers from 1 to 2)
-     mm <- lm(formula = cbind(wy1, wy2) ~ Z1 * Z2 - 1, data = data)
+# Unstratified case
+if (!has.strata) {
+     if (full.overlap) {
+          mm <- lm(formula = cbind(wy1, wy2) ~ z1 - 1, data = data)
+        } else {
+          mm <- lm(formula = cbind(wy1, wy2) ~ (z1 * z2) - 1, data = data)
+        }
+    }
+# Stratified case
+if (has.strata) {
+     # NOTE: If has.strata it is still meaningful to keep strata interactions
+     #       even if overlap is full, to take care of dynamic strata (e.g.
+     #       stratum jumpers from 1 to 2 in the *domain*)
+     #
+     # NOTE: However, one has to take care of the special case when the user
+     #	     asks for domain estimates at *stratum* level, as this means that
+     #       some of the two Z factors can happen to have just 1 level, which
+     #	     would result into an error of lm()
+     if ( (length(levels(data$Z1)) == 1) ||  (length(levels(data$Z2)) == 1) ) {
+         # NOTE: This condition means the user asked for domain estimates at
+         #       *stratum* level
+          mm <- lm(formula = cbind(wy1, wy2) ~ (z1 * z2) - 1, data = data)
+        } else {
+          if (no.strat.jump) {
+              # Save memory and processing time: obtain correct results if there
+              # are no stratum-jumpers from design1 to design2
+              mm <- lm(formula = cbind(wy1, wy2) ~ (z1 * z2) : (Z1 + Z2) - 1, data = data)
+            }
+          else {
+              # Full complexity: fully accommodates dynamic stratification, but
+              # likely unaffordable for highly stratified sampling design
+              # (especially of units)
+              mm <- lm(formula = cbind(wy1, wy2) ~ (Z1 * Z2) - 1, data = data)
+            }
+        }
     }
 
 # Get the residual variance covariance matrix from the model fit

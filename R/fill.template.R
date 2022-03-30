@@ -60,7 +60,9 @@ function(universe, template, mem.frac = 10)
     if (Sys.info()["sysname"] == "Windows"){
         naux  <- if (identical(partition, FALSE)) ncol(template) else (ncol(template) - length(partition.vars))
         nrec <- nrow(universe)
-        MEM.mega <- memory.limit()
+        # MEM.mega <- memory.limit()
+        # See the NOTE on memory.limit() after 4.2.0 in e.calibrate
+        MEM.mega <- 4096
     #   mem.frac <- 10 !Taken as default value: user must be able to change it if necessary!
         need.fetch <- ( ((8 * nrec * naux )/(1024^2))  > (MEM.mega / mem.frac) )
     }
@@ -68,7 +70,7 @@ function(universe, template, mem.frac = 10)
     if (need.fetch) {
         nchunks <- ceiling( 2 * ((8 * nrec * naux )/(1024^2)) * (mem.frac / MEM.mega) )
         warning("Processing 'universe' as a whole would require more than 1/",
-                mem.frac," of maximum allocable memory:\n it will be split into ",
+                mem.frac," of 0.4 GB:\n it will be split into ",
                 nchunks, " chunks instead.", immediate. = TRUE)
         if (!is.numeric(nchunks) || (nchunks < 1) || (nchunks > nrec)){
             stop("Chunks number doesn't satisfy 1 <= nchunks <= ", nrec,"!")

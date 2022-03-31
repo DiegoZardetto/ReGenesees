@@ -66,13 +66,19 @@ if (has.strata1 && has.strata2){
      if (!has.strata1 && !has.strata2) {
          has.strata <- FALSE
         } else {
-         if (!isTRUE(rho.UNSTRAT)) {
+         if (!isTRUE(rho.UNSTRAT) && !des.INDEP) {
              stop("Objects 'design1' and 'design2' must be either both stratified or both unstratified")
             }
         }
     }
 
-## In case of stratification, should we use it to compute RHO? And how?
+# If samples are declared to have been sampled independently, no rho estimation
+# needed and thus can set has.strata arbitrarily (will not be used):
+if (des.INDEP) {
+     has.strata <- FALSE
+    }
+
+## In case of stratification, should we use it to compute rho? And how?
 # if (has.strata1 || has.strata2) {
 #      if (isTRUE(rho.UNSTRAT) && !des.INDEP) {
 #          # Not sure wheter a warning is appropriate for a user tunable option...
@@ -94,8 +100,16 @@ if (is.element1 && is.element2){
      if (!is.element1 && !is.element2) {
          is.element <- FALSE
         } else {
-         stop("Objects 'design1' and 'design2' must be either both element sampling designs or both cluster sampling designs")
+         if (!des.INDEP) {
+             stop("Objects 'design1' and 'design2' must be either both element sampling designs or both cluster sampling designs")
+            }
         }
+    }
+
+# If samples are declared to have been sampled independently, no rho estimation
+# needed and thus can set is.element arbitrarily (will not be used):
+if (des.INDEP) {
+     is.element <- TRUE
     }
 
 ## Domain estimation

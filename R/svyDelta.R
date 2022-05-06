@@ -113,6 +113,7 @@ if (des.INDEP) {
     }
 
 ## Domain estimation
+na.rm <- FALSE  # Missing values are not handled
 if (!is.null(by)) {
      stat <- svyby.svydelta(expr = expr, by = by, design1 = design1, design2 = design2,
                    has.strata = use.strata, is.element = is.element, are.indep = des.INDEP, no.strat.jump = rho.NOSTRATJUMP,

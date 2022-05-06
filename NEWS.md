@@ -39,6 +39,10 @@
    environments, have been modified accordingly (aux.estimates, bounds.hint,
    e.calibrate, trimcal, and fill.template.R).
 
+*  Function pop.fuse() did not properly handle the corner case in which the
+   ordinary control totals data frame 'pop' derives from a pure intercept
+   calibration model described as calmodel = ~ 1. Fixed.
+
 *  Fixed a typo in documentation of ?extractors: confint() example was wrongly
    using argument 'conf.lev' instead of the right one, 'level', which comes from
    package stats.

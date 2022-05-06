@@ -53,7 +53,7 @@ min.g <- g.range[1]
 max.g <- g.range[2]
 
 # If the calibration task is *not* special purpose
-if (data.class(pop.totals) == "pop.totals") {
+# if (data.class(pop.totals) == "pop.totals") {
      # Draw the scatter plot
      plot(aux.HT.v, aux.totals.v, xlab = xlab, ylab = ylab, ...)
      # Draw the 3 lines
@@ -70,10 +70,10 @@ if (data.class(pop.totals) == "pop.totals") {
         }
      # Return
      return(invisible(g.range))
-    }
+#     }
 
-# This should not happen
-return(invisible(NULL))
+# # This should not happen
+# return(invisible(NULL))
 }
 
 `pop.plot.spc.pop` <- function(pop.totals, design,
@@ -123,7 +123,7 @@ min.g <- g.range[1]
 max.g <- g.range[2]
 
 # If the calibration task is a special purpose one
-if (data.class(pop.totals) == "spc.pop") {
+# if (data.class(pop.totals) == "spc.pop") {
      # If it is *not* fused
      if (!is.fused.spc(pop.totals)) {
          # Draw the scatter plot
@@ -191,8 +191,8 @@ if (data.class(pop.totals) == "spc.pop") {
          # Return
          return(invisible(g.range))
         }
-    }
+#     }
 
-# This should not happen
-return(invisible(NULL))
+# # This should not happen
+# return(invisible(NULL))
 }

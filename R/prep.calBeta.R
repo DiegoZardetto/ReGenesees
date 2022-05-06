@@ -621,6 +621,10 @@ pop.has.intercept <- any(attr(pop, "which.term.col") == 0)
 spc.pop.calmodel <- attr(spc.pop, "spec.purp.calib")$calmodel
 # Get pop's calmodel string
 pop.calmodel.char <- form.to.char(pop.calmodel)
+
+# Special case: pop's calmodel is ~1
+pop.is.N <- isTRUE(pop.calmodel.char == "~ 1") # DEBUG 1/4/2022
+
 if (!pop.has.intercept){
      # Strip '- 1' from pop.calmodel
      pop.calmodel.char <- gsub("- 1", "", pop.calmodel.char)
@@ -630,7 +634,12 @@ spc.pop.calmodel.char <- form.to.char(spc.pop.calmodel)
 # Strip '~' from spc.pop.calmodel
 spc.pop.calmodel.char <- gsub("~", "", spc.pop.calmodel.char)
 # Fuse pop and spc.pop *calmodels* ( order: pop U spc.pop )
-calmodel <- as.formula(paste(pop.calmodel.char, spc.pop.calmodel.char, sep = " + "), env = .GlobalEnv)
+fused.calmodel.char <- paste(pop.calmodel.char, spc.pop.calmodel.char, sep = " + ")
+if (pop.is.N) {
+     # Strip '- 1' from fused.calmodel.char, otherwise would get ~ 1 + (...) - 1  # DEBUG 1/4/2022
+     fused.calmodel.char <- gsub("- 1", "", fused.calmodel.char)
+     }
+calmodel <- as.formula(fused.calmodel.char, env = .GlobalEnv)
 
 # Build a template for the fused calmodel
 # NOTE: This is indeed *necessary*, as terms order in fused calmodel will *not* 

@@ -149,6 +149,9 @@ manual}.\cr\cr
 ***  svystatQ.............Estimation of Quantiles in Subpopulations
 ***  svystatL.............Estimation of Complex Estimators in
                           Subpopulations
+***  svySigma.............Estimation of the Population Standard Deviation of
+                          a Variable
+***  svySigma2............Estimation of the Population Variance of a Variable
 ***  svyDelta.............Estimation of a Measure of Change from Two
                           Not Necessarily Independent Samples
   *  details..............Details on svyDelta results

@@ -186,7 +186,7 @@ directly <- !( length(sys.calls()) > 1 )
             }
             else {
                 if (few.fpc) 
-                    stop("If both fpc and sel.rep.str are passed, fpcs must be specified for each sampling stage!")
+                    stop("If both fpc and self.rep.str are passed, fpcs must be specified for each sampling stage!")
                 this.selfrep <- selfrep(data, ids.charvect, fpc.charvect, srs.char, strata.char)
                 data[["var.PSU"]] <- this.selfrep$var.PSU
                 if (!is.null(fpc)) {

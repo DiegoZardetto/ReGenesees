@@ -137,11 +137,13 @@
 <ul>
 <li><p>THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.</p></li>
 <li><p>New function svyDelta: computes estimates and sampling errors of a Measure of Change from two <em>not necessarily independent</em> samples. The function handles any <em>complex</em> Measure of Change, i.e. arbitrary analytic functions of Horvitz-Thompson or Calibration estimators derived from the two samples. When the two samples are <em>not independent</em>, sampling covariance terms are properly taken into account in the estimation of the sampling variance of the Measure of Change.</p></li>
+<li><p>New functions svySigma2 and svySigma: compute estimates and sampling errors of the Population Variance and Standard Deviation of numeric variables (in subpopulations too).</p></li>
 <li><p>New function smooth.strat.jump: given a stratified one-stage unit sampling design object, smooths survey weights to cope with estimation issues that may arise from stratum jumpers.</p></li>
 <li><p>New function UWE: computes the Unequal Weighting Effect of design objects. If the input design is the outcome of a ‘weight-changing pipeline’, w0 -&gt; w1 -&gt; … -&gt; w, i.e. was obtained by applying an arbitrary chain of ReGenesees functions that modify the weights (e.g. smooth.strat.jump, e.calibrate, ext.calibrated, trimcal, …), then the function computes the UWE of the overall, cumulative weight adjustment from w0 to w.</p></li>
 <li><p>New function pop.plot: draws a scatter plot of calibration control totals vs current estimates. This plot may provide a first-level, rough assessment of how hard the calibration problem at hand will turn out to be in terms of constrained optimization.</p></li>
 <li><p>All estimation functions (svystatTM, …, svystatL) now use a slightly better estimate of design effects for sampling designs that are not self-weighting (see the added reference to Eurostat’s Handbook).</p></li>
 <li><p>R versions &gt;= 4.2.0 will no longer support 32-bit versions of Windows, thus memory.limit() is going to disappear. Some ReGenesees functions, which used the function to improve memory management in low performance Windows 32-bit environments, have been modified accordingly (aux.estimates, bounds.hint, e.calibrate, trimcal, and fill.template.R).</p></li>
+<li><p>Function pop.fuse() did not properly handle the corner case in which the ordinary control totals data frame ‘pop’ derives from a pure intercept calibration model described as calmodel = ~ 1. Fixed.</p></li>
 <li><p>Fixed a typo in documentation of ?extractors: confint() example was wrongly using argument ‘conf.lev’ instead of the right one, ‘level’, which comes from package stats.</p></li>
 </ul>
 </div>

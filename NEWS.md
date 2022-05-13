@@ -13,6 +13,10 @@
    properly taken into account in the estimation of the sampling variance of the
    Measure of Change.
 
+*  New functions svySigma2 and svySigma: compute estimates and sampling errors
+   of the Population Variance and Standard Deviation of numeric variables (in 
+   subpopulations too).
+
 *  New function smooth.strat.jump: given a stratified one-stage unit sampling
    design object, smooths survey weights to cope with estimation issues that may
    arise from stratum jumpers.

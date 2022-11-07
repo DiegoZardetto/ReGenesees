@@ -81,7 +81,7 @@ if (des.INDEP) {
 ## In case of stratification, should we use it to compute rho? And how?
 # if (has.strata1 || has.strata2) {
 #      if (isTRUE(rho.UNSTRAT) && !des.INDEP) {
-#          # Not sure wheter a warning is appropriate for a user tunable option...
+#          # Not sure whether a warning is appropriate for a user tunable option...
 #          warning("Stratification of input design objects disregarded in estimating sampling correlations")
 #         }
 #      if (isTRUE(rho.NOSTRATJUMP) && !des.INDEP) {

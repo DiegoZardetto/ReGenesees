@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -210,7 +210,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Function <code>svySigma</code> computes estimates and sampling errors of the Population Standard Deviation of a numeric variable.</p>
+    <p>Function <code>svySigma</code> computes estimates and sampling errors of the Population Standard Deviation of a numeric variable. These estimates play an important role in many contexts, including sample size guesstimation and power calculations.</p>
 <p>As the Population Standard Deviation is a <em>complex</em> estimator, <code>svySigma</code> automatically linearizes it to estimate its sampling variance. Automatic linearization is performed as function <code><a href='svystatL.html'>svystatL</a></code> would do, along the lines illustrated in [Zardetto, 15]. This, of course, also entails the usage of the residuals technique when the input <code>design</code> object is calibrated (i.e. of class <code>cal.analytic</code>).</p>
 <p>The mandatory argument <code>y</code> identifies the variable of interest. The <code>design</code> variable referenced by <code>y</code> must be <code>numeric</code>.</p>
 <p>If variable <code>y</code> is binary (i.e. has only values <code>0</code> and <code>1</code>), the estimated Population Standard Deviation coincides with the classical Bernoulli expression <code><a href='https://rdrr.io/r/base/MathFun.html'>sqrt(p*(1 - p))</a></code>, where <code>p</code> is the estimated proportion of population units with <code>y = 1</code> (see &#8216;Examples&#8217;).</p>

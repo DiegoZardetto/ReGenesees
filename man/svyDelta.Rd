@@ -118,7 +118,7 @@ Function \code{details} provides more details about the results of function \cod
   V2........Estimated sampling variance of the linearized Measure of Change,
             arranged in standard difference form, w.r.t. design2: V2(L.2)
   Vind......Estimated sampling variance of the linearized Measure of Change,
-            as would be obtained if design1 and design were independent: V1 + V2
+            as would be obtained if design1 and design2 were independent: V1 + V2
   rho.......Estimated sampling correlation between L.1 and L.2
   CoV.......Estimated sampling covariance between L.1 and L.2:
             rho * sqrt(V1) * sqrt(V2)

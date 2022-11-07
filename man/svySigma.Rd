@@ -41,7 +41,7 @@ svySigma(design, y, by = NULL,
   \item{\dots}{Additional arguments to \code{coef}, \ldots, \code{confint} methods (if any).}
 }
 \details{
-Function \code{svySigma} computes estimates and sampling errors of the Population Standard Deviation of a numeric variable.
+Function \code{svySigma} computes estimates and sampling errors of the Population Standard Deviation of a numeric variable. These estimates play an important role in many contexts, including sample size guesstimation and power calculations.
 
 As the Population Standard Deviation is a \emph{complex} estimator, \code{svySigma} automatically linearizes it to estimate its sampling variance. Automatic linearization is performed as function \code{\link{svystatL}} would do, along the lines illustrated in [Zardetto, 15]. This, of course, also entails the usage of the residuals technique when the input \code{design} object is calibrated (i.e. of class \code{cal.analytic}).
 

@@ -3,8 +3,6 @@
 #  ReGenesees 2.2
 
 
-*  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET.
-
 *  New function svyDelta: computes estimates and sampling errors of a Measure of
    Change from two *not necessarily independent* samples. The function handles
    any *complex* Measure of Change, i.e. arbitrary analytic functions of

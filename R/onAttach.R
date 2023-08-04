@@ -1,5 +1,10 @@
 .onAttach<-function(libname, pkgname){
-  path <- read.dcf(file = system.file("DESCRIPTION", package = pkgname, lib.loc = libname))
+  pkg.desc <- read.dcf(file = system.file("DESCRIPTION", package = pkgname, lib.loc = libname))
+  conn <- textConnection("RG_Desc_File", "w", local = TRUE)
+  sink(conn)
+  write.dcf(pkg.desc)
+  sink()
+  close(conn)
   packageStartupMessage("\n", appendLF = FALSE)
   packageStartupMessage("\n", appendLF = FALSE)
   packageStartupMessage("--------------------------------------------------------\n", appendLF = FALSE)
@@ -7,6 +12,8 @@
   packageStartupMessage("--------------------------------------------------------\n", appendLF = FALSE)
   packageStartupMessage("\n", appendLF = FALSE)
   packageStartupMessage("\n", appendLF = FALSE)
-  write.dcf(path)
+  for (line in RG_Desc_File) {
+         packageStartupMessage(line)
+    }
   packageStartupMessage("\n", appendLF = FALSE)
 }

@@ -13,6 +13,9 @@ function(universe, template, mem.frac = 10)
 {
     if (!inherits(universe, "data.frame"))
         stop("Universe must be a data frame")
+    # Prevent havoc caused by tibbles:
+    if (inherits(universe, c("tbl_df", "tbl")))
+        universe <- as.data.frame(universe)
     # Drop empty levels from factor variables (if any)
     universe <- emptylev.check(universe)
 

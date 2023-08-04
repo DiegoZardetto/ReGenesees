@@ -128,9 +128,9 @@ if (!all(scalartest2))
 
 ## Build a convenience formula with "internal variables"...
 ## design1
-in.vars.formula1 <- paste("~",paste(in.vars1, collapse="+"),sep="")
+in.vars.formula1 <- as.formula(paste("~",paste(in.vars1, collapse="+"),sep=""))
 ## design2
-in.vars.formula2 <- paste("~",paste(in.vars2, collapse="+"),sep="")
+in.vars.formula2 <- as.formula(paste("~",paste(in.vars2, collapse="+"),sep=""))
 
 ## ... and its model frame
 ## design1
@@ -488,9 +488,9 @@ if (has.strata) {
      #       stratum jumpers from 1 to 2 in the *domain*)
      #
      # NOTE: However, one has to take care of the special case when the user
-     #	     asks for domain estimates at *stratum* level, as this means that
+     #       asks for domain estimates at *stratum* level, as this means that
      #       some of the two Z factors can happen to have just 1 level, which
-     #	     would result into an error of lm()
+     #       would result into an error of lm()
      if ( (length(levels(data$Z1)) == 1) ||  (length(levels(data$Z2)) == 1) ) {
          # NOTE: This condition means the user asked for domain estimates at
          #       *stratum* level

@@ -86,7 +86,7 @@ if (!all(scalartest))
     stop("Estimator formula can contain only scalar numeric parameters")
 
 ## Build a convenience formula with "internal variables"...
-in.vars.formula <- paste("~",paste(in.vars, collapse="+"),sep="")
+in.vars.formula <- as.formula(paste("~",paste(in.vars, collapse="+"),sep=""))
 ## ... and its model frame
 mf <- model.frame(in.vars.formula, design$variables, na.action = na.pass)
 ## Convert model frame into matrix
@@ -99,9 +99,9 @@ if (na.rm && sum(nas)>0){
     design<-design[nas==0,]
     # If domain has some non-NA values, use them for estimation:
     if (length(design$prob) > 0) {
-        if (length(nas)>length(design$prob))
+        if (length(nas)>length(design$prob))  # i.e. design was not cal
             x<-x[nas==0,,drop=FALSE]
-        else
+        else                                  # i.e. design was cal
             x[nas>0,]<-0
         }
     # If domain has only NAs, cannot do anything:

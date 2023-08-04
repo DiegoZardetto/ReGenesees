@@ -20,7 +20,13 @@ directly <- !( length(sys.calls()) > 1 )
 # Just some checks on supplied arguments
     if (!inherits(data, "data.frame")) 
         stop("Survey data must be supplied as a data frame")
+
     data.expr <- if (directly) substitute(data)
+
+    # Prevent havoc caused by tibbles:
+    if (inherits(data, c("tbl_df", "tbl")))
+        data <- as.data.frame(data)
+
     # Drop empty levels from factor variables (if any)
     data <- emptylev.check(data)
 
@@ -116,7 +122,8 @@ directly <- !( length(sys.calls()) > 1 )
     # Crea la variabile var.PSU (identificativo delle  #
     # unita' che forniscono il contributo leading alla #
     # varianza) per disegni di campionamento che       #
-    # includono strati auto-rappresentativi.           #
+    # includono strati auto-rappresentativi (uno per   #
+    # ognuna PSU campionata con certezza).             #
     # Se specificate, aggiorna le fpc: negli strati    #
     # autorappresentativi il contributo di primo       #
     # stadio e' dato dalle fpc del secondo stadio.     #

@@ -29,7 +29,7 @@ svystatTM(design, y, by = NULL, estimator = c("Total", "Mean"),
 
 \arguments{
   \item{design}{Object of class \code{analytic} (or inheriting from it) containing survey data and sampling design metadata.}
-  \item{y}{Formula defining the variables of interest.}
+  \item{y}{Formula defining the variables of interest. Only \code{numeric} or \code{factor} variables are allowed.}
   \item{by}{Formula specifying the variables that define the "estimation domains". If \code{NULL}
            (the default option) estimates refer to the whole population.}
   \item{estimator}{\code{character} specifying the desired estimator: it may be \code{'Total'} (the default) or
@@ -50,7 +50,7 @@ svystatTM(design, y, by = NULL, estimator = c("Total", "Mean"),
 \details{
 This function computes weighted estimates for Totals and Means using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and direct weights otherwise. Standard errors for nonlinear estimators (e.g. calibration estimators) are calculated using the Taylor linearization technique.
 
-The mandatory argument \code{y} identifies the variables of interest, that is the variables for which estimates are to be calculated. The corresponding formula should be of the type \code{y=~var1+\ldots+varn}. The \code{design} variables referenced by \code{y} should be \code{numeric} or \code{factor} (variables of other types - e.g. \code{character} - will be coerced). It is admissible to specify for \code{y} "mixed" formulae that simultaneously contain quantitative (\code{numeric}) variables and qualitative (\code{factor}) variables.
+The mandatory argument \code{y} identifies the variables of interest, that is the variables for which estimates are to be calculated. The corresponding formula should be of the type \code{y=~var1+\ldots+varn}. The \code{design} variables referenced by \code{y} should be \code{numeric} or \code{factor} (variables of other types - e.g. \code{character} - will generate and error). It is admissible to specify for \code{y} "mixed" formulae that simultaneously contain quantitative (\code{numeric}) variables and qualitative (\code{factor}) variables.
 
 To override the restriction to formulae of the type \code{y=~var1+\ldots+varn}, the AsIs operator \code{I()} can be used (see \sQuote{Examples}). Though the latter opportunity could appear quite useful in some occasion, actually it should be almost always possible to find a work-around by using other functions of the \pkg{ReGenesees} package.
 
@@ -66,7 +66,7 @@ The optional argument \code{deff} allows to request the design effect [Kish 1995
 Understanding what 'equivalent' estimator actually means is straightforward when dealing with Horvitz-Thompson estimators of Totals and Means. This is not the case when, on the contrary, the estimator to which the deff refers is a nonlinear estimator (e.g. for Calibration estimators of Totals and Means). In such cases, the standard approach is to use as 'equivalent' estimator the linearized version of the original estimator (that is: the estimator of the total of the linearized variable, aka "Woodruff transform").\cr
 When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out \emph{within} that subpopulation. This is the same as the \code{srssubpop} option for Stata's function \code{estat}.
 
-Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default) they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates gets computed on non missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}. Notice that the \code{na.rm=TRUE} option is only allowed if \code{y} references a \emph{single} interest variable.
+Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default) they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE} and \code{estimator="Mean"}, observations containing NAs are dropped, and estimates gets computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random} (MCAR): should this not be the case, computed estimates would be \emph{biased}. Since, even under the MCAR assumption, estimates of totals and counts solely based on complete cases would be biased, function \code{svystatTM} adopts a model-based ratio estimator when \code{na.rm=TRUE} and \code{estimator="Total"}. This is obtained by (i) first estimating the mean or proportion based on complete cases only, and (ii) then multiplying the result by the estimated population size based on all observations (i.e. both missing and non-missing). This model-based ratio estimator is asymptotically design-unbiased under the MCAR assumption. Notice that the \code{na.rm=TRUE} option is only allowed if \code{y} references a \emph{single} interest variable.
 }
 
 \value{

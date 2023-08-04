@@ -40,6 +40,9 @@ function (data, calmodel, partition = FALSE)
         data <- data$variables
         }
     else {
+          # Prevent havoc caused by tibbles:
+          if (inherits(data, c("tbl_df", "tbl")))
+              data <- as.data.frame(data)
           # Drop empty levels from factor variables (if any)
           # (recall this is unnecessary for analytic objects thanks to e.svydesign)
           data <- emptylev.check(data)

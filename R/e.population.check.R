@@ -13,10 +13,18 @@ function (df.population, data, calmodel, partition = FALSE)
 {
     if (!inherits(df.population, "data.frame")) 
         stop("Known population totals must be supplied as a data frame")
+    # Prevent havoc caused by tibbles:
+    if (inherits(df.population, c("tbl_df", "tbl")))
+        df.population <- as.data.frame(df.population)
+
     if (!inherits(data, "data.frame") && !inherits(data, "analytic")) 
         stop("Survey data must be supplied as a data frame or as an object of class 'analytic'")
+    # Prevent havoc caused by tibbles:
+    if (inherits(data, c("tbl_df", "tbl")))
+        data <- as.data.frame(data)
     if (inherits(data, "analytic"))
         data <- data$variables
+
     if (!inherits(calmodel, "formula")) 
         stop("Calibration model must be supplied as a formula")
     if (!identical(partition, FALSE)) {

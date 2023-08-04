@@ -75,7 +75,7 @@ if (data.class(design) != "analytic") {
 # 'smoothing cycles'
 if (is.smoothed(design)) 
      stop("Weights of object 'design' have already been smoothed!")
-	
+
 # Check if design is actually stratified
 if (!isTRUE(design$has.strata)) {
      stop("Design object must be stratified!")

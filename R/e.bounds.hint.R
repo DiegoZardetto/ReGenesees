@@ -36,6 +36,9 @@ function (design, df.population,
         stop("Object 'design' must inherit from class analytic")
     if (!inherits(df.population, "data.frame")) 
         stop("Object 'df.population' must be of class data frame")
+    # Prevent havoc caused by tibbles:
+    if (inherits(df.population, c("tbl_df", "tbl")))
+        df.population <- as.data.frame(df.population)
     if (!inherits(calmodel, "formula")) 
         stop("Parameter 'calmodel' must be supplied as a formula")
     if (!identical(partition, FALSE)) {

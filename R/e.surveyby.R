@@ -152,7 +152,7 @@ else {
       ## NOTE 13/05/2021: Below the added if clause, one assumes results to have
       ##                  constant dim for all 'by' subpops. This could be NOT
       ##                  TRUE for svystatB, due to different aliasing in 'by'
-      ##	              subpops. The if clause should handle this corner case.
+      ##                  subpops. The if clause should handle this corner case.
       if (identical(FUN, svylinB)) {
          results2df <- lapply(results, as.data.frame)
          results2df.dims <- lapply(results2df, dim)

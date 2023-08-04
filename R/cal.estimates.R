@@ -253,6 +253,6 @@ function (dataset, pop.totals)
     # Wondering if this print is actually useful. In case of lack of coherence
     # the caller would stop with an error message... For sure it would be
     # bothering when invoking new function 'trimcal'!
-    # COMMENTED 22/07/2016: 	
+    # COMMENTED 22/07/2016:
     # cat("\n# Coherence check between design and calibration model: OK\n\n")
 }

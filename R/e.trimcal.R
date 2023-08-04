@@ -68,7 +68,7 @@ function (cal.design, w.range = c(-Inf, Inf),
     # NOTE: Here trimfun is a character: the actual binding with function
     #       `trim.linear` (implementing the Generalized Euclidean Trimming) is
     #       delegated to internal function `ez.trim`
-    trimfun <- "linear"		
+    trimfun <- "linear"
 
     # Get calibration metadata from cal.design attributes:
     calmodel  <- attr(cal.design, "calmodel")

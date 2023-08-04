@@ -20,6 +20,11 @@ NA.estvars(design = design, estvars = y.vars, na.rm = na.rm)
 #if (isTRUE(na.rm)) {
 #    if (length(y.vars) > 1) stop("na.rm = TRUE allowed only when a single interest variable is supplied!")
 #    }
+# Type check for interest variables
+typetest <- sapply(y.vars, function(y) is.numeric(design$variables[, y]) |
+                                       is.factor(design$variables[, y])   )
+if (!all(typetest))
+    stop("Interest variables must be numeric or factor")
 estimator <- match.arg(estimator)
 if (missing(vartype)) vartype <- "se"
 vartype <- match.arg(vartype, several.ok = TRUE)

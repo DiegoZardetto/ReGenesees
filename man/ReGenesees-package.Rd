@@ -183,6 +183,23 @@ manual}.\cr\cr
 }
 }
 
+\subsection{Sample Size and Power}{
+\preformatted{
+ **  n.prop................Sample Size Requirements for the Estimation
+                           of a Proportion
+ **  prec.prop.............Expected Precision Level in the Estimation
+                           of a Proportion
+ **  n.comp2prop...........Power Calculations for a Test that Compares
+                           Two Estimated Proportions
+ **  n.mean................Sample Size Requirements for the Estimation
+                           of a Mean
+ **  prec.mean.............Expected Precision Level in the Estimation
+                           of a Mean
+ **  n.comp2mean...........Power Calculations for a Test that Compares
+                           Two Estimated Means
+}
+}
+
 \subsection{Diagnostics and Utilities}{
 \preformatted{
   *  UWE...................Unequal Weighting Effect

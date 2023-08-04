@@ -12,6 +12,9 @@ function(design, data, key)
     # Check on 'data' class
     if (!inherits(data, "data.frame"))
          stop("Object 'data' must inherit from class data.frame")
+    # Prevent havoc caused by tibbles:
+    if (inherits(data, c("tbl_df", "tbl")))
+        data <- as.data.frame(data)
 
     # Check on 'key' class and length
     if (!inherits(key,"formula"))

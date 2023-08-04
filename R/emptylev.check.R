@@ -40,7 +40,10 @@ emptylev.check <- function (data){
   on.exit(gc())
 
   # Check for factors with empty levels...
-  has.emptylev <- function(f) { is.factor(f) & ( length(levels(f)) > length(unique(f)) ) }
+  has.emptylev <- function(f) {
+                     ( !anyNA(f) & is.factor(f) & ( length(levels(f)) > length(unique(f)) ) ) |
+                     (  anyNA(f) & is.factor(f) & ( length(levels(f)) > (length(unique(f)) - 1) ) ) # DEBUG 26/06/2023
+                    }
   with.empty <- vapply(data, has.emptylev, NA)
   gc.here(need.gc)
   emptylev.vars <- names(data)[with.empty]

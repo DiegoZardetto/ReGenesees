@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -195,7 +195,7 @@
 If the survey has only one stage, then the <code>fpc</code>s can be given either as the total population size in each stratum or as the fraction of the total population that has been sampled. In either case the relevant population size must be expressed in terms of sampling units (be they elementary units or clusters). That is, sampling 100 units from a population stratum of size 500 can be specified as 500 or as 100/500=0.2. Thus, passing to <code>fpc</code> a column of zeros, means again with-replacement sampling.<br />
 For multistage sampling the population size (or the sampling fraction) for each sampling stage should also be specified in <code>fpc</code>. For instance, when <code>ids=~id.PSU + id.SSU</code> the <code>fpc</code> formula should look like <code>fpc=~fpc.PSU + fpc.SSU</code>, with  variable <code>fpc.PSU</code> giving the population sizes (or sampling fractions) in each stratum for the first stage units, while variable <code>fpc.SSU</code> gives population sizes (or sampling fractions) for the second stage units in each sampled PSU. Notice that if you choose to pass to <code>fpc</code> population totals (rather than sampling rates) at a given stage, then you must do the same for all stages (and vice versa).<br />
 If <code>fpc</code> is specified but for fewer stages than <code>ids</code>, sampling is assumed to be <em>complete</em> for subsequent stages. The function will check that <code>fpc</code>s values at each sampling stage do not vary within strata.</p>
-<p>When dealing with a two-stage (multistage) stratified sampling design that includes <em>self-representing (SR) strata</em> (i.e. strata containing only PSUs selected with probability 1), the only (leading) contribution to the variance of SR strata arises from the second stage units (<em>&#8220;variance PSUs&#8221;</em>).<br />
+<p>When dealing with a two-stage (multistage) stratified sampling design that includes <em>self-representing (SR) strata</em> (i.e. strata containing only one PSU selected with probability 1), the only (leading) contribution to the variance of SR strata arises from the second stage units (<em>&#8220;variance PSUs&#8221;</em>).<br />
 When <code><a href='https://rdrr.io/r/base/options.html'>options("<a href='ReGenesees.options.html'>RG.ultimate.cluster</a>")</a></code> is <code>FALSE</code> (which is the default for <span class="pkg">ReGenesees</span>), variance estimation for SR strata is correctly handled provided the survey <code>fpc</code>s have been properly specified. In particular, if <code>fpc=~fpc.PSU + fpc.SSU</code> and one specifies <code>fpc</code>s in terms of sampling fractions, then, inside SR strata, <code>fpc.PSU</code> must be always equal to one. When, on the contrary, the <em>&#8220;Ultimate Cluster Approximation&#8221;</em> holds (i.e. <code><a href='https://rdrr.io/r/base/options.html'>options("<a href='ReGenesees.options.html'>RG.ultimate.cluster</a>")</a></code> has been set to <code>TRUE</code>) the SR strata give no contribution at all to the sampling variance.</p>
 <p>A compromise solution (adopted by former existing survey software) is the one of retaining, for both SR and not-SR strata, only the leading contribution to the sampling variance. This means that only the SSUs are relevant for SR strata, whereby only the PSUs matter in not-SR strata. This compromise solution can be achieved by using the <code>self.rep.str</code> argument. If this argument is actually specified (as a formula referencing the <code>data</code> variable that identifies the SR strata), a warning is generated in order to remind the user that an approximate variance estimation method will be adopted on that design. Notice that, when choosing the <code>self.rep.str</code> option, the user must ensure that the variable referenced by <code>self.rep.str</code> is <code>logical</code> (with value <code>TRUE</code> for SR strata and <code>FALSE</code> otherwise) or <code>numeric</code> (with value <code>1</code> for SR strata and <code>0</code> otherwise) or <code>factor</code> (with levels <code>"1"</code> for SR strata and <code>"0"</code> otherwise).</p>
 <p>The optional argument <code>check.data</code> allows to check out the correct nesting of <code>data</code> clusters (PSUs, SSUs, ...). If <code>check.data=TRUE</code> the function checks that every unit selected at stage <code>k+1</code> is associated to one and only one unit selected at stage <code>k</code>. For a stratified design the function checks also the correct nesting of clusters within strata.</p>

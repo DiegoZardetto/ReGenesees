@@ -5,35 +5,43 @@
 
 *  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET
 
-*  New functions n.prop, prec.prop, and n.comp2prop. These functions estimate the minimum
-   sample size required to (i) satisfy specific precision constraints in the estimation of
-   proportions and to (ii) attain specified levels of significance and power in a
-   statistical test that compares two proportions. The inverse problem of finding the
-   expected precision of the estimator of the proportion given a specified sample size is
+*  New functions n.prop, n.comp2prop, prec.prop, and pow.comp2prop. These 
+   functions estimate the minimum sample size required to (i) satisfy specific
+   precision constraints in the estimation of proportions and to (ii) attain
+   specified levels of significance and power in a statistical test that
+   compares two proportions. The inverse problems of finding, given a specified
+   sample size, (iii) the expected precision of the estimator of the proportion
+   and (iv) the expected power of the test that compares two proportions are
    also addressed.
 
-*  New functions n.mean, prec.mean, and n.comp2mean. These functions estimate the minimum
-   sample size required to (i) satisfy specific precision constraints in the estimation of
-   means and to (ii) attain specified levels of significance and power in a
-   statistical test that compares two means. The inverse problem of finding the
-   expected precision of the estimator of the mean given a specified sample size is also
-   addressed.
+*  New functions n.mean, n.comp2mean, prec.mean, and pow.comp2mean. These
+   functions estimate the minimum sample size required to (i) satisfy specific
+   precision constraints in the estimation of means and to (ii) attain specified
+   levels of significance and power in statistical test that compares two means.
+   The inverse problems of finding, given a specified sample size, (iii) the
+   expected precision of the estimator of the mean and (iv) the expected power
+   of the test that compares two means are also addressed.
 
-*  New function get.linvar. This function computes the linearized variable(s) of a Complex
-   Estimator in subpopulations (domains). The Complex Estimator can be any analytic
-   function of Horvitz-Thompson or Calibration estimators.
+*  New function get.linvar. This function computes the linearized variable(s) of
+   a Complex Estimator in subpopulations (domains). The Complex Estimator can be
+   any analytic function of Horvitz-Thompson or Calibration estimators.
 
-*  svystatTM: now only numeric and factor variables can be referenced by argument 'y'.
-   Character variables are no longer allowed and must be converted to factor in advance,
-   as suggested since the release of ReGenesees 2.0 (see the NOTE below).
+*  svystatTM: now only numeric and factor variables can be referenced by
+   argument 'y'. Character variables are no longer allowed and must be converted
+   to factor in advance, as suggested since the release of ReGenesees 2.0 (see
+   the NOTE below).
 
-*  ReGenesees predates the tidyverse, and ReGenesees functions were not intended to accept
-   in input 'tibbles' where data frame had always been documented to be required. To avoid
-   issues with 'tibbles', now ReGenesees silently converts 'tibbles' to plain data frames
-   before processing them.
+*  Improved documentation of how svystatTM works for estimators of totals and
+   counts (i.e. estimator = "Total") when interest variables are affected by
+   missing values and na.rm = TRUE is specified.
 
-*  The message that ReGenesees has always printed on screen upon loading can now be made
-   silent via suppressPackageStartupMessages(). For Statistics Norway.
+*  ReGenesees predates the tidyverse, and ReGenesees functions were not intended
+   to accept in input 'tibbles' where data frame had always been documented to
+   be required. To avoid issues with 'tibbles', now ReGenesees silently converts
+   'tibbles' to plain data frames before processing them.
+
+*  The message that ReGenesees has always printed on screen upon loading can now
+   be made silent via suppressPackageStartupMessages(). For Statistics Norway.
 
 
 #  ReGenesees 2.2

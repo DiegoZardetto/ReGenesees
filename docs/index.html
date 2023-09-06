@@ -33,7 +33,7 @@
         errors for subpopulations. Consistent trimming of calibration weights.
         Calibration on complex population parameters, e.g. multiple regression
         coefficients. Generalized Variance Functions (GVF) method for predicting
-        variance estimates.">
+        variance estimates. Sample size requirements and power calculations.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -54,7 +54,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3</span>
       </span>
     </div>
 
@@ -106,33 +106,49 @@
   <div class="contents col-md-9">
 <div id="regenesees-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#regenesees-" class="anchor"></a>ReGenesees <img src="reference/figures/ReGenesees_LOGO_small.png" align="right" alt="">
+<a href="#regenesees-" class="anchor"></a>ReGenesees
+<img src="reference/figures/ReGenesees_LOGO_small.png" align="right" alt="">
 </h1></div>
 
 <div id="what-is-regenesees" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-regenesees" class="anchor"></a>What is ReGenesees</h2>
-<p><strong>ReGenesees</strong> (R Evolved Generalized Software for Sampling Estimates and Errors in Surveys) is an R package for design-based and model-assisted analysis of complex sample surveys.</p>
-<p>It is the outcome of a long term research and development project, aimed at defining a new standard for calibration, estimation and sampling error assessment to be adopted in all large-scale sample surveys routinely carried out by <strong>Istat (the Italian National Institute of Statistics)</strong>.</p>
+<p><strong>ReGenesees</strong> (R Evolved Generalized Software for
+Sampling Estimates and Errors in Surveys) is an R package for
+design-based and model-assisted analysis of complex sample surveys.</p>
+<p>It is the outcome of a long term research and development project,
+aimed at defining a new standard for calibration, estimation and
+sampling error assessment to be adopted in all large-scale sample
+surveys routinely carried out by <strong>Istat (the Italian National
+Institute of Statistics)</strong>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the <strong>development version</strong> of ReGenesees from <a href="https://github.com/DiegoZardetto/ReGenesees">GitHub</a> as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"DiegoZardetto/ReGenesees"</span>)</span></code></pre></div>
-<p>The <strong>latest released version</strong> of ReGenesees can be downloaded from <a href="https://www.istat.it/en/tools/methods-and-it-tools/processing-tools/regenesees">Istat website</a> or from the <a href="https://joinup.ec.europa.eu/solution/regenesees-system/releases">European Commission platform Joinup</a> (where <strong>older versions</strong> are available too).</p>
+<p>You can install the <strong>development version</strong> of
+ReGenesees from <a href="https://github.com/DiegoZardetto/ReGenesees">GitHub</a> as
+follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"DiegoZardetto/ReGenesees"</span>)</span></code></pre></div>
+<p>The <strong>latest released version</strong> of ReGenesees can be
+downloaded from <a href="https://www.istat.it/en/tools/methods-and-it-tools/processing-tools/regenesees">Istat
+website</a> or from the <a href="https://joinup.ec.europa.eu/solution/regenesees-system/releases">European
+Commission platform Joinup</a> (where <strong>older versions</strong>
+are available too).</p>
 </div>
 <div id="main-statistical-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#main-statistical-functions" class="anchor"></a>Main Statistical Functions</h2>
 <ul>
 <li>
-<h4 id="complex-sampling-designs"><strong>Complex Sampling Designs</strong></h4>
+<h4 id="complex-sampling-designs"><strong>Complex Sampling
+Designs</strong></h4>
 <ul>
 <li>Multistage, stratified, clustered, sampling designs</li>
-<li>Sampling with equal or unequal probabilities, with or without replacement</li>
-<li>“Mixed” sampling designs (i.e. with both Self-Representing and Non-Self-Representing strata)</li>
+<li>Sampling with equal or unequal probabilities, with or without
+replacement</li>
+<li>“Mixed” sampling designs (i.e. with both Self-Representing and
+Non-Self-Representing strata)</li>
 </ul>
 </li>
 <li>
@@ -156,7 +172,8 @@
 </ul>
 </li>
 <li>
-<h4 id="variance-estimation"><strong>Variance Estimation</strong></h4>
+<h4 id="variance-estimation"><strong>Variance
+Estimation</strong></h4>
 <ul>
 <li>Multistage formulation (via Bellhouse recursive algorithm)</li>
 <li>Ultimate Cluster approximation</li>
@@ -166,32 +183,48 @@
 </ul>
 </li>
 <li>
-<h4 id="estimates-and-sampling-errors-standard-error-variance-coefficient-of-variation-confidence-interval-design-effect-for"><strong>Estimates and Sampling Errors (standard error, variance, coefficient of variation, confidence interval, design effect) for:</strong></h4>
+<h4 id="estimates-and-sampling-errors-standard-error-variance-coefficient-of-variation-confidence-interval-design-effect-for"><strong>Estimates
+and Sampling Errors (standard error, variance, coefficient of variation,
+confidence interval, design effect) for:</strong></h4>
 <ul>
 <li>Totals</li>
 <li>Means</li>
-<li>Absolute and relative frequency distributions (marginal, conditional and joint)</li>
+<li>Absolute and relative frequency distributions (marginal, conditional
+and joint)</li>
 <li>Ratios between totals</li>
 <li>Shares and ratios between shares</li>
 <li>Multiple regression coefficients</li>
 <li>Quantiles</li>
 <li>Population variance and standard deviation of numeric variables</li>
-<li>Measures of Change derived from two not necessarily independent samples</li>
+<li>Measures of Change derived from two not necessarily independent
+samples</li>
 </ul>
 </li>
 <li>
-<h4 id="estimates-and-sampling-errors-for-complex-estimators"><strong>Estimates and Sampling Errors for Complex Estimators</strong></h4>
+<h4 id="estimates-and-sampling-errors-for-complex-estimators"><strong>Estimates
+and Sampling Errors for Complex Estimators</strong></h4>
 <ul>
-<li>Handles arbitrary differentiable functions of Horvitz-Thompson or Calibration estimators</li>
+<li>Handles arbitrary differentiable functions of Horvitz-Thompson or
+Calibration estimators</li>
 <li>Complex Estimators can be freely defined by the user</li>
 <li>Automated Taylor-linearization</li>
 <li>Design covariance and correlation between Complex Estimators</li>
 </ul>
 </li>
 <li>
-<h4 id="estimates-and-sampling-errors-for-subpopulations-domains"><strong>Estimates and Sampling Errors for Subpopulations (Domains)</strong></h4>
+<h4 id="estimates-and-sampling-errors-for-subpopulations-domains"><strong>Estimates
+and Sampling Errors for Subpopulations (Domains)</strong></h4>
 <ul>
 <li>All the analyses above can be carried out for arbitrary domains</li>
+</ul>
+</li>
+<li>
+<h4 id="sample-size-requirements-and-power-calculations-for"><strong>Sample
+Size Requirements and Power Calculations for:</strong></h4>
+<ul>
+<li>Estimators of proportions and comparisons between two
+proportions</li>
+<li>Estimators of means and comparisons between two means</li>
 </ul>
 </li>
 </ul>
@@ -199,7 +232,10 @@
 <div id="graphical-user-interface" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graphical-user-interface" class="anchor"></a>Graphical User Interface</h2>
-<p>A companion R package named <strong>ReGenesees.GUI</strong> is also available, which provides a user-friendly mouse-click graphical interface for ReGenesees. Find it on <a href="https://github.com/DiegoZardetto/ReGenesees.GUI">GitHub</a> here:</p>
+<p>A companion R package named <strong>ReGenesees.GUI</strong> is also
+available, which provides a user-friendly mouse-click graphical
+interface for ReGenesees. Find it on <a href="https://github.com/DiegoZardetto/ReGenesees.GUI">GitHub</a>
+here:</p>
 <ul>
 <li><a href="https://github.com/DiegoZardetto/ReGenesees.GUI" class="uri">https://github.com/DiegoZardetto/ReGenesees.GUI</a></li>
 </ul>
@@ -207,14 +243,23 @@
 <div id="sponsors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#sponsors" class="anchor"></a>Sponsors</h2>
-<p>The ReGenesees project was conceived in <strong>Istat</strong> in late 2006, and Istat has been ReGenesees’ primary sponsor ever since.</p>
-<p>From April 2021, development, maintenance and support of ReGenesees are also actively sponsored by the <strong>World Bank</strong>.</p>
+<p>The ReGenesees project was conceived in <strong>Istat</strong> in
+late 2006, and Istat has been ReGenesees’ primary sponsor ever
+since.</p>
+<p>From April 2021, development, maintenance and support of ReGenesees
+are also actively sponsored by the <strong>World Bank</strong>.</p>
 </div>
 <div id="disclaimer" class="section level2">
 <h2 class="hasAnchor">
 <a href="#disclaimer" class="anchor"></a>Disclaimer</h2>
-<p>In case you come across malfunctions or flaws of this website, please bear in mind that it has been automatically generated from the sources of the ReGenesees package and it has no human maintainers.</p>
-<p>In particular, the printed output in the ‘Examples’ sections of some functions - e.g. <code><a href="reference/svystatL.html">svystatL()</a></code> and, through it, <code><a href="reference/e.calibrate.html">e.calibrate()</a></code> and <code><a href="reference/Corr.html">Corr()</a></code> - is known to mistakenly show error messages that do <em>not</em> actually exist in the package.</p>
+<p>In case you come across malfunctions or flaws of this website, please
+bear in mind that it has been automatically generated from the sources
+of the ReGenesees package and it has no human maintainers.</p>
+<p>In particular, the printed output in the ‘Examples’ sections of some
+functions - e.g. <code><a href="reference/svystatL.html">svystatL()</a></code> and, through it,
+<code><a href="reference/e.calibrate.html">e.calibrate()</a></code> and <code><a href="reference/Corr.html">Corr()</a></code> - is known to
+mistakenly show error messages that do <em>not</em> actually exist in
+the package.</p>
 </div>
 </div>
   </div>

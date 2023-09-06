@@ -30,9 +30,11 @@ carried out for arbitrary subpopulations. In addition, \pkg{ReGenesees} can trim
 calibration weights while preserving all the calibration constraints, and
 perform \sQuote{special purpose calibration} tasks, i.e. can calibrate on
 complex population parameters like Multiple Regression Coefficients.
-Lastly, \pkg{ReGenesees} offers a Generalized Variance Functions (GVF)
+\pkg{ReGenesees} also offers a Generalized Variance Functions (GVF)
 infrastructure, i.e. facilities for defining, fitting, testing and plotting GVF
-models, and to exploit them to predict variance estimates.
+models, and to exploit them to predict variance estimates. Lastly, the package
+offers simple survey planning tools to estimate sample size requirements and
+perform power calculations.
 
 The \pkg{ReGenesees} \emph{package} is the fundamental building block of a
 full-fledged \R-based software \emph{system}: the \strong{ReGenesees System}.
@@ -117,7 +119,9 @@ manual}.\cr\cr
  **  trimcal..............Trim Calibration Weights while Preserving
                           Calibration Constraints
   *  g.range..............Range of g-Weights
-  *  get.residuals........Calibration Residuals of Interest Variables
+  .  get.residuals........Calibration Residuals of Interest Variables
+  .  get.linvar...........Linearized Variable(s) of Complex Estimators
+                          by Domains
   *  ext.calibrated.......Make ReGenesees Digest Externally Calibrated
                           Weights
   .  contrasts.RG.........Set, Reset or Switch Off Contrasts for
@@ -190,13 +194,17 @@ manual}.\cr\cr
  **  prec.prop.............Expected Precision Level in the Estimation
                            of a Proportion
  **  n.comp2prop...........Power Calculations for a Test that Compares
-                           Two Estimated Proportions
+                           Two Estimated Proportions: Sample Size
+ **  pow.comp2prop.........Power Calculations for a Test that Compares
+                           Two Estimated Proportions: Expected Power
  **  n.mean................Sample Size Requirements for the Estimation
                            of a Mean
  **  prec.mean.............Expected Precision Level in the Estimation
                            of a Mean
  **  n.comp2mean...........Power Calculations for a Test that Compares
-                           Two Estimated Means
+                           Two Estimated Means: Sample Size
+ **  pow.comp2mean.........Power Calculations for a Test that Compares
+                           Two Estimated Means: Expected Power
 }
 }
 

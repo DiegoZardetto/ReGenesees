@@ -16,7 +16,7 @@ Description: Design-Based and Model-Assisted analysis of complex sample surveys.
         errors for subpopulations. Consistent trimming of calibration weights.
         Calibration on complex population parameters, e.g. multiple regression
         coefficients. Generalized Variance Functions (GVF) method for predicting
-        variance estimates.
+        variance estimates. Sample size requirements and power calculations.
 Version: 2.3
 Author: Diego Zardetto [aut, cre]
 Maintainer: Diego Zardetto <zardetto@istat.it>

@@ -67,9 +67,11 @@ carried out for arbitrary subpopulations. In addition, ReGenesees can trim
 calibration weights while preserving all the calibration constraints, and
 perform &amp;#8216;special purpose calibration&amp;#8217; tasks, i.e. can calibrate on
 complex population parameters like Multiple Regression Coefficients.
-Lastly, ReGenesees offers a Generalized Variance Functions (GVF)
+ReGenesees also offers a Generalized Variance Functions (GVF)
 infrastructure, i.e. facilities for defining, fitting, testing and plotting GVF
-models, and to exploit them to predict variance estimates.
+models, and to exploit them to predict variance estimates. Lastly, the package
+offers simple survey planning tools to estimate sample size requirements and
+perform power calculations.
 The ReGenesees package is the fundamental building block of a
 full-fledged R-based software system: the ReGenesees System.
 The latter has a clear-cut two-layer architecture. The application layer of the
@@ -109,7 +111,7 @@ namely a user-friendly Tcl/Tk GUI." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3</span>
       </span>
     </div>
 
@@ -125,7 +127,7 @@ namely a user-friendly Tcl/Tk GUI." />
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -189,9 +191,11 @@ carried out for arbitrary subpopulations. In addition, <span class="pkg">ReGenes
 calibration weights while preserving all the calibration constraints, and
 perform &#8216;special purpose calibration&#8217; tasks, i.e. can calibrate on
 complex population parameters like Multiple Regression Coefficients.
-Lastly, <span class="pkg">ReGenesees</span> offers a Generalized Variance Functions (GVF)
+<span class="pkg">ReGenesees</span> also offers a Generalized Variance Functions (GVF)
 infrastructure, i.e. facilities for defining, fitting, testing and plotting GVF
-models, and to exploit them to predict variance estimates.</p>
+models, and to exploit them to predict variance estimates. Lastly, the package
+offers simple survey planning tools to estimate sample size requirements and
+perform power calculations.</p>
 <p>The <span class="pkg">ReGenesees</span> <em>package</em> is the fundamental building block of a
 full-fledged <span style="R">R</span>-based software <em>system</em>: the <strong>ReGenesees System</strong>.
 The latter has a clear-cut two-layer architecture. The application layer of the
@@ -276,7 +280,9 @@ manual</strong>.<br /><br /></p>
  **  trimcal..............Trim Calibration Weights while Preserving
                           Calibration Constraints
   *  g.range..............Range of g-Weights
-  *  get.residuals........Calibration Residuals of Interest Variables
+  .  get.residuals........Calibration Residuals of Interest Variables
+  .  get.linvar...........Linearized Variable(s) of Complex Estimators
+                          by Domains
   *  ext.calibrated.......Make ReGenesees Digest Externally Calibrated
                           Weights
   .  contrasts.RG.........Set, Reset or Switch Off Contrasts for
@@ -342,6 +348,28 @@ manual</strong>.<br /><br /></p>
   *  gvf.misc.............Miscellanea: Methods for Fitted GVF Models 
   *  estimator.kind.......Which Estimator Did Generate these
                           Survey Statistics?
+</pre>
+
+
+<h3>Sample Size and Power</h3>
+
+<pre>
+ **  n.prop................Sample Size Requirements for the Estimation
+                           of a Proportion
+ **  prec.prop.............Expected Precision Level in the Estimation
+                           of a Proportion
+ **  n.comp2prop...........Power Calculations for a Test that Compares
+                           Two Estimated Proportions: Sample Size
+ **  pow.comp2prop.........Power Calculations for a Test that Compares
+                           Two Estimated Proportions: Expected Power
+ **  n.mean................Sample Size Requirements for the Estimation
+                           of a Mean
+ **  prec.mean.............Expected Precision Level in the Estimation
+                           of a Mean
+ **  n.comp2mean...........Power Calculations for a Test that Compares
+                           Two Estimated Means: Sample Size
+ **  pow.comp2mean.........Power Calculations for a Test that Compares
+                           Two Estimated Means: Expected Power
 </pre>
 
 

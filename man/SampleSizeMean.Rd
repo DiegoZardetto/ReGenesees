@@ -68,11 +68,11 @@ The formulas needed to guesstimate the minimum sample size required to satisfy s
 
 The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two means (function \code{\link{n.comp2mean}}) can be derived from equation 8.27 on page 302 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments \code{RR} and \code{DEFF}). Function \code{\link{pow.comp2mean}} solves the resulting equation for \code{Power} (= \code{1 - beta}) given a specified sample size.
 
-\strong{NOTE:} Despite most of the arguments to the above three functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, the default value \code{muY = NULL} is not valid when relative measures of precision are used (\code{'RME'} and \code{'CV'}).
+\strong{NOTE:} Despite most of the arguments to the above four functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, the default value \code{muY = NULL} is not valid when relative measures of precision are used (\code{'RME'} and \code{'CV'}).
 
 \strong{NOTE:} Arguments \code{F}, \code{hhSize}, and \code{AVEhh} are necessarily related to each other, as it is illustrated by the expression of the default of \code{AVEhh}, thus it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity \code{AVEhh = F * hhSize}.
 
-\strong{NOTE:} Most of the arguments to the above three functions are vectorized, meaning that users can pass \code{numeric} vectors to them to investigate multiple design scenarios in a single shot (e.g. via \code{MDE = c(750, 1000, 1250)}). When vectors of length greater than 1 are passed to multiple arguments, \R recycling rule will kick in.
+\strong{NOTE:} Most of the arguments to the above four functions are vectorized, meaning that users can pass \code{numeric} vectors to them to investigate multiple design scenarios in a single shot (e.g. via \code{MDE = c(750, 1000, 1250)}). When vectors of length greater than 1 are passed to multiple arguments, \R recycling rule will kick in.
 }
 
 \value{

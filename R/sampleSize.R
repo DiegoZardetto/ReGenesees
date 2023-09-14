@@ -460,11 +460,11 @@ out <- list(n1 = n1, n2 = n2, n = n)
 
 if (isTRUE(verbose)) {
      cat("# Minimum Detectable Effect:")
-     cat(paste("\n  MDE", "=", MDE))
+     cat("\n  MDE", "=", MDE)
      cat("\n# Significance:")
-     cat(paste("\n  alpha", "=", alpha))
+     cat("\n  alpha", "=", alpha)
      cat("\n# Power:")
-     cat(paste("\n  1 - beta", "=", 1 - beta))
+     cat("\n  1 - beta", "=", 1 - beta)
      cat("\n# Anticipated estimates:")
      cat("\n  P1 =", P1)
      if (!missing(P2)) {
@@ -566,9 +566,9 @@ if (isTRUE(verbose)) {
      cat("\n  n2 =", n2)
      cat("\n  K1 =", K1)
      cat("\n# Minimum Detectable Effect:")
-     cat(paste("\n  MDE", "=", MDE))
+     cat("\n  MDE", "=", MDE)
      cat("\n# Significance:")
-     cat(paste("\n  alpha", "=", alpha))
+     cat("\n  alpha", "=", alpha)
      cat("\n# Anticipated estimates:")
      cat("\n  P1 =", P1)
      if (!missing(P2)) {
@@ -587,7 +587,7 @@ if (isTRUE(verbose)) {
           cat("\n  new.DEFF =", DEFF)
          }
      cat("\n# -> Expected Power:")
-     cat(paste("\n  1 - beta", "=", round(Power, 3), "\n\n"))
+     cat("\n  1 - beta", "=", round(Power, 3), "\n\n")
 
      return(invisible(Power))
     }
@@ -667,11 +667,11 @@ out <- list(n1 = n1, n2 = n2, n = n)
 
 if (isTRUE(verbose)) {
      cat("# Minimum Detectable Effect:")
-     cat(paste("\n  MDE", "=", MDE))
+     cat("\n  MDE", "=", MDE)
      cat("\n# Significance:")
-     cat(paste("\n  alpha", "=", alpha))
+     cat("\n  alpha", "=", alpha)
      cat("\n# Power:")
-     cat(paste("\n  1 - beta", "=", 1 - beta))
+     cat("\n  1 - beta", "=", 1 - beta)
      cat("\n# Anticipated estimates:")
      cat("\n  sigmaY =", sigmaY)
      cat("\n  DEFF =", DEFF.old)
@@ -760,9 +760,9 @@ if (isTRUE(verbose)) {
      cat("\n  n2 =", n2)
      cat("\n  K1 =", K1)
      cat("\n# Minimum Detectable Effect:")
-     cat(paste("\n  MDE", "=", MDE))
+     cat("\n  MDE", "=", MDE)
      cat("\n# Significance:")
-     cat(paste("\n  alpha", "=", alpha))
+     cat("\n  alpha", "=", alpha)
      cat("\n# Anticipated estimates:")
      cat("\n  sigmaY =", sigmaY)
      cat("\n  DEFF =", DEFF.old)
@@ -778,7 +778,7 @@ if (isTRUE(verbose)) {
           cat("\n  new.DEFF =", DEFF)
          }
      cat("\n# -> Expected Power:")
-     cat(paste("\n  1 - beta", "=", round(Power, 3), "\n\n"))
+     cat("\n  1 - beta", "=", round(Power, 3), "\n\n")
 
      return(invisible(Power))
     }

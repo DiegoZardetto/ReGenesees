@@ -5,22 +5,23 @@
 
 *  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET
 
-*  New functions n.prop, n.comp2prop, prec.prop, and pow.comp2prop. These 
-   functions estimate the minimum sample size required to (i) satisfy specific
-   precision constraints in the estimation of proportions and to (ii) attain
-   specified levels of significance and power in a statistical test that
-   compares two proportions. The inverse problems of finding, given a specified
-   sample size, (iii) the expected precision of the estimator of the proportion
-   and (iv) the expected power of the test that compares two proportions are
-   also addressed.
+*  New functions n.prop, n.comp2prop, prec.prop, pow.comp2prop, and
+   mde.comp2prop. These functions estimate the minimum sample size required to
+   (i) satisfy specific precision constraints in the estimation of proportions
+   and to (ii) attain specified levels of significance and power in a statistical
+   test that compares two proportions. The inverse problems of finding, given a
+   specified sample size, (iii) the expected precision of the estimator of the
+   proportion and (iv) the expected power or (v) minimum detectable effect for
+   the test that compares two proportions are also addressed.
 
-*  New functions n.mean, n.comp2mean, prec.mean, and pow.comp2mean. These
-   functions estimate the minimum sample size required to (i) satisfy specific
-   precision constraints in the estimation of means and to (ii) attain specified
-   levels of significance and power in statistical test that compares two means.
-   The inverse problems of finding, given a specified sample size, (iii) the
-   expected precision of the estimator of the mean and (iv) the expected power
-   of the test that compares two means are also addressed.
+*  New functions n.mean, n.comp2mean, prec.mean, pow.comp2mean, and mde.comp2mean.
+   These functions estimate the minimum sample size required to (i) satisfy
+   specific precision constraints in the estimation of means and to (ii) attain
+   specified levels of significance and power in statistical test that compares
+   two means. The inverse problems of finding, given a specified sample size,
+   (iii) the expected precision of the estimator of the mean and (iv) the 
+   expected power or (v) minimum detectable effect for the test that compares
+   two means are also addressed.
 
 *  New function get.linvar. This function computes the linearized variable(s) of
    a Complex Estimator in subpopulations (domains). The Complex Estimator can be

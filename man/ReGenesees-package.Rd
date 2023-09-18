@@ -197,6 +197,9 @@ manual}.\cr\cr
                            Two Estimated Proportions: Sample Size
  **  pow.comp2prop.........Power Calculations for a Test that Compares
                            Two Estimated Proportions: Expected Power
+ **  mde.comp2prop.........Power Calculations for a Test that Compares
+                           Two Estimated Proportions: Expected Minimum
+                           Detectable Effect
  **  n.mean................Sample Size Requirements for the Estimation
                            of a Mean
  **  prec.mean.............Expected Precision Level in the Estimation
@@ -205,6 +208,9 @@ manual}.\cr\cr
                            Two Estimated Means: Sample Size
  **  pow.comp2mean.........Power Calculations for a Test that Compares
                            Two Estimated Means: Expected Power
+ **  mde.comp2mean.........Power Calculations for a Test that Compares
+                           Two Estimated Means: Expected Minimum
+                           Detectable Effect						   
 }
 }
 

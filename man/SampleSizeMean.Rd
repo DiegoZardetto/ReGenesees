@@ -3,13 +3,14 @@
 \alias{prec.mean}
 \alias{n.comp2mean}
 \alias{pow.comp2mean}
+\alias{mde.comp2mean}
 
 \title{
 Sample Size Requirements and Power Calculations for Means
 }
 
 \description{
-These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of means and to (ii) attain specified levels of significance and power in a statistical test that compares two means. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the mean and (iv) the expected power of the test that compares two means are also addressed.
+These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of means and to (ii) attain specified levels of significance and power in a statistical test that compares two means. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the mean and (iv) the expected power or (v) minimum detectable effect for the test that compares two means are also addressed.
 }
 
 \usage{
@@ -38,6 +39,13 @@ pow.comp2mean(n, sigmaY, MDE, K1 = 1/2,
               F = 1, hhSize = 1, AVEhh = F * hhSize,
               old.clus.size = NULL, new.clus.size = NULL,
               verbose = TRUE)
+
+mde.comp2mean(n, sigmaY, K1 = 1/2,
+              alpha = 0.05, beta = 0.2, sides = c("two-tailed", "one-tailed"),
+              DEFF = 1, RR = 1,
+              F = 1, hhSize = 1, AVEhh = F * hhSize,
+              old.clus.size = NULL, new.clus.size = NULL,
+              verbose = TRUE)
 }
 
 \arguments{
@@ -54,7 +62,7 @@ pow.comp2mean(n, sigmaY, MDE, K1 = 1/2,
   \item{new.clus.size}{Average number of households to be sampled per PSU in the survey you are planning.}
   \item{alpha}{Significance level used to build confidence intervals (with confidence level equal to \code{1 - alpha}) or probability of Type I error (False Positive) for hypothesis testing.}
   \item{verbose}{Print on screen some description or just return the results?}
-  \item{n}{The sample size for which the expected precision or power must be calculated.}
+  \item{n}{The sample size for which the expected precision or power or MDE must be calculated.}
   \item{MDE}{Minimum Detectable Effect for the difference between means.}
   \item{K1}{Ratio between the sample size of group 1 and the total sample size of groups 1 and 2 (defaults to \code{1/2}, i.e. equal sized groups).}
   \item{beta}{Probability of Type II error (False Negative) for hypothesis testing (so that \code{Power = 1 - beta}).}
@@ -66,17 +74,19 @@ These functions are intended as simple everyday tools for basic sampling design 
 
 The formulas needed to guesstimate the minimum sample size required to satisfy specific precision constraints in the estimation of a mean (function \code{\link{n.mean}}) or the expected precision of the estimator of the mean given a specified sample size (function \code{\link{prec.mean}}) are available in many textbooks and spreadsheet templates (see, e.g., [Rosner 2006], [Lance, Hattori 2016], [ILO 2014a], [ILO 2014b]).
 
-The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two means (function \code{\link{n.comp2mean}}) can be derived from equation 8.27 on page 302 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments \code{RR} and \code{DEFF}). Function \code{\link{pow.comp2mean}} solves the resulting equation for \code{Power} (= \code{1 - beta}) given a specified sample size.
+The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two means (function \code{\link{n.comp2mean}}) can be derived from equation 8.27 on page 302 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments \code{RR} and \code{DEFF}). Functions \code{\link{pow.comp2mean}} and \code{\link{mde.comp2mean}} solve the resulting equation for \code{Power} (= \code{1 - beta}) and \code{MDE} given a specified sample size.
 
-\strong{NOTE:} Despite most of the arguments to the above four functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, the default value \code{muY = NULL} is not valid when relative measures of precision are used (\code{'RME'} and \code{'CV'}).
+\strong{NOTE:} Despite most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, the default value \code{muY = NULL} is not valid when relative measures of precision are used (\code{'RME'} and \code{'CV'}).
 
 \strong{NOTE:} Arguments \code{F}, \code{hhSize}, and \code{AVEhh} are necessarily related to each other, as it is illustrated by the expression of the default of \code{AVEhh}, thus it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity \code{AVEhh = F * hhSize}.
 
-\strong{NOTE:} Most of the arguments to the above four functions are vectorized, meaning that users can pass \code{numeric} vectors to them to investigate multiple design scenarios in a single shot (e.g. via \code{MDE = c(750, 1000, 1250)}). When vectors of length greater than 1 are passed to multiple arguments, \R recycling rule will kick in.
+\strong{NOTE:} Most of the arguments to the above five functions are vectorized, meaning that users can pass \code{numeric} vectors to them to investigate multiple design scenarios in a single shot (e.g. via \code{MDE = c(750, 1000, 1250)}). When vectors of length greater than 1 are passed to multiple arguments, \R recycling rule will kick in.
+
+\strong{NOTE:} Both functions \code{\link{n.mean}} and \code{\link{n.comp2mean}} return the \emph{ceiling} of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performances than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).
 }
 
 \value{
-For \code{n.mean}, \code{prec.mean}, and \code{pow.comp2mean}, a \code{numeric} vector whose length depends on the length of the numeric inputs passed to the function (under \R recycling rule).
+For \code{n.mean}, \code{prec.mean}, \code{pow.comp2mean}, and \code{mde.comp2mean}, a \code{numeric} vector whose length depends on the length of the numeric inputs passed to the function (under \R recycling rule).
 
 For \code{n.comp2mean}, a list of length 3 with names \code{n1}, \code{n2}, and \code{n}, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a \code{numeric} vector whose length depends on the length of the numeric inputs passed to the function (under \R recycling rule).
 }
@@ -96,7 +106,7 @@ Lance, P., Hattori, A. (2016) Sampling and evaluation. Chapel Hill, North Caroli
 }
 
 \seealso{
-Functions \code{\link{n.prop}}, \code{\link{prec.prop}}, \code{\link{n.comp2prop}}, and \code{\link{pow.comp2prop}} provide the same functionalities documented here, when the statistics of interest are \emph{proportions} rather than means.
+Functions \code{\link{n.prop}}, \code{\link{prec.prop}}, \code{\link{n.comp2prop}}, \code{\link{pow.comp2prop}}, and \code{\link{mde.comp2prop}} provide the same functionalities documented here, when the statistics of interest are \emph{proportions} rather than means.
 }
 
 \examples{

@@ -594,6 +594,106 @@ if (isTRUE(verbose)) {
 return(Power)
 }
 
+mde.comp2prop <- function(n, P1, P2 = P1, K1 = 1/2,
+                          alpha = 0.05, beta = 0.2, sides = c("two-tailed", "one-tailed"),
+                          pooled.variance = TRUE,
+                          DEFF = 1, RR = 1,
+                          F = 1, hhSize = 1, AVEhh = F * hhSize,
+                          old.clus.size = NULL, new.clus.size = NULL,
+                          verbose = TRUE){
+################################################################
+# Expected MDE for a statistical test that COMPARES TWO        #
+# PROPORTIONS given specified sample size, significance, and   #
+# power.                                                       #
+#                                                              #
+# Also exploits the ICC *portability* assumption to guess the  #
+# impact that a change of cluster size would have on the       #
+# required sample size.                                        #
+################################################################
+sides <- match.arg(sides)
+Z.alpha <- switch(sides, "two-tailed" = qnorm(1 - alpha/2), "one-tailed" = qnorm(1 - alpha))
+Z.beta <- qnorm(1 - beta)
+
+## Arguments F, hhSizehave, and AVEhh are related: which ones have been passed?
+## If possible, deduce values that were not explicitly passed.
+if (!missing(AVEhh)) {
+     if (!missing(hhSize) & !missing(F)) {
+         if (!isTRUE(all.equal(AVEhh, F * hhSize))) stop("Specified arguments do not comply with AVEhh = F * hhSize, please double-check!")
+        }
+     if (missing(F) & !missing(hhSize)) {
+         F <- AVEhh / hhSize
+        }
+     if (missing(hhSize) & !missing(F)) {
+         hhSize <- AVEhh / F
+        }
+     if (missing(hhSize) & missing(F)) {
+         hhSize <- NULL
+         F <- NULL
+        }
+    }
+
+# Guesstimate the impact of changing cluster size (i.e. number of sampled hh per
+# sampled PSU) by leveraging DEFF portability
+DEFF.old <- DEFF
+if (!is.null(new.clus.size)) {
+     if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # NOTE: The ROH estimated here is an individual-level one, because the
+     #       the average cluster size is calculated in terms of individuals, not
+     #       households! 
+     ROH.old <- (DEFF.old - 1) / (old.clus.size * AVEhh - 1)
+     DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
+    }
+
+# Calculate the expected MDE
+if (isTRUE(pooled.variance)) {
+     Pbar <- P1 * K1 + P2 * (1 - K1)
+     MDE <- sqrt( ( ( Z.alpha * sqrt( Pbar * (1 - Pbar) / ( 1 - K1 ) ) +
+                      Z.beta  * sqrt( P1 * ( 1 - P1 ) + P2 * ( 1 - P2 ) * ( K1 / ( 1 - K1 ) ) )
+                    )^2 
+                  ) * ( DEFF / (n * K1 * RR * AVEhh) )
+                )
+    } else {
+     MDE <- sqrt( ( ( Z.alpha + Z.beta )^2 ) * ( P1 * ( 1 - P1 ) / K1 + P2 * ( 1 - P2 ) / ( 1 - K1 ) ) *
+                  ( DEFF / (n * RR * AVEhh) ) )
+    }
+n1 <- round(n * K1)
+n2 <- n - n1
+
+if (isTRUE(verbose)) {
+     cat("# Sample size(s):")
+     cat("\n  n =", n)
+     cat("\n  n1 =", n1)
+     cat("\n  n2 =", n2)
+     cat("\n  K1 =", K1)
+     cat("\n# Significance:")
+     cat("\n  alpha", "=", alpha)
+     cat("\n# Power:")
+     cat("\n  1 - beta", "=", 1 - beta)
+     cat("\n# Anticipated estimates:")
+     cat("\n  P1 =", P1)
+     if (!missing(P2)) {
+          cat("\n  P2 =", P2)
+         }
+     cat("\n  DEFF =", DEFF.old)
+     cat("\n  RR =", RR)
+     cat("\n  F =", F)
+     cat("\n  hhSize =", hhSize)
+     cat("\n  AVEhh =", AVEhh)
+     if (!is.null(new.clus.size)) {
+          cat("\n# Design parameters:")
+          cat("\n  old.clus.size =", old.clus.size)
+          cat("\n  ROH =", ROH.old)
+          cat("\n  new.clus.size =", new.clus.size)
+          cat("\n  new.DEFF =", DEFF)
+         }
+     cat("\n# -> Expected Minimum Detectable Effect:")
+     cat("\n  MDE", "=", MDE, "\n\n")
+
+     return(invisible(MDE))
+    }
+return(MDE)
+}
+
 
 n.comp2mean <- function(sigmaY, MDE, K1 = 1/2,
                         alpha = 0.05, beta = 0.2, sides = c("two-tailed", "one-tailed"),
@@ -783,4 +883,90 @@ if (isTRUE(verbose)) {
      return(invisible(Power))
     }
 return(Power)
+}
+
+mde.comp2mean <- function(n, sigmaY, K1 = 1/2,
+                          alpha = 0.05, beta = 0.2, sides = c("two-tailed", "one-tailed"),
+                          DEFF = 1, RR = 1,
+                          F = 1, hhSize = 1, AVEhh = F * hhSize,
+                          old.clus.size = NULL, new.clus.size = NULL,
+                          verbose = TRUE){
+################################################################
+# Expected MDE for a statistical test that COMPARES TWO        #
+# MEANS given specified sample size, significance, and power.  #
+#                                                              #
+# Also exploits the ICC *portability* assumption to guess the  #
+# impact that a change of cluster size would have on the       #
+# required sample size.                                        #
+################################################################
+sides <- match.arg(sides)
+Z.alpha <- switch(sides, "two-tailed" = qnorm(1 - alpha/2), "one-tailed" = qnorm(1 - alpha))
+Z.beta <- qnorm(1 - beta)
+
+## Arguments F, hhSizehave, and AVEhh are related: which ones have been passed?
+## If possible, deduce values that were not explicitly passed.
+if (!missing(AVEhh)) {
+     if (!missing(hhSize) & !missing(F)) {
+         if (!isTRUE(all.equal(AVEhh, F * hhSize))) stop("Specified arguments do not comply with AVEhh = F * hhSize, please double-check!")
+        }
+     if (missing(F) & !missing(hhSize)) {
+         F <- AVEhh / hhSize
+        }
+     if (missing(hhSize) & !missing(F)) {
+         hhSize <- AVEhh / F
+        }
+     if (missing(hhSize) & missing(F)) {
+         hhSize <- NULL
+         F <- NULL
+        }
+    }
+
+# Guesstimate the impact of changing cluster size (i.e. number of sampled hh per
+# sampled PSU) by leveraging DEFF portability
+DEFF.old <- DEFF
+if (!is.null(new.clus.size)) {
+     if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # NOTE: The ROH estimated here is an individual-level one, because the
+     #       the average cluster size is calculated in terms of individuals, not
+     #       households! 
+     ROH.old <- (DEFF.old - 1) / (old.clus.size * AVEhh - 1)
+     DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
+    }
+
+# Calculate the expected MDE
+sigma2Y <- sigmaY^2
+MDE <- sqrt( ( ( Z.alpha + Z.beta )^2 ) * ( sigma2Y / ( 1 - K1 ) ) * ( DEFF / (n * K1 * RR * AVEhh) ) )
+n1 <- round(n * K1)
+n2 <- n - n1
+
+if (isTRUE(verbose)) {
+     cat("# Sample size(s):")
+     cat("\n  n =", n)
+     cat("\n  n1 =", n1)
+     cat("\n  n2 =", n2)
+     cat("\n  K1 =", K1)
+     cat("\n# Significance:")
+     cat("\n  alpha", "=", alpha)
+     cat("\n# Power:")
+     cat("\n  1 - beta", "=", 1 - beta)
+     cat("\n# Anticipated estimates:")
+     cat("\n  sigmaY =", sigmaY)
+     cat("\n  DEFF =", DEFF.old)
+     cat("\n  RR =", RR)
+     cat("\n  F =", F)
+     cat("\n  hhSize =", hhSize)
+     cat("\n  AVEhh =", AVEhh)
+     if (!is.null(new.clus.size)) {
+          cat("\n# Design parameters:")
+          cat("\n  old.clus.size =", old.clus.size)
+          cat("\n  ROH =", ROH.old)
+          cat("\n  new.clus.size =", new.clus.size)
+          cat("\n  new.DEFF =", DEFF)
+         }
+     cat("\n# -> Expected Minimum Detectable Effect:")
+     cat("\n  MDE", "=", MDE, "\n\n")
+
+     return(invisible(MDE))
+    }
+return(MDE)
 }

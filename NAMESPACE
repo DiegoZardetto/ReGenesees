@@ -14,8 +14,8 @@ find.lon.strata, fill.template, aux.estimates, check.cal, weights, contr.off, co
 contrasts.reset, CoV, Corr, Zapsmall, get.residuals, des.merge, estimator.kind, GVF.db, gvf.input,
 fit.gvf, getR2, getBest, predictCV, drop.gvf.points, svystat, pop.desc, svystatS, svystatSR, ext.calibrated,
 trimcal, prep.calBeta, pop.calBeta, pop.fuse, smooth.strat.jump, UWE, pop.plot, svyDelta, details,
-svySigma, svySigma2, n.prop, prec.prop, n.comp2prop, pow.comp2prop, n.mean, prec.mean, n.comp2mean,
-pow.comp2mean, get.linvar)
+svySigma, svySigma2, n.prop, prec.prop, n.comp2prop, pow.comp2prop, mde.comp2prop, n.mean, prec.mean,
+n.comp2mean, pow.comp2mean, mde.comp2mean, get.linvar)
 
 S3method(print,summary.survey.design)
 S3method(print,summary.survey.design2)

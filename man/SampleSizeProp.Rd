@@ -3,13 +3,14 @@
 \alias{prec.prop}
 \alias{n.comp2prop}
 \alias{pow.comp2prop}
+\alias{mde.comp2prop}
 
 \title{
 Sample Size Requirements and Power Calculations for Proportions
 }
 
 \description{
-These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of proportions and to (ii) attain specified levels of significance and power in a statistical test that compares two proportions. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the proportion and (iv) the expected power of the test that compares two proportions are also addressed.
+These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of proportions and to (ii) attain specified levels of significance and power in a statistical test that compares two proportions. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the proportion, and (iv) the expected power or (v) minimum detectable effect for the test that compares two proportions are also addressed.
 }
 
 \usage{
@@ -40,6 +41,14 @@ pow.comp2prop(n, P1, P2 = P1, MDE = abs(P2 - P1), K1 = 1/2,
               F = 1, hhSize = 1, AVEhh = F * hhSize,
               old.clus.size = NULL, new.clus.size = NULL,
               verbose = TRUE)
+
+mde.comp2prop(n, P1, P2 = P1, K1 = 1/2,
+              alpha = 0.05, beta = 0.2, sides = c("two-tailed", "one-tailed"),
+              pooled.variance = TRUE,
+              DEFF = 1, RR = 1,
+              F = 1, hhSize = 1, AVEhh = F * hhSize,
+              old.clus.size = NULL, new.clus.size = NULL,
+              verbose = TRUE)
 }
 
 \arguments{
@@ -55,7 +64,7 @@ pow.comp2prop(n, P1, P2 = P1, MDE = abs(P2 - P1), K1 = 1/2,
   \item{new.clus.size}{Average number of households to be sampled per PSU in the survey you are planning.}
   \item{alpha}{Significance level used to build confidence intervals (with confidence level equal to \code{1 - alpha}) or probability of Type I error (False Positive) for hypothesis testing.}
   \item{verbose}{Print on screen some description or just return the results?}
-  \item{n}{The sample size for which the expected precision or power must be calculated.}
+  \item{n}{The sample size for which the expected precision or power or MDE must be calculated.}
   \item{P1}{Anticipated estimate of the proportion for group 1.}
   \item{P2}{Anticipated estimate of the proportion for group 2 (only needed when it differs from \code{P1}).}
   \item{MDE}{Minimum Detectable Effect for the difference between proportions.}
@@ -70,17 +79,19 @@ These functions are intended as simple everyday tools for basic sampling design 
 
 The formulas needed to guesstimate the minimum sample size required to satisfy specific precision constraints in the estimation of a proportion (function \code{\link{n.prop}}) or the expected precision of the estimator of the proportion given a specified sample size (function \code{\link{prec.prop}}) are available in many textbooks and spreadsheet templates (see, e.g., [Rosner 2006], [Lance, Hattori 2016], [ILO 2014], [UNICEF 2023]).
 
-The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two proportions (function \code{\link{n.comp2prop}}) can be derived from equation 10.14 on page 381 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments \code{RR} and \code{DEFF}). Function \code{\link{pow.comp2prop}} solves the resulting equation for \code{Power} (= \code{1 - beta}) given a specified sample size.
+The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two proportions (function \code{\link{n.comp2prop}}) can be derived from equation 10.14 on page 381 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments \code{RR} and \code{DEFF}). Functions \code{\link{pow.comp2prop}} and \code{\link{mde.comp2prop}} solve the resulting equation for \code{Power} (= \code{1 - beta}) and \code{MDE} given a specified sample size.
 
-\strong{NOTE:} Despite most of the arguments to the above four functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, as illustrated in the \sQuote{Examples} section, the Minimum Detectable Effect does not necessarily need to be equal to its default expression (\code{MDE = abs(P2 - P1)}).
+\strong{NOTE:} Despite most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, as illustrated in the \sQuote{Examples} section, the Minimum Detectable Effect does not necessarily need to be equal to its default expression (\code{MDE = abs(P2 - P1)}).
 
 \strong{NOTE:} Arguments \code{F}, \code{hhSize}, and \code{AVEhh} are necessarily related to each other, as it is illustrated by the expression of the default of \code{AVEhh}, thus it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity \code{AVEhh = F * hhSize}.
 
-\strong{NOTE:} Most of the arguments to the above four functions are vectorized, meaning that users can pass \code{numeric} vectors to them to investigate multiple design scenarios in a single shot (e.g. via \code{MDE = c(0.06, 0.08, 0.10)}). When vectors of length greater than 1 are passed to multiple arguments, \R recycling rule will kick in.
+\strong{NOTE:} Most of the arguments to the above five functions are vectorized, meaning that users can pass \code{numeric} vectors to them to investigate multiple design scenarios in a single shot (e.g. via \code{MDE = c(0.06, 0.08, 0.10)}). When vectors of length greater than 1 are passed to multiple arguments, \R recycling rule will kick in.
+
+\strong{NOTE:} Both functions \code{\link{n.prop}} and \code{\link{n.comp2prop}} return the \emph{ceiling} of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performances than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).
 }
 
 \value{
-For \code{n.prop}, \code{prec.prop}, and \code{n.comp2prop}, a \code{numeric} vector whose length depends on the length of the numeric inputs passed to the function (under \R recycling rule).
+For \code{n.prop}, \code{prec.prop}, \code{pow.comp2prop}, and \code{mde.comp2prop}, a \code{numeric} vector whose length depends on the length of the numeric inputs passed to the function (under \R recycling rule).
 
 For \code{n.comp2prop}, a list of length 3 with names \code{n1}, \code{n2}, and \code{n}, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a \code{numeric} vector whose length depends on the length of the numeric inputs passed to the function (under \R recycling rule).
 }
@@ -100,7 +111,7 @@ Lance, P., Hattori, A. (2016) Sampling and evaluation. Chapel Hill, North Caroli
 }
 
 \seealso{
-Functions \code{\link{n.mean}}, \code{\link{prec.mean}}, \code{\link{n.comp2mean}}, and \code{\link{pow.comp2mean}} provide the same functionalities documented here, when the statistics of interest are \emph{means} rather than proportions.
+Functions \code{\link{n.mean}}, \code{\link{prec.mean}}, \code{\link{n.comp2mean}}, \code{\link{pow.comp2mean}}, and \code{\link{mde.comp2mean}} provide the same functionalities documented here, when the statistics of interest are \emph{means} rather than proportions.
 }
 
 \examples{
@@ -264,6 +275,20 @@ n.comp2prop(P1 = 0.35, MDE = 0.05, sides = "one-tailed", DEFF = 2.7, RR = 0.92,
 #       3285 / 15 = 219 per round.
 #       Therefore, the proposed design would save 655 (= 3940 - 3285) households per round,
 #       but would require visiting 22 (= 219 - 197) additional EAs per round.
+
+# Suppose that the available budget only allows to survey 5000 households, 2500 per round,
+# and that logistic constraints dictate to survey 15 households per EA. What would be the
+# expected MDE of the study in that case, if a 80% power is desired?
+
+mde.comp2prop(n= 5000, P1 = 0.35, sides = "one-tailed", DEFF = 2.7, RR = 0.92,
+              F = 0.15, hhSize = 5.6, old.clus.size = 20, new.clus.size = 15)
+
+# NOTE: The MDE would be about 5.7 percentage points. This means that, if the assistance
+#       program actually results in the hoped-for 7 percentage points reduction, the study
+#       will detect its effect as statistically significant with high probability (>= 80%).
+#       However, should the program result in a smaller, yet not negligible, impact (e.g.
+#       a reduction of 5 percentage points), the study will have less than 80% probability
+#       to detect it, because of the sample size constraint.
 }
 
 \keyword{survey}

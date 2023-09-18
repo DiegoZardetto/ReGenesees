@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Sample Size Requirements and Power Calculations for Proportions — n.prop" />
-<meta property="og:description" content="These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of proportions and to (ii) attain specified levels of significance and power in a statistical test that compares two proportions. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the proportion and (iv) the expected power of the test that compares two proportions are also addressed." />
+<meta property="og:description" content="These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of proportions and to (ii) attain specified levels of significance and power in a statistical test that compares two proportions. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the proportion, and (iv) the expected power or (v) minimum detectable effect for the test that compares two proportions are also addressed." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -134,7 +134,7 @@
     </div>
 
     <div class="ref-description">
-    <p>These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of proportions and to (ii) attain specified levels of significance and power in a statistical test that compares two proportions. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the proportion and (iv) the expected power of the test that compares two proportions are also addressed.</p>
+    <p>These functions estimate the minimum sample size required to (i) satisfy specific precision constraints in the estimation of proportions and to (ii) attain specified levels of significance and power in a statistical test that compares two proportions. The inverse problems of finding, given a specified sample size, (iii) the expected precision of the estimator of the proportion, and (iv) the expected power or (v) minimum detectable effect for the test that compares two proportions are also addressed.</p>
     </div>
 
     <pre class="usage"><span class='fu'>n.prop</span>(<span class='no'>prec</span>, <span class='kw'>prec.ind</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ME"</span>, <span class='st'>"RME"</span>, <span class='st'>"SE"</span>, <span class='st'>"CV"</span>), <span class='kw'>P</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
@@ -159,6 +159,14 @@
 
 <span class='fu'>pow.comp2prop</span>(<span class='no'>n</span>, <span class='no'>P1</span>, <span class='kw'>P2</span> <span class='kw'>=</span> <span class='no'>P1</span>, <span class='kw'>MDE</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>(<span class='no'>P2</span> - <span class='no'>P1</span>), <span class='kw'>K1</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>,
               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>sides</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"two-tailed"</span>, <span class='st'>"one-tailed"</span>),
+              <span class='kw'>pooled.variance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+              <span class='kw'>DEFF</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>RR</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+              <span class='kw'>F</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>hhSize</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>AVEhh</span> <span class='kw'>=</span> <span class='no'>F</span> * <span class='no'>hhSize</span>,
+              <span class='kw'>old.clus.size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>new.clus.size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+              <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>mde.comp2prop</span>(<span class='no'>n</span>, <span class='no'>P1</span>, <span class='kw'>P2</span> <span class='kw'>=</span> <span class='no'>P1</span>, <span class='kw'>K1</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>,
+              <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>sides</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"two-tailed"</span>, <span class='st'>"one-tailed"</span>),
               <span class='kw'>pooled.variance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
               <span class='kw'>DEFF</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>RR</span> <span class='kw'>=</span> <span class='fl'>1</span>,
               <span class='kw'>F</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>hhSize</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>AVEhh</span> <span class='kw'>=</span> <span class='no'>F</span> * <span class='no'>hhSize</span>,
@@ -218,7 +226,7 @@
     </tr>
     <tr>
       <th>n</th>
-      <td><p>The sample size for which the expected precision or power must be calculated.</p></td>
+      <td><p>The sample size for which the expected precision or power or MDE must be calculated.</p></td>
     </tr>
     <tr>
       <th>P1</th>
@@ -254,13 +262,14 @@
 
     <p>These functions are intended as simple everyday tools for basic sampling design decisions and survey planning. They address sample size requirements and power calculations for <em>proportions</em> in surveys (typically household surveys) adopting one- or two-stage sampling designs. The proportions acting as estimation targets can be defined either in terms of individuals or in terms of households. Specific arguments (such as <code>hhSize</code>, <code>AVEhh</code>, <code>old.clus.size</code>, and <code>new.clus.size</code>) can be tweaked to cover different designs (one or two stages) and target populations (proportions of individuals or households), see the &#8216;Examples&#8217; section.</p>
 <p>The formulas needed to guesstimate the minimum sample size required to satisfy specific precision constraints in the estimation of a proportion (function <code>n.prop</code>) or the expected precision of the estimator of the proportion given a specified sample size (function <code>prec.prop</code>) are available in many textbooks and spreadsheet templates (see, e.g., [Rosner 2006], [Lance, Hattori 2016], [ILO 2014], [UNICEF 2023]).</p>
-<p>The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two proportions (function <code>n.comp2prop</code>) can be derived from equation 10.14 on page 381 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments <code>RR</code> and <code>DEFF</code>). Function <code>pow.comp2prop</code> solves the resulting equation for <code>Power</code> (= <code>1 - beta</code>) given a specified sample size.</p>
-<p><strong>NOTE:</strong> Despite most of the arguments to the above four functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, as illustrated in the &#8216;Examples&#8217; section, the Minimum Detectable Effect does not necessarily need to be equal to its default expression (<code>MDE = abs(P2 - P1)</code>).</p>
+<p>The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two proportions (function <code>n.comp2prop</code>) can be derived from equation 10.14 on page 381 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments <code>RR</code> and <code>DEFF</code>). Functions <code>pow.comp2prop</code> and <code>mde.comp2prop</code> solve the resulting equation for <code>Power</code> (= <code>1 - beta</code>) and <code>MDE</code> given a specified sample size.</p>
+<p><strong>NOTE:</strong> Despite most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, as illustrated in the &#8216;Examples&#8217; section, the Minimum Detectable Effect does not necessarily need to be equal to its default expression (<code>MDE = abs(P2 - P1)</code>).</p>
 <p><strong>NOTE:</strong> Arguments <code>F</code>, <code>hhSize</code>, and <code>AVEhh</code> are necessarily related to each other, as it is illustrated by the expression of the default of <code>AVEhh</code>, thus it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity <code>AVEhh = F * hhSize</code>.</p>
-<p><strong>NOTE:</strong> Most of the arguments to the above four functions are vectorized, meaning that users can pass <code>numeric</code> vectors to them to investigate multiple design scenarios in a single shot (e.g. via <code>MDE = c(0.06, 0.08, 0.10)</code>). When vectors of length greater than 1 are passed to multiple arguments, <span style="R">R</span> recycling rule will kick in.</p>
+<p><strong>NOTE:</strong> Most of the arguments to the above five functions are vectorized, meaning that users can pass <code>numeric</code> vectors to them to investigate multiple design scenarios in a single shot (e.g. via <code>MDE = c(0.06, 0.08, 0.10)</code>). When vectors of length greater than 1 are passed to multiple arguments, <span style="R">R</span> recycling rule will kick in.</p>
+<p><strong>NOTE:</strong> Both functions <code>n.prop</code> and <code>n.comp2prop</code> return the <em>ceiling</em> of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performances than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>n.prop</code>, <code>prec.prop</code>, and <code>n.comp2prop</code>, a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
+    <p>For <code>n.prop</code>, <code>prec.prop</code>, <code>pow.comp2prop</code>, and <code>mde.comp2prop</code>, a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
 <p>For <code>n.comp2prop</code>, a list of length 3 with names <code>n1</code>, <code>n2</code>, and <code>n</code>, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -270,7 +279,7 @@
 <p>Lance, P., Hattori, A. (2016) Sampling and evaluation. Chapel Hill, North Carolina: MEASURE Evaluation, University of North Carolina (2016).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Functions <code><a href='SampleSizeMean.html'>n.mean</a></code>, <code><a href='SampleSizeMean.html'>prec.mean</a></code>, <code><a href='SampleSizeMean.html'>n.comp2mean</a></code>, and <code><a href='SampleSizeMean.html'>pow.comp2mean</a></code> provide the same functionalities documented here, when the statistics of interest are <em>means</em> rather than proportions.</p></div>
+    <div class='dont-index'><p>Functions <code><a href='SampleSizeMean.html'>n.mean</a></code>, <code><a href='SampleSizeMean.html'>prec.mean</a></code>, <code><a href='SampleSizeMean.html'>n.comp2mean</a></code>, <code><a href='SampleSizeMean.html'>pow.comp2mean</a></code>, and <code><a href='SampleSizeMean.html'>mde.comp2mean</a></code> provide the same functionalities documented here, when the statistics of interest are <em>means</em> rather than proportions.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>##########################</span>
@@ -442,7 +451,7 @@
 <span class='co'># detection of the sought-after effect at significance level 5%?</span>
 
 <span class='fu'>n.comp2prop</span>(<span class='kw'>P1</span> <span class='kw'>=</span> <span class='fl'>0.73</span>, <span class='kw'>P2</span> <span class='kw'>=</span> <span class='fl'>0.80</span>, <span class='kw'>sides</span> <span class='kw'>=</span> <span class='st'>"one-tailed"</span>, <span class='kw'>DEFF</span> <span class='kw'>=</span> <span class='fl'>1.4</span>, <span class='kw'>RR</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; # Minimum Detectable Effect:
-#&gt;   MDE = 0.0700000000000001
+#&gt;   MDE = 0.07
 #&gt; # Significance:
 #&gt;   alpha = 0.05
 #&gt; # Power:
@@ -479,7 +488,7 @@
 #&gt;   n2 = 600
 #&gt;   K1 = 0.5
 #&gt; # Minimum Detectable Effect:
-#&gt;   MDE = 0.0700000000000001
+#&gt;   MDE = 0.07
 #&gt; # Significance:
 #&gt;   alpha = 0.05
 #&gt; # Anticipated estimates:
@@ -570,12 +579,48 @@
 #&gt;   n2 = 3285
 #&gt;   n = 6570 
 #&gt; </div><div class='input'>
-# NOTE: When going from 20 to 15 households per EA, the DEFF is expected to decrease from
-#       2.70 to 2.25. As a result, the required sample size would become 6570 households,
-#       3285 at baseline (T0) and 3285 at endline (T1). The EAs to be visited would become
-#       3285 / 15 = 219 per round.
-#       Therefore, the proposed design would save 655 (= 3940 - 3285) households per round,
-#       but would require visiting 22 (= 219 - 197) additional EAs per round.
+<span class='co'># NOTE: When going from 20 to 15 households per EA, the DEFF is expected to decrease from</span>
+<span class='co'>#       2.70 to 2.25. As a result, the required sample size would become 6570 households,</span>
+<span class='co'>#       3285 at baseline (T0) and 3285 at endline (T1). The EAs to be visited would become</span>
+<span class='co'>#       3285 / 15 = 219 per round.</span>
+<span class='co'>#       Therefore, the proposed design would save 655 (= 3940 - 3285) households per round,</span>
+<span class='co'>#       but would require visiting 22 (= 219 - 197) additional EAs per round.</span>
+
+<span class='co'># Suppose that the available budget only allows to survey 5000 households, 2500 per round,</span>
+<span class='co'># and that logistic constraints dictate to survey 15 households per EA. What would be the</span>
+<span class='co'># expected MDE of the study in that case, if a 80% power is desired?</span>
+
+<span class='fu'>mde.comp2prop</span>(<span class='kw'>n</span><span class='kw'>=</span> <span class='fl'>5000</span>, <span class='kw'>P1</span> <span class='kw'>=</span> <span class='fl'>0.35</span>, <span class='kw'>sides</span> <span class='kw'>=</span> <span class='st'>"one-tailed"</span>, <span class='kw'>DEFF</span> <span class='kw'>=</span> <span class='fl'>2.7</span>, <span class='kw'>RR</span> <span class='kw'>=</span> <span class='fl'>0.92</span>,
+              <span class='kw'>F</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>hhSize</span> <span class='kw'>=</span> <span class='fl'>5.6</span>, <span class='kw'>old.clus.size</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>new.clus.size</span> <span class='kw'>=</span> <span class='fl'>15</span>)</div><div class='output co'>#&gt; # Sample size(s):
+#&gt;   n = 5000
+#&gt;   n1 = 2500
+#&gt;   n2 = 2500
+#&gt;   K1 = 0.5
+#&gt; # Significance:
+#&gt;   alpha = 0.05
+#&gt; # Power:
+#&gt;   1 - beta = 0.8
+#&gt; # Anticipated estimates:
+#&gt;   P1 = 0.35
+#&gt;   DEFF = 2.7
+#&gt;   RR = 0.92
+#&gt;   F = 0.15
+#&gt;   hhSize = 5.6
+#&gt;   AVEhh = 0.84
+#&gt; # Design parameters:
+#&gt;   old.clus.size = 20
+#&gt;   ROH = 0.1075949
+#&gt;   new.clus.size = 15
+#&gt;   new.DEFF = 2.248101
+#&gt; # -&gt; Expected Minimum Detectable Effect:
+#&gt;   MDE = 0.05721292 
+#&gt; </div><div class='input'>
+# NOTE: The MDE would be about 5.7 percentage points. This means that, if the assistance
+#       program actually results in the hoped-for 7 percentage points reduction, the study
+#       will detect its effect as statistically significant with high probability (>= 80%).
+#       However, should the program result in a smaller, yet not negligible, impact (e.g.
+#       a reduction of 5 percentage points), the study will have less than 80% probability
+#       to detect it, because of the sample size constraint.
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

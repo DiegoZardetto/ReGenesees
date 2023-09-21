@@ -64,7 +64,7 @@ mde.comp2prop(n, P1, P2 = P1, K1 = 1/2,
   \item{new.clus.size}{Average number of households to be sampled per PSU in the survey you are planning.}
   \item{alpha}{Significance level used to build confidence intervals (with confidence level equal to \code{1 - alpha}) or probability of Type I error (False Positive) for hypothesis testing.}
   \item{verbose}{Print on screen some description or just return the results?}
-  \item{n}{The sample size for which the expected precision or power or MDE must be calculated.}
+  \item{n}{The sample size for which the expected precision or power or MDE must be calculated (see \sQuote{Details}).}
   \item{P1}{Anticipated estimate of the proportion for group 1.}
   \item{P2}{Anticipated estimate of the proportion for group 2 (only needed when it differs from \code{P1}).}
   \item{MDE}{Minimum Detectable Effect for the difference between proportions.}
@@ -79,7 +79,9 @@ These functions are intended as simple everyday tools for basic sampling design 
 
 The formulas needed to guesstimate the minimum sample size required to satisfy specific precision constraints in the estimation of a proportion (function \code{\link{n.prop}}) or the expected precision of the estimator of the proportion given a specified sample size (function \code{\link{prec.prop}}) are available in many textbooks and spreadsheet templates (see, e.g., [Rosner 2006], [Lance, Hattori 2016], [ILO 2014], [UNICEF 2023]).
 
-The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two proportions (function \code{\link{n.comp2prop}}) can be derived from equation 10.14 on page 381 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments \code{RR} and \code{DEFF}). Functions \code{\link{pow.comp2prop}} and \code{\link{mde.comp2prop}} solve the resulting equation for \code{Power} (= \code{1 - beta}) and \code{MDE} given a specified sample size.
+The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two proportions (function \code{\link{n.comp2prop}}) can be derived from equation 10.14 on page 381 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments \code{RR} and \code{DEFF}). Functions \code{\link{pow.comp2prop}} and \code{\link{mde.comp2prop}} solve the resulting equation for \code{Power} (= \code{1 - beta}) and \code{MDE} given a specified \emph{total} sample size, \code{n}.
+
+\strong{NOTE:} For both \code{\link{pow.comp2prop}} and \code{\link{mde.comp2prop}}, argument \code{n} must be the \emph{total} sample size, namely the sum of the sample sizes of the two groups (group 1 and group 2) whose estimated proportions need to be compared. The way the total sample size is allocated to the two groups is controlled by argument \code{K1}.
 
 \strong{NOTE:} Despite most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, as illustrated in the \sQuote{Examples} section, the Minimum Detectable Effect does not necessarily need to be equal to its default expression (\code{MDE = abs(P2 - P1)}).
 

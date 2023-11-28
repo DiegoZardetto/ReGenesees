@@ -37,7 +37,7 @@ gvf.input <- function(design, ..., stats = list(...)) {
      stop("No survey estimates provided: cannot model sampling errors!")
 
   # Test that input objects are all survey statistics
-  svystat.classes <- c("svystatTM", "svystatR", "svystatS", "svystatSR", "svystatL", "svystatQ", "svystatB", "svyby")
+  svystat.classes <- c("svystatTM", "svystatR", "svystatS", "svystatSR", "svystatL", "svystatQ", "svystatB", "svySigma", "svySigma2", "svyby")
   ok.stats <- sapply(stats, function(stat) any(sapply(svystat.classes, function(class) inherits(stat, class))))
 
   if (!all(ok.stats)) {
@@ -184,6 +184,8 @@ gvf.input <- function(design, ..., stats = list(...)) {
   # (10) 'Regression Coefficient'                     #
   # (11) 'Quantile'                                   #
   # (12) 'Complex Estimator'                          #
+  # (13) 'Population Variance'                        #
+  # (14) 'Population Standard Deviation'              #
   #                                                   #
   # NOTE: This is the unexported version of function  #
   #       estimator.kind, which has more error        #
@@ -198,7 +200,9 @@ gvf.input <- function(design, ..., stats = list(...)) {
                    svystatSR = "Share Ratio", svystatSR.by = "Share Ratio",
                    svystatB  = "Regression Coefficient",
                    svystatQ  = "Quantile", svystatQ.by = "Quantile",
-                   svystatL  = "Complex Estimator", svystatL.by = "Complex Estimator")
+                   svystatL  = "Complex Estimator", svystatL.by = "Complex Estimator",
+                   svySigma2 = "Population Variance", svySigma2.by = "Population Variance",
+                   svySigma  = "Population Standard Deviation", svySigma.by = "Population Standard Deviation")
     if (kind=="TM") {
         estfun <- if (!inherits(stat, "svyby")) {
                       attr(attr(stat, "origin"),"svyby")$statistic

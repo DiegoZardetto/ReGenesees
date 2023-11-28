@@ -1,5 +1,5 @@
-svystat <- function(design, kind = c("TM", "R", "S", "SR", "B", "Q", "L"), by = NULL,
-                    group = NULL, forGVF = TRUE, combo = -1, ...) {
+svystat <- function(design, kind = c("TM", "R", "S", "SR", "B", "Q", "L", "Sigma", "Sigma2"),
+                    by = NULL, group = NULL, forGVF = TRUE, combo = -1, ...) {
 ################################################################################
 # This function can compute all the summary statistics provided by ReGenesees, #
 # and is principally meant to return a lot of them in just a single shot.      #
@@ -50,12 +50,15 @@ if (!by.is.NULL && !inherits(by, "formula"))
 if (!is.null(group) && !inherits(group, "formula")) 
      stop("If specified, 'group' must be supplied as a formula")
 
-# DEBUG 14/11/2017
-# Handle special case: kind = 'B' with either of 'by' and 'group' not NULL.
-# This is because function svystatB does NOT have a 'by' argument.
-if ( (kind == "B") && ( !by.is.NULL || !is.null(group) ) ) {
-     stop("When kind == 'B' cannot specify 'by' nor 'group' (because of possible aliasing issues, see ?svystatB)")
-    }
+# DEBUG 06/11/2023
+# Code below commented because, from ReGenesees 2.1, we DO have a 'by' argument for
+# svystatB!
+# # DEBUG 14/11/2017
+# # Handle special case: kind = 'B' with either of 'by' and 'group' not NULL.
+# # This is because function svystatB does NOT have a 'by' argument.
+# if ( (kind == "B") && ( !by.is.NULL || !is.null(group) ) ) {
+#      stop("When kind == 'B' cannot specify 'by' nor 'group' (because of possible aliasing issues, see ?svystatB)")
+#     }
 
 by.var <- all.vars(by)
 group.var <- all.vars(group)
@@ -126,6 +129,8 @@ top <- svystat.gr[[1]]
 # Summary statistics classes 
 OK.classes <- c("svystatTM",       "svystatR",    "svystatL",    "svystatQ",    "svystatS",    "svystatSR",
                 "svystatTM.by", "svystatR.by", "svystatL.by", "svystatQ.by", "svystatS.by", "svystatSR.by",
+                "svySigma",       "svySigma2",
+                "svySigma.by", "svySigma2.by",
                 "svystatB",     "svyby")
 
 # Is top level object a summary statistic?
@@ -135,14 +140,18 @@ check.classes <- sapply(OK.classes, function(class) inherits(top, class))
 return(!any(check.classes))
 }
 
-svystat1 <- function(design, kind = c("TM", "R", "S", "SR", "B", "Q", "L"), by = NULL,
-                     group = NULL, forGVF = TRUE, design.expr = NULL, ...) {
+svystat1 <- function(design, kind = c("TM", "R", "S", "SR", "B", "Q", "L", "Sigma", "Sigma2"),
+                     by = NULL, group = NULL, forGVF = TRUE, design.expr = NULL, ...) {
 ##############################################################################
 # Workhorse function serving exported function svystat: does the brute force #
 # job and get called for each combination when 'combo' is used in svystat.   #
 ##############################################################################
 kind <- match.arg(kind)
-FUN <- paste("svystat", kind, sep = "")
+if (kind %in% c("Sigma", "Sigma2")) {
+     FUN <- paste("svy", kind, sep = "")
+    } else {
+     FUN <- paste("svystat", kind, sep = "")
+    }
 by.var <- all.vars(by)
 group.var <- all.vars(group)
 group.by <- paste(c(group.var, by.var), collapse = ":")

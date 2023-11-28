@@ -199,7 +199,7 @@ function (design, df.population,
         # MEM.mega <- memory.limit() # NOTE: memory.limit() was intended for
         #                                    32-bit versions of Windows, which
         #                                    are no longer supported in R
-        #                                    versions >= 4.2.0 (21/03/20222)
+        #                                    versions >= 4.2.0 (21/03/2022)
         MEM.mega <- 4096
         mem.frac <- 10                 #Default value
         need.gc <- ( ((8 * nrec * naux )/(1024^2))  > (MEM.mega / mem.frac) )

@@ -135,7 +135,6 @@
 <h1 class="page-header">
 <a href="#regenesees-23" class="anchor"></a>ReGenesees 2.3</h1>
 <ul>
-<li><p>THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET</p></li>
 <li>
 <p>New functions n.prop, n.comp2prop, prec.prop, pow.comp2prop, and
 mde.comp2prop. These functions estimate the minimum sample size required
@@ -167,6 +166,12 @@ Calibration estimators.</p></li>
 referenced by argument ‘y’. Character variables are no longer allowed
 and must be converted to factor in advance, as suggested since the
 release of ReGenesees 2.0 (see the NOTE below).</p></li>
+<li><p>svystat: the function can now handle calls to svySigma (via kind
+= “Sigma”) and svySigma2 (via kind = “Sigma2”). Moreover, specifying
+‘by’ when kind = “B” is now allowed, since we do have a ‘by’ argument
+for svystatB since ReGenesees 2.1.</p></li>
+<li><p>write.svystat: code update to accomodate summary statistics
+returned by recent functions svySigma and SvySigma2.</p></li>
 <li><p>Improved documentation of how svystatTM works for estimators of
 totals and counts (i.e. estimator = “Total”) when interest variables are
 affected by missing values and na.rm = TRUE is specified.</p></li>

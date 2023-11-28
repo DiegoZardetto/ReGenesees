@@ -3,8 +3,6 @@
 #  ReGenesees 2.3
 
 
-*  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET
-
 *  New functions n.prop, n.comp2prop, prec.prop, pow.comp2prop, and
    mde.comp2prop. These functions estimate the minimum sample size required to
    (i) satisfy specific precision constraints in the estimation of proportions
@@ -31,6 +29,13 @@
    argument 'y'. Character variables are no longer allowed and must be converted
    to factor in advance, as suggested since the release of ReGenesees 2.0 (see
    the NOTE below).
+
+*  svystat: the function can now handle calls to svySigma (via kind = "Sigma") and
+   svySigma2 (via kind = "Sigma2"). Moreover, specifying 'by' when kind = "B" is
+   now allowed, since we do have a 'by' argument for svystatB since ReGenesees 2.1.
+
+*  write.svystat: code update to accomodate summary statistics returned by recent
+   functions svySigma and SvySigma2.
 
 *  Improved documentation of how svystatTM works for estimators of totals and
    counts (i.e. estimator = "Total") when interest variables are affected by

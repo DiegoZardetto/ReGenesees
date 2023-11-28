@@ -17,7 +17,7 @@ Computes many estimates and errors (e.g. for disparate estimation domains) in ju
 }
 
 \usage{
-svystat(design, kind = c("TM", "R", "S", "SR", "B", "Q", "L"),
+svystat(design, kind = c("TM", "R", "S", "SR", "B", "Q", "L", "Sigma", "Sigma2"),
         by = NULL, group = NULL, forGVF = TRUE,
         combo = -1, ...)
 
@@ -35,7 +35,8 @@ svystat(design, kind = c("TM", "R", "S", "SR", "B", "Q", "L"),
   \item{design}{Object of class \code{analytic} (or inheriting from it) containing survey data and sampling design metadata.}
   \item{kind}{\code{character} specifying the summary statistics function to call: it may be \code{'TM'} (i.e. \code{svystatTM}, the default),
               \code{'R'} (i.e. \code{svystatR}), \code{'S'} (i.e. \code{svystatS}), \code{'SR'} (i.e. \code{svystatSR}),
-              \code{'B'} (i.e. \code{svystatB}), \code{'Q'} (i.e. \code{svystatQ}), and \code{'L'} (i.e. \code{svystatL}).}
+              \code{'B'} (i.e. \code{svystatB}), \code{'Q'} (i.e. \code{svystatQ}), \code{'L'} (i.e. \code{svystatL}),
+              \code{'Sigma'} (i.e. \code{svySigma}), and \code{'Sigma2'} (i.e. \code{svySigma2}).}
   \item{by}{Formula specifying the variables that define the "estimation domains". If \code{NULL}
            (the default option) estimates refer to the whole population.}
   \item{group}{Formula specifying a partition of the population into "groups": the output will be returned separately for each group.

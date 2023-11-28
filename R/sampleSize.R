@@ -369,7 +369,7 @@ if (isTRUE(verbose)) {
          }
      cat("\n\n")
 
-     return(invisible(n))
+     return(invisible(prec))
     }
 return(prec)
 }

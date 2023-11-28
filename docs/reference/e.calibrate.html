@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -334,7 +334,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'># to estimate the number of final units in the population):</span>
 <span class='no'>descal01</span><span class='kw'>&lt;-</span><span class='fu'><a href='des.addvars.html'>des.addvars</a></span>(<span class='no'>descal01</span>,<span class='kw'>ones</span><span class='kw'>=</span><span class='fl'>1</span>)
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal01</span>, ~<span class='no'>ones</span>)</div><div class='output co'>#&gt;       Total           SE
-#&gt; ones 918300 2.884865e-10</div><div class='input'>
+#&gt; ones 918300 1.201834e-10</div><div class='input'>
 
 <span class='co'># 2) Calibration on the marginal distributions of sex and marstat</span>
 <span class='co'>#    (totals in pop02):</span>
@@ -344,11 +344,11 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
 <span class='co'># Checking the result:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal02</span>,~<span class='no'>sex</span>+<span class='no'>marstat</span>)</div><div class='output co'>#&gt;                   Total           SE
-#&gt; sexf             468366 1.398529e-10
-#&gt; sexm             449934 3.138359e-10
-#&gt; marstatmarried   532376 4.716981e-10
-#&gt; marstatunmarried 311996 3.564549e-11
-#&gt; marstatwidowed    73928 1.460957e-11</div><div class='input'>
+#&gt; sexf             468366 3.355174e-11
+#&gt; sexm             449934 4.622560e-11
+#&gt; marstatmarried   532376 1.624207e-11
+#&gt; marstatunmarried 311996 1.254943e-10
+#&gt; marstatwidowed    73928 1.917476e-11</div><div class='input'>
 
 <span class='co'># 3) Calibration (global solution) on the joint distribution of sex</span>
 <span class='co'>#    and marstat (totals in pop03):</span>
@@ -357,9 +357,9 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
 <span class='co'># Checking the result:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal03</span>,~<span class='no'>sex</span>,~<span class='no'>marstat</span>) <span class='co'># or: svystatTM(descal03,~marstat,~sex)</span></div><div class='output co'>#&gt;             marstat Total.sexf Total.sexm SE.Total.sexf SE.Total.sexm
-#&gt; married     married     272172     260204  8.185683e-11  2.824941e-11
-#&gt; unmarried unmarried     159280     152716  9.612173e-11  2.957805e-11
-#&gt; widowed     widowed      36914      37014  1.398840e-12  3.742899e-12</div><div class='input'>
+#&gt; married     married     272172     260204  6.673482e-11  4.242815e-11
+#&gt; unmarried unmarried     159280     152716  8.637640e-12  2.957805e-11
+#&gt; widowed     widowed      36914      37014  1.398840e-12  7.555014e-13</div><div class='input'>
 <span class='co'># which, obviously, is not respected by descal02 (notice the size of SE):</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal02</span>,~<span class='no'>sex</span>,~<span class='no'>marstat</span>)</div><div class='output co'>#&gt;             marstat Total.sexf Total.sexm SE.Total.sexf SE.Total.sexm
 #&gt; married     married  272111.67  260264.33      4697.938      4697.938
@@ -375,9 +375,9 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
 <span class='co'># Checking the result:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal03p</span>,~<span class='no'>sex</span>,~<span class='no'>marstat</span>)</div><div class='output co'>#&gt;             marstat Total.sexf Total.sexm SE.Total.sexf SE.Total.sexm
-#&gt; married     married     272172     260204  8.185683e-11  2.977929e-11
-#&gt; unmarried unmarried     159280     152716  9.612173e-11  6.462052e-11
-#&gt; widowed     widowed      36914      37014  1.398840e-12  3.739329e-12</div><div class='input'>
+#&gt; married     married     272172     260204  6.673482e-11  4.475639e-11
+#&gt; unmarried unmarried     159280     152716  8.637640e-12  3.381298e-11
+#&gt; widowed     widowed      36914      37014  1.398840e-12  7.587658e-13</div><div class='input'>
 
 <span class='co'># 4) Calibration (global solution) on the totals for the quantitative</span>
 <span class='co'>#    variables x1, x2 and x3 in the subpopulations defined by the</span>
@@ -388,9 +388,9 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
 <span class='co'># Checking the result:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal04</span>,~<span class='no'>x1</span>+<span class='no'>x2</span>+<span class='no'>x3</span>,~<span class='no'>regcod</span>)</div><div class='output co'>#&gt;    regcod Total.x1 Total.x2 Total.x3  SE.Total.x1  SE.Total.x2  SE.Total.x3
-#&gt; 6       6    18403     5870     6525 8.015991e-13 2.301395e-13 4.874376e-13
-#&gt; 7       7    22484     7557     8092 1.074796e-12 8.483139e-13 1.285120e-12
-#&gt; 10     10    13726     4884     5659 7.875984e-13 6.953547e-13 5.570303e-13</div><div class='input'>
+#&gt; 6       6    18403     5870     6525 2.528340e-12 1.041907e-12 4.874376e-13
+#&gt; 7       7    22484     7557     8092 1.477221e-12 7.347449e-13 1.744538e-12
+#&gt; 10     10    13726     4884     5659 7.875984e-13 3.360599e-13 5.570303e-13</div><div class='input'>
 
 <span class='co'># 4.1) Same problem with the partitioned solution (partition=~regcod,</span>
 <span class='co'>#      totals in pop04p):</span>
@@ -400,9 +400,9 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
 <span class='co'># Checking the result:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal04p</span>,~<span class='no'>x1</span>+<span class='no'>x2</span>+<span class='no'>x3</span>,~<span class='no'>regcod</span>)</div><div class='output co'>#&gt;    regcod Total.x1 Total.x2 Total.x3  SE.Total.x1  SE.Total.x2  SE.Total.x3
-#&gt; 6       6    18403     5870     6525 7.967991e-13 2.491342e-13 5.599769e-13
-#&gt; 7       7    22484     7557     8092 1.074796e-12 1.051257e-12 5.193805e-13
-#&gt; 10     10    13726     4884     5659 6.495574e-13 4.881762e-13 4.316836e-13</div><div class='input'>
+#&gt; 6       6    18403     5870     6525 3.377659e-12 1.343405e-12 5.599769e-13
+#&gt; 7       7    22484     7557     8092 1.477221e-12 8.935162e-13 1.751581e-12
+#&gt; 10     10    13726     4884     5659 6.495574e-13 2.544583e-13 4.316836e-13</div><div class='input'>
 
 <span class='co'># 5) Calibration (global solution) on the total for the quantitative</span>
 <span class='co'>#    variable x1 and on the marginal distribution of the qualitative</span>
@@ -421,19 +421,19 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; f.widowed     f   widowed         2099         8122        16437         8574
 #&gt; m.widowed     m   widowed          561        12013        14556         8024
 #&gt;             Total.age5c5 Total.x1 SE.Total.age5c1 SE.Total.age5c2
-#&gt; f.married           6463    14750    1.235338e-12    1.625541e-11
-#&gt; m.married           9714    18171    2.073350e-13    1.019556e-11
-#&gt; f.unmarried          992     8446    4.420889e-12    6.056524e-12
-#&gt; m.unmarried          462     8210    7.156751e-12    1.530471e-12
-#&gt; f.widowed           1682     2737    1.442386e-13    2.842057e-13
+#&gt; f.married           6463    14750    1.235338e-12    1.272409e-11
+#&gt; m.married           9714    18171    3.976661e-13    3.759196e-12
+#&gt; f.unmarried          992     8446    1.132742e-12    2.141538e-12
+#&gt; m.unmarried          462     8210    6.700997e-12    5.211010e-12
+#&gt; f.widowed           1682     2737    9.508466e-14    2.842057e-13
 #&gt; m.widowed           1860     2298    2.897581e-14    1.203842e-12
 #&gt;             SE.Total.age5c3 SE.Total.age5c4 SE.Total.age5c5  SE.Total.x1
-#&gt; f.married      3.700087e-11    2.687992e-12    1.776885e-13 3.584693e-12
-#&gt; m.married      4.585277e-11    4.537545e-12    2.414860e-13 2.717903e-11
-#&gt; f.unmarried    4.917396e-12    5.880996e-13    9.737936e-14 9.932427e-12
-#&gt; m.unmarried    3.440076e-12    8.086585e-13    6.365716e-14 9.372442e-12
-#&gt; f.widowed      6.995869e-13    5.912852e-13    1.905831e-13 1.081738e-12
-#&gt; m.widowed      4.345409e-13    5.736963e-13    6.372526e-14 2.581541e-13</div><div class='input'>
+#&gt; f.married      2.203339e-11    6.260919e-12    1.776885e-13 4.639167e-12
+#&gt; m.married      1.948546e-11    3.459667e-12    2.468354e-13 3.448681e-12
+#&gt; f.unmarried    4.963355e-12    2.534411e-13    9.737936e-14 9.948751e-12
+#&gt; m.unmarried    7.230665e-13    8.158830e-13    6.224669e-14 2.002933e-11
+#&gt; f.widowed      6.995869e-13    7.100555e-13    1.905831e-13 3.481116e-13
+#&gt; m.widowed      4.345409e-13    5.670255e-13    8.655409e-14 3.818179e-13</div><div class='input'>
 
 <span class='co'># 5.1) Same problem with the partitioned solution (partition=~sex:marstat,</span>
 <span class='co'>#      totals in pop05p):</span>
@@ -450,19 +450,19 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; f.widowed     f   widowed         2099         8122        16437         8574
 #&gt; m.widowed     m   widowed          561        12013        14556         8024
 #&gt;             Total.age5c5  Total.x1 SE.Total.age5c1 SE.Total.age5c2
-#&gt; f.married           6463 14750.000    7.057527e-13    7.059334e-12
-#&gt; m.married           9714 18171.000    1.708768e-13    3.852390e-12
-#&gt; f.unmarried          992  8446.000    6.810395e-12    6.146171e-12
-#&gt; m.unmarried          462  8210.001    8.703464e-12    8.960385e-13
+#&gt; f.married           6463 14750.000    1.206965e-12    1.489651e-12
+#&gt; m.married           9714 18171.000    4.175847e-13    8.763915e-12
+#&gt; f.unmarried          992  8446.000    1.040497e-12    1.892746e-12
+#&gt; m.unmarried          462  8210.001    9.082416e-12    4.539486e-12
 #&gt; f.widowed           1682  2737.000    9.359915e-14    2.575470e-13
-#&gt; m.widowed           1860  2298.000    3.043670e-14    1.474902e-12
+#&gt; m.widowed           1860  2298.000    9.631189e-14    1.450222e-12
 #&gt;             SE.Total.age5c3 SE.Total.age5c4 SE.Total.age5c5  SE.Total.x1
-#&gt; f.married      4.982447e-11    3.203555e-11    1.777031e-13 1.000677e-11
-#&gt; m.married      4.109918e-11    4.962078e-12    3.082513e-13 4.474995e-12
-#&gt; f.unmarried    5.659135e-12    2.925929e-12    1.614705e-13 2.795701e-12
-#&gt; m.unmarried    3.228953e-12    8.089967e-13    6.852988e-14 1.187036e-12
-#&gt; f.widowed      3.937072e-13    2.074362e-13    1.833791e-13 1.508752e-12
-#&gt; m.widowed      4.310660e-13    6.870425e-13    7.750609e-14 1.749181e-13</div><div class='input'>
+#&gt; f.married      2.089462e-11    1.381439e-11    1.777031e-13 1.036177e-11
+#&gt; m.married      2.107743e-11    3.450302e-12    3.029680e-13 3.038585e-12
+#&gt; f.unmarried    7.742098e-12    2.922028e-12    1.614705e-13 3.140887e-12
+#&gt; m.unmarried    8.345906e-13    7.762465e-13    5.818079e-14 1.241258e-12
+#&gt; f.widowed      1.008660e-12    6.448378e-13    1.833791e-13 5.720334e-13
+#&gt; m.widowed      4.310660e-13    4.817074e-13    7.750609e-14 4.162713e-13</div><div class='input'>
 <span class='co'># Notice that 3.1 and 5.1) 5.2) do not impose the aggregate.stage=2</span>
 <span class='co'># condition. This condition cannot, in fact, be fulfilled because</span>
 <span class='co'># in both cases the domains defined by partition "cut across"</span>
@@ -936,7 +936,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; 19.75 19.75 19.75 19.75 </div><div class='input'>       <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal2</span>)[<span class='no'>to.keep</span>]</div><div class='output co'>#&gt; [1] 19.75 19.75 19.75 19.75</div><div class='input'>
        <span class='co'>## ...as it must be.</span>
 
-<span class='co'># NOTE: It should be clear that the additional request to held some weights</span>
+<span class='co'># NOTE: It should be clear that the additional request to hold some weights</span>
 <span class='co'>#       fixed while calibrating will - all other things being equal - increase</span>
 <span class='co'>#       the probability of non-convergence of the calibration algorithm.</span>
 
@@ -990,7 +990,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'># at population level:</span>
 <span class='fu'><a href='svystatR.html'>svystatR</a></span>(<span class='no'>exdes</span>,~<span class='no'>ones</span>,~<span class='no'>houdensity</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                    Ratio       CV%
 #&gt; ones/houdensity 1.259284 0.8744035</div><div class='input'><span class='fu'><a href='svystatR.html'>svystatR</a></span>(<span class='no'>excal</span>,~<span class='no'>ones</span>,~<span class='no'>houdensity</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                    Ratio          CV%
-#&gt; ones/houdensity 1.133042 1.358692e-14</div><div class='input'>
+#&gt; ones/houdensity 1.133042 2.265184e-14</div><div class='input'>
 
 <span class='co'>########################################</span>
 <span class='co'># Calibrating on different patterns of #</span>
@@ -1109,10 +1109,10 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'># Test1: nace.macro counts have 0 CVs:</span>
   <span class='no'>test1</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>nace.macro</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)
   <span class='no'>test1</span></div><div class='output co'>#&gt;                       Total          CV%
-#&gt; nace.macroAgriculture   458 5.875410e-15
-#&gt; nace.macroIndustry     9295 2.056985e-14
-#&gt; nace.macroCommerce     3060 9.085781e-16
-#&gt; nace.macroServices     4505 1.758063e-14</div><div class='input'>
+#&gt; nace.macroAgriculture   458 1.624180e-14
+#&gt; nace.macroIndustry     9295 9.551931e-16
+#&gt; nace.macroCommerce     3060 6.655761e-15
+#&gt; nace.macroServices     4505 9.898773e-15</div><div class='input'>
   <span class='co'># Test2: only 'Industry' macrosector has 0 CVs for dom3 counts:</span>
   <span class='no'>test2</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>dom3</span>,<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>nace.macro</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)
   <span class='fu'><a href='Zapsmall.html'>Zapsmall</a></span>(<span class='no'>test2</span>)</div><div class='output co'>#&gt;              nace.macro Total.dom3A Total.dom3B Total.dom3C Total.dom3D

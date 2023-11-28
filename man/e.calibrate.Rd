@@ -627,7 +627,7 @@ pop<-fill.template(universe=sbs.frame,template=pop)
 
        ## ...as it must be.
 
-# NOTE: It should be clear that the additional request to held some weights
+# NOTE: It should be clear that the additional request to hold some weights
 #       fixed while calibrating will - all other things being equal - increase
 #       the probability of non-convergence of the calibration algorithm.
 

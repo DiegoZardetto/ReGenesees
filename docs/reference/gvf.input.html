@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -166,7 +166,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Given a set of survey statistic objects (via arguments &#8216;<code>...</code>&#8217; or <code>stats</code>) and a design object (<code>design</code>) from which those statics are supposed to have been derived, function <code>gvf.input</code> builds a data structure that can be fed to <span class="pkg">ReGenesees</span> GVF model fitting function <code><a href='fit.gvf.html'>fit.gvf</a></code>.</p>
-<p>Argument &#8216;<code>...</code>&#8217; can be bound to an arbitrary number of objects. These objects must be output of survey statistics functions, i.e. <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code>, and <code><a href='svystatL.html'>svystatL</a></code>.<br />
+<p>Argument &#8216;<code>...</code>&#8217; can be bound to an arbitrary number of objects. These objects must be output of survey statistics functions, i.e. <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code>, <code><a href='svystatL.html'>svystatL</a></code>, <code><a href='svySigma.html'>svySigma</a></code>, and <code><a href='svySigma2.html'>svySigma2</a></code>.<br />
 All input objects passed to &#8216;<code>...</code>&#8217; must derive from estimators of the <em>same</em> kind (as returned by function <code><a href='estimator.kind.html'>estimator.kind</a></code>). For the same reason, objects of <em>mixed</em> kind (see <code><a href='estimator.kind.html'>estimator.kind</a></code>) are not allowed. Since function <code><a href='svystatL.html'>svystatL</a></code> can actually handle estimators of <em>different</em> kinds, objects of kind &#8216;<code>Complex Estimator</code>&#8217; are the only exception to the rule.</p>
 <p>Argument <code>stats</code> can be used as an alternative to argument &#8216;<code>...</code>&#8217;: one has only to store the survey statistic objects into a <code>list</code> and bind such list to <code>stats</code>. Note that, if both are passed, argument <code>stats</code> will prevail on &#8216;<code>...</code>&#8217; (see &#8216;Examples&#8217;).</p>
 <p>Should <em>any</em> input object be a survey statistic derived from a design object <em>other than</em> <code>design</code>, the function would raise an error.</p>

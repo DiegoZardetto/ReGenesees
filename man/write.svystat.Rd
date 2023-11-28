@@ -14,7 +14,7 @@ write.svystat(x, ...)
   \item{\dots}{Arguments to \code{write.table}}
 }
 \details{
-This function is just a convenience wrapper to \code{\link{write.table}}, designed to export objects which have been returned by survey statistics functions (e.g. \code{\link{svystatTM}}, \code{\link{svystatR}}, \code{\link{svystatS}}, \code{\link{svystatSR}}, \code{\link{svystatB}}, \code{\link{svystatQ}}, \code{\link{svystatL}}).
+This function is just a convenience wrapper to \code{\link{write.table}}, designed to export objects which have been returned by survey statistics functions (e.g. \code{\link{svystatTM}}, \code{\link{svystatR}}, \code{\link{svystatS}}, \code{\link{svystatSR}}, \code{\link{svystatB}}, \code{\link{svystatQ}}, \code{\link{svystatL}}, \code{\link{svySigma}}, \code{\link{svySigma2}}).
 }
 \author{
 Diego Zardetto

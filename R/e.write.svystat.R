@@ -3,6 +3,8 @@ function(x, ...)
 {
 OK.classes <- c("svystatTM",       "svystatR",    "svystatL",    "svystatQ",    "svystatS",    "svystatSR",    "svystatB",
                 "svystatTM.by", "svystatR.by", "svystatL.by", "svystatQ.by", "svystatS.by", "svystatSR.by", "svystatB.by",
+                "svySigma",       "svySigma2",
+                "svySigma.by", "svySigma2.by",
                 "CoV",                 "Corr",       "svyby")
 check.classes <- sapply(OK.classes, function(class) inherits(x, class))
 if (!any(check.classes))

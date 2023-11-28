@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -137,7 +137,7 @@
     <p>Computes many estimates and errors (e.g. for disparate estimation domains) in just a single shot, primarily to use them in fitting GVF models. Can handle estimators of all kinds.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>svystat</span>(<span class='no'>design</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TM"</span>, <span class='st'>"R"</span>, <span class='st'>"S"</span>, <span class='st'>"SR"</span>, <span class='st'>"B"</span>, <span class='st'>"Q"</span>, <span class='st'>"L"</span>),
+    <pre class="usage"><span class='fu'>svystat</span>(<span class='no'>design</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TM"</span>, <span class='st'>"R"</span>, <span class='st'>"S"</span>, <span class='st'>"SR"</span>, <span class='st'>"B"</span>, <span class='st'>"Q"</span>, <span class='st'>"L"</span>, <span class='st'>"Sigma"</span>, <span class='st'>"Sigma2"</span>),
         <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>forGVF</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
         <span class='kw'>combo</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='no'>...</span>)
 
@@ -168,7 +168,8 @@
       <th>kind</th>
       <td><p><code>character</code> specifying the summary statistics function to call: it may be <code>'TM'</code> (i.e. <code>svystatTM</code>, the default),
               <code>'R'</code> (i.e. <code>svystatR</code>), <code>'S'</code> (i.e. <code>svystatS</code>), <code>'SR'</code> (i.e. <code>svystatSR</code>),
-              <code>'B'</code> (i.e. <code>svystatB</code>), <code>'Q'</code> (i.e. <code>svystatQ</code>), and <code>'L'</code> (i.e. <code>svystatL</code>).</p></td>
+              <code>'B'</code> (i.e. <code>svystatB</code>), <code>'Q'</code> (i.e. <code>svystatQ</code>), <code>'L'</code> (i.e. <code>svystatL</code>),
+              <code>'Sigma'</code> (i.e. <code>svySigma</code>), and <code>'Sigma2'</code> (i.e. <code>svySigma2</code>).</p></td>
     </tr>
     <tr>
       <th>by</th>

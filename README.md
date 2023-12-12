@@ -23,6 +23,10 @@ A [pkgdown website](https://DiegoZardetto.github.io/ReGenesees) for ReGenesees i
 - <https://DiegoZardetto.github.io/ReGenesees>
 
 
+## Citation
+Zardetto, D. (2015). "ReGenesees: An Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys". *Journal of Official Statistics*, **31**(2), 177-203. <https://sciendo.com/article/10.1515/jos-2015-0013>.
+
+
 ## Graphical User Interface
 A companion R package named **ReGenesees.GUI** is also available, which provides a user-friendly mouse-click graphical interface for ReGenesees. Find it e.g. on [GitHub](https://github.com/DiegoZardetto/ReGenesees.GUI) here:
 - <https://github.com/DiegoZardetto/ReGenesees.GUI>

@@ -34,6 +34,6 @@ ci.l <- ci[1:(length(ci)/2)]
 ci.u <- ci[(length(ci)/2 + 1):length(ci)]
 plot(e, ylim = range(ci.l, ci.u), xaxt = "n", col = arr.col, xlab = xlab, ylab = ylab, ...)
 x <- 1:length(e)
-axis(1, at = x, labels = names(e), ...)
+suppressWarnings(axis(1, at = x, labels = names(e), ...))
 arrows(x, ci.l, x, ci.u, length = arr.len, angle = 90, code = 3, col = arr.col, lwd = arr.lwd)
 }

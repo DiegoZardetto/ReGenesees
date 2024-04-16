@@ -3,6 +3,8 @@
 # design decisions and survey planning into ReGenesees. Below are a couple of
 # initial code snippets.
 #
+# NOTE: First release ReGenesees 2.3. Treatment of fpc added in ReGenesees 2.4. 
+#
 # Possible reference URLs for documentation/testing/validation:
 # - MICS7 TOOLS, UNICEF 2023. URL: https://mics.unicef.org/tools?round=mics7
 # - ILO-IPEC TOOLS, ILO 2014. URL: https://www.ilo.org/ipec/ChildlabourstatisticsSIMPOC/Manuals/WCMS_304559/lang--en/index.htm
@@ -20,7 +22,7 @@ n.prop <- function(prec, prec.ind = c("ME", "RME", "SE", "CV"), P = 0.5,
                    DEFF = 1, RR = 1,
                    F = 1, hhSize = 1, AVEhh = F * hhSize,
                    old.clus.size = NULL, new.clus.size = NULL,
-                   alpha = 0.05, verbose = TRUE){
+                   N = NULL, alpha = 0.05, verbose = TRUE){
 ################################################################
 # Sample size requirements for specified precision constraints #
 # in the estimation of a PROPORTION.                           #
@@ -62,7 +64,11 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
@@ -71,7 +77,16 @@ if (!is.null(new.clus.size)) {
     }
 
 # Calculate the required sample size
-n <- ceiling( ( Z^2 * DEFF * P * (1 - P) ) / (ME^2 * RR * AVEhh) )
+n.inf <- ( Z^2 * DEFF * P * (1 - P) ) / (ME^2 * RR * AVEhh)
+
+# Address fpc
+if (is.null(N)) {
+     n <- ceiling(n.inf)
+    } else {
+     # Make sure input is a sensical number
+     N <- round(abs(N))
+     n <- ceiling( n.inf / ( 1 + (n.inf - 1) / N ) )
+    }
 
 if (!is.null(new.clus.size)) {
      # Make the required sample size a multiple of the requested new cluster
@@ -92,6 +107,9 @@ if (isTRUE(verbose)) {
      cat("\n  F =", F)
      cat("\n  hhSize =", hhSize)
      cat("\n  AVEhh =", AVEhh)
+     if (!is.null(N)) {
+          cat("\n  N =", N)
+         }
      if (!is.null(new.clus.size)) {
           cat("\n# Design parameters:")
           cat("\n  old.clus.size =", old.clus.size)
@@ -111,7 +129,7 @@ prec.prop <- function(n, prec.ind = c("ME", "RME", "SE", "CV"), P = 0.5,
                       DEFF = 1, RR = 1,
                       F = 1, hhSize = 1, AVEhh = F * hhSize,
                       old.clus.size = NULL, new.clus.size = NULL,
-                      alpha = 0.05, verbose = TRUE){
+                      N = NULL, alpha = 0.05, verbose = TRUE){
 ################################################################
 # Expected precision in the estimation of a PROPORTION for a   #
 # specified sample size.                                       #
@@ -146,7 +164,11 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
@@ -154,8 +176,22 @@ if (!is.null(new.clus.size)) {
      DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
     }
 
+# Make sure input is a sensical number
+n <- round(abs(n))
+
 # Calculate the expected ME
-ME <- sqrt( ( Z^2 * DEFF * P * (1 - P) ) / (n * RR * AVEhh) )
+ME.inf <- sqrt( ( Z^2 * DEFF * P * (1 - P) ) / (n * RR * AVEhh) )
+
+# Address fpc
+if (is.null(N)) {
+     ME <- ME.inf
+    } else {
+     # Make sure input is a sensical number
+     N <- round(abs(N))
+     if (n > N) stop("Specified sample size (n) is larger than specified population size (N), please double-check!")
+     ME <- ME.inf * sqrt( (N - n) / (N - 1) )
+    }
+
 ## Use ME as a pivot
 # ME  = Z * SE
 # RME = ME / P
@@ -173,6 +209,9 @@ if (isTRUE(verbose)) {
      cat("\n  F =", F)
      cat("\n  hhSize =", hhSize)
      cat("\n  AVEhh =", AVEhh)
+     if (!is.null(N)) {
+          cat("\n  N =", N)
+         }
      if (!is.null(new.clus.size)) {
           cat("\n# Design parameters:")
           cat("\n  old.clus.size =", old.clus.size)
@@ -180,11 +219,12 @@ if (isTRUE(verbose)) {
           cat("\n  new.clus.size =", new.clus.size)
           cat("\n  new.DEFF =", DEFF)
          }
-     cat("\n# -> Expected precision:")
-     cat(paste("\n  ", prec.ind, sep = ""), "=", prec)
      if (prec.ind %in% c("ME", "RME")) {
+          cat("\n# Significance:")
           cat("\n  alpha =", alpha)
          }
+     cat("\n# -> Expected precision:")
+     cat(paste("\n  ", prec.ind, sep = ""), "=", prec)
      cat("\n\n")
 
      return(invisible(prec))
@@ -192,12 +232,11 @@ if (isTRUE(verbose)) {
 return(prec)
 }
 
-
 n.mean <- function(prec, prec.ind = c("ME", "RME", "SE", "CV"), sigmaY, muY = NULL,
                    DEFF = 1, RR = 1,
                    F = 1, hhSize = 1, AVEhh = F * hhSize,
                    old.clus.size = NULL, new.clus.size = NULL,
-                   alpha = 0.05, verbose = TRUE){
+                   N = NULL, alpha = 0.05, verbose = TRUE){
 ################################################################
 # Sample size requirements for specified precision constraints #
 # in the estimation of the MEAN of a numeric variable Y.       #
@@ -239,7 +278,11 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
@@ -249,7 +292,16 @@ if (!is.null(new.clus.size)) {
 
 # Calculate the required sample size
 sigma2Y <- sigmaY^2
-n <- ceiling( ( Z^2 * DEFF * sigma2Y ) / (ME^2 * RR * AVEhh) )
+n.inf <- ( Z^2 * DEFF * sigma2Y ) / (ME^2 * RR * AVEhh)
+
+# Address fpc
+if (is.null(N)) {
+     n <- ceiling(n.inf)
+    } else {
+     # Make sure input is a sensical number
+     N <- round(abs(N))
+     n <- ceiling( n.inf / ( 1 + (n.inf - 1) / N ) )
+    }
 
 if (!is.null(new.clus.size)) {
      # Make the required sample size a multiple of the requested new cluster
@@ -271,6 +323,9 @@ if (isTRUE(verbose)) {
      cat("\n  F =", F)
      cat("\n  hhSize =", hhSize)
      cat("\n  AVEhh =", AVEhh)
+     if (!is.null(N)) {
+          cat("\n  N =", N)
+         }
      if (!is.null(new.clus.size)) {
           cat("\n# Design parameters:")
           cat("\n  old.clus.size =", old.clus.size)
@@ -290,7 +345,7 @@ prec.mean <- function(n, prec.ind = c("ME", "RME", "SE", "CV"), sigmaY, muY = NU
                       DEFF = 1, RR = 1,
                       F = 1, hhSize = 1, AVEhh = F * hhSize,
                       old.clus.size = NULL, new.clus.size = NULL,
-                      alpha = 0.05, verbose = TRUE){
+                      N = NULL, alpha = 0.05, verbose = TRUE){
 ################################################################
 # Expected precision in the estimation of the MEAN of a        #
 # numeric variable Y for a specified sample size.              #
@@ -326,7 +381,11 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
@@ -334,9 +393,23 @@ if (!is.null(new.clus.size)) {
      DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
     }
 
+# Make sure input is a sensical number
+n <- round(abs(n))
+
 # Calculate the the expected ME
 sigma2Y <- sigmaY^2
-ME <- sqrt( ( Z^2 * DEFF * sigma2Y ) / (n * RR * AVEhh) )
+ME.inf <- sqrt( ( Z^2 * DEFF * sigma2Y ) / (n * RR * AVEhh) )
+
+# Address fpc
+if (is.null(N)) {
+     ME <- ME.inf
+    } else {
+     # Make sure input is a sensical number
+     N <- round(abs(N))
+     if (n > N) stop("Specified sample size (n) is larger than specified population size (N), please double-check!")
+     ME <- ME.inf * sqrt( (N - n) / (N - 1) )
+    }
+
 ## Use ME as a pivot
 # ME  = Z * SE
 # RME = ME / muY
@@ -362,11 +435,12 @@ if (isTRUE(verbose)) {
           cat("\n  new.clus.size =", new.clus.size)
           cat("\n  new.DEFF =", DEFF)
          }
-     cat("\n# -> Expected precision:")
-     cat(paste("\n  ", prec.ind, sep = ""), "=", prec)
      if (prec.ind %in% c("ME", "RME")) {
+          cat("\n# Significance:")
           cat("\n  alpha =", alpha)
          }
+     cat("\n# -> Expected precision:")
+     cat(paste("\n  ", prec.ind, sep = ""), "=", prec)
      cat("\n\n")
 
      return(invisible(prec))
@@ -419,7 +493,11 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
@@ -534,13 +612,20 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
      ROH.old <- (DEFF.old - 1) / (old.clus.size * AVEhh - 1)
      DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
     }
+
+# Make sure input is a sensical number
+n <- round(abs(n))
 
 # Calculate the expected power
 if (isTRUE(pooled.variance)) {
@@ -636,13 +721,20 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
      ROH.old <- (DEFF.old - 1) / (old.clus.size * AVEhh - 1)
      DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
     }
+
+# Make sure input is a sensical number
+n <- round(abs(n))
 
 # Calculate the expected MDE
 if (isTRUE(pooled.variance)) {
@@ -738,7 +830,11 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
@@ -837,13 +933,20 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
      ROH.old <- (DEFF.old - 1) / (old.clus.size * AVEhh - 1)
      DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
     }
+
+# Make sure input is a sensical number
+n <- round(abs(n))
 
 # Calculate the expected power
 sigma2Y <- sigmaY^2
@@ -925,13 +1028,20 @@ if (!missing(AVEhh)) {
 # sampled PSU) by leveraging DEFF portability
 DEFF.old <- DEFF
 if (!is.null(new.clus.size)) {
+     # Make sure input is a sensical number
+     new.clus.size <- round(abs(new.clus.size))
      if (is.null(old.clus.size)) stop("Specify the cluster size that resulted in the input DEFF value!")
+     # Make sure input is a sensical number
+     old.clus.size <- round(abs(old.clus.size))
      # NOTE: The ROH estimated here is an individual-level one, because the
      #       the average cluster size is calculated in terms of individuals, not
      #       households! 
      ROH.old <- (DEFF.old - 1) / (old.clus.size * AVEhh - 1)
      DEFF <- 1 + ROH.old * (new.clus.size * AVEhh - 1)
     }
+
+# Make sure input is a sensical number
+n <- round(abs(n))
 
 # Calculate the expected MDE
 sigma2Y <- sigmaY^2

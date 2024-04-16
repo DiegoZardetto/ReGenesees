@@ -24,7 +24,7 @@ A [pkgdown website](https://DiegoZardetto.github.io/ReGenesees) for ReGenesees i
 
 
 ## Citation
-Zardetto, D. (2015). "ReGenesees: An Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys". *Journal of Official Statistics*, **31**(2), 177-203. <https://sciendo.com/article/10.1515/jos-2015-0013>.
+Zardetto, D. (2015). "ReGenesees: An Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys". *Journal of Official Statistics*, *31*(2), 177-203. <https://sciendo.com/article/10.1515/jos-2015-0013>.
 
 
 ## Graphical User Interface

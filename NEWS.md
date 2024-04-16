@@ -1,3 +1,13 @@
+#  ReGenesees 2.4
+
+
+*  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET!
+
+*  Functions n.prop, prec.prop, n.mean, and prec.mean no longer neglect finite
+   population corrections (fpc). To factor the fpc, you need to specify the
+   target population size by using the new (and still optional) argument 'N'.
+   The new argument defaults to NULL, which would again result in neglecting
+   the fpc, as in previous versions of ReGenesees.
 
 
 #  ReGenesees 2.3

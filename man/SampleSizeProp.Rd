@@ -18,13 +18,13 @@ n.prop(prec, prec.ind = c("ME", "RME", "SE", "CV"), P = 0.5,
        DEFF = 1, RR = 1,
        F = 1, hhSize = 1, AVEhh = F * hhSize,
        old.clus.size = NULL, new.clus.size = NULL,
-       alpha = 0.05, verbose = TRUE)
+       N = NULL, alpha = 0.05, verbose = TRUE)
 
 prec.prop(n, prec.ind = c("ME", "RME", "SE", "CV"), P = 0.5,
           DEFF = 1, RR = 1,
           F = 1, hhSize = 1, AVEhh = F * hhSize,
           old.clus.size = NULL, new.clus.size = NULL,
-          alpha = 0.05, verbose = TRUE)
+          N = NULL, alpha = 0.05, verbose = TRUE)
 
 n.comp2prop(P1, P2 = P1, MDE = abs(P2 - P1), K1 = 1/2,
             alpha = 0.05, beta = 0.2, sides = c("two-tailed", "one-tailed"),
@@ -62,6 +62,7 @@ mde.comp2prop(n, P1, P2 = P1, K1 = 1/2,
   \item{AVEhh}{Anticipated estimate of the average number of individuals belonging to the target subpopulation per household.}
   \item{old.clus.size}{Average number of households sampled per PSU in the survey you have used to compute the input value for the \code{DEFF} argument.}
   \item{new.clus.size}{Average number of households to be sampled per PSU in the survey you are planning.}
+  \item{N}{The size of your target (sub)population. Only needed if you don't want to neglect finite population corrections (which is the default behaviour if \code{N = NULL}).}
   \item{alpha}{Significance level used to build confidence intervals (with confidence level equal to \code{1 - alpha}) or probability of Type I error (False Positive) for hypothesis testing.}
   \item{verbose}{Print on screen some description or just return the results?}
   \item{n}{The sample size for which the expected precision or power or MDE must be calculated (see \sQuote{Details}).}
@@ -88,6 +89,10 @@ The formula needed to guesstimate the minimum sample size required to attain spe
 \strong{NOTE:} Arguments \code{F}, \code{hhSize}, and \code{AVEhh} are necessarily related to each other, as it is illustrated by the expression of the default of \code{AVEhh}, thus it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity \code{AVEhh = F * hhSize}.
 
 \strong{NOTE:} Most of the arguments to the above five functions are vectorized, meaning that users can pass \code{numeric} vectors to them to investigate multiple design scenarios in a single shot (e.g. via \code{MDE = c(0.06, 0.08, 0.10)}). When vectors of length greater than 1 are passed to multiple arguments, \R recycling rule will kick in.
+
+\strong{NOTE:} Input values for sample size, \code{n}, and population size (if any), \code{N}, should be positive integers. The functions will silently make them so, by using their \code{round(abs( ))} values. When both \code{n} and \code{N} are specified, an error will be raised if \code{n > N}.
+
+\strong{NOTE:} Since, as shown in the \sQuote{Examples} section, the functions can be tweaked to cover different designs (one or two stages) and target populations (proportions of \emph{individuals} or \emph{households}), users who do not want to neglect finite population corrections must specify the population size \code{N} in terms of the \emph{analytical units} that are relevant to their analysis.
 
 \strong{NOTE:} Both functions \code{\link{n.prop}} and \code{\link{n.comp2prop}} return the \emph{ceiling} of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performances than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).
 }

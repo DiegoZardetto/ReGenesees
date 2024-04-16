@@ -1,7 +1,7 @@
 citHeader("To cite the ReGenesees package in publications please use:")
 
-citEntry(
-    entry = "article",
+bibentry(
+    bibtype = "article",
     author = "Diego Zardetto",
     year = "2015",
     title = "ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys",
@@ -15,14 +15,14 @@ citEntry(
     textVersion = "Zardetto D. (2015) \"ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys\". Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013"
     )
 
-citEntry(
-    entry = "misc",
+bibentry(
+    bibtype = "misc",
     author = "Diego Zardetto",
-    year = "2023",
+    year = "2024",
     title = "ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys",
-    note = "R package version 2.3",
+    note = "R package version 2.4",
     organization = "Istat",
     address = "Rome, Italy",
-    textVersion = "Zardetto D. (2023) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.3, Istat, Italy."
+    textVersion = "Zardetto D. (2024) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.4, Istat, Italy."
     )
 

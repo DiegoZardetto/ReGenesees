@@ -8,6 +8,10 @@
    target population size by using the new (and still optional) argument 'N'.
    The new argument defaults to NULL, which would again result in neglecting
    the fpc, as in previous versions of ReGenesees.
+*  The output of function UWE(), when calculated by domains (i.e. argument 'by'
+   is passed), has now a better behavior under *subsetting by columns*. Note
+   that this improvement does not have any other visible effects (values and
+   metadata are exactly the same as before).
 
 
 #  ReGenesees 2.3

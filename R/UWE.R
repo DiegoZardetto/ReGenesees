@@ -60,6 +60,8 @@ if (!inherits(design, "analytic")) {
                     )
 
      out <- cbind(u.byfactors.s, t(out))
+     out <- data.frame(lapply(out, unlist)) # Debug 17/04/2024: same output, just better
+                                            #                   subsetting behavior
      rownames(out) <- uniquelevels
     }
 

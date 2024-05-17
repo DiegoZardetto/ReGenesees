@@ -210,6 +210,17 @@ n.prop(prec= 0.03, prec.ind= "ME", P= 0.1, DEFF= 4, F= 0.15, hhSize= 5.0, RR= 0.
 #       desired margin of error from 2288 to 2760 households.
 
 
+##################################################
+# Impact of Finite Population Corrections (fpc). #
+##################################################
+# The sample size above was obtained by neglecting finite population corrections. Now let's
+# assume we know the population size is in the ballpark of 100 thousand households. If we
+# correctly factor in the fpc terms, then the required sample size is reduced as follows:
+n.prop(prec= 0.03, prec.ind= "ME", P= 0.1, DEFF= 4, F= 0.15, hhSize= 5.0, RR= 0.9, 
+       old.clus.size= 16, new.clus.size= 20, N= 100000)
+
+
+
 #######################################################################
 # Power calculations for the comparison of two proportions: example 1 #
 #######################################################################

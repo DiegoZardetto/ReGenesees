@@ -188,7 +188,7 @@ if (is.null(N)) {
     } else {
      # Make sure input is a sensical number
      N <- round(abs(N))
-     if (n > N) stop("Specified sample size (n) is larger than specified population size (N), please double-check!")
+     if ( any(n > N) ) stop("Specified sample size (n) is larger than specified population size (N), please double-check!")
      ME <- ME.inf * sqrt( (N - n) / (N - 1) )
     }
 
@@ -406,7 +406,7 @@ if (is.null(N)) {
     } else {
      # Make sure input is a sensical number
      N <- round(abs(N))
-     if (n > N) stop("Specified sample size (n) is larger than specified population size (N), please double-check!")
+     if ( any(n > N) ) stop("Specified sample size (n) is larger than specified population size (N), please double-check!")
      ME <- ME.inf * sqrt( (N - n) / (N - 1) )
     }
 

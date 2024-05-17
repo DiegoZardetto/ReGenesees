@@ -135,6 +135,17 @@ n.mean(prec= 20, prec.ind= "ME", sigmaY= 250, muY= 400, DEFF= 4.0, AVEhh= 0.75, 
 round( 3557 * (2 / 1.96)^2 )
 
 
+##################################################
+# Impact of Finite Population Corrections (fpc). #
+##################################################
+# The sample size above was obtained by neglecting finite population corrections. Now let's
+# assume we know the population size is in the ballpark of 100 thousand households. If we
+# correctly factor in the fpc terms, then the required sample size is reduced as follows:
+n.mean(prec= 20, prec.ind= "ME", sigmaY= 250, muY= 400, DEFF= 4.0, AVEhh= 0.75, RR= 0.9,
+       N= 100000)
+
+
+
 ######################################################
 # Power calculations for the comparison of two means #
 ######################################################

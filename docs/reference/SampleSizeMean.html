@@ -307,6 +307,30 @@
 <span class='co'>#       equal to:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>( <span class='fl'>3557</span> * (<span class='fl'>2</span> / <span class='fl'>1.96</span>)^<span class='fl'>2</span> )</div><div class='output co'>#&gt; [1] 3704</div><div class='input'>
 
+<span class='co'>##################################################</span>
+<span class='co'># Impact of Finite Population Corrections (fpc). #</span>
+<span class='co'>##################################################</span>
+<span class='co'># The sample size above was obtained by neglecting finite population corrections. Now let's</span>
+<span class='co'># assume we know the population size is in the ballpark of 100 thousand households. If we</span>
+<span class='co'># correctly factor in the fpc terms, then the required sample size is reduced as follows:</span>
+<span class='fu'>n.mean</span>(<span class='kw'>prec</span><span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>prec.ind</span><span class='kw'>=</span> <span class='st'>"ME"</span>, <span class='kw'>sigmaY</span><span class='kw'>=</span> <span class='fl'>250</span>, <span class='kw'>muY</span><span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>DEFF</span><span class='kw'>=</span> <span class='fl'>4.0</span>, <span class='kw'>AVEhh</span><span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>RR</span><span class='kw'>=</span> <span class='fl'>0.9</span>,
+       <span class='kw'>N</span><span class='kw'>=</span> <span class='fl'>100000</span>)</div><div class='output co'>#&gt; # Precision constraint:
+#&gt;   ME = 20
+#&gt;   alpha = 0.05
+#&gt; # Anticipated estimates:
+#&gt;   muY = 400
+#&gt;   sigmaY = 250
+#&gt;   DEFF = 4
+#&gt;   RR = 0.9
+#&gt;   F =
+#&gt;   hhSize =
+#&gt;   AVEhh = 0.75
+#&gt;   N = 1e+05
+#&gt; # -&gt; Required sample size:
+#&gt;   n = 3435 
+#&gt; </div><div class='input'>
+
+
 <span class='co'>######################################################</span>
 <span class='co'># Power calculations for the comparison of two means #</span>
 <span class='co'>######################################################</span>

@@ -211,7 +211,7 @@ options(old.op)
   # Load survey data:
   data(data.examples)
 
-  # Define the survey design (variable famcod identifies households) 
+  # Define the survey design (variable famcod identifies households)
   exdes<-e.svydesign(data=example,ids=~towcod+famcod,strata=~stratum,
          weights=~weight)
 

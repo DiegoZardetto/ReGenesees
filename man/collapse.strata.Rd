@@ -191,7 +191,7 @@ clps.err2 <- collapse.strata(exdes,~regcod:stratum)
 clps.strata.status
 
   # 3) Successful collapsing: explore strata to superstrata mapping
-exdes.ok <- collapse.strata(exdes,~sr:regcod:procod)
+exdes.ok <- collapse.strata(exdes, ~sr:regcod:procod)
 clps.strata.status
 }
 \keyword{survey}

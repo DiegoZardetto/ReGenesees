@@ -8,6 +8,9 @@
    target population size by using the new (and still optional) argument 'N'.
    The new argument defaults to NULL, which would again result in neglecting
    the fpc, as in previous versions of ReGenesees.
+*  Lonely PSU treatment (when lonely.psu='adjust') has been improved along the
+   lines of Practical Significance's blog of 02/09/2022. Still, ReGenesees
+   always advocates the use of function collapse.strata() as a best practice.
 *  The output of function UWE(), when calculated by domains (i.e. argument 'by'
    is passed), has now a better behavior under *subsetting by columns*. Note
    that this improvement does not have any other visible effects (values and

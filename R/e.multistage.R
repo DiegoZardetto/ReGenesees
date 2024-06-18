@@ -188,6 +188,12 @@ onestrat<-function(x,cluster,nPSU,fpc, lonely.psu,stratum=NULL,stage=1,cal=cal){
   # Flag lonely strata in subdomain 
   is.lonely <- FALSE
 
+# NOTE: Lonely PSUs treatment under the "adjust" option revised as suggested by Practical
+#       Significance blog on 02/09/2022
+  stratum_center <- attr(x, "center")
+  if (is.null(stratum_center)) stratum_center <- 0  # The old way: centering in 0 (always
+                                                    # good for linearized variables)
+
   if (is.null(fpc))
       f<-rep(1,NROW(x))
   else{
@@ -216,8 +222,11 @@ onestrat<-function(x,cluster,nPSU,fpc, lonely.psu,stratum=NULL,stage=1,cal=cal){
     scale<-rep(scale[1],NROW(x))
   }
   if (lonely.psu!="adjust" || nsubset>1 ||
-      (nPSU>1 & !getOption("RG.adjust.domain.lonely")))
-      x<-sweep(x, 2, colMeans(x), "-")
+      (nPSU>1 & !getOption("RG.adjust.domain.lonely"))) {
+      stratum_center <- colMeans(x)
+	}
+  x<-sweep(x, 2, stratum_center, "-")  # Centering in Y^hat / all_PSUs when the lonely.psu
+                                       # option is "adjust"
 
   if (nsubset==1 && nPSU>1){
       if (isTRUE(getOption("RG.warn.domain.lonely"))){
@@ -258,8 +267,20 @@ onestrat<-function(x,cluster,nPSU,fpc, lonely.psu,stratum=NULL,stage=1,cal=cal){
 
 
 onestage<-function(x, strata, clusters, nPSU, fpc, lonely.psu=getOption("RG.lonely.psu"),stage=0, cal){
+
+# NOTE: Lonely PSUs treatment under the "adjust" option revised as suggested by Practical
+#       Significance blog on 02/09/2022
+   if (lonely.psu=="adjust") {
+     # Get the overall number of clusters selected at that stage (e.g., PSUs at stage 1)
+     all_PSUs <- sum(tapply(nPSU, as.numeric(strata), FUN = head, 1))
+     # Get the weighted total per cluster to use it to compute deviations for lonely PSUs
+     center <- colSums(x) / all_PSUs
+    } else {
+     center <- 0
+    }
+
   stratvars<-tapply(1:NROW(x), list(factor(strata)), function(index){
-    onestrat(x[index,,drop=FALSE], clusters[index],
+    onestrat(`attr<-`(x[index,,drop=FALSE], "center", center), clusters[index],
              nPSU[index][1], fpc[index], ##old was fpc[index][1],
              lonely.psu=lonely.psu,stratum=strata[index][1], stage=stage,cal=cal)
     }, simplify = FALSE)

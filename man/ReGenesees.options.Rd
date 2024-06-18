@@ -95,7 +95,7 @@
     }
 
   \examples{
-# Define a two-stage stratified cluster sampling without 
+# Define a two-stage stratified cluster sampling without
 # replacement:
 data(fpcdat)
 des<-e.svydesign(data=fpcdat,ids=~psu+ssu,strata=~stratum,weights=~w,

@@ -728,7 +728,7 @@ svystatR(excal,~ones,~houdensity,vartype="cvpct")
   pop<-pop.template(des,calmodel=~unmarried-1)
 
   # Third, fill the template with the known total:
-  pop[1,1]<-398240
+  pop[1,1] <- 398240
 
   # Fourth, calibrate:
   descal<-e.calibrate(des,pop)

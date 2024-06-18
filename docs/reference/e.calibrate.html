@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
       </span>
     </div>
 
@@ -344,11 +344,11 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 
 <span class='co'># Checking the result:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>descal02</span>,~<span class='no'>sex</span>+<span class='no'>marstat</span>)</div><div class='output co'>#&gt;                   Total           SE
-#&gt; sexf             468366 3.355174e-11
-#&gt; sexm             449934 4.622560e-11
-#&gt; marstatmarried   532376 1.624207e-11
-#&gt; marstatunmarried 311996 1.254943e-10
-#&gt; marstatwidowed    73928 1.917476e-11</div><div class='input'>
+#&gt; sexf             468366 3.355895e-11
+#&gt; sexm             449934 4.624523e-11
+#&gt; marstatmarried   532376 1.625845e-11
+#&gt; marstatunmarried 311996 1.254959e-10
+#&gt; marstatwidowed    73928 1.909956e-11</div><div class='input'>
 
 <span class='co'># 3) Calibration (global solution) on the joint distribution of sex</span>
 <span class='co'>#    and marstat (totals in pop03):</span>
@@ -421,19 +421,19 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; f.widowed     f   widowed         2099         8122        16437         8574
 #&gt; m.widowed     m   widowed          561        12013        14556         8024
 #&gt;             Total.age5c5 Total.x1 SE.Total.age5c1 SE.Total.age5c2
-#&gt; f.married           6463    14750    1.235338e-12    1.272409e-11
-#&gt; m.married           9714    18171    3.976661e-13    3.759196e-12
+#&gt; f.married           6463    14750    1.235338e-12    1.125264e-11
+#&gt; m.married           9714    18171    3.976661e-13    3.820415e-12
 #&gt; f.unmarried          992     8446    1.132742e-12    2.141538e-12
 #&gt; m.unmarried          462     8210    6.700997e-12    5.211010e-12
-#&gt; f.widowed           1682     2737    9.508466e-14    2.842057e-13
-#&gt; m.widowed           1860     2298    2.897581e-14    1.203842e-12
+#&gt; f.widowed           1682     2737    9.508466e-14    2.926494e-13
+#&gt; m.widowed           1860     2298    8.690471e-14    1.203842e-12
 #&gt;             SE.Total.age5c3 SE.Total.age5c4 SE.Total.age5c5  SE.Total.x1
-#&gt; f.married      2.203339e-11    6.260919e-12    1.776885e-13 4.639167e-12
-#&gt; m.married      1.948546e-11    3.459667e-12    2.468354e-13 3.448681e-12
-#&gt; f.unmarried    4.963355e-12    2.534411e-13    9.737936e-14 9.948751e-12
+#&gt; f.married      2.203339e-11    6.371099e-12    1.776885e-13 5.165166e-12
+#&gt; m.married      1.948546e-11    3.809402e-12    3.348865e-13 3.470902e-12
+#&gt; f.unmarried    4.963355e-12    2.776057e-13    9.737936e-14 9.948751e-12
 #&gt; m.unmarried    7.230665e-13    8.158830e-13    6.224669e-14 2.002933e-11
-#&gt; f.widowed      6.995869e-13    7.100555e-13    1.905831e-13 3.481116e-13
-#&gt; m.widowed      4.345409e-13    5.670255e-13    8.655409e-14 3.818179e-13</div><div class='input'>
+#&gt; f.widowed      7.161366e-13    7.278407e-13    1.424087e-13 3.057159e-13
+#&gt; m.widowed      3.510724e-13    5.736963e-13    8.655409e-14 3.943796e-13</div><div class='input'>
 
 <span class='co'># 5.1) Same problem with the partitioned solution (partition=~sex:marstat,</span>
 <span class='co'>#      totals in pop05p):</span>
@@ -450,19 +450,19 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 #&gt; f.widowed     f   widowed         2099         8122        16437         8574
 #&gt; m.widowed     m   widowed          561        12013        14556         8024
 #&gt;             Total.age5c5  Total.x1 SE.Total.age5c1 SE.Total.age5c2
-#&gt; f.married           6463 14750.000    1.206965e-12    1.489651e-12
-#&gt; m.married           9714 18171.000    4.175847e-13    8.763915e-12
+#&gt; f.married           6463 14750.000    1.206965e-12    1.463607e-12
+#&gt; m.married           9714 18171.000    4.175847e-13    4.104038e-12
 #&gt; f.unmarried          992  8446.000    1.040497e-12    1.892746e-12
 #&gt; m.unmarried          462  8210.001    9.082416e-12    4.539486e-12
 #&gt; f.widowed           1682  2737.000    9.359915e-14    2.575470e-13
-#&gt; m.widowed           1860  2298.000    9.631189e-14    1.450222e-12
+#&gt; m.widowed           1860  2298.000    3.043670e-14    1.467628e-12
 #&gt;             SE.Total.age5c3 SE.Total.age5c4 SE.Total.age5c5  SE.Total.x1
-#&gt; f.married      2.089462e-11    1.381439e-11    1.777031e-13 1.036177e-11
-#&gt; m.married      2.107743e-11    3.450302e-12    3.029680e-13 3.038585e-12
+#&gt; f.married      2.084759e-11    1.397215e-11    1.777031e-13 9.963147e-12
+#&gt; m.married      2.107743e-11    3.786168e-12    3.082513e-13 3.034851e-12
 #&gt; f.unmarried    7.742098e-12    2.922028e-12    1.614705e-13 3.140887e-12
-#&gt; m.unmarried    8.345906e-13    7.762465e-13    5.818079e-14 1.241258e-12
+#&gt; m.unmarried    8.345906e-13    7.254506e-13    5.818079e-14 1.248768e-12
 #&gt; f.widowed      1.008660e-12    6.448378e-13    1.833791e-13 5.720334e-13
-#&gt; m.widowed      4.310660e-13    4.817074e-13    7.750609e-14 4.162713e-13</div><div class='input'>
+#&gt; m.widowed      4.294868e-13    4.519245e-13    7.750609e-14 2.164354e-13</div><div class='input'>
 <span class='co'># Notice that 3.1 and 5.1) 5.2) do not impose the aggregate.stage=2</span>
 <span class='co'># condition. This condition cannot, in fact, be fulfilled because</span>
 <span class='co'># in both cases the domains defined by partition "cut across"</span>
@@ -696,11 +696,11 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'># emp.cl (look at the cvpct values)...</span>
   <span class='no'>old.op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"RG.lonely.psu"</span><span class='kw'>=</span><span class='st'>"adjust"</span>)   <span class='co'># (prevent lonely-PSUs troubles)</span>
   <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal.nr2</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>emp.cl</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                   Total       CV%
-#&gt; emp.cl[6,9]    5292.797 0.8556058
-#&gt; emp.cl(9,19]   4761.984 0.6970512
-#&gt; emp.cl(19,49]  3626.837 0.6768815
-#&gt; emp.cl(49,99]  1679.097 0.5751650
-#&gt; emp.cl(99,Inf] 1957.285 0.8686677</div><div class='input'>
+#&gt; emp.cl[6,9]    5292.797 0.8556068
+#&gt; emp.cl(9,19]   4761.984 0.6970515
+#&gt; emp.cl(19,49]  3626.837 0.6768818
+#&gt; emp.cl(49,99]  1679.097 0.5751725
+#&gt; emp.cl(99,Inf] 1957.285 0.8686701</div><div class='input'>
   <span class='co'># ...the nonresponse bias has not been resurrected (i.e. it gets stuck</span>
   <span class='co'># to its previous 7%):</span>
   <span class='no'>mean.VA.cal.nr2</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal.nr2</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>va.imp2</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>,
@@ -709,7 +709,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)   <span class='co'># (reset variance estimation options)</span>
 
   <span class='no'>mean.VA.cal.nr2</span></div><div class='output co'>#&gt;             Mean CI.l(95%) CI.u(95%)      CV%
-#&gt; va.imp2 3361.037  3152.528  3569.545 3.165209</div><div class='input'>  <span class='fl'>100</span>*(<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mean.VA.cal.nr2</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
+#&gt; va.imp2 3361.037  3152.528  3569.545 3.165208</div><div class='input'>  <span class='fl'>100</span>*(<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='no'>mean.VA.cal.nr2</span>)-<span class='no'>MEAN.VA</span>)/<span class='no'>MEAN.VA</span></div><div class='output co'>#&gt;  va.imp2 
 #&gt; 7.145207 </div><div class='input'>
 
   <span class='co'>##############################################################</span>
@@ -776,7 +776,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='co'># (ii) compare cvpct with the previous 2-step calibration example:</span>
   <span class='no'>mean.VA.cal.nr1</span></div><div class='output co'>#&gt;             Mean CI.l(95%) CI.u(95%)      CV%
 #&gt; va.imp2 3349.107  3140.887  3557.326 3.172087</div><div class='input'>  <span class='no'>mean.VA.cal.nr2</span></div><div class='output co'>#&gt;             Mean CI.l(95%) CI.u(95%)      CV%
-#&gt; va.imp2 3361.037  3152.528  3569.545 3.165209</div><div class='input'>
+#&gt; va.imp2 3361.037  3152.528  3569.545 3.165208</div><div class='input'>
   <span class='co'># hence, both bias reduction and efficiency are almost the same in 2-step and</span>
   <span class='co'># single step calibration (auxiliary information being equal): the choice</span>
   <span class='co'># will often depend on practical considerations (e.g. convergence, computation</span>
@@ -990,7 +990,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
 <span class='co'># at population level:</span>
 <span class='fu'><a href='svystatR.html'>svystatR</a></span>(<span class='no'>exdes</span>,~<span class='no'>ones</span>,~<span class='no'>houdensity</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                    Ratio       CV%
 #&gt; ones/houdensity 1.259284 0.8744035</div><div class='input'><span class='fu'><a href='svystatR.html'>svystatR</a></span>(<span class='no'>excal</span>,~<span class='no'>ones</span>,~<span class='no'>houdensity</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)</div><div class='output co'>#&gt;                    Ratio          CV%
-#&gt; ones/houdensity 1.133042 2.265184e-14</div><div class='input'>
+#&gt; ones/houdensity 1.133042 2.265623e-14</div><div class='input'>
 
 <span class='co'>########################################</span>
 <span class='co'># Calibrating on different patterns of #</span>
@@ -1038,7 +1038,7 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='no'>pop</span><span class='kw'>&lt;-</span><span class='fu'><a href='pop.template.html'>pop.template</a></span>(<span class='no'>des</span>,<span class='kw'>calmodel</span><span class='kw'>=</span>~<span class='no'>unmarried</span>-<span class='fl'>1</span>)
 
   <span class='co'># Third, fill the template with the known total:</span>
-  <span class='no'>pop</span>[<span class='fl'>1</span>,<span class='fl'>1</span>]<span class='kw'>&lt;-</span><span class='fl'>398240</span>
+  <span class='no'>pop</span>[<span class='fl'>1</span>,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>398240</span>
 
   <span class='co'># Fourth, calibrate:</span>
   <span class='no'>descal</span><span class='kw'>&lt;-</span><span class='fu'>e.calibrate</span>(<span class='no'>des</span>,<span class='no'>pop</span>)
@@ -1110,9 +1110,9 @@ If any <code>return.code</code> equal to <code>1</code> exists, the <code>ecal.s
   <span class='no'>test1</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>nace.macro</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)
   <span class='no'>test1</span></div><div class='output co'>#&gt;                       Total          CV%
 #&gt; nace.macroAgriculture   458 1.624180e-14
-#&gt; nace.macroIndustry     9295 9.551931e-16
-#&gt; nace.macroCommerce     3060 6.655761e-15
-#&gt; nace.macroServices     4505 9.898773e-15</div><div class='input'>
+#&gt; nace.macroIndustry     9295 9.322049e-16
+#&gt; nace.macroCommerce     3060 6.646342e-15
+#&gt; nace.macroServices     4505 9.896392e-15</div><div class='input'>
   <span class='co'># Test2: only 'Industry' macrosector has 0 CVs for dom3 counts:</span>
   <span class='no'>test2</span><span class='kw'>&lt;-</span><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='kw'>design</span><span class='kw'>=</span><span class='no'>sbscal</span>,<span class='kw'>y</span><span class='kw'>=</span>~<span class='no'>dom3</span>,<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>nace.macro</span>,<span class='kw'>vartype</span><span class='kw'>=</span><span class='st'>"cvpct"</span>)
   <span class='fu'><a href='Zapsmall.html'>Zapsmall</a></span>(<span class='no'>test2</span>)</div><div class='output co'>#&gt;              nace.macro Total.dom3A Total.dom3B Total.dom3C Total.dom3D

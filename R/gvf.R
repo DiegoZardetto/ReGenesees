@@ -198,7 +198,7 @@ gvf.input <- function(design, ..., stats = list(...)) {
                    svystatR  = "Ratio", svystatR.by = "Ratio",
                    svystatS  = "Share", svystatS.by = "Share",
                    svystatSR = "Share Ratio", svystatSR.by = "Share Ratio",
-                   svystatB  = "Regression Coefficient",
+                   svystatB  = "Regression Coefficient", svystatB.by  = "Regression Coefficient",
                    svystatQ  = "Quantile", svystatQ.by = "Quantile",
                    svystatL  = "Complex Estimator", svystatL.by = "Complex Estimator",
                    svySigma2 = "Population Variance", svySigma2.by = "Population Variance",

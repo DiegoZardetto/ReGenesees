@@ -127,11 +127,11 @@ is.wrapped <- function(svystat.gr) {
 top <- svystat.gr[[1]]
 
 # Summary statistics classes 
-OK.classes <- c("svystatTM",       "svystatR",    "svystatL",    "svystatQ",    "svystatS",    "svystatSR",
-                "svystatTM.by", "svystatR.by", "svystatL.by", "svystatQ.by", "svystatS.by", "svystatSR.by",
+OK.classes <- c("svystatTM",       "svystatR",    "svystatL",    "svystatQ",    "svystatS",    "svystatSR",    "svystatB",
+                "svystatTM.by", "svystatR.by", "svystatL.by", "svystatQ.by", "svystatS.by", "svystatSR.by", "svystatB.by",
                 "svySigma",       "svySigma2",
                 "svySigma.by", "svySigma2.by",
-                "svystatB",     "svyby")
+                "svyby")
 
 # Is top level object a summary statistic?
 check.classes <- sapply(OK.classes, function(class) inherits(top, class))

@@ -12,6 +12,10 @@
 # GUI stratum
 # directly <- !( length(sys.calls()) > 1 )  # Not used YET
 
+# Prevent havoc caused by tibbles:
+if (inherits(data, c("tbl_df", "tbl")))
+    data <- as.data.frame(data)
+
 # Standard checks on weights here, as e.svydesign - that would perform the same
 # checks - will be invoked later using weights.cal NOT weights...
 if (!inherits(weights, "formula"))

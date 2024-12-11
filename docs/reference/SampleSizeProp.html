@@ -280,8 +280,9 @@
 <p>For <code>n.comp2prop</code>, a list of length 3 with names <code>n1</code>, <code>n2</code>, and <code>n</code>, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>UNICEF (2023) MICS7 TOOLS. URL: <a href='https://mics.unicef.org/tools?round=mics7'>https://mics.unicef.org/tools?round=mics7</a>.</p>
-<p>ILO (2014) ILO-IPEC TOOLS. URL: <a href='https://www.ilo.org/ipec/ChildlabourstatisticsSIMPOC/Manuals/WCMS_304559/lang--en/index.htm'>https://www.ilo.org/ipec/ChildlabourstatisticsSIMPOC/Manuals/WCMS_304559/lang--en/index.htm</a>.</p>
+    <p>UNICEF (2023) MICS7 TOOLS. URL: <a href='https://mics.unicef.org/tools#survey-design'>https://mics.unicef.org/tools#survey-design</a>.</p>
+<p>ILO (2014) ILO-IPEC TOOLS. URL: <a href='https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys'>https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys</a>.</p>
+<p>ILO (2014) ILO-IPEC TEMPLATE. URL: <a href='https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Template_2014.xlsx'>https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Template_2014.xlsx</a>.</p>
 <p>Rosner, B. (2006) Fundamentals of biostatistics (7th ed.). Boston, MA: Brooks/Cole.</p>
 <p>Lance, P., Hattori, A. (2016) Sampling and evaluation. Chapel Hill, North Carolina: MEASURE Evaluation, University of North Carolina (2016).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -335,8 +336,9 @@
 #&gt;   SE = 0.01217161
 #&gt; </div><div class='input'>
 <span class='co'># NOTE: This time, the result of the MICS7 template (0.01217) is *exactly* the same, since</span>
-<span class='co'>#       the standard error is a measure of precision that does *not* depend on the confidence</span>
-<span class='co'>#       level (so that MICS' approximation qnorm(1 - 0.05/2) = 2 plays no role here).</span>
+<span class='co'>#       the standard error is a measure of precision that does *not* depend on the</span>
+<span class='co'>#       confidence level (so that MICS' approximation qnorm(1 - 0.05/2) = 2 plays no role</span>
+<span class='co'>#       here).</span>
 
 
 <span class='co'>##########################</span>
@@ -344,8 +346,8 @@
 <span class='co'>##########################</span>
 
 <span class='co'># Solve the problem stored as illustrating example in the ILO-IPEC Excel template (which</span>
-<span class='co'># can be freely downloaded from:</span>
-<span class='co'># https://www.ilo.org/ipec/ChildlabourstatisticsSIMPOC/Manuals/WCMS_304559/lang--en/index.htm)</span>
+<span class='co'># can be freely downloaded from the ILO-IPEC TEMPLATE URL in the References section</span>
+<span class='co'># above):</span>
 
 <span class='fu'>n.prop</span>(<span class='kw'>prec</span><span class='kw'>=</span> <span class='fl'>0.03</span>, <span class='kw'>prec.ind</span><span class='kw'>=</span> <span class='st'>"ME"</span>, <span class='kw'>P</span><span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>DEFF</span><span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>F</span><span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>hhSize</span><span class='kw'>=</span> <span class='fl'>5.0</span>, <span class='kw'>RR</span><span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; # Precision constraint:
 #&gt;   ME = 0.03

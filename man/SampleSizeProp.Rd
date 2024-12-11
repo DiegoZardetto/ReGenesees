@@ -108,9 +108,11 @@ Diego Zardetto
 }
 
 \references{
-UNICEF (2023) MICS7 TOOLS. URL: \url{https://mics.unicef.org/tools?round=mics7}.
+UNICEF (2023) MICS7 TOOLS. URL: \url{https://mics.unicef.org/tools#survey-design}.
 
-ILO (2014) ILO-IPEC TOOLS. URL: \url{https://www.ilo.org/ipec/ChildlabourstatisticsSIMPOC/Manuals/WCMS_304559/lang--en/index.htm}.
+ILO (2014) ILO-IPEC TOOLS. URL: \url{https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys}.
+
+ILO (2014) ILO-IPEC TEMPLATE. URL: \url{https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Template_2014.xlsx}.
 
 Rosner, B. (2006) Fundamentals of biostatistics (7th ed.). Boston, MA: Brooks/Cole.
 
@@ -148,8 +150,9 @@ floor( 3953 * (2 / 1.96)^2 )
 prec.prop(n= 4000, prec.ind= "SE", P= 0.2, DEFF= 1.5, F= 0.09, hhSize= 5.0, RR= 0.9)
 
 # NOTE: This time, the result of the MICS7 template (0.01217) is *exactly* the same, since
-#       the standard error is a measure of precision that does *not* depend on the confidence
-#       level (so that MICS' approximation qnorm(1 - 0.05/2) = 2 plays no role here).
+#       the standard error is a measure of precision that does *not* depend on the
+#       confidence level (so that MICS' approximation qnorm(1 - 0.05/2) = 2 plays no role
+#       here).
 
 
 ##########################
@@ -157,8 +160,8 @@ prec.prop(n= 4000, prec.ind= "SE", P= 0.2, DEFF= 1.5, F= 0.09, hhSize= 5.0, RR= 
 ##########################
 
 # Solve the problem stored as illustrating example in the ILO-IPEC Excel template (which
-# can be freely downloaded from:
-# https://www.ilo.org/ipec/ChildlabourstatisticsSIMPOC/Manuals/WCMS_304559/lang--en/index.htm)
+# can be freely downloaded from the ILO-IPEC TEMPLATE URL in the References section
+# above):
 
 n.prop(prec= 0.03, prec.ind= "ME", P= 0.1, DEFF= 4, F= 0.15, hhSize= 5.0, RR= 0.9)
 

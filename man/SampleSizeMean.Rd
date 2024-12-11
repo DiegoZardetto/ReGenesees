@@ -103,9 +103,9 @@ Diego Zardetto
 }
 
 \references{
-ILO (2014a) ILO-IPEC TOOLS. URL: \url{https://www.ilo.org/ipec/ChildlabourstatisticsSIMPOC/Manuals/WCMS_304559/lang--en/index.htm}.
+ILO (2014a) ILO-IPEC TOOLS. URL: \url{https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys}.
 
-ILO (2014b) ILO-IPEC TOOLS USER GUIDE. URL: \url{https://www.ilo.org/ipecinfo/product/download.do?type=document&id=25435}.
+ILO (2014b) ILO-IPEC TOOLS USER GUIDE. URL: \url{https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Guidelines_2014.pdf}.
 
 Rosner, B. (2006) Fundamentals of biostatistics (7th ed.). Boston, MA: Brooks/Cole.
 
@@ -121,8 +121,8 @@ Functions \code{\link{n.prop}}, \code{\link{prec.prop}}, \code{\link{n.comp2prop
 # Reproducible example #
 ########################
 # Solve the problem used as illustrating example in Diagram 1b on page 12 of the ILO-IPEC
-# TOOLS USER GUIDE (which is available for free download at the following URL:
-# https://www.ilo.org/ipecinfo/product/download.do?type=document&id=25435).
+# TOOLS USER GUIDE (which can be freely downloaded from ILO-IPEC TOOLS USER GUIDE URL in
+# the References section above).
 # This is the only example provided by the document for the estimate of a *mean* (which
 # the document, somewhat oddly, refers to as an <<indicator of amount>>):
 

@@ -3,6 +3,8 @@
 
 *  THIS IS A DEVELOPMENT VERSION AND IS NOT RELEASED YET!
 
+*  Function ext.calibrated() had a residual compatibility issue with tibbles
+   (thanks to MarkPaulin for spotting this). Fixed.
 *  Functions n.prop, prec.prop, n.mean, and prec.mean no longer neglect finite
    population corrections (fpc). To factor in the fpc, you need to specify the
    target population size by using the new (and still optional) argument 'N'.

@@ -161,7 +161,7 @@ Diego Zardetto
 \references{
 Berger, Y. G., Priam, R. (2016). \emph{\dQuote{A simple variance estimator of change for rotating repeated surveys: an application to the European Union Statistics on Income and Living Conditions household surveys}}. Journal of the Royal Statistical Society: Series A (Statistics in Society), 179(1), 251-272.
 
-Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. \doi{https://doi.org/10.1515/jos-2015-0013}.
 
 Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Survey Sampling}}, Springer Verlag.
 }

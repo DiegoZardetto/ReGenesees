@@ -70,7 +70,7 @@ MAIN DRIVER
 
 TOPIC --------------------------------------------------------------------------
      Integrate ReGenesees "partitioned" calibration approach with dedicated
-     matrix algebra methods (e.g. multiplication, generalize inverse, QR) for
+     matrix algebra methods (e.g. multiplication, generalized inverse, QR) for
      sparse matrices
 COMPLEXITY/TIME
      Medium

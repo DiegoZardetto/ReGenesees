@@ -15,7 +15,7 @@ contrasts.reset, CoV, Corr, Zapsmall, get.residuals, des.merge, estimator.kind, 
 fit.gvf, getR2, getBest, predictCV, drop.gvf.points, svystat, pop.desc, svystatS, svystatSR, ext.calibrated,
 trimcal, prep.calBeta, pop.calBeta, pop.fuse, smooth.strat.jump, UWE, pop.plot, svyDelta, details,
 svySigma, svySigma2, n.prop, prec.prop, n.comp2prop, pow.comp2prop, mde.comp2prop, n.mean, prec.mean,
-n.comp2mean, pow.comp2mean, mde.comp2mean, get.linvar)
+n.comp2mean, pow.comp2mean, mde.comp2mean, get.linvar, PlotCI, BarPlotCI)
 
 S3method(print,summary.survey.design)
 S3method(print,summary.survey.design2)
@@ -108,6 +108,7 @@ S3method(deff,svystatL)
 S3method(deff,svystatB)
 S3method(deff,svystatB.by.list)
 S3method(deff,svystat.gr)
+S3method(deff,svyDelta)
 S3method(deff,svySigma)
 S3method(deff,svySigma2)
 

@@ -18,11 +18,11 @@ bibentry(
 bibentry(
     bibtype = "misc",
     author = "Diego Zardetto",
-    year = "2024",
+    year = "2025",
     title = "ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys",
     note = "R package version 2.4",
     organization = "Istat",
     address = "Rome, Italy",
-    textVersion = "Zardetto D. (2024) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.4, Istat, Italy."
+    textVersion = "Zardetto D. (2025) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.4, Istat, Italy."
     )
 

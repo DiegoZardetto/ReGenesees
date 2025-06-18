@@ -43,7 +43,7 @@ A matrix of linearized variables.
 \references{
 Deville, J. C. (1999) \emph{\dQuote{Variance Estimation for Complex Statistics and Estimators: Linearization and Residual Techniques.}}. Survey Methodology 25: 193-203.
 
-Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. \doi{https://doi.org/10.1515/jos-2015-0013}.
 }
 
 \seealso{

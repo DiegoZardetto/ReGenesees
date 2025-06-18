@@ -75,7 +75,7 @@ Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Sur
 
 Lumley, T. (2006) \emph{\dQuote{survey: analysis of complex survey samples}}, \url{https://CRAN.R-project.org/package=survey}.
 
-Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. \doi{https://doi.org/10.1515/jos-2015-0013}.
 }
 
 \seealso{

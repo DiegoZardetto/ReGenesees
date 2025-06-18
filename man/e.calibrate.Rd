@@ -102,7 +102,7 @@ Deville, J.C., Sarndal, C.E. (1992) \emph{\dQuote{Calibration Estimators in Surv
 
 Deville, J.C., Sarndal, C.E., Sautory, O. (1993) \emph{\dQuote{Generalized Raking Procedures in Survey Sampling}}, Journal of the American Statistical Association, Vol. 88, No. 423, pp. 1013-1020.
 
-Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.
+Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys}}. Journal of Official Statistics, 31(2), 177-203. \doi{https://doi.org/10.1515/jos-2015-0013}.
 
 Wilkinson, G.N., Rogers, C.E. (1973) \emph{\dQuote{Symbolic Description of Factorial Models for Analysis of Variance}}, Journal of the Royal Statistical Society, series C (Applied Statistics), Vol. 22, pp. 181-191.
 

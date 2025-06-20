@@ -2,18 +2,23 @@
 
 
 *  This version ensures a safe transition of ReGenesees to the "R 4.5.x" series.
+
 *  New functions PlotCI and BarPlotCI: visualize domain estimates and confidence
    intervals via simple plots and bar charts.
+
 *  Functions n.prop, prec.prop, n.mean, and prec.mean no longer neglect finite
    population corrections (fpc). To factor in the fpc, you need to specify the
    target population size by using the new (and still optional) argument 'N'.
    The new argument defaults to NULL, which would again result in neglecting
    the fpc, as in previous versions of ReGenesees.
+
 *  Function ext.calibrated() had a residual compatibility issue with tibbles
    (thanks to Mark Paulin for spotting this). Fixed.
+
 *  Lonely PSU treatment (when lonely.psu='adjust') has been improved along the
    lines of Practical Significance's blog of 02/09/2022. Still, ReGenesees
    always advocates the use of function collapse.strata() as a best practice.
+
 *  The output of function UWE(), when calculated by domains (i.e. argument 'by'
    is passed), has now a better behavior under *subsetting by columns*. Note
    that this improvement does not have any other visible effects (values and

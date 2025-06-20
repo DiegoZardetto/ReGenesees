@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -142,9 +142,9 @@
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>The main data frame, named <code>example</code>, contains (artificial) data from a two stage stratified cluster sampling design. The sample is made up of 3000 final units, for which the following 21 variables were observed:</p><dl class='dl-horizontal'>
-    <dt><code>towcod</code></dt><dd><p>Code identifying "variance PSUs": towns (PSUs) in not-self-representing (NSR) strata, families (SSUs) in self-representing (SR) strata, <code>numeric</code></p></dd>
-    <dt><code>famcod</code></dt><dd><p>Code identifying families (SSUs), <code>numeric</code></p></dd>
+    <p>The main data frame, named <code>example</code>, contains (artificial) data from a two stage stratified cluster sampling design. The sample is made up of 3000 final units (individuals), for which the following 21 variables were observed:</p><dl class='dl-horizontal'>
+    <dt><code>towcod</code></dt><dd><p>Code identifying "variance PSUs": towns (PSUs) in not-self-representing (NSR) strata, households (SSUs) in self-representing (SR) strata, <code>numeric</code></p></dd>
+    <dt><code>famcod</code></dt><dd><p>Code identifying households (SSUs), <code>numeric</code></p></dd>
     <dt><code>key</code></dt><dd><p>Key identifying final units (individuals), <code>numeric</code></p></dd>
     <dt><code>weight</code></dt><dd><p>Initial weights, <code>numeric</code></p></dd>
     <dt><code>stratum</code></dt><dd><p>Stratification variable, <code>factor</code> with levels <code>801</code> <code>802</code> <code>803</code> <code>901</code> <code>902</code> <code>903</code> <code>904</code> <code>905</code> <code>906</code> <code>907</code> <code>908</code> <code>1001</code> <code>1002</code> <code>1003</code> <code>1004</code> <code>1005</code> <code>1006</code> <code>1007</code> <code>1008</code> <code>1009</code> <code>1101</code> <code>1102</code> <code>1103</code> <code>1104</code> <code>3001</code> <code>3002</code> <code>3003</code> <code>3004</code> <code>3005</code> <code>3006</code> <code>3007</code> <code>3008</code> <code>3009</code> <code>3010</code> <code>3011</code> <code>3012</code> <code>3101</code> <code>3102</code> <code>3103</code> <code>3104</code> <code>3105</code> <code>3106</code> <code>3107</code> <code>3108</code> <code>3201</code> <code>3202</code> <code>3203</code> <code>3204</code> <code>5401</code> <code>5402</code> <code>5403</code> <code>5404</code> <code>5405</code> <code>5406</code> <code>5407</code> <code>5408</code> <code>5409</code> <code>5410</code> <code>5411</code> <code>5412</code> <code>5413</code> <code>5414</code> <code>5415</code> <code>5416</code> <code>5501</code> <code>5502</code> <code>5503</code> <code>5504</code> <code>9301</code> <code>9302</code> <code>9303</code> <code>9304</code> <code>9305</code> <code>9306</code> <code>9307</code> <code>9308</code> <code>9309</code> <code>9310</code> <code>9311</code> <code>9312</code></p></dd>

@@ -46,32 +46,34 @@ Sample Surveys — ReGenesees-package • ReGenesees</title>
 <meta property="og:title" content="ReGenesees: a Package for Design-Based and Model-Assisted Analysis of Complex
 Sample Surveys — ReGenesees-package" />
 <meta property="og:description" content="ReGenesees is an R package for design-based and model-assisted analysis
-of complex sample surveys. It handles multistage, stratified, clustered,
-unequally weighted survey designs. Sampling variance estimation for nonlinear
-(smooth) estimators is obtained by Taylor-series linearization. Sampling
-variance estimation for multistage designs can be obtained both under the
-Ultimate Cluster approximation or by means of an actual multistage computation.
-ReGenesees offers comprehensive and advanced functionalities for
-calibration of survey weights. Estimates, standard errors, confidence intervals
-and design effects are provided for Horvitz-Thompson and Calibration estimators
-of: Totals, Means, absolute and relative Frequency Distributions (marginal,
-conditional and joint), Ratios, Shares and Ratios of Shares, Multiple Regression
-Coefficients and Quantiles (variance via the Woodruff method). ReGenesees
-also handles Complex Estimators, i.e. any user-defined estimator that can be
-expressed as an analytic function of Horvitz-Thompson or Calibration estimators
-of Totals or Means, by automatically linearizing them. The Design Covariance and
-Correlation between Complex Estimators is also provided. Moreover, the package
-can compute estimates and sampling errors of complex Measures of Change derived
-from two not necessarily independent samples. All the analyses above can be
-carried out for arbitrary subpopulations. In addition, ReGenesees can trim
-calibration weights while preserving all the calibration constraints, and
-perform &amp;#8216;special purpose calibration&amp;#8217; tasks, i.e. can calibrate on
-complex population parameters like Multiple Regression Coefficients.
-ReGenesees also offers a Generalized Variance Functions (GVF)
-infrastructure, i.e. facilities for defining, fitting, testing and plotting GVF
-models, and to exploit them to predict variance estimates. Lastly, the package
-offers simple survey planning tools to estimate sample size requirements and
-perform power calculations.
+of complex sample surveys.
+It handles multistage, stratified, clustered, unequally weighted survey designs.
+Sampling variance estimation for nonlinear (smooth) estimators is obtained by
+Taylor-series linearization. Sampling variance estimation for multistage designs
+can be obtained either under the Ultimate Cluster approximation or by means of
+an actual multistage computation.
+ReGenesees offers comprehensive and advanced functionalities for calibration
+of survey weights. In addition, ReGenesees can trim calibration weights
+while preserving all the calibration constraints, and perform &amp;#8216;special
+purpose calibration&amp;#8217; tasks, i.e. calibrate on complex population parameters like
+Multiple Regression Coefficients.
+Estimates, standard errors, confidence intervals and design effects are provided
+for Horvitz-Thompson and Calibration estimators of: Totals, Means, absolute and
+relative Frequency Distributions (marginal, conditional and joint), Ratios,
+Shares and Ratios of Shares, Population Variances and Standard Deviations,
+Multiple Regression Coefficients and Quantiles (variance via the Woodruff method).
+ReGenesees also handles Complex Estimators, i.e. any user-defined estimator
+that can be expressed as an analytic function of Horvitz-Thompson or Calibration
+estimators of Totals or Means, by automatically linearizing them. The Design
+Covariance and Correlation between Complex Estimators is also provided.
+Furthermore, the package can compute estimates and sampling errors of complex
+Measures of Change derived from two not necessarily independent samples.
+All the analyses listed above can be carried out for arbitrary subpopulations.
+ReGenesees also offers a Generalized Variance Functions (GVF) infrastructure,
+i.e. facilities for defining, fitting, testing and plotting GVF models, and to
+exploit them to predict sampling variance estimates.
+Lastly, the package offers simple survey planning tools to estimate sample size
+requirements and perform power calculations.
 The ReGenesees package is the fundamental building block of a
 full-fledged R-based software system: the ReGenesees System.
 The latter has a clear-cut two-layer architecture. The application layer of the
@@ -111,7 +113,7 @@ namely a user-friendly Tcl/Tk GUI." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
       </span>
     </div>
 
@@ -170,32 +172,34 @@ Sample Surveys</h1>
 
     <div class="ref-description">
     <p><span class="pkg">ReGenesees</span> is an <span style="R">R</span> package for design-based and model-assisted analysis
-of complex sample surveys. It handles multistage, stratified, clustered,
-unequally weighted survey designs. Sampling variance estimation for nonlinear
-(smooth) estimators is obtained by Taylor-series linearization. Sampling
-variance estimation for multistage designs can be obtained both under the
-Ultimate Cluster approximation or by means of an actual multistage computation.
-<span class="pkg">ReGenesees</span> offers comprehensive and advanced functionalities for
-calibration of survey weights. Estimates, standard errors, confidence intervals
-and design effects are provided for Horvitz-Thompson and Calibration estimators
-of: Totals, Means, absolute and relative Frequency Distributions (marginal,
-conditional and joint), Ratios, Shares and Ratios of Shares, Multiple Regression
-Coefficients and Quantiles (variance via the Woodruff method). <span class="pkg">ReGenesees</span>
-also handles Complex Estimators, i.e. any user-defined estimator that can be
-expressed as an analytic function of Horvitz-Thompson or Calibration estimators
-of Totals or Means, by automatically linearizing them. The Design Covariance and
-Correlation between Complex Estimators is also provided. Moreover, the package
-can compute estimates and sampling errors of complex Measures of Change derived
-from two not necessarily independent samples. All the analyses above can be
-carried out for arbitrary subpopulations. In addition, <span class="pkg">ReGenesees</span> can trim
-calibration weights while preserving all the calibration constraints, and
-perform &#8216;special purpose calibration&#8217; tasks, i.e. can calibrate on
-complex population parameters like Multiple Regression Coefficients.
-<span class="pkg">ReGenesees</span> also offers a Generalized Variance Functions (GVF)
-infrastructure, i.e. facilities for defining, fitting, testing and plotting GVF
-models, and to exploit them to predict variance estimates. Lastly, the package
-offers simple survey planning tools to estimate sample size requirements and
-perform power calculations.</p>
+of complex sample surveys.</p>
+<p>It handles multistage, stratified, clustered, unequally weighted survey designs.</p>
+<p>Sampling variance estimation for nonlinear (smooth) estimators is obtained by
+Taylor-series linearization. Sampling variance estimation for multistage designs
+can be obtained either under the Ultimate Cluster approximation or by means of
+an actual multistage computation.</p>
+<p><span class="pkg">ReGenesees</span> offers comprehensive and advanced functionalities for calibration
+of survey weights. In addition, <span class="pkg">ReGenesees</span> can trim calibration weights
+while preserving all the calibration constraints, and perform &#8216;special
+purpose calibration&#8217; tasks, i.e. calibrate on complex population parameters like
+Multiple Regression Coefficients.</p>
+<p>Estimates, standard errors, confidence intervals and design effects are provided
+for Horvitz-Thompson and Calibration estimators of: Totals, Means, absolute and
+relative Frequency Distributions (marginal, conditional and joint), Ratios,
+Shares and Ratios of Shares, Population Variances and Standard Deviations,
+Multiple Regression Coefficients and Quantiles (variance via the Woodruff method).</p>
+<p><span class="pkg">ReGenesees</span> also handles Complex Estimators, i.e. any user-defined estimator
+that can be expressed as an analytic function of Horvitz-Thompson or Calibration
+estimators of Totals or Means, by automatically linearizing them. The Design
+Covariance and Correlation between Complex Estimators is also provided.</p>
+<p>Furthermore, the package can compute estimates and sampling errors of complex
+Measures of Change derived from two not necessarily independent samples.</p>
+<p>All the analyses listed above can be carried out for arbitrary subpopulations.</p>
+<p><span class="pkg">ReGenesees</span> also offers a Generalized Variance Functions (GVF) infrastructure,
+i.e. facilities for defining, fitting, testing and plotting GVF models, and to
+exploit them to predict sampling variance estimates.</p>
+<p>Lastly, the package offers simple survey planning tools to estimate sample size
+requirements and perform power calculations.</p>
 <p>The <span class="pkg">ReGenesees</span> <em>package</em> is the fundamental building block of a
 full-fledged <span style="R">R</span>-based software <em>system</em>: the <strong>ReGenesees System</strong>.
 The latter has a clear-cut two-layer architecture. The application layer of the
@@ -375,15 +379,24 @@ manual</strong>.<br /><br /></p>
                            Two Estimated Means: Expected Power
  **  mde.comp2mean.........Power Calculations for a Test that Compares
                            Two Estimated Means: Expected Minimum
-                           Detectable Effect						   
+                           Detectable Effect
 </pre>
 
 
-<h3>Diagnostics and Utilities</h3>
+<h3>Weight Diagnostics</h3>
 
 <pre>
   *  UWE...................Unequal Weighting Effect
-  *  Zapsmall..............Zapsmall Data Frame Columns and Numeric Vectors
+</pre>
+
+
+<h3>Visualization</h3>
+
+<pre>
+  *  PlotCI................Visualize Domain Estimates and Confidence
+                           Intervals by Simple Plots
+  *  BarPlotCI.............Visualize Domain Estimates and Confidence
+                           Intervals by Bar Charts
 </pre>
 
 
@@ -402,6 +415,13 @@ manual</strong>.<br /><br /></p>
 </pre>
 
 
+<h3>Utilities</h3>
+
+<pre>
+  *  Zapsmall..............Zapsmall Data Frame Columns and Numeric Vectors
+</pre>
+
+
 <p>The ordering of the above &#8216;Table of Contents&#8217; reflects only loosely the
 procedural sequence in which functions could be used. For instance, while you
 cannot apply function <code><a href='e.calibrate.html'>e.calibrate</a></code> unless you have previously built
@@ -414,7 +434,8 @@ objects created by <code><a href='e.calibrate.html'>e.calibrate</a></code> (yiel
 errors for functions of Calibration estimators).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Zardetto, D. (2015) <em>&#8220;ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys&#8221;</em>. Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013.</p>
+    <p>Zardetto, D. (2015) <em>&#8220;ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys&#8221;</em>. Journal of Official Statistics, 31(2), 177-203. <a href='https://doi.org/10.1515/jos-2015-0013'>doi:10.1515/jos-2015-0013</a>
+.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

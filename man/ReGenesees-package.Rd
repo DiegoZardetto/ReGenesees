@@ -221,7 +221,7 @@ manual}.\cr\cr
                            Two Estimated Means: Expected Power
  **  mde.comp2mean.........Power Calculations for a Test that Compares
                            Two Estimated Means: Expected Minimum
-                           Detectable Effect						   
+                           Detectable Effect
 }
 }
 

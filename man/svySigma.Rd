@@ -27,7 +27,7 @@ svySigma(design, y, by = NULL,
   \item{y}{Formula identifying the \emph{numeric} interest variable.}
   \item{by}{Formula specifying the variables that define the "estimation domains". If \code{NULL}
            (the default option) estimates refer to the whole population.}
-  \item{fin.pop}{If \code{TRUE} (the default) the estimation target is the \emph{finite} population formula of the standard deviation, i.e. the one with \bold{N - 1} at denominator in the expression of the variance. If \code{FALSE} the estimation target is the standard deviation with \bold{N} at denominator in the expression of the variance.} 
+  \item{fin.pop}{If \code{TRUE} (the default) the estimation target is the \emph{finite} population formula of the standard deviation, i.e. the one with \bold{N - 1} in the denominator in the expression of the variance. If \code{FALSE} the estimation target is the standard deviation with \bold{N} in the denominator in the expression of the variance.} 
   \item{vartype}{\code{character} vector specifying the desired variability estimators. It is possible to choose
                 one or more of: standard error (\code{'se'}, the default), coefficient of variation (\code{'cv'}),
                 percent coefficient of variation (\code{'cvpct'}), or variance (\code{'var'}).}
@@ -43,7 +43,7 @@ svySigma(design, y, by = NULL,
 \details{
 Function \code{svySigma} computes estimates and sampling errors of the Population Standard Deviation of a numeric variable. These estimates play an important role in many contexts, including sample size guesstimation and power calculations.
 
-As the Population Standard Deviation is a \emph{complex} estimator, \code{svySigma} automatically linearizes it to estimate its sampling variance. Automatic linearization is performed as function \code{\link{svystatL}} would do, along the lines illustrated in [Zardetto, 15]. This, of course, also entails the usage of the residuals technique when the input \code{design} object is calibrated (i.e. of class \code{cal.analytic}).
+As the Population Standard Deviation is a \emph{complex} estimator, \code{svySigma} automatically linearizes it to estimate its sampling variance. Automatic linearization is performed as function \code{\link{svystatL}} would do, along the lines illustrated in [Zardetto 2015]. This, of course, also entails the usage of the residuals technique when the input \code{design} object is calibrated (i.e. of class \code{cal.analytic}).
 
 The mandatory argument \code{y} identifies the variable of interest. The \code{design} variable referenced by \code{y} must be \code{numeric}.
 
@@ -51,15 +51,15 @@ If variable \code{y} is binary (i.e. has only values \code{0} and \code{1}), the
 
 The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svySigma} refer to the whole population. If specified, estimation domains must be defined by a formula, following the usual syntactic and semantic rules (see e.g. \code{\link{svystatTM}}).
 
-Argument \code{fin.pop} allows the users to select which standard deviation formula they prefer as estimation target. If \code{fin.pop = TRUE} (the default) the \emph{finite} population version of the standard deviation formula will be used, namely the one with \bold{N - 1} at denominator in the expression of the variance [Sarndal, Swensson, Wretman 92]. If \code{fin.pop = FALSE} the standard deviation formula with \bold{N} at denominator in the expression of the variance will be used.
+Argument \code{fin.pop} allows the users to select which standard deviation formula they prefer as estimation target. If \code{fin.pop = TRUE} (the default) the \emph{finite} population version of the standard deviation formula will be used, namely the one with \bold{N - 1} in the denominator in the expression of the variance [Sarndal, Swensson, Wretman 1992]. If \code{fin.pop = FALSE} the standard deviation formula with \bold{N} in the denominator in the expression of the variance will be used.
 
-The \code{conf.int} argument allows to request the confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is the confidence intervals are not provided. 
+The \code{conf.int} argument makes it possible to request confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is, the confidence intervals are not provided. 
 
 Whenever confidence intervals are requested (i.e. \code{conf.int=TRUE}), the desired confidence level can be specified by means of the \code{conf.lev} argument. The \code{conf.lev} value must represent a probability (\code{0<=conf.lev<=1}) and its default is chosen to be \code{0.95}.
 
-The optional argument \code{deff} allows to request the design effect [Kish 1995] for the estimates. By default \code{deff=FALSE}, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the sampling variance of the estimator under the actual sampling design and the sampling variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}. See \code{\link{svystatTM}} for further details.
+The optional argument \code{deff} makes it possible to request the design effect [Kish 1995] for the estimates. By default \code{deff=FALSE}, that is, the design effect is not provided. The design effect of an estimator is defined as the ratio between the sampling variance of the estimator under the actual sampling design and the sampling variance that would be obtained for an \sQuote{equivalent} estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect compared to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}. See \code{\link{svystatTM}} for further details.
 
-Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default) they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
+Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default), they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
 }
 
 \value{
@@ -118,7 +118,7 @@ svystatTM(des, ~marstat, estimator = "Mean")
 # Store only the estimated proportion
 p.widowed <- coef(svystatTM(des, ~is.widowed, estimator = "Mean"))
 
-# Now estimate the population variance of the binary variable 'is.widowed' *with
+# Now estimate the population standard deviation of the binary variable 'is.widowed' *with
 # fin.pop = FALSE*, and verify that it *exactly* equals the Bernoulli expression
 # sqrt(p.widowed * (1 - p.widowed))
 svySigma(des, ~is.widowed, fin.pop = FALSE, conf.int = TRUE)

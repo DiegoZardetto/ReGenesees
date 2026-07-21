@@ -27,15 +27,15 @@ The mandatory argument \code{data} identifies the survey data frame on which the
 
 The mandatory argument \code{calmodel} symbolically defines the calibration model you intend to use: it identifies the auxiliary variables and the constraints for the calibration problem. The \code{data} variables referenced by \code{calmodel} must be \code{numeric} or \code{factor} and must not contain any missing value (\code{NA}).
 
-The optional argument \code{partition} specifies the variables that define the calibration domains for the model. The default value (\code{FALSE}) means either that there are not calibration domains or that you want to solve the problem globally (even though it could be factorized). If a formula is passed through the \code{partition} argument the program checks that \code{calmodel} actually describes a "reduced model", that is it does not reference any of the partition variables; if this is not the case, the program stops and prints an error message. Notice that a formula like \code{by=~D1+D2} will be automatically translated into the factor-crossing formula \code{by=~D1:D2}. The \code{data} variables referenced by \code{partition} (if any) must be \code{factor} and must not contain any missing value (\code{NA}). Note that, if the \code{partition} formula involves two or more factors, their crossed levels will be ordered according to operator \code{:} (that is, those from the \emph{rightmost} variable will vary fastest).
+The optional argument \code{partition} specifies the variables that define the calibration domains for the model. The default value (\code{FALSE}) means either that there are no calibration domains or that you want to solve the problem globally (even though it could be factorized). If a formula is passed through the \code{partition} argument, the program checks that \code{calmodel} actually describes a \emph{\dQuote{reduced model}}, that is, it does not reference any of the partition variables; if this is not the case, the program stops and prints an error message. Notice that a formula like \code{partition=~D1+D2} will be automatically translated into the factor-crossing formula \code{partition=~D1:D2}. The \code{data} variables referenced by \code{partition} (if any) must be \code{factor} and must not contain any missing value (\code{NA}). Note that, if the \code{partition} formula involves two or more factors, their crossed levels will be ordered according to operator \code{:} (that is, those from the \emph{rightmost} variable will vary fastest).
 }
 
 \value{
-An invisible object of class \code{pop.totals}. The \code{pop.totals} class is a specialization of the \code{data.frame} class; this means that an object built by \code{pop.template} inherits from the \code{data.frame} class and you can use on it every method defined on that class.
+An invisible object of class \code{pop.totals}. The \code{pop.totals} class is a specialization of the \code{data.frame} class; this means that an object built by \code{pop.template} inherits from the \code{data.frame} class, and every method defined for that class can be used on it as well.
 }
 
 \note{
-The \code{population.check} function can be used to convert a known totals data frame that conforms to the standard required by \code{e.calibrate} into an object of class \code{pop.totals}. The usefulness of this conversion lies in the fact that, once you have known totals with this "certified format", you can invoke \code{e.calibrate} without specifying the values for the \code{calmodel} and \code{partition} arguments (this means that the function is able to extract them directly from the attributes of the \code{pop.totals} object). 
+The \code{population.check} function can be used to convert a known totals data frame that conforms to the standard required by \code{e.calibrate} into an object of class \code{pop.totals}. The usefulness of this conversion lies in the fact that, once you have known totals with this \dQuote{certified format}, you can invoke \code{e.calibrate} without specifying the values for the \code{calmodel} and \code{partition} arguments (this means that the function is able to extract them directly from the attributes of the \code{pop.totals} object). 
 }
 
 \author{Diego Zardetto}
@@ -45,7 +45,7 @@ Zardetto, D. (2015) \emph{\dQuote{ReGenesees: an Advanced R System for Calibrati
 }
 
 \seealso{
-\code{\link{e.calibrate}} for calibrating weights, \code{\link{pop.template}} for the definition of the class \code{pop.totals} and to build a "template" data frame for known population totals, \code{\link{fill.template}} to automatically fill the template when a sampling frame is available.
+\code{\link{e.calibrate}} for calibrating weights, \code{\link{pop.template}} for the definition of the class \code{pop.totals} and to build a \dQuote{template} data frame for known population totals, \code{\link{fill.template}} to automatically fill the template when a sampling frame is available.
 }
 
 \examples{

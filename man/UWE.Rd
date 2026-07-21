@@ -14,13 +14,13 @@ UWE(design, by = NULL)
 \arguments{
   \item{design}{Object of class \code{analytic} (or inheriting from it).}
   \item{by}{Formula specifying variables that define "estimation domains". If \code{NULL}
-           (the default option) the UWE refer to the whole sample.}
+           (the default option) the UWE refers to the whole sample.}
 }
 
 \details{
 Function \code{UWE} computes the Unequal Weighting Effect for the current (\code{w}) and initial (\code{w0}) weights of a design object, plus the corresponding variance inflation (or deflation) factor (\code{UWE(w) / UWE(w0)}) induced by changing the weights from \code{w0} to \code{w} (\code{w0 -> w}).
 
-Following Kish's definition [Kish 92], the UWE is calculated as 1 plus the relative sample variance of the weights: \code{UWE(w) = 1 + RelVar(w)}.
+Following Kish's definition [Kish 1992], the UWE is calculated as 1 plus the relative sample variance of the weights: \code{UWE(w) = 1 + RelVar(w)}.
 
 The \emph{current} weights, \code{w}, of \code{design} are the weights that would be returned by \code{\link{weights}(design)} and would be used for estimation purposes by functions \code{\link{svystatTM}}, \code{\link{svystatR}}, etc.
 
@@ -45,9 +45,9 @@ A data.frame, with one single row (if \code{by = NULL}) or one row for each doma
 }
 
 \section{Methodological Remark}{
-Kish's UWE is a model-based tool that can be useful for diagnostic purposes. However, its values must be interpreted with some caution, exactly as it is necessary to do for model-based estimates of Kish's Deff.
+Kish's UWE is a model-based tool that can be useful for diagnostic purposes. However, its values must be interpreted with some caution, just as is necessary for model-based estimates of Kish's Deff.
 
-In particular, UWE is - by construction - only sensitive to variations of the \emph{sample} variance of the weights. Therefore, it is unable to discriminate weight adjustments which, despite adding variability to the weights at sample level, might result in reductions of the \emph{sampling} variance for some estimators. This is often the case of calibration, which may well make survey weights more unequal, but nonetheless cause their reciprocals to become more correlated to some interest variables. Similar considerations hold for stratified sampling, to the extent that, with respect to the interest variables, units tend to be more similar within strata than between strata.
+In particular, UWE is - by construction - only sensitive to variations of the \emph{sample} variance of the weights. Therefore, it is unable to discriminate weight adjustments which, despite adding variability to the weights at sample level, might result in reductions of the \emph{sampling} variance for some estimators. This is often the case of calibration, which may well make survey weights more unequal, but nonetheless cause their reciprocals to become more correlated with some interest variables. Similar considerations hold for stratified sampling, to the extent that, with respect to the interest variables, units tend to be more similar within strata than between strata.
 
 In any case, the UWE can turn out handy when comparing the potential outcomes of performing the same kind of weight adjustment under slightly different settings (e.g. calibration with different bounds or distance functions, trimming with different thresholds, etc.).
 }
@@ -55,7 +55,7 @@ In any case, the UWE can turn out handy when comparing the potential outcomes of
 \author{Diego Zardetto}
 
 \references{
-Kish, L. (1992). Weighting for unequal Pi. Journal of Official Statistics, 8, 183-200.
+Kish, L. (1992). \emph{\dQuote{Weighting for unequal Pi}}. Journal of Official Statistics, 8, 183-200.
 }
 
 \seealso{
@@ -151,7 +151,7 @@ sbscal <- e.calibrate(sbsRHG, pop)
 sbscal
 
 # -- 4) Consistently trim calibration weights
-# Say one wants to avoid weights that are less then 1 and above 50:
+# Say one wants to avoid weights that are less than 1 and above 50:
 sbstrim <- trimcal(sbscal, c(1, 50))
 
 # Have a look

@@ -60,9 +60,9 @@ Use argument \code{kind} to specify the summary statistic you need. The default 
 
 As usual in summary statistics, argument \code{by} can be used to request domain estimates.
 
-The \code{group} formula (if any) specifies a way of partitioning the population into groups: the output will be reported separately for each group. In the GVF context, a \emph{\dQuote{grouped}} output will permit to fit \emph{separate} GVF models inside different groups (and hence to compute separate variance predictions for different groups).
+The \code{group} formula (if any) specifies a way of partitioning the population into groups: the output will be reported separately for each group. In the GVF context, a \emph{\dQuote{grouped}} output will make it possible to fit \emph{separate} GVF models inside different groups (and hence to compute separate variance predictions for different groups).
 
-Note that \code{group} and \code{by} share identical syntax and semantics as model formulae, despite they have different purposes in function \code{svystat} (as explained above).
+Note that \code{group} and \code{by} share identical syntax and semantics as model formulae, although they have different purposes in function \code{svystat} (as explained above).
 
 Parameter \code{combo} is \emph{only} meaningful if \code{by} is passed. Its purpose is to allow computing estimates and errors simultaneously for many estimation domains.
 

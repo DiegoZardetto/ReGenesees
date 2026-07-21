@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -179,7 +179,7 @@
     </tr>
     <tr>
       <th>prec.ind</th>
-      <td><p>The precision indicator for which the specified precison level <code>prec</code> has to be attained. The following uncertainty measures can be used as precision indicators: Margin of Error (<code>'ME'</code>, the default), Relative Margin of Error (<code>'RME'</code>), Standard Error (<code>'SE'</code>), and Coefficient of Variation (<code>'CV'</code>, also known as Relative Standard Error).</p></td>
+      <td><p>The precision indicator for which the specified precision level <code>prec</code> has to be attained. The following uncertainty measures can be used as precision indicators: Margin of Error (<code>'ME'</code>, the default), Relative Margin of Error (<code>'RME'</code>), Standard Error (<code>'SE'</code>), and Coefficient of Variation (<code>'CV'</code>, also known as Relative Standard Error).</p></td>
     </tr>
     <tr>
       <th>sigmaY</th>
@@ -207,7 +207,7 @@
     </tr>
     <tr>
       <th>AVEhh</th>
-      <td><p>Anticipated estimate of the average number of individuals belonging to the target subpopulation per houshold.</p></td>
+      <td><p>Anticipated estimate of the average number of individuals belonging to the target subpopulation per household.</p></td>
     </tr>
     <tr>
       <th>old.clus.size</th>
@@ -253,26 +253,26 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>These functions are intended as simple everyday tools for basic sampling design decisions and survey planning. They address sample size requirements and power calculations for <em>means</em> in surveys (typically household surveys) adopting one- or two-stage sampling designs. The means acting as estimation targets can be defined either in terms of individuals or in terms of households. Specific arguments (such as <code>hhSize</code>, <code>AVEhh</code>, <code>old.clus.size</code>, and <code>new.clus.size</code>) can be tweaked to cover different designs (one or two stages) and target populations (individual-level or household-level means), see the &#8216;Examples&#8217; section.</p>
+    <p>These functions are intended as simple everyday tools for basic sampling design decisions and survey planning. They address sample size requirements and power calculations for <em>means</em> in surveys (typically household surveys) adopting one- or two-stage sampling designs. The means acting as estimation targets can be defined either in terms of individuals or in terms of households. Specific arguments (such as <code>hhSize</code>, <code>AVEhh</code>, <code>old.clus.size</code>, and <code>new.clus.size</code>) can be tweaked to cover different designs (one or two stages) and target populations (individual-level or household-level means); see the &#8216;Examples&#8217; section.</p>
 <p>The formulas needed to guesstimate the minimum sample size required to satisfy specific precision constraints in the estimation of a mean (function <code>n.mean</code>) or the expected precision of the estimator of the mean given a specified sample size (function <code>prec.mean</code>) are available in many textbooks and spreadsheet templates (see, e.g., [Rosner 2006], [Lance, Hattori 2016], [ILO 2014a], [ILO 2014b]).</p>
 <p>The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two means (function <code>n.comp2mean</code>) can be derived from equation 8.27 on page 302 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments <code>RR</code> and <code>DEFF</code>). Functions <code>pow.comp2mean</code> and <code>mde.comp2mean</code> solve the resulting equation for <code>Power</code> (= <code>1 - beta</code>) and <code>MDE</code> given a specified <em>total</em> sample size, <code>n</code>.</p>
 <p><strong>NOTE:</strong> For both <code>pow.comp2mean</code> and <code>mde.comp2mean</code>, argument <code>n</code> must be the <em>total</em> sample size, namely the sum of the sample sizes of the two groups (group 1 and group 2) whose estimated means need to be compared. The way the total sample size is allocated to the two groups is controlled by argument <code>K1</code>.</p>
-<p><strong>NOTE:</strong> Despite most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, the default value <code>muY = NULL</code> is not valid when relative measures of precision are used (<code>'RME'</code> and <code>'CV'</code>).</p>
-<p><strong>NOTE:</strong> Arguments <code>F</code>, <code>hhSize</code>, and <code>AVEhh</code> are necessarily related to each other, as it is illustrated by the expression of the default of <code>AVEhh</code>, thus it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity <code>AVEhh = F * hhSize</code>.</p>
-<p><strong>NOTE:</strong> Most of the arguments to the above five functions are vectorized, meaning that users can pass <code>numeric</code> vectors to them to investigate multiple design scenarios in a single shot (e.g. via <code>MDE = c(750, 1000, 1250)</code>). When vectors of length greater than 1 are passed to multiple arguments, <span style="R">R</span> recycling rule will kick in.</p>
+<p><strong>NOTE:</strong> Although most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, the default value <code>muY = NULL</code> is not valid when relative measures of precision are used (<code>'RME'</code> and <code>'CV'</code>).</p>
+<p><strong>NOTE:</strong> Arguments <code>F</code>, <code>hhSize</code>, and <code>AVEhh</code> are necessarily related to each other, as illustrated by the expression of the default of <code>AVEhh</code>; thus, it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity <code>AVEhh = F * hhSize</code>.</p>
+<p><strong>NOTE:</strong> Most of the arguments to the above five functions are vectorized, meaning that users can pass <code>numeric</code> vectors to them to investigate multiple design scenarios in a single shot (e.g. via <code>MDE = c(750, 1000, 1250)</code>). When vectors of length greater than 1 are passed to multiple arguments, the <span style="R">R</span> recycling rule will kick in.</p>
 <p><strong>NOTE:</strong> Input values for sample size, <code>n</code>, and population size (if any), <code>N</code>, should be positive integers. The functions will silently make them so, by using their <code><a href='https://rdrr.io/r/base/Round.html'>round(abs( ))</a></code> values. When both <code>n</code> and <code>N</code> are specified, an error will be raised if <code>n &gt; N</code>.</p>
 <p><strong>NOTE:</strong> Since, as shown in the &#8216;Examples&#8217; section, the functions can be tweaked to cover different designs (one or two stages) and target populations (<em>individual-level</em> or <em>household-level</em> means), users who do not want to neglect finite population corrections must specify the population size <code>N</code> in terms of the <em>analytical units</em> that are relevant to their analysis.</p>
-<p><strong>NOTE:</strong> Both functions <code>n.mean</code> and <code>n.comp2mean</code> return the <em>ceiling</em> of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performances than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).</p>
+<p><strong>NOTE:</strong> Both functions <code>n.mean</code> and <code>n.comp2mean</code> return the <em>ceiling</em> of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performance than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>n.mean</code>, <code>prec.mean</code>, <code>pow.comp2mean</code>, and <code>mde.comp2mean</code>, a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
-<p>For <code>n.comp2mean</code>, a list of length 3 with names <code>n1</code>, <code>n2</code>, and <code>n</code>, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
+    <p>For <code>n.mean</code>, <code>prec.mean</code>, <code>pow.comp2mean</code>, and <code>mde.comp2mean</code>, a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under the <span style="R">R</span> recycling rule).</p>
+<p>For <code>n.comp2mean</code>, a list of length 3 with names <code>n1</code>, <code>n2</code>, and <code>n</code>, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under the <span style="R">R</span> recycling rule).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>ILO (2014a) ILO-IPEC TOOLS. URL: <a href='https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys'>https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys</a>.</p>
 <p>ILO (2014b) ILO-IPEC TOOLS USER GUIDE. URL: <a href='https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Guidelines_2014.pdf'>https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Guidelines_2014.pdf</a>.</p>
 <p>Rosner, B. (2006) Fundamentals of biostatistics (7th ed.). Boston, MA: Brooks/Cole.</p>
-<p>Lance, P., Hattori, A. (2016) Sampling and evaluation. Chapel Hill, North Carolina: MEASURE Evaluation, University of North Carolina (2016).</p>
+<p>Lance, P., Hattori, A. (2016) Sampling and evaluation. Chapel Hill, North Carolina: MEASURE Evaluation, University of North Carolina.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Functions <code><a href='SampleSizeProp.html'>n.prop</a></code>, <code><a href='SampleSizeProp.html'>prec.prop</a></code>, <code><a href='SampleSizeProp.html'>n.comp2prop</a></code>, <code><a href='SampleSizeProp.html'>pow.comp2prop</a></code>, and <code><a href='SampleSizeProp.html'>mde.comp2prop</a></code> provide the same functionalities documented here, when the statistics of interest are <em>proportions</em> rather than means.</p></div>
@@ -282,7 +282,7 @@
 <span class='co'># Reproducible example #</span>
 <span class='co'>########################</span>
 <span class='co'># Solve the problem used as illustrating example in Diagram 1b on page 12 of the ILO-IPEC</span>
-<span class='co'># TOOLS USER GUIDE (which can be freely downloaded from ILO-IPEC TOOLS USER GUIDE URL in</span>
+<span class='co'># TOOLS USER GUIDE (which can be freely downloaded from the ILO-IPEC TOOLS USER GUIDE URL in</span>
 <span class='co'># the References section above).</span>
 <span class='co'># This is the only example provided by the document for the estimate of a *mean* (which</span>
 <span class='co'># the document, somewhat oddly, refers to as an &lt;&lt;indicator of amount&gt;&gt;):</span>
@@ -335,7 +335,7 @@
 <span class='co'># Power calculations for the comparison of two means #</span>
 <span class='co'>######################################################</span>
 <span class='co'># A new national assistance policy aims to increase by 7% the average monthly household</span>
-<span class='co'># consumption, which was estimated to be equal to 362000 (in the country currency) by an</span>
+<span class='co'># consumption, which was estimated to be equal to 362000 (in the country currency) by a</span>
 <span class='co'># household survey conducted two years before. The DEFF of that estimate was reported to</span>
 <span class='co'># be 3.5, and the same survey estimated the population standard deviation of the monthly</span>
 <span class='co'># household consumption to be 461000. To evaluate the impact of the intervention, two</span>
@@ -343,12 +343,12 @@
 <span class='co'># (T1) the implementation of the policy. Assuming that (i) the average monthly household</span>
 <span class='co'># consumption at T0 will still be close to 362000 and (ii) the new policy will be the only</span>
 <span class='co'># driver of changes, success of the policy would require a value of at least 387340 at T1</span>
-<span class='co'># (387340 = 362000 * 1.07), namely an increase of 25340. However,the government would like</span>
+<span class='co'># (387340 = 362000 * 1.07), namely an increase of 25340. However, the government would like</span>
 <span class='co'># the study to be able to detect a possibly *smaller* consumption increase of 20000.</span>
 <span class='co'># Moreover, the government is confident the new policy cannot result in harming household</span>
 <span class='co'># consumption (so a one-tailed test is deemed appropriate). Assuming 20 households per EA</span>
-<span class='co'># will be sampled as it was the case for the survey conducted two years before, and</span>
-<span class='co'># anticipating a response rate of 0.9, and how many households must be selected to achieve</span>
+<span class='co'># will be sampled, as was the case for the survey conducted two years before, and</span>
+<span class='co'># anticipating a response rate of 0.9, how many households must be selected to achieve</span>
 <span class='co'># 80% power for the detection of the sought-after consumption increase at significance</span>
 <span class='co'># level 5%?</span>
 
@@ -411,10 +411,10 @@
 <span class='co'># NOTE: When going from 20 to 15 or 12 households per EA, the required sample size is</span>
 <span class='co'>#       expected to decrease to 25590 households (12795 per round) and 22032 households</span>
 <span class='co'>#       (11016 per round), respectively. Conversely, the EAs to be visited are expected to</span>
-<span class='co'>#       increase to 12795 / 15 = 853 and 11016 / 12 = 918 per round,respectively.</span>
+<span class='co'>#       increase to 12795 / 15 = 853 and 11016 / 12 = 918 per round, respectively.</span>
 
 <span class='co'># How much sample size could be saved if the government resorts to detecting as significant</span>
-<span class='co'># a larger consumption increase of 25000, which is much closer to the actually intended</span>
+<span class='co'># a larger consumption increase of 25000, which is much closer to the actual intended</span>
 <span class='co'># goal of the policy?</span>
 
 <span class='fu'>n.comp2mean</span>(<span class='kw'>sigmaY</span> <span class='kw'>=</span> <span class='fl'>362000</span>, <span class='kw'>MDE</span> <span class='kw'>=</span> <span class='fl'>25000</span>, <span class='kw'>sides</span> <span class='kw'>=</span> <span class='st'>"one-tailed"</span>, <span class='kw'>DEFF</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>RR</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,

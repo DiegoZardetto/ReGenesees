@@ -11,18 +11,18 @@ bibentry(
     volume = "31",
     number = "2",
     pages = "177 - 203",
-    url = "https://sciendo.com:443/article/10.1515/jos-2015-0013",
-    textVersion = "Zardetto D. (2015) \"ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys\". Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013"
+    url = "https://doi.org/10.1515/jos-2015-0013",
+    textVersion = "Zardetto, D. (2015). \"ReGenesees: an Advanced R System for Calibration, Estimation and Sampling Error Assessment in Complex Sample Surveys\". Journal of Official Statistics, 31(2), 177-203. doi: https://doi.org/10.1515/jos-2015-0013"
     )
 
 bibentry(
     bibtype = "misc",
     author = "Diego Zardetto",
-    year = "2025",
+    year = "2026",
     title = "ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys",
-    note = "R package version 2.4",
+    note = "R package version 2.5",
     organization = "Istat",
     address = "Rome, Italy",
-    textVersion = "Zardetto D. (2025) \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.4, Istat, Italy."
+    textVersion = "Zardetto, D. (2026). \"ReGenesees: R Evolved Generalized Software for Sampling Estimates and Errors in Surveys\". R package version 2.5, Istat, Italy."
     )
 

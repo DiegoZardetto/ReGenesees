@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -166,7 +166,7 @@
     </tr>
     <tr>
       <th>design</th>
-      <td><p>A design object to compute estimates of the calibration control totals. Must be of class of class <code>analytic</code> (or inheriting from it).</p></td>
+      <td><p>A design object to compute estimates of the calibration control totals. Must be of class <code>analytic</code> (or inheriting from it).</p></td>
     </tr>
     <tr>
       <th>xlab</th>
@@ -201,16 +201,16 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Function <code>pop.plot</code> draws a scatter plot of calibration control totals vs current estimates derived from object <code>design</code>. This plot is sometimes very telling and may provide a first-level, rough assessment of how hard the calibration problem at hand will turn out to be in terms of constrained optimization.</p>
-<p>A trivial calibration problem would correspond to points lying exactly on the <code>y = x</code> bisector line. A moderate spread around the bisector line without evident and anomalous patterns is usually a sign of a well behaved calibration task. Larger spreads signal increasing calibration complexity. The maximum and minimum slopes of lines connecting the origin to the points in the scatter plot provide often a reasonable clue about the minimum possible range for the calibration bounds <code>[L, U]</code>, see <code><a href='bounds.hint.html'>bounds.hint</a></code>. Evident and anomalous patterns emerging from the scatter plot not only generally imply harder calibration tasks, but can even reveal signs of underlying biases in the auxiliary variables. For instance, an extremely imbalanced pattern, with the overwhelming majority of points lying below (or above) the <code>y = x</code> line would be a striking symptom of upward (or downward) bias of the current estimates with respect to the true population totals.</p>
+<p>A trivial calibration problem would correspond to points lying exactly on the <code>y = x</code> bisector line. A moderate spread around the bisector line without evident and anomalous patterns is usually a sign of a well behaved calibration task. Larger spreads signal increasing calibration complexity. The maximum and minimum slopes of lines connecting the origin to the points in the scatter plot often provide a reasonable clue about the minimum possible range for the calibration bounds <code>[L, U]</code> (see <code><a href='bounds.hint.html'>bounds.hint</a></code>). Evident and anomalous patterns emerging from the scatter plot not only generally imply harder calibration tasks, but can even reveal signs of underlying biases in the auxiliary variables. For instance, an extremely imbalanced pattern, with the overwhelming majority of points lying below (or above) the <code>y = x</code> line would be a striking symptom of upward (or downward) bias of the current estimates with respect to the true population totals.</p>
 <p>In addition to the scatter plot of calibration control totals vs current estimates, function <code>pop.plot</code> draws three useful reference lines: (1) the maximum slope line connecting the origin to the points, (2) the <code>y = x</code> bisector line, and (3) the minimum slope line connecting the origin to the points.</p>
 <p>If <code>verbose = TRUE</code>, the minimum and maximum slopes get printed on screen.</p>
-<p>When the calibration control totals in <code>pop.totals</code> span different orders of magnitude (as it often happens in enterprise surveys) it is beneficial to look at the plot in logarithmic scale, which can be achieved by setting <code>log = "xy"</code> via argument <code>...</code>.</p>
-<p>If <code>pop.totals</code> is of class <code>spc.pop</code>, i.e. it stores known totals for a special purpose calibration tasks, which are all zero (see <code><a href='prep.calBeta.html'>prep.calBeta</a></code>), then just one reference vertical line at <code>x = 0</code> is added to the scatter plot.</p>
-<p>If <code>pop.totals</code> is of class <code>spc.pop</code> but it is a <em>fused</em> data frame, encompassing simultaneous control totals for a special purpose calibration task and an ordinary calibration task (see <code><a href='pop.fuse.html'>pop.fuse</a></code>), than two separate scatter plots are drawn.</p>
+<p>When the calibration control totals in <code>pop.totals</code> span different orders of magnitude (as often happens in enterprise surveys), it is beneficial to look at the plot in logarithmic scale, which can be achieved by setting <code>log = "xy"</code> via argument <code>...</code>.</p>
+<p>If <code>pop.totals</code> is of class <code>spc.pop</code>, i.e. it stores known totals for a special purpose calibration task, which are all zero (see <code><a href='prep.calBeta.html'>prep.calBeta</a></code>), then just one reference vertical line at <code>x = 0</code> is added to the scatter plot.</p>
+<p>If <code>pop.totals</code> is of class <code>spc.pop</code> but it is a <em>fused</em> data frame, encompassing simultaneous control totals for a special purpose calibration task and an ordinary calibration task (see <code><a href='pop.fuse.html'>pop.fuse</a></code>), then two separate scatter plots are drawn.</p>
 <p>Note that you can also pass to argument <code>design</code> the calibrated object obtained using <code>pop.totals</code> as known totals data frame: if calibration perfectly converged, points will lie on the <code>y = x</code> bisector line, otherwise the spread around the bisector line will provide a visual assessment of how significantly the calibration task failed.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The main purpose of the function is to draw a plot, anyway it returns invisibly the minimum and maximum slopes whenever it is meaningful to do so (thus excluding non-fused special purpose calibration task).</p>
+    <p>The main purpose of the function is to draw a plot; however, it returns invisibly the minimum and maximum slopes whenever it is meaningful to do so (thus excluding non-fused special purpose calibration tasks).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating weights, <code><a href='pop.template.html'>pop.template</a></code> for the definition of the class <code>pop.totals</code> and to build a template data frame for known population totals, <code><a href='fill.template.html'>fill.template</a></code> to automatically fill the template when a sampling frame is available, <code><a href='describe.html'>pop.desc</a></code> to obtain a natural language description of control totals data frames.</p></div>

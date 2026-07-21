@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -144,42 +144,42 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <span class="pkg">ReGenesees</span> package provides four options for variance
-    estimations which can be freely set and modified by the user:<br /></p>    
+    estimation which can be freely set and modified by the user:<br /></p>    
 <p>- <code>RG.ultimate.cluster</code><br />
     - <code>RG.lonely.psu</code><br />
     - <code>RG.adjust.domain.lonely</code><br />
     - <code>RG.warn.domain.lonely</code><br /></p>    
 <p>When <code><a href='https://rdrr.io/r/base/options.html'>options("RG.ultimate.cluster")</a></code> is <code>TRUE</code>,
-    the <span class="pkg">ReGenesees</span> package adopts the so called <em>&#8220;Ultimate
-    Cluster Approximation&#8221;</em> [Kalton 79]. Under this approximation, the overall
+    the <span class="pkg">ReGenesees</span> package adopts the so-called <em>&#8220;Ultimate
+    Cluster Approximation&#8221;</em> [Kalton 1979]. Under this approximation, the overall
     sampling variance for a multistage sampling design is estimated by
     taking into account only the contribution arising from the estimated PSU
     totals (thus simply ignoring any available information about subsequent
-    sampling stages). For without replacement sampling designs, this approach
+    sampling stages). For without-replacement sampling designs, this approach
     is known to underestimate the true multistage variance, while - at the
-    same time - overestimating its true first-stage component. Anyway, the
+    same time - overestimating its true first-stage component. In any case, the
     underestimation error becomes negligible if the PSUs' sampling fractions
     across strata are very small. When sampling with replacement, the Ultimate
     Cluster approach is no longer an approximation, but rather an exact result.
-    Hence, be <code><a href='https://rdrr.io/r/base/options.html'>options("RG.ultimate.cluster")</a></code> <code>TRUE</code> or <code>FALSE</code>,
+    Hence, be it <code><a href='https://rdrr.io/r/base/options.html'>options("RG.ultimate.cluster")</a></code> <code>TRUE</code> or <code>FALSE</code>,
     if one does not specify first-stage finite population corrections, <span class="pkg">ReGenesees</span>
     will produce exactly the same variance estimates.</p>    
 <p>When <code><a href='https://rdrr.io/r/base/options.html'>options("RG.ultimate.cluster")</a></code> is <code>FALSE</code>,
     each sampling stage contributes and variances get estimated by means
-    of a recursive algorithm [Bellhouse, 85] inherited and adapted from
-    package <span class="pkg">survey</span> [Lumley 06]. Notice that the results obtained
-    by choosing this option can differ from the one that would be obtained
-    under the "Ultimate Cluster Approximation" <em>only if</em> first-stage
+    of a recursive algorithm [Bellhouse 1985] inherited and adapted from
+    package <span class="pkg">survey</span> [Lumley 2006]. Notice that the results obtained
+    by choosing this option can differ from those that would be obtained
+    under the &#8220;Ultimate Cluster Approximation&#8221; <em>only if</em> first-stage
     finite population corrections are specified.</p>    
 <p>Lonely PSUs (i.e. PSUs which are alone inside a not self-representing
     stratum) are a concern from the viewpoint of variance estimation. The
     suggested <span class="pkg">ReGenesees</span> facility to handle the lonely PSUs problem is
-    the strata aggregation technique (see e.g. [Wolter 07] and [Rust, Kalton 87])
+    the strata aggregation technique (see e.g. [Wolter 2007] and [Rust, Kalton 1987])
     provided in function <code><a href='collapse.strata.html'>collapse.strata</a></code>.
     As a possible alternative, you can get rid of lonely PSUs also by setting
     proper variance estimation options via <code><a href='https://rdrr.io/r/base/options.html'>options("RG.lonely.psu")</a></code>.
     The default setting is <code>"fail"</code>, which raises an error if a lonely PSU
-    is met. Option <code>"remove"</code> simply causes the software to ignore lonely PSUs
+    is encountered. Option <code>"remove"</code> simply causes the software to ignore lonely PSUs
     for variance computation purposes. Option <code>"adjust"</code> means that
     deviations from the <em>population mean</em> will be used in variance
     estimation formulae, instead of deviations from the stratum mean
@@ -193,7 +193,7 @@
     observations falling in the domain, but are not unbiased.<br />
     If <code><a href='https://rdrr.io/r/base/options.html'>options("RG.adjust.domain.lonely")</a></code> is <code>TRUE</code>
     and <code><a href='https://rdrr.io/r/base/options.html'>options("RG.lonely.psu")</a></code> is <code>"average"</code> or
-    <code>"adjust"</code> the same adjustment for lonely PSUs will be used
+    <code>"adjust"</code>, the same adjustment for lonely PSUs will be used
     within a domain. Note that this adjustment is not available for
     calibrated designs.</p>    
 <p>If <code><a href='https://rdrr.io/r/base/options.html'>options("RG.warn.domain.lonely")</a></code> is set to <code>TRUE</code>, a
@@ -209,7 +209,7 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='e.svydesign.html'>e.svydesign</a></code> and its <code>self.rep.str</code> argument for a 
-    "compromise solution" that can be adopted when the sampling design
+    &#8220;compromise solution&#8221; that can be adopted when the sampling design
     involves self-representing (SR) strata, <code><a href='collapse.strata.html'>collapse.strata</a></code>
     for the suggested way of handling lonely PSUs, and <code><a href='fpcdat.html'>fpcdat</a></code>
     for useful data examples.</p></div>
@@ -237,7 +237,7 @@
 #&gt; y   976.2417  231.5724 23.72081
 #&gt; z 19180.1349 3258.6512 16.98972</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='no'>old.op</span>)
 
-<span class='co'>## 3) The "compromise solution" (see ?e.svydesign) i.e. retaining</span>
+<span class='co'>## 3) The "compromise solution" (see ?e.svydesign), i.e. retaining</span>
 <span class='co'>##    only the leading contribution to the sampling variance (namely</span>
 <span class='co'>##    the one arising from SSUs in SR strata and PSUs in not-SR strata):</span>
 <span class='no'>des2</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>fpcdat</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>psu</span>+<span class='no'>ssu</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,<span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>,
@@ -249,8 +249,8 @@
 <span class='co'># hierarchy: 1) &gt; 3) &gt; 2).</span>
 
 
-<span class='co'># Under default settings lonely PSUs produce errors in standard</span>
-<span class='co'># errors estimation (notice we didn't pass the fpcs):</span>
+<span class='co'># Under default settings lonely PSUs produce errors during standard</span>
+<span class='co'># error estimation (notice we didn't pass the fpcs):</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fpcdat</span>)
 <span class='no'>des.lpsu</span><span class='kw'>&lt;-</span><span class='fu'><a href='e.svydesign.html'>e.svydesign</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>fpcdat</span>,<span class='kw'>ids</span><span class='kw'>=</span>~<span class='no'>psu</span>+<span class='no'>ssu</span>,<span class='kw'>strata</span><span class='kw'>=</span>~<span class='no'>stratum</span>,
           <span class='kw'>weights</span><span class='kw'>=</span>~<span class='no'>w</span>)

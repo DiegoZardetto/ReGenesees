@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Predict CV Values via Fitted GVF Models — predictCV" />
-<meta property="og:description" content="This function predicts the CV values associated to given estimates, based on fitted GVF model(s)." />
+<meta property="og:description" content="This function predicts the CV values associated with given estimates, based on fitted GVF model(s)." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -134,7 +134,7 @@
     </div>
 
     <div class="ref-description">
-    <p>This function predicts the CV values associated to given estimates, based on fitted GVF model(s).</p>
+    <p>This function predicts the CV values associated with given estimates, based on fitted GVF model(s).</p>
     </div>
 
     <pre class="usage"><span class='fu'>predictCV</span>(<span class='no'>object</span>, <span class='kw'>new.Y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
@@ -190,8 +190,8 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The main motivation for building and fitting a GVF model is to exploit the fitted model to <em>predict</em> the sampling error associated to a given estimate, instead of having to <em>compute</em> directly an estimate of such sampling error. Function <code>predictCV</code> is relevant to that scope.</p>
-<p>Despite different GVF models can specify as response term (call it <code>'resp'</code>) different functions of variables <code>'SE'</code>, <code>'CV'</code>, and <code>'VAR'</code> (see e.g. [Wolter 07]), function <code>predictCV</code> adopts variable <code>'CV'</code> as a universal <em>pivot</em>. This means that <code>predictCV</code> can handle <em>only</em> fitted GVF models which are <em>registered</em> (that is already stored inside <code><a href='GVF.db.html'>GVF.db</a></code>), and for which variable <code>Resp.to.CV</code> is <em>not</em> <code>NA</code>. Indeed, it is variable <code>Resp.to.CV</code> of data frame <code>GVF.db</code> which tells <code>predictCV</code> how to transform the response of an arbitrary GVF model (<code>'resp'</code>) into the pivot measure of variability (<code>'CV'</code>).</p>
+    <p>The main motivation for building and fitting a GVF model is to exploit the fitted model to <em>predict</em> the sampling error associated with a given estimate, instead of having to <em>compute</em> directly an estimate of such sampling error. Function <code>predictCV</code> is relevant to that scope.</p>
+<p>Although different GVF models can specify as response term (call it <code>'resp'</code>) different functions of variables <code>'SE'</code>, <code>'CV'</code>, and <code>'VAR'</code> (see e.g. [Wolter 2007]), function <code>predictCV</code> adopts variable <code>'CV'</code> as a universal <em>pivot</em>. This means that <code>predictCV</code> can handle <em>only</em> fitted GVF models which are <em>registered</em> (that is already stored inside <code><a href='GVF.db.html'>GVF.db</a></code>), and for which variable <code>Resp.to.CV</code> is <em>not</em> <code>NA</code>. Indeed, it is variable <code>Resp.to.CV</code> of data frame <code>GVF.db</code> which tells <code>predictCV</code> how to transform the response of an arbitrary GVF model (<code>'resp'</code>) into the pivot measure of variability (<code>'CV'</code>).</p>
 <p>By default <code>new.Y = NULL</code> and CVs (and intervals, if any) obtained by transforming fitted response values will be returned. If passed, argument <code>new.Y</code> must be a data frame storing new estimates for which CVs have to be predicted. Such input estimates have to be stored in column <code>Y</code> of data frame <code>new.Y</code>. Moreover, if <code>object</code> stores GVF model(s) fitted to <em>grouped</em> data (namely, it has class <code>gvf.fit.gr</code> or <code>gvf.fits.gr</code>), then <code>new.Y</code> should also have columns identifying the <em>groups</em> to which input estimates are referred (see &#8216;Examples&#8217;). The <em>only exception</em> is the following: if the <code>new.Y</code> data frame has just the <code>Y</code> column, then CVs will be predicted for <em>all groups</em> (see &#8216;Examples&#8217;). The function will check for consistency between groups available in <code>object</code> and in <code>new.Y</code> (see &#8216;Examples&#8217;).</p>
 <p>If <code>interval = "none"</code> (the default), the function will return predicted CVs only. Otherwise, lower and upper bounds of confidence (or prediction) intervals around predicted CVs will be also provided. Use argument <code>level</code> to specify the desired confidence (or tolerance) level for those intervals.</p>
 <p>All the other arguments have the same meaning as in function <code><a href='https://rdrr.io/r/stats/predict.lm.html'>predict.lm</a></code>.</p>
@@ -240,7 +240,7 @@
 #&gt;  age10c3 :  1   Mean   : 45014   Mean   : 2989   Mean   :0.22191  
 #&gt;  age10c4 :  1   3rd Qu.: 46046   3rd Qu.: 4006   3rd Qu.:0.27813  
 #&gt;  age10c5 :  1   Max.   :924101   Max.   :17173   Max.   :1.00000  
-#&gt;  (Other) :343                                    NA's   :6        
+#&gt;  (Other) :343                                    NAs    :6        
 #&gt;       VAR           
 #&gt;  Min.   :        0  
 #&gt;  1st Qu.:  1470114  
@@ -302,7 +302,7 @@
 #&gt; 4 -5.012725 -5.067519 -4.957932
 #&gt; 5 -5.702336 -5.769512 -5.635160</div><div class='input'>
 
-<span class='co'>## (B) A *a set* of GVF models fitted to the same data ##</span>
+<span class='co'>## (B) A *set* of GVF models fitted to the same data ##</span>
 <span class='co'># Fit example data to registered GVF models for frequencies (i.e. number 1:3):</span>
 <span class='no'>mm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.gvf.html'>fit.gvf</a></span>(<span class='no'>ee.AF</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)
 
@@ -364,7 +364,7 @@
 #&gt; 5 0.003262796 -0.0031629208 0.009688512
 #&gt; </div><div class='input'>
 
-<span class='co'>## (C) a *single* GVF model fitted to *grouped* data ##</span>
+<span class='co'>## (C) A *single* GVF model fitted to *grouped* data ##</span>
 <span class='co'># We have at our disposal the following survey design object on household data:</span>
 <span class='no'>exdes</span></div><div class='output co'>#&gt; Stratified 2 - Stage Cluster Sampling Design (with replacement)
 #&gt; - [55] strata
@@ -405,13 +405,13 @@
 #&gt; 5 10.4:ind  24630.7 3092.299 0.12554653  9562313
 #&gt; 6 10.5:ind   4417.7 1119.309 0.25336928  1252854
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>ee.g</span>, <span class='no'>summary</span>)</div><div class='output co'>#&gt; $`6`
-#&gt;      name                 Y                  SE               CV         
-#&gt;  Length:69          Min.   :   536.9   Min.   : 313.7   Min.   :0.03041  
-#&gt;  Class :character   1st Qu.:  3731.4   1st Qu.: 945.5   1st Qu.:0.09752  
-#&gt;  Mode  :character   Median : 15802.5   Median :2373.1   Median :0.15608  
-#&gt;                     Mean   : 34024.2   Mean   :2803.8   Mean   :0.22400  
-#&gt;                     3rd Qu.: 40903.4   3rd Qu.:4046.9   3rd Qu.:0.30588  
-#&gt;                     Max.   :293458.3   Max.   :8923.8   Max.   :0.72946  
+#&gt;         name          Y                  SE               CV         
+#&gt;  Length   :69   Min.   :   536.9   Min.   : 313.7   Min.   :0.03041  
+#&gt;  N.unique :69   1st Qu.:  3731.4   1st Qu.: 945.5   1st Qu.:0.09752  
+#&gt;  N.blank  : 0   Median : 15802.5   Median :2373.1   Median :0.15608  
+#&gt;  Min.nchar: 5   Mean   : 34024.2   Mean   :2803.8   Mean   :0.22400  
+#&gt;  Max.nchar:19   3rd Qu.: 40903.4   3rd Qu.:4046.9   3rd Qu.:0.30588  
+#&gt;                 Max.   :293458.3   Max.   :8923.8   Max.   :0.72946  
 #&gt;       VAR          
 #&gt;  Min.   :   98432  
 #&gt;  1st Qu.:  894042  
@@ -421,13 +421,13 @@
 #&gt;  Max.   :79634317  
 #&gt; 
 #&gt; $`7`
-#&gt;      name                 Y                  SE                CV         
-#&gt;  Length:71          Min.   :   350.7   Min.   :  350.7   Min.   :0.03096  
-#&gt;  Class :character   1st Qu.:  6293.6   1st Qu.: 1592.4   1st Qu.:0.08590  
-#&gt;  Mode  :character   Median : 21186.6   Median : 3107.3   Median :0.14216  
-#&gt;                     Mean   : 46272.9   Mean   : 3476.7   Mean   :0.21512  
-#&gt;                     3rd Qu.: 59568.2   3rd Qu.: 4578.4   3rd Qu.:0.25424  
-#&gt;                     Max.   :410671.9   Max.   :12714.4   Max.   :1.00000  
+#&gt;         name          Y                  SE                CV         
+#&gt;  Length   :71   Min.   :   350.7   Min.   :  350.7   Min.   :0.03096  
+#&gt;  N.unique :71   1st Qu.:  6293.6   1st Qu.: 1592.4   1st Qu.:0.08590  
+#&gt;  N.blank  : 0   Median : 21186.6   Median : 3107.3   Median :0.14216  
+#&gt;  Min.nchar: 5   Mean   : 46272.9   Mean   : 3476.7   Mean   :0.21512  
+#&gt;  Max.nchar:19   3rd Qu.: 59568.2   3rd Qu.: 4578.4   3rd Qu.:0.25424  
+#&gt;                 Max.   :410671.9   Max.   :12714.4   Max.   :1.00000  
 #&gt;       VAR           
 #&gt;  Min.   :   122990  
 #&gt;  1st Qu.:  2536128  
@@ -437,13 +437,13 @@
 #&gt;  Max.   :161655092  
 #&gt; 
 #&gt; $`10`
-#&gt;      name                 Y                  SE               CV         
-#&gt;  Length:71          Min.   :   227.2   Min.   : 227.2   Min.   :0.03329  
-#&gt;  Class :character   1st Qu.:  2742.7   1st Qu.: 845.4   1st Qu.:0.09030  
-#&gt;  Mode  :character   Median : 11619.8   Median :1764.2   Median :0.15643  
-#&gt;                     Mean   : 24785.5   Mean   :2032.7   Mean   :0.25273  
-#&gt;                     3rd Qu.: 32857.5   3rd Qu.:2771.8   3rd Qu.:0.30220  
-#&gt;                     Max.   :219971.1   Max.   :7322.0   Max.   :1.00000  
+#&gt;         name          Y                  SE               CV         
+#&gt;  Length   :71   Min.   :   227.2   Min.   : 227.2   Min.   :0.03329  
+#&gt;  N.unique :71   1st Qu.:  2742.7   1st Qu.: 845.4   1st Qu.:0.09030  
+#&gt;  N.blank  : 0   Median : 11619.8   Median :1764.2   Median :0.15643  
+#&gt;  Min.nchar: 6   Mean   : 24785.5   Mean   :2032.7   Mean   :0.25273  
+#&gt;  Max.nchar:20   3rd Qu.: 32857.5   3rd Qu.:2771.8   3rd Qu.:0.30220  
+#&gt;                 Max.   :219971.1   Max.   :7322.0   Max.   :1.00000  
 #&gt;       VAR          
 #&gt;  Min.   :   51620  
 #&gt;  1st Qu.:  714783  
@@ -571,7 +571,7 @@
 }
 
 
-<span class='co'>## (D) a *set of* GVF models fitted to *grouped* data ##</span>
+<span class='co'>## (D) A *set of* GVF models fitted to *grouped* data ##</span>
 <span class='co'># Fit all registered GVF models for frequencies (i.e. number 1:3) separately</span>
 <span class='co'># inside groups:</span>
 <span class='no'>mm.g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.gvf.html'>fit.gvf</a></span>(<span class='no'>ee.g</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)

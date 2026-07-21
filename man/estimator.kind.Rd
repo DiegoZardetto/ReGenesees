@@ -2,11 +2,11 @@
 \alias{estimator.kind}
 
 \title{
-Which Estimator Did Generate these Survey Statistics? 
+Which Estimator Generated These Survey Statistics? 
 }
 
 \description{
-Identifies what kind of estimator has been used to compute a (set of) survey static(s).
+Identifies what kind of estimator has been used to compute a (set of) survey statistic(s).
 }
 
 \usage{
@@ -25,7 +25,7 @@ Argument \code{stat} can be any object which has been returned by calling a surv
 
 Should \code{stat} be a survey statistic derived from a design object \emph{other than} \code{design}, the function would raise an error.
 
-Note that function \code{estimator.kind} is smart enough to recognize that estimates of totals/means of \emph{dummy variables} are actually estimates of absolute/relative frequencies, despite such variables are of class \code{numeric} (see Section \sQuote{Examples}).
+Note that function \code{estimator.kind} is smart enough to recognize that estimates of totals/means of \emph{dummy variables} are actually estimates of absolute/relative frequencies, although such variables are of class \code{numeric} (see \sQuote{Examples}).
 }
 
 \value{
@@ -100,7 +100,7 @@ estimator.kind(stat,des)
 
 # Behaviour with dummy variables:
  ## 1. convenience variable 'ent' (whose values are always 1, so that its
-  #    estimated total actually estimates haw many enterprises are there in the
+  #    estimated total actually estimates how many enterprises are there in the
   #    target population)
   class(des$variables$ent)
   range(des$variables$ent)
@@ -110,7 +110,7 @@ estimator.kind(stat,des)
     estimator.kind(stat,des)
 
  ## 2. an actual dummy variable (built on the fly) which indicates if the
-  #    enterprise has more than 29 employess or not:
+  #    enterprise has more than 29 employees or not:
   des<-des.addvars(des,emp.gt.29=as.numeric(emp.num > 29))
   class(des$variables$emp.gt.29)
   range(des$variables$emp.gt.29)

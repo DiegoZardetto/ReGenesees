@@ -36,7 +36,7 @@ A single GVF fitted model.
 }
 
 \section{Methodological Warning}{
-Each one of the available criteria has its own specificities and limitations (e.g. it is senseless to use AIC to compare two GVF models with different response variables). It is up to the user to select the measure which is appropriate to his goals.
+Each one of the available criteria has its own specificities and limitations (e.g. it is senseless to use AIC to compare two GVF models with different response variables). It is up to the user to select the measure which is appropriate to their goals.
 }
 
 \author{
@@ -58,7 +58,7 @@ str(ee.AF)
 GVF.db
 
 
-## (A) A *a set* of GVF models fitted to the same data ##
+## (A) A *set* of GVF models fitted to the same data ##
 # Fit example data to all registered GVF models:
 mm <- fit.gvf(ee.AF)
 summary(mm)
@@ -72,7 +72,7 @@ mm.best
 plot(mm, 1:3)
 
 
-## (B) a *set of* GVF models fitted to *grouped* data ##
+## (B) A *set of* GVF models fitted to *grouped* data ##
 # We have at our disposal the following survey design object on household data:
 exdes
 
@@ -81,7 +81,7 @@ exdes
 ee.g <- svystat(exdes, y=~ind, by=~age5c:marstat:sex, combo=3, group=~regcod)
 str(ee.g)
 
-# Fit all registered GVF model number separately inside groups:
+# Fit all registered GVF models separately inside groups:
 mm.g <- fit.gvf(ee.g)
 summary(mm.g)
 

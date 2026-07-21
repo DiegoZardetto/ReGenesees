@@ -24,11 +24,11 @@ aux.estimates(design,
 }
 
 \details{
-The main purpose of function \code{aux.estimates} is to make easy the task of estimating the totals of \emph{all} the auxiliary variables involved in a calibration model (separately inside distinct calibration domains, if specified). Even if such totals can be estimated also by repeatedly invoking function \code{\link{svystatTM}}, this may reveal very tricky in practice, because real-world calibration tasks (e.g. in the field of Official Statistics) can simultaneously involve hundreds of auxiliary variables. Moreover, total estimates provided by function \code{\link{svystatTM}} are always complemented by sampling errors, whose estimation is very computationally demanding.
+The main purpose of function \code{aux.estimates} is to make it easy to estimate the totals of \emph{all} the auxiliary variables involved in a calibration model (separately inside distinct calibration domains, if specified). Even if such totals can also be estimated by repeatedly invoking function \code{\link{svystatTM}}, this may prove very tricky in practice, because real-world calibration tasks (e.g. in the field of Official Statistics) can simultaneously involve hundreds of auxiliary variables. Moreover, total estimates provided by function \code{\link{svystatTM}} are always complemented by sampling errors, whose estimation is very computationally demanding.
 
-Function \code{aux.estimates}, on the contrary, \emph{only} provides estimates of totals (i.e. without associated sampling errors), thus being very quick to be executed. Moreover, \code{aux.estimates} is able to compute, \emph{in just a single shot}, all the totals of the auxiliary variables of a calibration model, no matter how complex the model is. Lastly, as a third strong point, the totals estimated by \code{aux.estimates} will be returned exactly in the same \emph{standard format} in which the known population totals for the related calibration task need to be represented (see \code{\link{pop.template}}, \code{\link{population.check}}, \code{\link{fill.template}}).
+Function \code{aux.estimates}, on the contrary, \emph{only} provides estimates of totals (i.e. without associated sampling errors), and is thus very quick to execute. Moreover, \code{aux.estimates} is able to compute, \emph{in just a single shot}, all the totals of the auxiliary variables of a calibration model, no matter how complex the model is. Lastly, as a third strong point, the totals estimated by \code{aux.estimates} will be returned exactly in the same \emph{standard format} in which the known population totals for the related calibration task need to be represented (see \code{\link{pop.template}}, \code{\link{population.check}}, \code{\link{fill.template}}).
 
-It may be useful to point out that, besides having been designed to handle auxiliary variables involved in calibration models, function \code{aux.estimates} could be also used for computing \emph{general} estimates of totals inside subpopulations in a very effective way (see \sQuote{Examples}).
+It may be useful to point out that, besides having been designed to handle auxiliary variables involved in calibration models, function \code{aux.estimates} could also be used for computing \emph{general} estimates of totals inside subpopulations in a very effective way (see \sQuote{Examples}).
 }
 
 \value{
@@ -38,7 +38,7 @@ An object of class \code{pop.totals}, thus inheriting from class \code{data.fram
 \author{Diego Zardetto}
 
 \seealso{
-\code{\link{e.svydesign}} to bind survey data and sampling design metadata, \code{\link{svystatTM}} for calculating estimates and standard errors of totals, \code{\link{e.calibrate}} for calibrating weights, \code{\link{pop.template}} for constructing known totals data frames in compliance with the standard required by \code{e.calibrate}, \code{\link{population.check}} to check that the known totals data frame satisfies that standard, \code{\link{fill.template}} to automatically fill the template when a sampling frame is available.
+\code{\link{e.svydesign}} to bind survey data and sampling design metadata, \code{\link{svystatTM}} for calculating estimates and sampling errors of totals, \code{\link{e.calibrate}} for calibrating weights, \code{\link{pop.template}} for constructing known totals data frames in compliance with the standard required by \code{e.calibrate}, \code{\link{population.check}} to check that the known totals data frame satisfies that standard, \code{\link{fill.template}} to automatically fill the template when a sampling frame is available.
 }
 
 \examples{

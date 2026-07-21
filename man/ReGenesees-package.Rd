@@ -33,7 +33,7 @@ Multiple Regression Coefficients and Quantiles (variance via the Woodruff method
 \pkg{ReGenesees} also handles Complex Estimators, i.e. any user-defined estimator
 that can be expressed as an analytic function of Horvitz-Thompson or Calibration
 estimators of Totals or Means, by automatically linearizing them. The Design
-Covariance and Correlation between Complex Estimators is also provided.
+Covariance and Correlation between Complex Estimators are also provided.
 
 Furthermore, the package can compute estimates and sampling errors of complex
 Measures of Change derived from two not necessarily independent samples.
@@ -41,8 +41,8 @@ Measures of Change derived from two not necessarily independent samples.
 All the analyses listed above can be carried out for arbitrary subpopulations.
 
 \pkg{ReGenesees} also offers a Generalized Variance Functions (GVF) infrastructure,
-i.e. facilities for defining, fitting, testing and plotting GVF models, and to
-exploit them to predict sampling variance estimates.
+i.e. facilities for defining, fitting, testing and plotting GVF models, as well as
+for exploiting them to predict sampling variance estimates.
 
 Lastly, the package offers simple survey planning tools to estimate sample size
 requirements and perform power calculations.
@@ -58,28 +58,28 @@ namely a user-friendly Tcl/Tk GUI.
 \section{A Quick Reading Guide to the Reference Manual}{
 This reference manual reports a documentation entry for each (user visible)
 function of package \pkg{ReGenesees}. As you may have noticed by reading section
-\sQuote{\R topics documented} (page 1 of the pdf manual), these documentation
+\sQuote{\R topics documented} (page 1 of the PDF manual), these documentation
 entries are automatically sorted according to the alphabetic ordering of the
-names of the functions. Such an ordering doesn't provide any clue about where
-should a user start reading, nor on the best way to proceed further.
+names of the functions. Such an ordering doesn't provide any clue about where a
+user should start reading, nor about the best way to proceed further.
 
 In section \sQuote{Table of Contents}, I tried to cluster the most important
-topics documented in the reference manual into few broad groups, based on both
-the statistical goals and on the software design of the underlying functions.
+topics documented in the reference manual into a few broad groups, based on both
+the statistical goals and the software design of the underlying functions.
 
 Moreover, I provided a \emph{relevance code} for each documented topic/function.
 The meaning of such codes, along with the corresponding \emph{reading
-suggestions}, are reported in the following table:\cr
+suggestions}, is reported in the following table:\cr
 
 \strong{Relevance Codes Legend}
 \preformatted{
 CODE    RELEVANCE           READING SUGGESTION
  ***    Very Important......Read these topics as soon as possible. A clear
                             understanding of these functions is mandatory
-                            in order to start using profitably the package.
+                            in order to start using the package profitably.
 
-  **    Important...........Read these topics once you have been experiencing
-                            for a while with (at least some of) the 'Very
+  **    Important...........Read these topics once you have had some
+                            experience using (at least some of) the 'Very
                             Important' functions.
 
    *    Useful..............These functions are ancillary (albeit in
@@ -104,7 +104,7 @@ manual}.\cr\cr
 \subsection{Survey Design}{
 \preformatted{
 ***  e.svydesign..........Specification of a Complex Survey Design
-  *  weights..............Retrieve Sampling Units Weights
+  *  weights..............Retrieve Weights of Sampling Units
   *  find.lon.strata......Find Strata with Lonely PSUs
  **  collapse.strata......Collapse Strata Technique for Eliminating
                           Lonely PSUs
@@ -135,6 +135,8 @@ manual}.\cr\cr
                           by Domains
   *  ext.calibrated.......Make ReGenesees Digest Externally Calibrated
                           Weights
+  *  ext.calibrated2......Make ReGenesees Digest Externally Calibrated
+                          Weights (No Base Weights Needed)
   .  contrasts.RG.........Set, Reset or Switch Off Contrasts for
                           Calibration Models
   .  \%into\%...............Compress Nested Factors
@@ -143,7 +145,7 @@ manual}.\cr\cr
 
 \subsection{Special Purpose Calibration}{
 \preformatted{
-  .  prep.calBeta.........Prepare a Survey Design to Calibration on
+  .  prep.calBeta.........Prepare a Survey Design for Calibration on
                           Multiple Regression Coefficients
   .  pop.calBeta..........Prepare Control Totals for Calibration on
                           Multiple Regression Coefficients
@@ -193,8 +195,8 @@ manual}.\cr\cr
   *  getBest..............Identify the Best Fit GVF Model
 ***  predictCV............Predict CV Values via Fitted GVF Models
   *  gvf.misc.............Miscellanea: Methods for Fitted GVF Models 
-  *  estimator.kind.......Which Estimator Did Generate these
-                          Survey Statistics?
+  *  estimator.kind.......Which Estimator Generated These Survey
+                          Statistics?
 }
 }
 

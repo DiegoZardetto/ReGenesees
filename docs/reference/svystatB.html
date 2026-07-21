@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -209,29 +209,29 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function computes weighted estimates for Multiple Regression Coefficients using suitable weights depending on the class of <code>design</code>: calibrated weights for class <code>cal.analytic</code> and direct weights otherwise. Standard errors are calculated using the Taylor linearization technique.</p>
+    <p>This function computes weighted estimates for Multiple Regression Coefficients using suitable weights depending on the class of <code>design</code>: calibrated weights for class <code>cal.analytic</code> and base weights otherwise. Standard errors are calculated using the Taylor linearization technique.</p>
 <p>The mandatory argument <code>model</code> identifies the regression model whose population coefficients have to be estimated (for details on model specification, see e.g. <code><a href='https://rdrr.io/r/stats/lm.html'>lm</a></code>). The <code>design</code> variables referenced by <code>model</code> should be <code>numeric</code> or <code>factor</code> (variables of other types - e.g. <code>character</code> - will need to be converted in advance, e.g. using function <code><a href='des.addvars.html'>des.addvars</a></code>).</p>
-<p>The optional argument <code>by</code> specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If <code>by=NULL</code> (the default option), the estimates produced by <code>svystatB</code> refer to the whole population. Estimation domains must be defined by a formula: for example the statement <code>by=~B1:B2</code> selects as estimation domains the subpopulations determined by crossing the modalities of variables <code>B1</code> and <code>B2</code>. Notice that a formula like <code>by=~B1+B2</code> will be automatically translated into the factor-crossing formula <code>by=~B1:B2</code>: if you need to compute estimates for domains <code>B1</code> and <code>B2</code> <em>separately</em>, you have to call <code>svystatQ</code> twice. The <code>design</code> variables referenced by <code>by</code> (if any) should be of type <code>factor</code>, otherwise they will be coerced. Note that, to prevent obvious collinearity issues, the variables referenced by argument <code>by</code> must <em>not</em> appear in the input <code>model</code> formula: otherwise, the program will stop and print an error message.</p>
-<p>The <code>conf.int</code> argument allows to request the confidence intervals for the estimates. By default <code>conf.int=FALSE</code>, that is the confidence intervals are not provided.</p>
+<p>The optional argument <code>by</code> specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If <code>by=NULL</code> (the default option), the estimates produced by <code>svystatB</code> refer to the whole population. Estimation domains must be defined by a formula: for example the statement <code>by=~B1:B2</code> selects as estimation domains the subpopulations determined by crossing the modalities of variables <code>B1</code> and <code>B2</code>. Notice that a formula like <code>by=~B1+B2</code> will be automatically translated into the factor-crossing formula <code>by=~B1:B2</code>: if you need to compute estimates for domains <code>B1</code> and <code>B2</code> <em>separately</em>, you have to call <code>svystatB</code> twice. The <code>design</code> variables referenced by <code>by</code> (if any) should be of type <code>factor</code>, otherwise they will be coerced. Note that, to prevent obvious collinearity issues, the variables referenced by argument <code>by</code> must <em>not</em> appear in the input <code>model</code> formula: otherwise, the program will stop and print an error message.</p>
+<p>The <code>conf.int</code> argument makes it possible to request confidence intervals for the estimates. By default <code>conf.int=FALSE</code>, that is, the confidence intervals are not provided.</p>
 <p>Whenever confidence intervals are requested (i.e. <code>conf.int=TRUE</code>), the desired confidence level can be specified by means of the <code>conf.lev</code> argument. The <code>conf.lev</code> value must represent a probability (<code>0&lt;=conf.lev&lt;=1</code>) and its default is chosen to be <code>0.95</code>.</p>
-<p>The optional argument <code>deff</code> allows to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling <em>&#8220;with replacement&#8221;</em>, one must use <code>deff="replace"</code>.<br />
-For nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is for the estimator of the total of the linearized variable, aka "Woodruff transform").<br />
-When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out <em>within</em> that subpopulation. This is the same as the <code>srssubpop</code> option for Stata's function <code>estat</code>.</p>
-<p>Missing values (<code>NA</code>) in model variables should be avoided. If <code>na.rm=FALSE</code> (the default) they generate an error. If <code>na.rm=TRUE</code>, observations containing NAs in model variables are dropped, and estimates get computed on non missing values only. This implicitly assumes that missing values hit interest variables <em>completely at random</em>: should this not be the case, computed estimates would be <em>biased</em>.</p>
-<p>The <code>summary</code> method invoked on regression coefficients (say <code>b</code>) estimated via <code>svystatB</code>, gives p-values and significance codes for the component-wise test <code>b = 0</code>. Such values are computed assuming that the distribution of the regression coefficients estimators is normal (which is asymptotically true for large scale surveys). This assumption has the advantage of overcoming the problem of choosing the "right" statistic and assessing its "right" number of degrees of freedom when using data from a complex survey (see e.g. [Korn, Graubard 1990]).</p>
+<p>The optional argument <code>deff</code> makes it possible to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is, the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an &#8216;equivalent&#8217; estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect compared to simple random sampling <em>&#8220;with replacement&#8221;</em>, one must use <code>deff="replace"</code>.</p>
+<p>For nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is, for the estimator of the total of the linearized variable, also known as the &#8220;Woodruff transform&#8221;) [Eurostat 2013].</p>
+<p>When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out <em>within</em> that subpopulation. This is the same as the <code>srssubpop</code> option for Stata's function <code>estat</code>.</p>
+<p>Missing values (<code>NA</code>) in model variables should be avoided. If <code>na.rm=FALSE</code> (the default), they generate an error. If <code>na.rm=TRUE</code>, observations containing NAs in model variables are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables <em>completely at random</em>: should this not be the case, computed estimates would be <em>biased</em>.</p>
+<p>The <code>summary</code> method invoked on regression coefficients (say <code>b</code>) estimated via <code>svystatB</code>, gives p-values and significance codes for the component-wise test <code>b = 0</code>. Such values are computed assuming that the distribution of the regression coefficients estimators is normal (which is asymptotically true for large scale surveys). This assumption has the advantage of overcoming the problem of choosing the &#8220;right&#8221; statistic and assessing its &#8220;right&#8221; number of degrees of freedom when using data from a complex survey (see e.g. [Korn, Graubard 1990]).</p>
     <h2 class="hasAnchor" id="collinearity-aliasing-and-impacts-in-domain-estimation"><a class="anchor" href="#collinearity-aliasing-and-impacts-in-domain-estimation"></a>Collinearity, Aliasing and Impacts in Domain Estimation</h2>
 
-    <p>Function <code>svystatB</code> overcomes problems arising from exact collinearity between model variables via <em>&#8216;aliasing&#8217;</em> (see the &#8216;Examples&#8217; Section). Put simply, aliasing discards redundant (i.e. collinear) regressors, yielding exact estimates and standard errors for non-aliased regression coefficients (namely, the same results that would be obtained with a reduced - no collinearity - model). Note that for the way aliasing works, the order of the terms in the linear model formula definitely matters.</p>
-<p>Collinearity between variables may manifest itself in subsets of the sample, and with different patterns across subsets. In domain estimation, this phenomenon can have an impact on the structure of <code>svystatB</code>'s output. In fact, owing to aliasing, the estimable regression coefficients - for the same input linear model - can be different across domains. In such cases, the domain estimates produced by <code>svystatB</code> can no longer be stored in a <code>data.frame</code>, and the output object will instead be a <em>list</em> (see the &#8216;Examples&#8217; Section). Note that for these <code>svystatB</code>'s return objects (whose <code>class</code> is <code>svystatB.by.list</code>) no variance <code><a href='extractors.html'>extractors</a></code> are currently available.</p>
+    <p>Function <code>svystatB</code> overcomes problems arising from exact collinearity between model variables via <em>&#8216;aliasing&#8217;</em> (see &#8216;Examples&#8217;). Put simply, aliasing discards redundant (i.e. collinear) regressors, yielding exact estimates and sampling errors for non-aliased regression coefficients (namely, the same results that would be obtained with a reduced - no collinearity - model). Note that, given the way aliasing works, the order of the terms in the linear model formula definitely matters.</p>
+<p>Collinearity between variables may manifest itself in subsets of the sample, and with different patterns across subsets. In domain estimation, this phenomenon can have an impact on the structure of <code>svystatB</code>'s output. In fact, owing to aliasing, the estimable regression coefficients - for the same input linear model - can be different across domains. In such cases, the domain estimates produced by <code>svystatB</code> can no longer be stored in a <code>data.frame</code>, and the output object will instead be a <em>list</em> (see &#8216;Examples&#8217;). Note that for these <code>svystatB</code>'s return objects (whose <code>class</code> is <code>svystatB.by.list</code>) no variance <code><a href='extractors.html'>extractors</a></code> are currently available.</p>
 <p>Note also that, for the reasons above, the usage of <code>svystatB</code> via function <code><a href='svystat.html'>svystat</a></code> is restricted: it is not allowed to specify <code><a href='svystat.html'>svystat</a></code>'s arguments <code>by</code> and <code>group</code> when <code>kind == "B"</code>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object inheriting from the <code>data.frame</code> class, whose detailed structure depends on input parameters' values. In special cases (see Section &#8216;Collinearity, Aliasing and Impacts in Domain Estimation&#8217;), a <em>list</em> object.</p>
+    <p>An object inheriting from the <code>data.frame</code> class, whose detailed structure depends on input parameters' values. In special cases (see &#8216;Collinearity, Aliasing and Impacts in Domain Estimation&#8217;), a <em>list</em> object.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Sarndal, C.E., Swensson, B., Wretman, J. (1992) <em>&#8220;Model Assisted Survey Sampling&#8221;</em>, Springer Verlag.</p>
 <p>Kish, L. (1995). <em>&#8220;Methods for design effects&#8221;</em>. Journal of Official Statistics, Vol. 11, pp. 55-77.</p>
-<p>European Commission, Eurostat, (2013). <em>&#8220;Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition&#8221;</em>, Publications Office. doi: 10.2785/13579</p>
+<p>European Commission, Eurostat (2013). <em>&#8220;Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition&#8221;</em>, Publications Office. doi: 10.2785/13579</p>
 <p>Korn, E.L., Graubard, B.I. (1990) <em>&#8220;Simultaneous testing of regression coefficients with complex survey
 data: Use of Bonferroni t statistics&#8221;</em>. The American Statistician, 44, 270-276.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -314,7 +314,7 @@ data: Use of Bonferroni t statistics&#8221;</em>. The American Statistician, 44,
 #&gt; 
 #&gt; NOTE: the distribution of regression coefficients estimators has been assumed normal
 #&gt; </div><div class='input'>
-<span class='co'># Notice that estimators normality is assumed.</span>
+<span class='co'># Notice that the normality of the estimators is assumed.</span>
 
 
 <span class='co'>##########################################</span>
@@ -322,7 +322,7 @@ data: Use of Bonferroni t statistics&#8221;</em>. The American Statistician, 44,
 <span class='co'>##########################################</span>
 
 <span class='co'># The domain mean of a numeric variable can be thought</span>
-<span class='co'># as a regression coefficient. Suppose you need the</span>
+<span class='co'># of as a regression coefficient. Suppose you need the</span>
 <span class='co'># average number of employees by macro-sector, you can</span>
 <span class='co'># do as follows:</span>
 <span class='fu'>svystatB</span>(<span class='no'>sbsdes</span>,<span class='no'>emp.num</span>~<span class='no'>nace.macro</span>-<span class='fl'>1</span>)</div><div class='output co'>#&gt;                       RegCoef.emp.num        SE
@@ -389,12 +389,12 @@ data: Use of Bonferroni t statistics&#8221;</em>. The American Statistician, 44,
 #&gt; x            -1.6402421 1.0672825</div><div class='input'>
 
 <span class='co'>##################################</span>
-<span class='co'># Handling non positive weights. #</span>
+<span class='co'># Handling non-positive weights. #</span>
 <span class='co'>##################################</span>
 
-<span class='co'># Non positive direct weights are not allowed, anyway some</span>
+<span class='co'># Non-positive base weights are not allowed; however, some</span>
 <span class='co'># calibrated weights can sometimes turn out to be &lt;= 0. The</span>
-<span class='co'># corrisponding observations would be dropped by svystatB.</span>
+<span class='co'># corresponding observations would be dropped by svystatB.</span>
 
   <span class='co'># Prepare a template for population totals:</span>
   <span class='no'>pop</span><span class='kw'>&lt;-</span><span class='fu'><a href='pop.template.html'>pop.template</a></span>(<span class='no'>fpcdes</span>,~<span class='no'>z</span>+<span class='no'>pl.domain</span>-<span class='fl'>1</span>)
@@ -409,7 +409,7 @@ data: Use of Bonferroni t statistics&#8221;</em>. The American Statistician, 44,
   <span class='fu'><a href='g.range.html'>g.range</a></span>(<span class='no'>fpccal</span>)</div><div class='output co'>#&gt;       g.min       g.max 
 #&gt; -0.05392021  1.92609506 </div><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>fpccal</span>)<span class='kw'>&lt;=</span><span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'>
   <span class='co'># Now, let's estimate regression coefficients of model z~y+x</span>
-  <span class='co'># and pay attantion to the warnings:</span>
+  <span class='co'># and pay attention to the warnings:</span>
   <span class='fu'>svystatB</span>(<span class='no'>fpccal</span>,<span class='no'>z</span>~<span class='no'>y</span>+<span class='no'>x</span>,<span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Detected 2 observations with weight &lt; 0: they will be ignored!</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Missing values in: y, x; corresponding observations (3) will be ignored!</span></div><div class='output co'>#&gt;             RegCoef.z        SE
 #&gt; (Intercept)  104.5892 5.9801452
 #&gt; y              1.8030 1.2176491
@@ -553,7 +553,7 @@ data: Use of Bonferroni t statistics&#8221;</em>. The American Statistician, 44,
 #&gt; Center.Services           14.582071  0.003318769   0.09988549
 #&gt; South.Services            18.127184  0.003408633   0.11381062</div><div class='input'>
 
-<span class='co'># A case of differential aliasing across domain (note the warning messages).</span>
+<span class='co'># A case of differential aliasing across domains (note the warning messages).</span>
 <span class='co'># A list-like object is returned:</span>
 <span class='fu'>svystatB</span>(<span class='no'>sbsdes</span>, <span class='no'>va.imp2</span> ~<span class='no'>emp.num</span>:<span class='no'>emp.cl</span> + <span class='no'>nace.macro</span>, <span class='kw'>by</span><span class='kw'>=</span> ~<span class='no'>region</span>:<span class='no'>public</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Variables nace.macroCommerce, nace.macroServices, emp.num:emp.cl(9,19], emp.num:emp.cl(19,49] have been aliased due to collinearity!</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Variables nace.macroIndustry, nace.macroCommerce, emp.num:emp.cl(9,19], emp.num:emp.cl(19,49], emp.num:emp.cl(49,99] have been aliased due to collinearity!</span></div><div class='output co'>#&gt; $`region.North:public.0`
 #&gt;                            regcoef          SE

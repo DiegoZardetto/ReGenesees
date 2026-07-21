@@ -4,7 +4,7 @@
 \title{Fuse Control Totals Data Frames for Special Purpose and Ordinary Calibration Tasks}
 
 \description{
-Allows to solve jointly a special purpose calibration task and an ordinary calibration task by fusing their respective control totals.
+Makes it possible to solve jointly a special purpose calibration task and an ordinary calibration task by fusing their respective control totals.
 }
 
 \usage{
@@ -38,7 +38,7 @@ Argument \code{design} must be the survey design object that:\cr
 (i)  was already \emph{prepared} for the special purpose calibration task at hand, and\cr
 (ii) you want to calibrate simultaneously also on the ordinary population totals at hand.
 
-Note that condition (i) requires that object \code{design} has actually been used to build object \code{spc.pop} (see the \sQuote{Examples} section). Note, moreover, that condition (ii) requires that you eventually run \code{\link{e.calibrate}} on object \code{design} (see the \sQuote{Examples} section).
+Note that condition (i) requires that object \code{design} has actually been used to build object \code{spc.pop} (see \sQuote{Examples}). Note, moreover, that condition (ii) requires that you eventually run \code{\link{e.calibrate}} on object \code{design} (see \sQuote{Examples}).
 }
 
 \value{
@@ -61,7 +61,7 @@ Diego Zardetto
 # (A) complex population parameters (e.g. multiple regression coefficients)
 # (B) ordinary population totals
 # You just have to:
-## 1) prepare the survey desing and control totals data frame for (A)
+## 1) prepare the survey design and control totals data frame for (A)
 ## 2) create and fill the known totals data frame for (B)
 ## 3) fuse the control totals data frames produced in steps 1) and 2)!
 
@@ -88,7 +88,7 @@ pop.A <- pop.calBeta(sbsdes.A)
 #     activity macro sectors
 ## 2) Create and fill the known totals data frame for calibration (B)
 pop.B <- pop.template(sbsdes.A, calmodel = ~(ent + emp.num):nace.macro - 1)
-# Note that, to create the template above, you could have used equally well 
+# Note that, to create the template above, you could have equally well used
 # the original object sbsdes.
 pop.B <- fill.template(pop.B, universe = sbs.frame)
 

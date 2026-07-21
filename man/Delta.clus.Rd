@@ -9,7 +9,7 @@ Two Artificial Cluster Samples for Estimation of Change
 }
 
 \description{
-Two small, partially overlapping datasets, built to mimick non-independent PSU samples selected with a one- or multi-stage, stratified, cluster sampling design (but identifiers of SSUs etc. are not reported). Allow to run \R code contained in the \sQuote{Examples} section of \pkg{ReGenesees} function \code{\link{svyDelta}}.
+Two small, partially overlapping datasets, built to mimic non-independent PSU samples selected with a one- or multi-stage, stratified, cluster sampling design (but identifiers of SSUs etc. are not reported). They make it possible to run \R code contained in the \sQuote{Examples} section of \pkg{ReGenesees} function \code{\link{svyDelta}}.
 }
 
 \usage{data(Delta.clus)}
@@ -22,7 +22,7 @@ Two data frames, \code{sclus1} and \code{sclus2}, with 6 PSUs each (and 20 and 2
 }
   \describe{
     \item{\code{id}}{Identifier of sample PSUs, \code{numeric}}
-    \item{\code{strata}}{Stratification variable, a \code{factor} with \code{2} levels: \code{A}, and \code{B}}
+    \item{\code{strata}}{Stratification variable, a \code{factor} with \code{2} levels: \code{A} and \code{B}}
     \item{\code{w}}{Sampling weights of final units, \code{numeric}}
     \item{\code{y}}{A \code{numeric} variable}
     \item{\code{x}}{A \code{numeric} variable, correlated with \code{y}}
@@ -32,9 +32,9 @@ Two data frames, \code{sclus1} and \code{sclus2}, with 6 PSUs each (and 20 and 2
 \details{
 The two samples, \code{sclus1} and \code{sclus2}, have 3 PSUs in common, resulting in an overlap rate of 3 / 6 = 0.5 at PSU-level. One could think of them as, e.g., two consecutive waves of a rotating panel with a 50\% overlap at PSU-level.
 
-Common PSUs are unambigously identified by variable \code{id}.
+Common PSUs are unambiguously identified by variable \code{id}.
 
-The stratification is \emph{static}: (1) \code{sclus1} and \code{sclus2} use the same strata (i.e. levels \code{A}, and \code{B}), and (2) no common PSUs changed stratum from \code{sclus1} to \code{sclus2}.
+The stratification is \emph{static}: (1) \code{sclus1} and \code{sclus2} use the same strata (i.e. levels \code{A} and \code{B}), and (2) no common PSUs changed stratum from \code{sclus1} to \code{sclus2}.
 
 The \sQuote{Examples} section of \code{\link{svyDelta}} will illustrate the effect of \emph{dynamic} stratification by injecting new strata and stratum-changer units in the samples. 
 }

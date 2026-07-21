@@ -12,18 +12,18 @@ check.cal(cal.design)
 }
 \details{
 The function verifies if all the imposed Calibration Constraints are actually
-fulfilled by object \code{cal.design}. If it is not the case, the function 
+fulfilled by object \code{cal.design}. If this is not the case, the function 
 evaluates the degree of violation of the constraints and prints a summary of
-the mismatches between population totals and achieved estimates (see also Section
-'Calibration process diagnostics' in the help page of \code{\link{e.calibrate}}).
+the mismatches between population totals and achieved estimates (see also \sQuote{Calibration Process Diagnostics}
+in the help page of \code{\link{e.calibrate}}).
 }
 \value{
-The main purpose of the function is to print on screen; anyway a list
+The main purpose of the function is to print on screen; however, a list
 is invisibly returned, which summarizes the results of the check.
 }
 \author{Diego Zardetto}
 \seealso{
-\code{\link{e.calibrate}} for calibrating weights (in particular, Section 'Calibration process diagnostics').
+\code{\link{e.calibrate}} for calibrating weights (in particular, \sQuote{Calibration Process Diagnostics}).
 }
 \examples{
 # Load sbs data:

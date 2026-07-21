@@ -22,7 +22,7 @@
 <meta property="og:description" content="Design-Based and Model-Assisted analysis of complex sample surveys.
         Multistage, stratified, clustered, unequally weighted survey designs.
         Calibration of survey weights. Horvitz-Thompson and Calibration Estimators.
-        Variance Estimation for nonlinear smooth estimators by Taylor-series
+        Variance Estimation for nonlinear (smooth) estimators by Taylor-series
         linearization. Estimates, standard errors, confidence intervals and design
         effects for: Totals, Means, absolute and relative Frequency Distributions
         (marginal, conditional, and joint), Ratios, Shares and Ratios of Shares,
@@ -55,7 +55,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
 <div id="regenesees-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#regenesees-" class="anchor"></a>ReGenesees
-<img src="reference/figures/ReGenesees_LOGO_small.png" align="right" alt="">
+<img src="reference/figures/ReGenesees_LOGO_small.png" align="right" alt="ReGenesees.GUI logo">
 </h1></div>
 
 <div id="what-is-regenesees" class="section level2">
@@ -117,7 +117,7 @@
 <p><strong>ReGenesees</strong> (R Evolved Generalized Software for
 Sampling Estimates and Errors in Surveys) is an R package for
 design-based and model-assisted analysis of complex sample surveys.</p>
-<p>It is the outcome of a long term research and development project,
+<p>It is the outcome of a long-term research and development project,
 aimed at defining a new standard for calibration, estimation and
 sampling error assessment to be adopted in all large-scale sample
 surveys routinely carried out by <strong>Istat (the Italian National
@@ -129,10 +129,15 @@ Institute of Statistics)</strong>.</p>
 <p>You can install the <strong>development version</strong> of
 ReGenesees from <a href="https://github.com/DiegoZardetto/ReGenesees">GitHub</a> as
 follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"DiegoZardetto/ReGenesees"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Recommended</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"DiegoZardetto/ReGenesees"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># Alternative</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"DiegoZardetto/ReGenesees"</span>)</span></code></pre></div>
 <p>The <strong>latest released version</strong> of ReGenesees can be
-downloaded from <a href="https://www.istat.it/en/classifications-and-tools/methods-and-software-of-the-statistical-process/process-phase/weighting-estimation-and-sampling-error-evaluation/regenesees/">Istat
+downloaded from the <a href="https://www.istat.it/en/classifications-and-tools/methods-and-software-of-the-statistical-process/process-phase/weighting-estimation-and-sampling-error-evaluation/regenesees/">Istat
 website</a> or from the <a href="https://joinup.ec.europa.eu/solution/regenesees-system/releases">European
 Commission platform Joinup</a> (where <strong>older versions</strong>
 are available too).</p>
@@ -264,11 +269,6 @@ are also actively sponsored by the <strong>World Bank</strong>.</p>
 <p>In case you come across malfunctions or flaws of this website, please
 bear in mind that it has been automatically generated from the sources
 of the ReGenesees package and it has no human maintainers.</p>
-<p>In particular, the printed output in the ‘Examples’ sections of some
-functions - e.g. <code><a href="reference/svystatL.html">svystatL()</a></code> and, through it,
-<code><a href="reference/e.calibrate.html">e.calibrate()</a></code> and <code><a href="reference/Corr.html">Corr()</a></code> - is known to
-mistakenly show error messages that do <em>not</em> actually exist in
-the package.</p>
 </div>
 </div>
   </div>

@@ -29,7 +29,7 @@ BarPlotCI(stat, level = 0.95, eb.len = 0.05, eb.col = "black", eb.lwd = 1,
   \item{labels}{Labels to be placed at the tick points (see \code{\link[graphics]{axis}} for more details). Only relevant for function \code{\link{PlotCI}}.}
   \item{names.arg}{Vector of names to be plotted below each bar of the bar chart (see \code{\link[graphics]{barplot}} for more details). Only relevant for function \code{\link{BarPlotCI}}.}
   \item{pch}{An optional plotting symbol to mark point estimates. By default no symbol is plotted. Only relevant for function \code{\link{BarPlotCI}}.}
-  \item{\dots}{Other parameters to be passed through to basic plotting functions (\code{\link[graphics]{plot}} for function \code{\link{PlotCI}}) and \code{\link[graphics]{barplot}} for function \code{\link{BarPlotCI}}).}
+  \item{\dots}{Other parameters to be passed through to basic plotting functions (\code{\link[graphics]{plot}} for function \code{\link{PlotCI}} and \code{\link[graphics]{barplot}} for function \code{\link{BarPlotCI}}).}
 }
 
 \details{

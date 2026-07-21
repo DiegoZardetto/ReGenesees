@@ -7,7 +7,7 @@ A Small But Not Trivial Artificial Sample Data Set
 }
 
 \description{
-A small dataset mimicking sample data selected with a 2-stage, stratified, cluster sampling without replacement. Allows to run \R code contained in the \sQuote{Examples} section of the \pkg{ReGenesees} package help pages.
+A small dataset mimicking sample data selected with a 2-stage, stratified, cluster sampling without replacement. It makes it possible to run \R code contained in the \sQuote{Examples} section of the \pkg{ReGenesees} package help pages.
 }
 \usage{data(fpcdat)}
 \format{
@@ -23,13 +23,13 @@ A small dataset mimicking sample data selected with a 2-stage, stratified, clust
     \item{\code{y}}{A \code{numeric} variable}
     \item{\code{dom1}}{A variable defining unplanned estimation domains, \code{factor} with \code{3} levels: \code{A}, \code{B}, \code{C}}
     \item{\code{dom2}}{A variable defining unplanned estimation domains, \code{factor} with \code{6} levels: \code{a}, \code{b}, \code{c}, \code{d}, \code{e}, \code{f}}
-    \item{\code{w}}{Direct weights, \code{numeric}}
+    \item{\code{w}}{Base weights, \code{numeric}}
     \item{\code{z}}{A \code{numeric} variable}
     \item{\code{pl.domain}}{A variable defining planned estimation domains, \code{factor} with \code{3} levels: \code{pd.1}, \code{pd.2}, \code{pd.3}}
   }
 }
 \details{
-Though very small, the \code{fpcdat} dataset concentrates a lot of interesting features. The sampling design is a complex one, with both self-representing (SR) and not-self-representing (NSR) strata. Sampling fractions are deliberately not negligible, in order to stress the effects of finite population corrections on variance estimation. Moreover, being the observations so few, performing computations on the \code{fpcdat} dataset allows to check and understand easily all the effects of setting/changing the global variance estimation options of the \pkg{ReGenesees} package (see e.g. \code{\link{ReGenesees.options}}).
+Though very small, the \code{fpcdat} dataset concentrates a lot of interesting features. The sampling design is a complex one, with both self-representing (SR) and not-self-representing (NSR) strata. Sampling fractions are deliberately not negligible, in order to stress the effects of finite population corrections on variance estimation. Moreover, since the observations are so few, performing computations on the \code{fpcdat} dataset makes it easy to check and understand all the effects of setting/changing the global variance estimation options of the \pkg{ReGenesees} package (see e.g. \code{\link{ReGenesees.options}}).
 }
 
 \seealso{

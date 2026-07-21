@@ -46,7 +46,7 @@ fit.gvf(gvf.input, model = NULL, weights = NULL)
 
 \arguments{
   \item{gvf.input}{An object of class \code{gvf.input} (or \code{gvf.input.gr}), containing the data to fit.}
-  \item{model}{The GVF model(s) to be fitted (see \sQuote{Details}). \code{NULL} (the default) requires to fit \emph{all} the registered GVF models currently available in \code{\link{GVF.db}}.}
+  \item{model}{The GVF model(s) to be fitted (see \sQuote{Details}). \code{NULL} (the default) requires fitting \emph{all} the registered GVF models currently available in \code{\link{GVF.db}}.}
   \item{weights}{Formula specifying the weights to be used for fitting (via weighted least squares), if any. \code{NULL} (the default) means that ordinary least squares will be used. See also \sQuote{Details}.}
 
   \item{x}{An object of class \code{gvf.fits}, storing fitted GVF models.}
@@ -60,7 +60,7 @@ fit.gvf(gvf.input, model = NULL, weights = NULL)
 }
 
 \details{
-Function \code{fit.gvf} fits one or more GVF models to a set of survey statistics. The rationale for fitting multiple models to the same data is primarily for comparison purposes: the user is expected to eventually choose his preferred model, in order to obtain sampling errors predictions.
+Function \code{fit.gvf} fits one or more GVF models to a set of survey statistics. The rationale for fitting multiple models to the same data is primarily for comparison purposes: the user is expected to eventually choose their preferred model, in order to obtain sampling errors predictions.
 
 Argument \code{gvf.input} specifies the set of (pre computed) estimates and errors to which GVF models are to be fitted, as prepared by functions \code{\link{gvf.input}} and/or \code{\link{svystat}}.
 
@@ -74,7 +74,7 @@ Argument \code{model} can be either:
 
 (3) an arbitrary (single) formula, i.e. any custom, user-defined GVF model.\cr
 
-When \code{model} is passed via options (1) or (2), function \code{fit.gvf} can take advantage of any additional information available inside \code{GVF.db}, e.g. to warn the user in case a GVF model is not deemed to be appropriate for the kind of estimates contained into \code{gvf.input} (see \sQuote{Examples}).
+When \code{model} is passed via options (1) or (2), function \code{fit.gvf} can take advantage of any additional information available inside \code{GVF.db}, e.g. to warn the user in case a GVF model is not deemed to be appropriate for the kind of estimates contained in \code{gvf.input} (see \sQuote{Examples}).
 
 Argument \code{weights} enables fitting the specified GVF model(s) via weighted least squares. By default \code{weights = NULL} and ordinary least squares are used. The weights must be passed by a formula referencing variables belonging to \code{gvf.input}. For instance, to weight observations according to reciprocals of squared CVs, one can use \code{weights} \code{=} \code{~I(CV^-2)}.
 }

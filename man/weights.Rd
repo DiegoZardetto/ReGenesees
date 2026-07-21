@@ -1,7 +1,7 @@
 \name{weights}
 \alias{weights}
 \alias{weights.survey.design}
-\title{Retrieve Sampling Units Weights}
+\title{Retrieve Weights of Sampling Units}
 \description{
 Extracts the \emph{current} weights of units belonging to a survey design object.
 }
@@ -13,7 +13,7 @@ weights(object, ...)
   \item{\dots}{Arguments for future expansion.}
 }
 \details{
-The \emph{current} weights of \code{object} are, by definition, those weights that would be used for estimation purposes on that object (e.g. by functions \code{\link{svystatTM}}, \code{\link{svystatR}}, \code{\link{svystatS}}, \code{\link{svystatSR}}, \code{\link{svystatQ}}, \code{\link{svystatB}}, \code{\link{svystatL}}, \ldots). The nature of such weights depends on the class of \code{object}: calibrated weights for class \code{cal.analytic} and direct weights otherwise.
+The \emph{current} weights of \code{object} are, by definition, those weights that would be used for estimation purposes on that object (e.g. by functions \code{\link{svystatTM}}, \code{\link{svystatR}}, \code{\link{svystatS}}, \code{\link{svystatSR}}, \code{\link{svystatQ}}, \code{\link{svystatB}}, \code{\link{svystatL}}, \ldots). The nature of such weights depends on the class of \code{object}: calibrated weights for class \code{cal.analytic} and base weights otherwise.
 }
 \value{
 A vector of weights, whose components are positionally tied to the sampling units belonging to \code{object}.
@@ -26,7 +26,7 @@ If \code{object} has undergone multiple, subsequent calibration steps, the funct
 Diego Zardetto
 }
 
-\seealso{Function \code{\link{g.range}} to asses the range of the g-weights of a calibrated design object.}
+\seealso{Function \code{\link{g.range}} to assess the range of the g-weights of a calibrated design object.}
 
 \examples{
 # Creation of the object to be calibrated:

@@ -1,3 +1,17 @@
+#  ReGenesees 2.5
+
+*  This version ensures a safe transition of ReGenesees to the "R 4.6.x" series.
+
+*  New function ext.calibrated2: an approximate version of ext.calibrated.
+   The key difference is that ext.calibrated2 does *not* require the user to
+   specify the *base weights* that underwent external calibration. This piece
+   of information is usually unavailable to users working with publicly
+   disseminated survey microdata.
+
+*  The documentation (help pages, reference manual, GITHUB) was reviewed, fixing
+   typos and other minor issues.
+
+
 #  ReGenesees 2.4
 
 

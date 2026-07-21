@@ -30,18 +30,18 @@ ext.calibrated(data, ids, strata = NULL, weights,
 \details{
 Owing to \pkg{ReGenesees}'s ability to provide proper variance estimates for (complex functions of) calibration estimators, some users may be tempted to exploit \pkg{ReGenesees} in the estimation phase \emph{even if} they did \emph{not} use \pkg{ReGenesees} for calibration.
 
-This result \emph{cannot} be achieved naively, by simply passing to \pkg{ReGenesees} function \code{\link{e.svydesign}} the survey data and supplying the externally calibrated weights through its \code{weights} argument.
+This result \emph{cannot} be achieved naively, by simply passing the survey data to \pkg{ReGenesees} function \code{\link{e.svydesign}} and supplying the externally calibrated weights through its \code{weights} argument.
 
 Indeed, variance estimation methods of \pkg{ReGenesees}'s summary statistics functions (\code{\link{svystatTM}}, \code{\link{svystatR}}, \code{\link{svystatS}}, \code{\link{svystatSR}}, \code{\link{svystatB}}, \code{\link{svystatQ}}, \code{\link{svystatL}} and \code{\link{svystat}}) are dispatched according to the class of the input \code{design} object:
 \enumerate{
-\item If the design object is un-calibrated (i.e. its class is \sQuote{analytic}), variance formulas are appropriate to Horvitz-Thompson estimators (and functions of them).
+\item If the design object is un-calibrated (i.e. its class is \sQuote{analytic}), variance formulas are appropriate for Horvitz-Thompson estimators (and functions of them).
 
-\item If the design object is calibrated (i.e. its class is \sQuote{cal.analytic}), variance formulas are appropriate to Calibration estimators (and functions of them).
+\item If the design object is calibrated (i.e. its class is \sQuote{cal.analytic}), variance formulas are appropriate for calibration estimators (and functions of them).
 }
 
 Therefore, the naive approach of passing the externally calibrated weights \code{weights.cal} to \code{\link{e.svydesign}} as if they were initial or design weights cannot succeed, since it would result in HT-like variance estimates, leading generally to \emph{variance overestimation} (with bigger upward bias for variables that are better explained by the calibration model).
 
-Function \code{ext.calibrated} has been designed exactly to avoid the aforementioned pitfalls and to allow \pkg{ReGenesees} provide correct variance estimates of (functions of) calibration estimators, even if the survey weights have been calibrated externally by other software.
+Function \code{ext.calibrated} has been designed exactly to avoid the aforementioned pitfalls and to allow \pkg{ReGenesees} to provide correct variance estimates of (functions of) calibration estimators, even if the survey weights have been calibrated externally by other software.
 
 Argument \code{weights.cal} identifies the externally calibrated weights of the units included in the sample. The \code{data} variable referenced by \code{weights.cal} must be numeric. Currently, only \emph{positive} externally calibrated weights can be handled (see the dedicated section below).
 
@@ -49,7 +49,7 @@ Other arguments to \code{ext.calibrated} derive either from function \code{\link
 }
 
 \section{What if externally calibrated weights happen to be negative?}{
-From a methodological perspective, negative calibration weights are legitimate. However, owing to software implementation details whose modification would not be trivial, function \code{ext.calibrated} is \emph{not} yet able to cope with this case. Note that the problem is actually due to the \emph{external} origin of the negative calibration weights. In fact, \pkg{ReGenesees} calibration and estimation facilities are entirely able to cope with possibly negative calibration weights, provided they were computed \emph{internally}.
+From a methodological perspective, negative calibration weights are legitimate. However, owing to software implementation details whose modification would not be trivial, function \code{ext.calibrated} is \emph{not} yet able to cope with this case. Note that the problem is actually due to the \emph{external} origin of the negative calibration weights. In fact, \pkg{ReGenesees} calibration and estimation facilities are fully able to cope with possibly negative calibration weights, provided they were computed \emph{internally}.
 }
 
 \value{
@@ -57,18 +57,18 @@ An object of class \code{cal.analytic}, storing the original survey data \emph{p
 }
 
 \note{
-Exactly as \pkg{ReGenesees}'s base functions \code{\link{e.svydesign}} and \code{\link{e.calibrate}} would do, \code{ext.calibrated} too will wrap inside its return value a local copy of \code{data}. As usual, this copy will be stored inside the \code{variables} slot of the output list. As usual, again, the calibrated weights will be accessible by using the \code{\link{weights}} function.
+Just like \pkg{ReGenesees}'s base functions \code{\link{e.svydesign}} and \code{\link{e.calibrate}}, \code{ext.calibrated} too wraps a local copy of \code{data} inside its return value. As usual, this copy is stored inside the \code{variables} slot of the output list. As usual, again, the calibrated weights are accessible by using the \code{\link{weights}} function.
 }
 
 \author{Diego Zardetto.}
 
 \seealso{
-\code{\link{e.svydesign}} to bind survey data and sampling design metadata, and \code{\link{e.calibrate}} for calibrating survey weights within \pkg{ReGenesees}.
+\code{\link{ext.calibrated2}} an approximate version of function \code{ext.calibrated} that does \emph{not} require the \emph{base weights}, \code{\link{e.svydesign}} to bind survey data and sampling design metadata, and \code{\link{e.calibrate}} for calibrating survey weights within \pkg{ReGenesees}.
 }
 
 \examples{
 
-# Load data sbs data
+# Load the sbs data
 data(sbs)
 
 #########################################################################

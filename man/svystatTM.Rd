@@ -48,25 +48,27 @@ svystatTM(design, y, by = NULL, estimator = c("Total", "Mean"),
 }
 
 \details{
-This function computes weighted estimates for Totals and Means using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and direct weights otherwise. Standard errors for nonlinear estimators (e.g. calibration estimators) are calculated using the Taylor linearization technique.
+This function computes weighted estimates for Totals and Means using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and base weights otherwise. Standard errors for nonlinear estimators (e.g. calibration estimators) are calculated using the Taylor linearization technique.
 
-The mandatory argument \code{y} identifies the variables of interest, that is the variables for which estimates are to be calculated. The corresponding formula should be of the type \code{y=~var1+\ldots+varn}. The \code{design} variables referenced by \code{y} should be \code{numeric} or \code{factor} (variables of other types - e.g. \code{character} - will generate and error). It is admissible to specify for \code{y} "mixed" formulae that simultaneously contain quantitative (\code{numeric}) variables and qualitative (\code{factor}) variables.
+The mandatory argument \code{y} identifies the variables of interest, that is the variables for which estimates are to be calculated. The corresponding formula should be of the type \code{y=~var1+\ldots+varn}. The \code{design} variables referenced by \code{y} should be \code{numeric} or \code{factor} (variables of other types - e.g. \code{character} - will generate an error). It is admissible to specify for \code{y} \dQuote{mixed} formulae that simultaneously contain quantitative (\code{numeric}) variables and qualitative (\code{factor}) variables.
 
-To override the restriction to formulae of the type \code{y=~var1+\ldots+varn}, the AsIs operator \code{I()} can be used (see \sQuote{Examples}). Though the latter opportunity could appear quite useful in some occasion, actually it should be almost always possible to find a work-around by using other functions of the \pkg{ReGenesees} package.
+To override the restriction to formulae of the type \code{y=~var1+\ldots+varn}, the AsIs operator \code{I()} can be used (see \sQuote{Examples}). Though the latter opportunity could appear quite useful on some occasions, actually it should be almost always possible to find a work-around by using other functions of the \pkg{ReGenesees} package.
 
-The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatTM} refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatTM} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
+The optional argument \code{by} specifies the variables that define the \dQuote{estimation domains}, that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatTM} refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatTM} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
 
-The optional argument \code{estimator} makes it possible to select the desired estimator. If\cr \code{estimator="Total"} (the default option), \code{svystatTM} calculates, for a given variable of interest \code{vark}, the estimate of the total (when \code{vark} is \code{numeric}) or the estimate of the absolute frequency distribution (when \code{vark} is \code{factor}). Similarly, if \code{estimator="Mean"}, the function calculates the estimate of the mean (when \code{vark} is \code{numeric}) or the the estimate of the relative frequency distribution (when \code{vark} is \code{factor}).
+The optional argument \code{estimator} makes it possible to select the desired estimator. If\cr \code{estimator="Total"} (the default option), \code{svystatTM} calculates, for a given variable of interest \code{vark}, the estimate of the total (when \code{vark} is \code{numeric}) or the estimate of the absolute frequency distribution (when \code{vark} is \code{factor}). Similarly, if \code{estimator="Mean"}, the function calculates the estimate of the mean (when \code{vark} is \code{numeric}) or the estimate of the relative frequency distribution (when \code{vark} is \code{factor}).
 
-The \code{conf.int} argument allows to request the confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is the confidence intervals are not provided. 
+The \code{conf.int} argument makes it possible to request confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is, the confidence intervals are not provided. 
 
 Whenever confidence intervals are requested (i.e. \code{conf.int=TRUE}), the desired confidence level can be specified by means of the \code{conf.lev} argument. The \code{conf.lev} value must represent a probability (\code{0<=conf.lev<=1}) and its default is chosen to be \code{0.95}.
 
-The optional argument \code{deff} allows to request the design effect [Kish 1995] for the estimates. By default \code{deff=FALSE}, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}.\cr
-Understanding what 'equivalent' estimator actually means is straightforward when dealing with Horvitz-Thompson estimators of Totals and Means. This is not the case when, on the contrary, the estimator to which the deff refers is a nonlinear estimator (e.g. for Calibration estimators of Totals and Means). In such cases, the standard approach is to use as 'equivalent' estimator the linearized version of the original estimator (that is: the estimator of the total of the linearized variable, aka "Woodruff transform").\cr
+The optional argument \code{deff} makes it possible to request the design effect [Kish 1995] for the estimates. By default \code{deff=FALSE}, that is, the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an \sQuote{equivalent} estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect compared to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}.
+
+Understanding what an \sQuote{equivalent} estimator actually means is straightforward when dealing with Horvitz-Thompson estimators of Totals and Means. This is not the case when, on the contrary, the estimator to which \code{deff} refers is a nonlinear estimator (e.g. for Calibration estimators of Totals and Means). In such cases, the standard approach is to use as an \sQuote{equivalent} estimator the linearized version of the original estimator (that is, the estimator of the total of the linearized variable, also known as the \dQuote{Woodruff transform}) [Eurostat 2013].
+
 When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out \emph{within} that subpopulation. This is the same as the \code{srssubpop} option for Stata's function \code{estat}.
 
-Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default) they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE} and \code{estimator="Mean"}, observations containing NAs are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random} (MCAR): should this not be the case, computed estimates would be \emph{biased}. Since, even under the MCAR assumption, estimates of totals and counts solely based on complete cases would be biased, function \code{svystatTM} adopts a model-based ratio estimator when \code{na.rm=TRUE} and \code{estimator="Total"}. This is obtained by (i) first estimating the mean or proportion based on complete cases only, and (ii) then multiplying the result by the estimated population size based on all observations (i.e. both missing and non-missing). This model-based ratio estimator is asymptotically design-unbiased under the MCAR assumption. Notice that the \code{na.rm=TRUE} option is only allowed if \code{y} references a \emph{single} interest variable.
+Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default), they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE} and \code{estimator="Mean"}, observations containing NAs are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random} (MCAR): should this not be the case, computed estimates would be \emph{biased}. Since, even under the MCAR assumption, estimates of totals and counts solely based on complete cases would be biased, function \code{svystatTM} adopts a model-based ratio estimator when \code{na.rm=TRUE} and \code{estimator="Total"}. This is obtained by (i) first estimating the mean or proportion based on complete cases only, and (ii) then multiplying the result by the estimated population size based on all observations (i.e. both missing and non-missing). This model-based ratio estimator is asymptotically design-unbiased under the MCAR assumption. Notice that the \code{na.rm=TRUE} option is only allowed if \code{y} references a \emph{single} interest variable.
 }
 
 \value{
@@ -172,8 +174,8 @@ svystatTM(des,~income+sex,~marstat)
   svystatTM(des,~income,~regcod,vartype="cvpct")
 
 
-# Under default settings lonely PSUs produce errors in standard
-# errors estimation (notice we didn't pass the fpcs):
+# Under default settings lonely PSUs produce errors during standard error
+# estimation (notice we didn't pass the fpcs):
 data(fpcdat)
 des.lpsu<-e.svydesign(data=fpcdat,ids=~psu+ssu,strata=~stratum,
           weights=~w)
@@ -203,9 +205,9 @@ options(old.op)
 # to eventually collect information on each individual belonging to
 # sampled SSUs. In such a framework (up to possible total nonresponse
 # effects), each individual inside a sampled household shares the
-# same direct weight, which, in turn, equals the household weight.
-# This implies that it is very easy to build estimates referred to
-# SSU-level (households) information, despite estimators actually
+# same base weight, which, in turn, equals the household weight.
+# This implies that it is very easy to build estimates referring to
+# SSU-level (household) information, even though estimators actually
 # involve only individual values. Some examples are given below.
 
   # Load survey data:
@@ -248,7 +250,7 @@ options(old.op)
   nind.by.housize<-svystatTM(exdes,~housize,vartype="cvpct")
   nind.by.housize
   
-  pind.by.housize<-svystatTM(exdes,~housize,estimator="Mean",var="cvpct")
+  pind.by.housize<-svystatTM(exdes,~housize,estimator="Mean",vartype="cvpct")
   pind.by.housize
 
   # Estimate the number of households by household size:

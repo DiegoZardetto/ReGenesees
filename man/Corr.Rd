@@ -26,13 +26,13 @@ Corr(design, expr1, expr2,
 }
 
 \details{
-This function allows to estimate the covariance and the correlation of two arbitrary Complex Estimators. Estimates are calculated using the Taylor linearization technique.
+This function makes it possible to estimate the covariance and the correlation of two arbitrary Complex Estimators. Estimates are calculated using the Taylor linearization technique.
 
 The mandatory arguments \code{expr1} and \code{expr2} identify the Complex Estimators: both must be of class \code{expression}. For further details on the syntax and the semantics of such expressions, see \code{\link{svystatL}}.
 
-The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{CoV} (\code{Corr}) refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{CoV} (\code{Corr}) twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
+The optional argument \code{by} specifies the variables that define the \dQuote{estimation domains}, that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{CoV} (\code{Corr}) refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{CoV} (\code{Corr}) twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
 
-Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default) they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
+Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default), they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
 }
 
 \value{
@@ -74,7 +74,7 @@ des<-e.svydesign(data=example,ids=~towcod+famcod,strata=~SUPERSTRATUM,
   ## (use mean income as an example):
      Corr(des,expression(income/ones),expression(income/ones))
 
-# Switch to non trivial examples:
+# Switch to non-trivial examples:
   ## Correlation of mean income with population size:
      Corr(des,expression(income/ones),expression(ones))
 
@@ -160,7 +160,7 @@ stopifnot( corr > 0.5*cv(EMP)/cv(VA) )
 # Let's check...:
 
   # Compute the ratio estimate of the total of value added using
-  # as auxiliary variable the number of emloyees, whose total
+  # as auxiliary variable the number of employees, whose total
   # is 984394:
   TOT.emp.num <- sum(sbs.frame$emp.num)
   TOT.emp.num

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -154,9 +154,9 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function adds to the data frame contained in <code>design</code> the <em>new</em> variables defined by the <code>tag = expr</code> arguments. A <code>tag</code> can be specified either by means of an identifier or by a character string; <code>expr</code> can be any expression that it makes sense to evaluate in the <code>design</code> environment.</p>
-<p>For each argument <code>tag = expr</code> bound to the formal argument <code>...</code> the added column will have <em>name</em> given by the <code>tag</code> value and <em>values</em> obtained by evaluating the <code>expr</code> expression on <code>design</code>. Any input expression not supplied with a <code>tag</code> will be ignored and will therefore have no effect on the <code>des.addvars</code> return value.</p>
-<p>Variables to be added to the input object have to be <em>new</em>: namely it is not possible to use <code>des.addvars</code> to modify the values in a pre-existing <code>design</code> column. This an intentional feature meant to safeguard the integrity of the relations between survey data and sampling design metadata stored in <code>design</code>.</p>
+    <p>This function adds to the data frame contained in <code>design</code> the <em>new</em> variables defined by the <code>tag = expr</code> arguments. A <code>tag</code> can be specified either by means of an identifier or by a character string; <code>expr</code> can be any expression that makes sense to evaluate in the <code>design</code> environment.</p>
+<p>For each argument <code>tag = expr</code> bound to the formal argument <code>...</code>, the added column will have <em>name</em> given by the <code>tag</code> value and <em>values</em> obtained by evaluating the <code>expr</code> expression on <code>design</code>. Any input expression not supplied with a <code>tag</code> will be ignored and will therefore have no effect on the <code>des.addvars</code> return value.</p>
+<p>Variables to be added to the input object have to be <em>new</em>: namely, it is not possible to use <code>des.addvars</code> to modify the values in a pre-existing <code>design</code> column. This is an intentional feature meant to safeguard the integrity of the relations between survey data and sampling design metadata stored in <code>design</code>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of the same class of <code>design</code>, containing new variables but supplied with exactly the same metadata.</p>
@@ -213,7 +213,7 @@
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>,~<span class='no'>income</span>,~<span class='no'>status</span>,<span class='kw'>estimator</span><span class='kw'>=</span><span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;            status Mean.income SE.Mean.income
 #&gt; non-poor non-poor   1349.3443       7.855904
 #&gt; poor         poor    544.5881      10.161308</div><div class='input'>
-### NOTE: Procedure above yields *correct point estimates* of the share of poor
+### NOTE: The procedure above yields *correct point estimates* of the share of poor
 ###       population and their average income, while *variance estimation is
 ###       approximated* since we neglected the sampling variability of the
 ###       estimated poverty threshold.

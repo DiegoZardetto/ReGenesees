@@ -97,7 +97,7 @@
 \details{
 These methods can be used to extract information from fitted GVF model(s).
 
-For more details on their usage, please read the help pages of the methods with same name defined on class .lm by package \pkg{stats} (e.g. \code{\link[stats]{coef}}, \code{\link[stats]{fitted}}, etc.).
+For more details on their usage, please read the help pages of the methods with the same name defined for class \code{lm} in package \pkg{stats} (e.g. \code{\link[stats]{coef}}, \code{\link[stats]{fitted}}, etc.).
 }
 
 \value{
@@ -131,7 +131,7 @@ coef(m)
 fitted(m)
 
 
-## (B) A *a set* of GVF models fitted to the same data ##
+## (B) A *set* of GVF models fitted to the same data ##
 # Fit example data to registered GVF models for frequencies (i.e. number 1:3):
 mm <- fit.gvf(ee.AF, 1:3)
 
@@ -146,7 +146,7 @@ r.stu <- rstudent(mm)
 lapply(r.stu, head)
 
 
-## (C) a *single* GVF model fitted to *grouped* data ##
+## (C) A *single* GVF model fitted to *grouped* data ##
 # We have at our disposal the following survey design object on household data:
 exdes
 
@@ -163,7 +163,7 @@ coef(m.g)
 fitted(m.g)
 
 
-## (D) a *set of* GVF models fitted to *grouped* data ##
+## (D) A *set of* GVF models fitted to *grouped* data ##
 # Fit all registered GVF models for frequencies (i.e. number 1:3) separately
 # inside groups:
 mm.g <- fit.gvf(ee.g, 1:3)

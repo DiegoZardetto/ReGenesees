@@ -17,19 +17,19 @@ gvf.input(design, ..., stats = list(...))
 }
 
 \arguments{
-  \item{design}{The design object (of class \code{analytic} or inheriting from it) from which the input survey statics are supposed to have been derived.}
+  \item{design}{The design object (of class \code{analytic} or inheriting from it) from which the input survey statistics are supposed to have been derived.}
   \item{\dots}{For function \code{gvf.input}, objects containing survey statistics. For \code{plot}, further arguments passed to or from other methods.}
   \item{stats}{A \code{list} storing survey statistic objects (see \sQuote{Details}).}
   \item{x}{The object of class \code{gvf.input} to plot.}
 }
 
 \details{
-Given a set of survey statistic objects (via arguments \sQuote{\code{\ldots}} or \code{stats}) and a design object (\code{design}) from which those statics are supposed to have been derived, function \code{gvf.input} builds a data structure that can be fed to \pkg{ReGenesees} GVF model fitting function \code{\link{fit.gvf}}.
+Given a set of survey statistic objects (via arguments \sQuote{\code{\ldots}} or \code{stats}) and a design object (\code{design}) from which those statistics are supposed to have been derived, function \code{gvf.input} builds a data structure that can be fed to \pkg{ReGenesees} GVF model fitting function \code{\link{fit.gvf}}.
 
 Argument \sQuote{\code{\ldots}} can be bound to an arbitrary number of objects. These objects must be output of survey statistics functions, i.e. \code{\link{svystatTM}}, \code{\link{svystatR}}, \code{\link{svystatS}}, \code{\link{svystatSR}}, \code{\link{svystatB}}, \code{\link{svystatQ}}, \code{\link{svystatL}}, \code{\link{svySigma}}, and \code{\link{svySigma2}}.\cr
 All input objects passed to \sQuote{\code{\ldots}} must derive from estimators of the \emph{same} kind (as returned by function \code{\link{estimator.kind}}). For the same reason, objects of \emph{mixed} kind (see \code{\link{estimator.kind}}) are not allowed. Since function \code{\link{svystatL}} can actually handle estimators of \emph{different} kinds, objects of kind \sQuote{\code{Complex Estimator}} are the only exception to the rule.
 
-Argument \code{stats} can be used as an alternative to argument \sQuote{\code{\ldots}}: one has only to store the survey statistic objects into a \code{list} and bind such list to \code{stats}. Note that, if both are passed, argument \code{stats} will prevail on \sQuote{\code{\ldots}} (see \sQuote{Examples}).
+Argument \code{stats} can be used as an alternative to argument \sQuote{\code{\ldots}}: one has only to store the survey statistic objects into a \code{list} and bind such list to \code{stats}. Note that, if both are passed, argument \code{stats} will prevail over \sQuote{\code{\ldots}} (see \sQuote{Examples}).
 
 Should \emph{any} input object be a survey statistic derived from a design object \emph{other than} \code{design}, the function would raise an error.
 
@@ -89,7 +89,7 @@ ee2<-gvf.input(sbsdes,stats=va.list)
 # ...obtaining exactly the same result:
 identical(ee,ee2)
 
-# Note also that, if both are passed, argument 'stats' prevails on '...':
+# Note also that, if both are passed, argument 'stats' prevails over '...':
   # indeed, while:
   gvf.input(sbsdes,va.reg)
   # we would get again:

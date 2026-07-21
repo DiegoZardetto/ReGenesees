@@ -6,7 +6,7 @@ Archive of Registered GVF Models
 }
 
 \description{
-\code{GVF.db} is the archive of \emph{registered} (i.e. built-in and/or user-defined) Generalized Variance Functions models supported by \pkg{ReGenesees}. Special accessor functions allow to customize, maintain, extend, update, save and reset such archive.
+\code{GVF.db} is the archive of \emph{registered} (i.e. built-in and/or user-defined) Generalized Variance Functions models supported by \pkg{ReGenesees}. Special accessor functions make it possible to customize, maintain, extend, update, save and reset such archive.
 }
 
 \format{
@@ -88,15 +88,15 @@ Optional argument \code{Estimator.kind} can be used to specify the kind of estim
 (10)  'Quantile'
 (11)  'Complex Estimator'
  }
-Note that category \code{'Frequency'} has to be understood as an aggregation of categories \code{'Absolute Frequency'} and \code{'Relative Frequency'}, thus being appropriate for GVF models which are deemed to work well for estimators of \emph{both} kind of frequencies.
+Note that category \code{'Frequency'} has to be understood as an aggregation of categories \code{'Absolute Frequency'} and \code{'Relative Frequency'}, thus being appropriate for GVF models which are deemed to work well for estimators of \emph{both} kinds of frequencies.
 
-One of the primary motivations for building and fitting a GVF model is to exploit the fitted model to \emph{predict} the sampling error associated to a given estimate, instead of having to \emph{compute} directly an estimate of such sampling error. Optional argument \code{Resp.to.CV} is relevant to that scope.
+One of the primary motivations for building and fitting a GVF model is to exploit the fitted model to \emph{predict} the sampling error associated with a given estimate, instead of having to \emph{compute} directly an estimate of such sampling error. Optional argument \code{Resp.to.CV} is relevant to that scope.
 
-Indeed, different GVF models can actually specify as response term (call it \code{'resp'} for definiteness) different functions of variables \code{'SE'}, \code{'CV'}, and \code{'VAR'}, but \pkg{ReGenesees} will always adopt variable \code{'CV'} as a \emph{pivot}. Thus, when registering a new GVF model, the user can provide via argument \code{Resp.to.CV} the function which transforms the response of the model, \code{'resp'}, into the pivot measure of variability, \code{'CV'}. A look to the default content of \code{GVF.db} should make the latter statement clear (see \sQuote{Examples}).
+Indeed, different GVF models can actually specify as response term (call it \code{'resp'} for definiteness) different functions of variables \code{'SE'}, \code{'CV'}, and \code{'VAR'}, but \pkg{ReGenesees} will always adopt variable \code{'CV'} as a \emph{pivot}. Thus, when registering a new GVF model, the user can provide via argument \code{Resp.to.CV} the function which transforms the response of the model, \code{'resp'}, into the pivot measure of variability, \code{'CV'}. A look at the default content of \code{GVF.db} should make the latter statement clear (see \sQuote{Examples}).
 
 Note that while \code{Resp.to.CV} is passed as a character string, that string is expected to represent a well-formed mathematical expression (otherwise function \code{\link{predictCV}} would not work). Moreover, only variables \code{'resp'} and \code{'Y'} are allowed to appear inside \code{Resp.to.CV} (which is enough, since \code{'VAR'} and \code{'SE'} can be expressed in terms of \code{'CV'} and \code{'Y'}).
 
-If the user does not specify \code{Resp.to.CV} when registering a new GVF model, he will be not able to use function \code{\link{predictCV}} for predicting CV values based on the fitted GVF model.
+If the user does not specify \code{Resp.to.CV} when registering a new GVF model, they will not be able to use function \code{\link{predictCV}} for predicting CV values based on the fitted GVF model.
 
 Lastly, note that the \code{Model.id} of a newly inserted GVF model will automatically be set, by adding 1 to the previous maximum of \code{Model.id}.\cr\cr
 
@@ -120,7 +120,7 @@ Function \code{GVF.db$reset} has no mandatory arguments and simply restores the 
 }
 
 \source{
-Built-in GVF models for frequencies (i.e. those with \code{Model.id} \code{1}, \code{2}, and \code{3}) are discussed in Chapter 7 of [Wolter 07], along with their theoretical justification. Built-in GVF models for totals (i.e. those with \code{Model.id} \code{4}, and \code{5}) lack a rigorous justification, but have sometimes been used successfully on a purely empirical basis. For instance, Istat surveys on structural business statistics adopted models of that kind to summarize standard errors in publications and to allow their approximate evaluation on a custom basis.
+Built-in GVF models for frequencies (i.e. those with \code{Model.id} \code{1}, \code{2}, and \code{3}) are discussed in Chapter 7 of [Wolter 2007], along with their theoretical justification. Built-in GVF models for totals (i.e. those with \code{Model.id} \code{4}, and \code{5}) lack a rigorous justification, but have sometimes been used successfully on a purely empirical basis. For instance, Istat surveys on structural business statistics adopted models of that kind to summarize standard errors in publications and to allow their approximate evaluation on a custom basis.
 }
 
 \references{
@@ -221,7 +221,7 @@ GVF.db
 GVF.db$insert(log(CV^2) ~ log(Y))
 }
 # ...if this is the case, it can even be "equivalent" to old ones: e.g.
-# the following is identical to model number 5 and will produces identical 
+# the following is identical to model number 5 and will produce identical 
 # estimates and predictions (as you may want to check):
 GVF.db$insert(I(sqrt(VAR)/Y) ~ I(1/Y) + Y, "Total", Resp.to.CV = "resp")
 GVF.db

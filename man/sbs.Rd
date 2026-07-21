@@ -8,7 +8,7 @@ Artificial Structural Business Statistics Data
 }
 
 \description{
-The \code{sbs} data frame stores artificial sbs-like sampling data, while \code{sbs.frame} is the artificial sampling frame from which the \code{sbs} units have been drawn. They allow to run \R code contained in the \sQuote{Examples} section of the \pkg{ReGenesees} package help pages.
+The \code{sbs} data frame stores artificial sbs-like sampling data, while \code{sbs.frame} is the artificial sampling frame from which the \code{sbs} units have been drawn. They make it possible to run \R code contained in the \sQuote{Examples} section of the \pkg{ReGenesees} package help pages.
 }
 
 \usage{data(sbs)}
@@ -33,7 +33,7 @@ The \code{sbs} data frame mimics data observed in a Structural Business Statisti
     \item{\code{va.imp1}}{Value Added Imputed1, \code{numeric} (\code{NA}s were replaced with average values computed inside imputation strata obtained by crossing \code{region}, \code{nace.macro}, \code{emp.cl})}
     \item{\code{va.imp2}}{Value Added Imputed2, \code{numeric} (\code{NA}s were replaced with median values computed inside imputation strata obtained by crossing \code{region}, \code{nace.macro}, \code{emp.cl})}
     \item{\code{y}}{A \code{numeric} variable correlated with \code{va}}
-    \item{\code{weight}}{Direct weights, \code{numeric}}
+    \item{\code{weight}}{Base weights, \code{numeric}}
     \item{\code{fpc}}{Finite Population Corrections (given as sampling fractions inside strata), \code{numeric}}
     \item{\code{ent}}{Convenience \code{numeric} variable identically equal to \code{1} (sometimes useful, e.g. to estimate the total number of enterprises)}
     \item{\code{dom3}}{An unplanned estimation domain, \code{factor} with \code{4} levels}

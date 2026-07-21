@@ -20,7 +20,7 @@ aggregation technique provided in function \code{\link{collapse.strata}}
 (for further alternatives, see also \code{\link{ReGenesees.options}}).
 
 Function \code{find.lon.strata} (originally a private function intended to be
-called only by \link{collapse.strata}) is a simple diagnostic tool whose purpose
+called only by \code{\link{collapse.strata}}) is a simple diagnostic tool whose purpose
 is to identify the levels of the strata containing lonely PSUs (lonely strata
 for short).
 }

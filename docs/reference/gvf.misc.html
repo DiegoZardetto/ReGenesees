@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -238,7 +238,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>These methods can be used to extract information from fitted GVF model(s).</p>
-<p>For more details on their usage, please read the help pages of the methods with same name defined on class .lm by package <span class="pkg">stats</span> (e.g. <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code>, <code><a href='https://rdrr.io/r/stats/fitted.values.html'>fitted</a></code>, etc.).</p>
+<p>For more details on their usage, please read the help pages of the methods with the same name defined for class <code>lm</code> in package <span class="pkg">stats</span> (e.g. <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a></code>, <code><a href='https://rdrr.io/r/stats/fitted.values.html'>fitted</a></code>, etc.).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The requested information, wrapped into an <span style="R">R</span> object whose structure depends on the class of the input fitted GVF model(s) (i.e. arguments <code>object</code> and/or <code>model</code>).</p>
@@ -264,7 +264,7 @@
 #&gt;  age10c3 :  1   Mean   : 45014   Mean   : 2989   Mean   :0.22191  
 #&gt;  age10c4 :  1   3rd Qu.: 46046   3rd Qu.: 4006   3rd Qu.:0.27813  
 #&gt;  age10c5 :  1   Max.   :924101   Max.   :17173   Max.   :1.00000  
-#&gt;  (Other) :343                                    NA's   :6        
+#&gt;  (Other) :343                                    NAs    :6        
 #&gt;       VAR           
 #&gt;  Min.   :        0  
 #&gt;  1st Qu.:  1470114  
@@ -409,7 +409,7 @@
 #&gt;         349 
 #&gt; -0.13094481 </div><div class='input'>
 
-<span class='co'>## (B) A *a set* of GVF models fitted to the same data ##</span>
+<span class='co'>## (B) A *set* of GVF models fitted to the same data ##</span>
 <span class='co'># Fit example data to registered GVF models for frequencies (i.e. number 1:3):</span>
 <span class='no'>mm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.gvf.html'>fit.gvf</a></span>(<span class='no'>ee.AF</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)
 
@@ -454,7 +454,7 @@
 #&gt; 0.008790860 0.008803347 0.006007887 0.009511633 0.011393762 0.032134199 
 #&gt; </div><div class='input'>
 
-<span class='co'>## (C) a *single* GVF model fitted to *grouped* data ##</span>
+<span class='co'>## (C) A *single* GVF model fitted to *grouped* data ##</span>
 <span class='co'># We have at our disposal the following survey design object on household data:</span>
 <span class='no'>exdes</span></div><div class='output co'>#&gt; Stratified 2 - Stage Cluster Sampling Design (with replacement)
 #&gt; - [55] strata
@@ -584,7 +584,7 @@
 #&gt; -0.2893791 
 #&gt; </div><div class='input'>
 
-<span class='co'>## (D) a *set of* GVF models fitted to *grouped* data ##</span>
+<span class='co'>## (D) A *set of* GVF models fitted to *grouped* data ##</span>
 <span class='co'># Fit all registered GVF models for frequencies (i.e. number 1:3) separately</span>
 <span class='co'># inside groups:</span>
 <span class='no'>mm.g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.gvf.html'>fit.gvf</a></span>(<span class='no'>ee.g</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)

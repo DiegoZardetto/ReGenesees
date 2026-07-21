@@ -57,35 +57,37 @@ svystatB(design, model, by = NULL,
 }
 
 \details{
-This function computes weighted estimates for Multiple Regression Coefficients using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and direct weights otherwise. Standard errors are calculated using the Taylor linearization technique.
+This function computes weighted estimates for Multiple Regression Coefficients using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and base weights otherwise. Standard errors are calculated using the Taylor linearization technique.
 
 The mandatory argument \code{model} identifies the regression model whose population coefficients have to be estimated (for details on model specification, see e.g. \code{\link{lm}}). The \code{design} variables referenced by \code{model} should be \code{numeric} or \code{factor} (variables of other types - e.g. \code{character} - will need to be converted in advance, e.g. using function \code{\link{des.addvars}}).
 
-The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatB} refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatQ} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. Note that, to prevent obvious collinearity issues, the variables referenced by argument \code{by} must \emph{not} appear in the input \code{model} formula: otherwise, the program will stop and print an error message.
+The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatB} refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatB} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. Note that, to prevent obvious collinearity issues, the variables referenced by argument \code{by} must \emph{not} appear in the input \code{model} formula: otherwise, the program will stop and print an error message.
 
-The \code{conf.int} argument allows to request the confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is the confidence intervals are not provided. 
+The \code{conf.int} argument makes it possible to request confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is, the confidence intervals are not provided. 
 
 Whenever confidence intervals are requested (i.e. \code{conf.int=TRUE}), the desired confidence level can be specified by means of the \code{conf.lev} argument. The \code{conf.lev} value must represent a probability (\code{0<=conf.lev<=1}) and its default is chosen to be \code{0.95}.
 
-The optional argument \code{deff} allows to request the design effect [Kish 1995] for the estimates. By default \code{deff=FALSE}, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}.\cr
-For nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is for the estimator of the total of the linearized variable, aka "Woodruff transform").\cr
+The optional argument \code{deff} makes it possible to request the design effect [Kish 1995] for the estimates. By default \code{deff=FALSE}, that is, the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an \sQuote{equivalent} estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect compared to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}.
+
+For nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is, for the estimator of the total of the linearized variable, also known as the \dQuote{Woodruff transform}) [Eurostat 2013].
+
 When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out \emph{within} that subpopulation. This is the same as the \code{srssubpop} option for Stata's function \code{estat}.
 
-Missing values (\code{NA}) in model variables should be avoided. If \code{na.rm=FALSE} (the default) they generate an error. If \code{na.rm=TRUE}, observations containing NAs in model variables are dropped, and estimates get computed on non missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
+Missing values (\code{NA}) in model variables should be avoided. If \code{na.rm=FALSE} (the default), they generate an error. If \code{na.rm=TRUE}, observations containing NAs in model variables are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
 
-The \code{summary} method invoked on regression coefficients (say \code{b}) estimated via \code{svystatB}, gives p-values and significance codes for the component-wise test \code{b = 0}. Such values are computed assuming that the distribution of the regression coefficients estimators is normal (which is asymptotically true for large scale surveys). This assumption has the advantage of overcoming the problem of choosing the "right" statistic and assessing its "right" number of degrees of freedom when using data from a complex survey (see e.g. [Korn, Graubard 1990]).
+The \code{summary} method invoked on regression coefficients (say \code{b}) estimated via \code{svystatB}, gives p-values and significance codes for the component-wise test \code{b = 0}. Such values are computed assuming that the distribution of the regression coefficients estimators is normal (which is asymptotically true for large scale surveys). This assumption has the advantage of overcoming the problem of choosing the \dQuote{right} statistic and assessing its \dQuote{right} number of degrees of freedom when using data from a complex survey (see e.g. [Korn, Graubard 1990]).
 }
 
 \section{Collinearity, Aliasing and Impacts in Domain Estimation}{
-Function \code{svystatB} overcomes problems arising from exact collinearity between model variables via \emph{\sQuote{aliasing}} (see the \sQuote{Examples} Section). Put simply, aliasing discards redundant (i.e. collinear) regressors, yielding exact estimates and standard errors for non-aliased regression coefficients (namely, the same results that would be obtained with a reduced - no collinearity - model). Note that for the way aliasing works, the order of the terms in the linear model formula definitely matters.
+Function \code{svystatB} overcomes problems arising from exact collinearity between model variables via \emph{\sQuote{aliasing}} (see \sQuote{Examples}). Put simply, aliasing discards redundant (i.e. collinear) regressors, yielding exact estimates and sampling errors for non-aliased regression coefficients (namely, the same results that would be obtained with a reduced - no collinearity - model). Note that, given the way aliasing works, the order of the terms in the linear model formula definitely matters.
 
-Collinearity between variables may manifest itself in subsets of the sample, and with different patterns across subsets. In domain estimation, this phenomenon can have an impact on the structure of \code{svystatB}'s output. In fact, owing to aliasing, the estimable regression coefficients - for the same input linear model - can be different across domains. In such cases, the domain estimates produced by \code{svystatB} can no longer be stored in a \code{data.frame}, and the output object will instead be a \emph{list} (see the \sQuote{Examples} Section). Note that for these \code{svystatB}'s return objects (whose \code{class} is \code{svystatB.by.list}) no variance \code{\link{extractors}} are currently available.
+Collinearity between variables may manifest itself in subsets of the sample, and with different patterns across subsets. In domain estimation, this phenomenon can have an impact on the structure of \code{svystatB}'s output. In fact, owing to aliasing, the estimable regression coefficients - for the same input linear model - can be different across domains. In such cases, the domain estimates produced by \code{svystatB} can no longer be stored in a \code{data.frame}, and the output object will instead be a \emph{list} (see \sQuote{Examples}). Note that for these \code{svystatB}'s return objects (whose \code{class} is \code{svystatB.by.list}) no variance \code{\link{extractors}} are currently available.
 
 Note also that, for the reasons above, the usage of \code{svystatB} via function \code{\link{svystat}} is restricted: it is not allowed to specify \code{\link{svystat}}'s arguments \code{by} and \code{group} when \code{kind == "B"}. 
 }
 
 \value{
-An object inheriting from the \code{data.frame} class, whose detailed structure depends on input parameters' values. In special cases (see Section \sQuote{Collinearity, Aliasing and Impacts in Domain Estimation}), a \emph{list} object.
+An object inheriting from the \code{data.frame} class, whose detailed structure depends on input parameters' values. In special cases (see \sQuote{Collinearity, Aliasing and Impacts in Domain Estimation}), a \emph{list} object.
 }
 
 \author{
@@ -97,7 +99,7 @@ Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Sur
 
 Kish, L. (1995). \emph{\dQuote{Methods for design effects}}. Journal of Official Statistics, Vol. 11, pp. 55-77.
 
-European Commission, Eurostat, (2013). \emph{\dQuote{Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition}}, Publications Office. doi: 10.2785/13579
+European Commission, Eurostat (2013). \emph{\dQuote{Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition}}, Publications Office. doi: 10.2785/13579
 
 Korn, E.L., Graubard, B.I. (1990) \emph{\dQuote{Simultaneous testing of regression coefficients with complex survey
 data: Use of Bonferroni t statistics}}. The American Statistician, 44, 270-276.
@@ -169,7 +171,7 @@ b
 # summary method:
 summary(b)
 
-# Notice that estimators normality is assumed.
+# Notice that the normality of the estimators is assumed.
 
 
 ##########################################
@@ -177,7 +179,7 @@ summary(b)
 ##########################################
 
 # The domain mean of a numeric variable can be thought
-# as a regression coefficient. Suppose you need the
+# of as a regression coefficient. Suppose you need the
 # average number of employees by macro-sector, you can
 # do as follows:
 svystatB(sbsdes,emp.num~nace.macro-1)
@@ -233,12 +235,12 @@ fpcdes<-e.svydesign(data=fpcdat,ids=~psu+ssu,strata=~stratum,weights=~w,
 
 
 ##################################
-# Handling non positive weights. #
+# Handling non-positive weights. #
 ##################################
 
-# Non positive direct weights are not allowed, anyway some
+# Non-positive base weights are not allowed; however, some
 # calibrated weights can sometimes turn out to be <= 0. The
-# corrisponding observations would be dropped by svystatB.
+# corresponding observations would be dropped by svystatB.
 
   # Prepare a template for population totals:
   pop<-pop.template(fpcdes,~z+pl.domain-1)
@@ -254,7 +256,7 @@ fpcdes<-e.svydesign(data=fpcdat,ids=~psu+ssu,strata=~stratum,weights=~w,
   sum(weights(fpccal)<=0)
 
   # Now, let's estimate regression coefficients of model z~y+x
-  # and pay attantion to the warnings:
+  # and pay attention to the warnings:
   svystatB(fpccal,z~y+x,na.rm=TRUE)
 
 
@@ -286,7 +288,7 @@ svystatTM(sbsdes, y= ~emp.num, by= ~nace.macro, estimator= "Mean")
 svystatB(sbsdes, model = y ~ va.imp2 + emp.num, by = ~region:nace.macro)
 
 
-# A case of differential aliasing across domain (note the warning messages).
+# A case of differential aliasing across domains (note the warning messages).
 # A list-like object is returned:
 svystatB(sbsdes, va.imp2 ~emp.num:emp.cl + nace.macro, by= ~region:public)
 

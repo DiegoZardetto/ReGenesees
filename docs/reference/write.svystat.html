@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments to <code>write.table</code></p></td>
+      <td><p>Arguments to <code>write.table</code>.</p></td>
     </tr>
     </table>
 
@@ -166,7 +166,7 @@
      <span class='kw'>fpc</span><span class='kw'>=</span>~<span class='no'>fpc</span>)
 
 <span class='co'># Estimation of the average value added per employee</span>
-<span class='co'># for economic activity region and macro-sectors,</span>
+<span class='co'># by region and economic activity macro-sectors,</span>
 <span class='co'># with SE, CV% and standard confidence intervals:</span>
 <span class='no'>stat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='svystatR.html'>svystatR</a></span>(<span class='no'>des</span>,~<span class='no'>va.imp2</span>,~<span class='no'>emp.num</span>,<span class='kw'>by</span><span class='kw'>=</span>~<span class='no'>region</span>:<span class='no'>nace.macro</span>,
         <span class='kw'>vartype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"se"</span>,<span class='st'>"cvpct"</span>),<span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)

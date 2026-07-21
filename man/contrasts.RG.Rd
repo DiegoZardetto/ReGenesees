@@ -23,11 +23,11 @@ contr.off(n, base = 1, contrasts = TRUE, sparse = FALSE)
   \item{sparse}{Formally as in function \code{contr.treatment}. (see \sQuote{Details})}
 }
 \details{
-All the calibration facilities in package \pkg{ReGenesees} transform symbolic calibration models (as specified by the user via \code{calmodel}) into numeric model-matrices. Factor variables occurring in \code{calmodel} play a special role in such transformations, as the encoding of a factor can (and, by default, do) \emph{depend} on the \emph{structure} of the formula in which it occurs. The \pkg{ReGenesees} functions documented below control the way factor levels are translated into auxiliary variables and mapped to columns of population totals data frames. The underlying technical tools are \code{\link{contrasts}} handling functions (see Section 'Technical Remarks and Warnings' for further details).
+All the calibration facilities in package \pkg{ReGenesees} transform symbolic calibration models (as specified by the user via \code{calmodel}) into numeric model-matrices. Factor variables occurring in \code{calmodel} play a special role in such transformations, as the encoding of a factor can (and, by default, does) \emph{depend} on the \emph{structure} of the formula in which it occurs. The \pkg{ReGenesees} functions documented below control the way factor levels are translated into auxiliary variables and mapped to columns of population totals data frames. The underlying technical tools are \code{\link{contrasts}} handling functions (see \sQuote{Technical Remarks and Warnings} for further details).
 
-Under the calibration perspective, ordered and unordered factors appearing in \code{calmodel} must be treated the same way. This obvious constraint defines the \pkg{ReGenesees} default for contrasts handling. Such a default is silently set when loading the package. Moreover, you can set it also by calling \code{contrasts.RG()}. As can be understood by reading Section 'Technical Remarks and Warnings' below, the default setup can be seen as \strong{\dQuote{efficient-but-slightly-risky}}.
+Under the calibration perspective, ordered and unordered factors appearing in \code{calmodel} must be treated the same way. This obvious constraint defines the \pkg{ReGenesees} default for contrasts handling. Such a default is silently set when loading the package. Moreover, you can set it also by calling \code{contrasts.RG()}. As can be understood by reading \sQuote{Technical Remarks and Warnings} below, the default setup can be seen as \strong{\dQuote{efficient-but-slightly-risky}}.
 
-A call to \code{contrasts.off()} simply disables all contrasts and imposes a complete dummy coding of factors. Under this setup, all levels of factors occurring in \code{calmodel} generate a distinct model-matrix column, \emph{even if some of these columns can be linearly dependent}. To be very concise, the \code{contrasts.off()} setup can be seen as \strong{\dQuote{safe-but-less-efficient}} as compared to the default one (read Section 'Technical Remarks and Warnings' for more details).
+A call to \code{contrasts.off()} simply disables all contrasts and imposes a complete dummy coding of factors. Under this setup, all levels of factors occurring in \code{calmodel} generate a distinct model-matrix column, \emph{even if some of these columns can be linearly dependent}. To be very concise, the \code{contrasts.off()} setup can be seen as \strong{\dQuote{safe-but-less-efficient}} as compared to the default one (read \sQuote{Technical Remarks and Warnings} for more details).
 
 Function \code{contr.off} is not meant to be called directly by users: it serves only the purpose of enabling the \code{contrasts.off()} setup.
 
@@ -38,13 +38,13 @@ A call to \code{contrasts.reset()} restores \R factory-fresh defaults for contra
 \dQuote{\emph{[...] the corner cases of model.matrix and friends is some of the more impenetrable code in the R sources.}}\cr
 \href{https://stat.ethz.ch/pipermail/r-help/2012-January/301901.html}{Peter Dalgaard}\cr
 
-Contrasts handling functions tell \R how to encode the model-matrix associated to a given model-formula on specific data (see, e.g., \code{\link{contr.treatment}}, \code{\link{contrasts}}, \code{\link{model.matrix}}, \code{\link{formula}}, and references therein). More specifically, contrasts control the way factor-terms and interaction-terms occurring in formulae get actually represented in the model matrix. For instance, \R (by default) avoids the complete dummy coding of a factor whenever it is able to understand, on the basis of the structure of the model-formula, that some of the factor levels would generate linearly dependent (i.e. redundant) columns in the model-matrix (see Section \sQuote{Examples}).
+Contrasts handling functions tell \R how to encode the model-matrix associated with a given model-formula on specific data (see, e.g., \code{\link{contr.treatment}}, \code{\link{contrasts}}, \code{\link{model.matrix}}, \code{\link{formula}}, and references therein). More specifically, contrasts control the way factor-terms and interaction-terms occurring in formulae get actually represented in the model matrix. For instance, \R (by default) avoids the complete dummy coding of a factor whenever it is able to understand, on the basis of the structure of the model-formula, that some of the factor levels would generate linearly dependent (i.e. redundant) columns in the model-matrix (see \sQuote{Examples}).
 
 The usage of contrasts to build smaller, full-rank calibration model-matrices would be a good opportunity for \pkg{ReGenesees}, provided it comes \emph{without any information loss}. Indeed, smaller model-matrices mean less population totals to be provided by users, and higher efficiency in computations.
 
-Unfortunately, few controversial cases have been signalled in which \R ability to "simplify" a model-matrix on the basis of the structure of the related model-formula seems to lead to strange, unexpected results (see, e.g., \href{https://stat.ethz.ch/pipermail/r-help/2012-January/301778.html}{this R-help thread}). No matter whether such \R behaviour is or not an actual bug with respect to its impact on \R linear model fitting or ANOVA facilities, it surely represents a concern for \pkg{ReGenesees} with respect to calibration (see Section \sQuote{Examples}). The risk is the following: there could be rare cases in which exploiting \R contrasts handling functions inside \pkg{ReGenesees} ends up with a \emph{wrong} (i.e. incomplete) population totals template, and (eventually) with \emph{wrong} calibration results.
+Unfortunately, few controversial cases have been signalled in which \R's ability to \dQuote{simplify} a model-matrix on the basis of the structure of the related model-formula seems to lead to strange, unexpected results (see, e.g., \href{https://stat.ethz.ch/pipermail/r-help/2012-January/301778.html}{this R-help thread}). No matter whether or not such \R's behaviour is an actual bug with respect to its impact on \R linear model fitting or ANOVA facilities, it surely represents a concern for \pkg{ReGenesees} with respect to calibration (see \sQuote{Examples}). The risk is the following: there could be rare cases in which exploiting \R's contrasts handling functions inside \pkg{ReGenesees} ends up with a \emph{wrong} (i.e. incomplete) population totals template, and (eventually) with \emph{wrong} calibration results.
 
-Though one could adopt several ad-hoc countermeasures to sterilize the risk described above while still taking advantage of contrasts (see Section \sQuote{Examples}), the choice of completely disabling contrasts via \code{contrasts.off()} would result in a \strong{100\% safety guarantee}. If computational efficiency is not a serious concern for you, switching off contrasts may determine the best \pkg{ReGenesees} setup for your analyses.
+Though one could adopt several ad-hoc countermeasures to sterilize the risk described above while still taking advantage of contrasts (see \sQuote{Examples}), the choice of completely disabling contrasts via \code{contrasts.off()} would result in a \strong{100\% safety guarantee}. If computational efficiency is not a serious concern for you, switching off contrasts may determine the best \pkg{ReGenesees} setup for your analyses.
 }
 \author{
 Diego Zardetto
@@ -91,7 +91,7 @@ sbsdes<-e.svydesign(data=sbs,ids=~id,strata=~strata,weights=~weight,fpc=~fpc)
 # Suppose you want to calibrate on the marginals of 'region' (a factor
 # with 3 levels: "North", "Center", and "South") and 'dom3' (a factor
 # with 4 levels: "A", "B", "C", and "D").
-# Let's see how things go under the 'contrast on' (default) and 'contrasts off'
+# Let's see how things go under the 'contrasts on' (default) and 'contrasts off'
 # setups:
 
   ########################################
@@ -135,7 +135,7 @@ sbsdes<-e.svydesign(data=sbs,ids=~id,strata=~strata,weights=~weight,fpc=~fpc)
   
   # As you see: (1) it has now 7 columns, and (2) the "A" level of factor
   # 'dom3' has been resurrected. This is because contrasts are OFF,
-  # so that each level of factors in calmodel are coded to dummies.
+  # so that each level of factors in calmodel gets coded as a dummy.
   
   # Now calibrate. Since only 6 out of 7 dummy auxiliary variables are
   # actually independent, the model.matrix computed by e.calibrate will not be
@@ -164,7 +164,7 @@ sbsdes<-e.svydesign(data=sbs,ids=~id,strata=~strata,weights=~weight,fpc=~fpc)
 #
 # You rightly expect that 3*4 + 4 = 16 population totals are needed for such a
 # calibration task. Indeed, knowing the enterprise counts for the 3*4 cells of
-# the joint distribution (A) doesn't tell anything on the number of employees
+# the joint distribution (A) doesn't tell you anything about the number of employees
 # working in the 4 nace macrosectors (B), and vice-versa.
 #
 # Moreover, you might expect that calibration models:
@@ -210,9 +210,9 @@ sbsdes<-e.svydesign(data=sbs,ids=~id,strata=~strata,weights=~weight,fpc=~fpc)
   pop2
 
   # Thus we are missing the 4 'nace.macro' totals for 'region' level "North".
-  # Everything goes as if R contrasts functions mistakenly treated the term
-  # emp.num:nace.macro as a factor-factor interaction (i.e. a 2 way joint
-  # distribution), which would have justified to eliminate the 4 missing totals
+  # Everything goes as if R's contrasts functions mistakenly treated the term
+  # emp.num:nace.macro as a factor-factor interaction (i.e. a 2-way joint
+  # distribution), which would have justified eliminating the 4 missing totals
   # as redundant.
 
   # Notice that calibrating on pop2 would generate wrong results...
@@ -226,7 +226,7 @@ sbsdes<-e.svydesign(data=sbs,ids=~id,strata=~strata,weights=~weight,fpc=~fpc)
   ################################################################
   # A possible countermeasure (still working with contrasts ON). #
   ################################################################
-  # Empirical evidence tells that the weird case above is extremely rare
+  # Empirical evidence shows that the weird case above is extremely rare
   # and that it manifests whenever a numeric (say X) and a factor (say F) both
   # interact with the same factor (say D), i.e. calmodel=~(X+F):D-1.
   #

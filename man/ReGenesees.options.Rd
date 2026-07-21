@@ -3,6 +3,8 @@
 \alias{RG.lonely.psu}
 \alias{RG.ultimate.cluster}
 \alias{RG.adjust.domain.lonely}
+\alias{RG.warn.domain.lonely}
+
 \title{Variance Estimation Options for the ReGenesees Package}
 \description{
   This help page documents the options that control the behaviour of
@@ -11,7 +13,7 @@
   
   \details{
     The \pkg{ReGenesees} package provides four options for variance
-    estimations which can be freely set and modified by the user:\cr
+    estimation which can be freely set and modified by the user:\cr
     
     - \code{RG.ultimate.cluster}\cr
     - \code{RG.lonely.psu}\cr
@@ -19,38 +21,38 @@
     - \code{RG.warn.domain.lonely}\cr
     
     When \code{options("RG.ultimate.cluster")} is \code{TRUE},
-    the \pkg{ReGenesees} package adopts the so called \emph{\dQuote{Ultimate
-    Cluster Approximation}} [Kalton 79]. Under this approximation, the overall
+    the \pkg{ReGenesees} package adopts the so-called \emph{\dQuote{Ultimate
+    Cluster Approximation}} [Kalton 1979]. Under this approximation, the overall
     sampling variance for a multistage sampling design is estimated by
     taking into account only the contribution arising from the estimated PSU
     totals (thus simply ignoring any available information about subsequent
-    sampling stages). For without replacement sampling designs, this approach
+    sampling stages). For without-replacement sampling designs, this approach
     is known to underestimate the true multistage variance, while - at the
-    same time - overestimating its true first-stage component. Anyway, the
+    same time - overestimating its true first-stage component. In any case, the
     underestimation error becomes negligible if the PSUs' sampling fractions
     across strata are very small. When sampling with replacement, the Ultimate
     Cluster approach is no longer an approximation, but rather an exact result.
-    Hence, be \code{options("RG.ultimate.cluster")} \code{TRUE} or \code{FALSE},
+    Hence, be it \code{options("RG.ultimate.cluster")} \code{TRUE} or \code{FALSE},
     if one does not specify first-stage finite population corrections, \pkg{ReGenesees}
     will produce exactly the same variance estimates.
     
     When \code{options("RG.ultimate.cluster")} is \code{FALSE},
     each sampling stage contributes and variances get estimated by means
-    of a recursive algorithm [Bellhouse, 85] inherited and adapted from
-    package \pkg{survey} [Lumley 06]. Notice that the results obtained
-    by choosing this option can differ from the one that would be obtained
-    under the "Ultimate Cluster Approximation" \emph{only if} first-stage
+    of a recursive algorithm [Bellhouse 1985] inherited and adapted from
+    package \pkg{survey} [Lumley 2006]. Notice that the results obtained
+    by choosing this option can differ from those that would be obtained
+    under the \dQuote{Ultimate Cluster Approximation} \emph{only if} first-stage
     finite population corrections are specified.
     
     Lonely PSUs (i.e. PSUs which are alone inside a not self-representing
     stratum) are a concern from the viewpoint of variance estimation. The
     suggested \pkg{ReGenesees} facility to handle the lonely PSUs problem is
-    the strata aggregation technique (see e.g. [Wolter 07] and [Rust, Kalton 87])
+    the strata aggregation technique (see e.g. [Wolter 2007] and [Rust, Kalton 1987])
     provided in function \code{\link{collapse.strata}}.
     As a possible alternative, you can get rid of lonely PSUs also by setting
     proper variance estimation options via \code{options("RG.lonely.psu")}.
     The default setting is \code{"fail"}, which raises an error if a lonely PSU
-    is met. Option \code{"remove"} simply causes the software to ignore lonely PSUs
+    is encountered. Option \code{"remove"} simply causes the software to ignore lonely PSUs
     for variance computation purposes. Option \code{"adjust"} means that
     deviations from the \emph{population mean} will be used in variance
     estimation formulae, instead of deviations from the stratum mean
@@ -65,7 +67,7 @@
     observations falling in the domain, but are not unbiased.\cr
     If \code{options("RG.adjust.domain.lonely")} is \code{TRUE}
     and \code{options("RG.lonely.psu")} is \code{"average"} or
-    \code{"adjust"} the same adjustment for lonely PSUs will be used
+    \code{"adjust"}, the same adjustment for lonely PSUs will be used
     within a domain. Note that this adjustment is not available for
     calibrated designs.
     
@@ -88,7 +90,7 @@
 
   \seealso{
     \code{\link{e.svydesign}} and its \code{self.rep.str} argument for a 
-    "compromise solution" that can be adopted when the sampling design
+    \dQuote{compromise solution} that can be adopted when the sampling design
     involves self-representing (SR) strata, \code{\link{collapse.strata}}
     for the suggested way of handling lonely PSUs, and \code{\link{fpcdat}}
     for useful data examples.
@@ -113,7 +115,7 @@ old.op <- options("RG.ultimate.cluster"=TRUE)
 svystatTM(des,~x+y+z,vartype=c("se","cvpct"))
 options(old.op)
 
-## 3) The "compromise solution" (see ?e.svydesign) i.e. retaining
+## 3) The "compromise solution" (see ?e.svydesign), i.e. retaining
 ##    only the leading contribution to the sampling variance (namely
 ##    the one arising from SSUs in SR strata and PSUs in not-SR strata):
 des2<-e.svydesign(data=fpcdat,ids=~psu+ssu,strata=~stratum,weights=~w,
@@ -124,8 +126,8 @@ svystatTM(des2,~x+y+z,vartype=c("se","cvpct"))
 # hierarchy: 1) > 3) > 2).
 
 
-# Under default settings lonely PSUs produce errors in standard
-# errors estimation (notice we didn't pass the fpcs):
+# Under default settings lonely PSUs produce errors during standard
+# error estimation (notice we didn't pass the fpcs):
 data(fpcdat)
 des.lpsu<-e.svydesign(data=fpcdat,ids=~psu+ssu,strata=~stratum,
           weights=~w)

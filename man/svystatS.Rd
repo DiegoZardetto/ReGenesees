@@ -47,7 +47,7 @@ svystatS(design, y, classes, by = NULL,
 }
 
 \details{
-This function computes weighted estimates for Shares of a numeric variable, using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and direct weights otherwise. Standard errors are calculated using the Taylor linearization technique.
+This function computes weighted estimates for Shares of a numeric variable, using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and base weights otherwise. Standard errors are calculated using the Taylor linearization technique.
 
 Shares are a special case of Ratios. Therefore, at the price of some additional (and possibly heavy) data preparation effort, shares could also be estimated using function \code{\link{svystatR}}. However, \code{svystatS} makes estimation by far easier, in particular when shares have to be estimated for many population groups and/or within many domains.
 
@@ -57,15 +57,17 @@ The mandatory argument \code{classes} identifies population groups whose shares 
 
 The optional argument \code{by} specifies the variables defining the "estimation domains", that is the subpopulations within which shares of \code{y} by \code{classes} must be estimated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatS} refer to the whole population. Estimation domains must be defined by a formula: for instance the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatS} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
 
-The \code{conf.int} argument allows to request the confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is the confidence intervals are not provided.
+The \code{conf.int} argument makes it possible to request confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is, the confidence intervals are not provided.
 
 Whenever confidence intervals are requested (i.e. \code{conf.int=TRUE}), the desired confidence level can be specified by means of the \code{conf.lev} argument. The \code{conf.lev} value must represent a probability (\code{0<=conf.lev<=1}) and its default is chosen to be \code{0.95}.
 
-The optional argument \code{deff} allows to request the design effect [Kish 1995] for the estimates.  By default \code{deff=FALSE}, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}.\cr
-Being Ratios nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is: for the estimator of the total of the linearized variable, aka "Woodruff transform").\cr
+The optional argument \code{deff} makes it possible to request the design effect [Kish 1995] for the estimates. By default \code{deff=FALSE}, that is, the design effect is not provided. The design effect of an estimator is defined as the ratio between the variance of the estimator under the actual sampling design and the variance that would be obtained for an \sQuote{equivalent} estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect compared to simple random sampling \emph{\dQuote{with replacement}}, one must use \code{deff="replace"}.
+
+Since Shares are nonlinear estimators, the design effect is estimated on the linearized version of the estimator (that is, for the estimator of the total of the linearized variable, also known as the \dQuote{Woodruff transform}) [Eurostat 2013].
+
 When dealing with domain estimation, the design effects referring to a given subpopulation are currently computed by taking the ratios between the actual variance estimates and those that would have been obtained if a simple random sampling were carried out \emph{within} that subpopulation. This is the same as the \code{srssubpop} option for Stata's function \code{estat}.
 
-Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default) they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
+Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default), they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
 }
 
 \value{
@@ -81,7 +83,7 @@ Sarndal, C.E., Swensson, B., Wretman, J. (1992) \emph{\dQuote{Model Assisted Sur
 
 Kish, L. (1995). \emph{\dQuote{Methods for design effects}}. Journal of Official Statistics, Vol. 11, pp. 55-77.
 
-European Commission, Eurostat, (2013). \emph{\dQuote{Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition}}, Publications Office. doi: 10.2785/13579
+European Commission, Eurostat (2013). \emph{\dQuote{Handbook on precision requirements and variance estimation for ESS households surveys: 2013 edition}}, Publications Office. doi: 10.2785/13579
 }
 
 \seealso{

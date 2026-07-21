@@ -11,7 +11,7 @@ Predict CV Values via Fitted GVF Models
 }
 
 \description{
-This function predicts the CV values associated to given estimates, based on fitted GVF model(s).
+This function predicts the CV values associated with given estimates, based on fitted GVF model(s).
 }
 
 \usage{
@@ -39,9 +39,9 @@ predictCV(object, new.Y = NULL, scale = NULL, df = Inf,
 }
 
 \details{
-The main motivation for building and fitting a GVF model is to exploit the fitted model to \emph{predict} the sampling error associated to a given estimate, instead of having to \emph{compute} directly an estimate of such sampling error. Function \code{predictCV} is relevant to that scope.
+The main motivation for building and fitting a GVF model is to exploit the fitted model to \emph{predict} the sampling error associated with a given estimate, instead of having to \emph{compute} directly an estimate of such sampling error. Function \code{predictCV} is relevant to that scope.
 
-Despite different GVF models can specify as response term (call it \code{'resp'}) different functions of variables \code{'SE'}, \code{'CV'}, and \code{'VAR'} (see e.g. [Wolter 07]), function \code{predictCV} adopts variable \code{'CV'} as a universal \emph{pivot}. This means that \code{predictCV} can handle \emph{only} fitted GVF models which are \emph{registered} (that is already stored inside \code{\link{GVF.db}}), and for which variable \code{Resp.to.CV} is \emph{not} \code{NA}. Indeed, it is variable \code{Resp.to.CV} of data frame \code{GVF.db} which tells \code{predictCV} how to transform the response of an arbitrary GVF model (\code{'resp'}) into the pivot measure of variability (\code{'CV'}).
+Although different GVF models can specify as response term (call it \code{'resp'}) different functions of variables \code{'SE'}, \code{'CV'}, and \code{'VAR'} (see e.g. [Wolter 2007]), function \code{predictCV} adopts variable \code{'CV'} as a universal \emph{pivot}. This means that \code{predictCV} can handle \emph{only} fitted GVF models which are \emph{registered} (that is already stored inside \code{\link{GVF.db}}), and for which variable \code{Resp.to.CV} is \emph{not} \code{NA}. Indeed, it is variable \code{Resp.to.CV} of data frame \code{GVF.db} which tells \code{predictCV} how to transform the response of an arbitrary GVF model (\code{'resp'}) into the pivot measure of variability (\code{'CV'}).
 
 By default \code{new.Y = NULL} and CVs (and intervals, if any) obtained by transforming fitted response values will be returned. If passed, argument \code{new.Y} must be a data frame storing new estimates for which CVs have to be predicted. Such input estimates have to be stored in column \code{Y} of data frame \code{new.Y}. Moreover, if \code{object} stores GVF model(s) fitted to \emph{grouped} data (namely, it has class \code{gvf.fit.gr} or \code{gvf.fits.gr}), then \code{new.Y} should also have columns identifying the \emph{groups} to which input estimates are referred (see \sQuote{Examples}). The \emph{only exception} is the following: if the \code{new.Y} data frame has just the \code{Y} column, then CVs will be predicted for \emph{all groups} (see \sQuote{Examples}). The function will check for consistency between groups available in \code{object} and in \code{new.Y} (see \sQuote{Examples}).
 
@@ -122,7 +122,7 @@ p
 predict(m, new.Y, interval = "confidence")
 
 
-## (B) A *a set* of GVF models fitted to the same data ##
+## (B) A *set* of GVF models fitted to the same data ##
 # Fit example data to registered GVF models for frequencies (i.e. number 1:3):
 mm <- fit.gvf(ee.AF, 1:3)
 
@@ -141,7 +141,7 @@ pp
 predict(mm, new.Y, interval = "confidence")
 
 
-## (C) a *single* GVF model fitted to *grouped* data ##
+## (C) A *single* GVF model fitted to *grouped* data ##
 # We have at our disposal the following survey design object on household data:
 exdes
 
@@ -219,7 +219,7 @@ p.g <- predictCV(m.g, new.Y.g, interval = "confidence")
 }
 
 
-## (D) a *set of* GVF models fitted to *grouped* data ##
+## (D) A *set of* GVF models fitted to *grouped* data ##
 # Fit all registered GVF models for frequencies (i.e. number 1:3) separately
 # inside groups:
 mm.g <- fit.gvf(ee.g, 1:3)

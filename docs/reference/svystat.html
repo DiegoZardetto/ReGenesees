@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -212,8 +212,8 @@
 <p>If <code>forGVF = TRUE</code> the output will be ready to feed <span class="pkg">ReGenesees</span> GVF fitting infrastructure, otherwise it will consist simply of a set of summary statistic objects.</p>
 <p>Use argument <code>kind</code> to specify the summary statistic you need. The default value <code>'TM'</code> selects function <code><a href='svystatTM.html'>svystatTM</a></code>, which yields Totals and Means. All the arguments needed by the summary statistic function implied by <code>kind</code> (e.g. argument <code>y</code> for <code>svystatTM</code> when <code>kind = 'TM'</code>) will be passed on through argument &#8216;<code>...</code>&#8217;.</p>
 <p>As usual in summary statistics, argument <code>by</code> can be used to request domain estimates.</p>
-<p>The <code>group</code> formula (if any) specifies a way of partitioning the population into groups: the output will be reported separately for each group. In the GVF context, a <em>&#8220;grouped&#8221;</em> output will permit to fit <em>separate</em> GVF models inside different groups (and hence to compute separate variance predictions for different groups).</p>
-<p>Note that <code>group</code> and <code>by</code> share identical syntax and semantics as model formulae, despite they have different purposes in function <code>svystat</code> (as explained above).</p>
+<p>The <code>group</code> formula (if any) specifies a way of partitioning the population into groups: the output will be reported separately for each group. In the GVF context, a <em>&#8220;grouped&#8221;</em> output will make it possible to fit <em>separate</em> GVF models inside different groups (and hence to compute separate variance predictions for different groups).</p>
+<p>Note that <code>group</code> and <code>by</code> share identical syntax and semantics as model formulae, although they have different purposes in function <code>svystat</code> (as explained above).</p>
 <p>Parameter <code>combo</code> is <em>only</em> meaningful if <code>by</code> is passed. Its purpose is to allow computing estimates and errors simultaneously for many estimation domains.</p>
 <p>If the <code>by</code> formula involves <code>n</code> variables, specifying <code>combo = m</code> requests to compute outputs for all the domains determined by all the interactions of <code>by</code> variables <em>up to</em> order <code>m</code> (with <code>-1 &lt;= m &lt;= n</code>), as follows:</p><pre>
   COMBO         MEANING

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -175,11 +175,11 @@
 
     <p><strong><em>Special Purpose Calibration</em> tasks</strong><br />
 <span class="pkg">ReGenesees 2.1</span> introduced support for <em>&#8216;special purpose calibration&#8217;</em> tasks, i.e. facilities to calibrate survey weights so as to match complex population parameters, instead of ordinary population totals.</p>
-<p>When calibration benchmarks come in the form of population parameters that are complex, <em>non-linear</em> functions of auxiliary variables (like, in the present case, multiple regression coefficients), calibration constraints have to be linearized first. This generates <em>synthetic linearized variables</em> <strong><em>z</em></strong>, which are the <em>actual calibration variables</em> the calibration algorithm will eventually work on. Typically, <em>control totals</em> for these synthetic linearized variables <strong><em>z</em></strong> will <em>all</em> be <em>zero</em>. See, e.g. [Lesage, 2011].</p>
+<p>When calibration benchmarks come in the form of population parameters that are complex, <em>non-linear</em> functions of auxiliary variables (like, in the present case, multiple regression coefficients), calibration constraints have to be linearized first. This generates <em>synthetic linearized variables</em> <strong><em>z</em></strong>, which are the <em>actual calibration variables</em> the calibration algorithm will eventually work on. Typically, <em>control totals</em> for these synthetic linearized variables <strong><em>z</em></strong> will <em>all</em> be <em>zero</em>. See, e.g. [Lesage 2011].</p>
 <p>Put briefly:</p><ul>
 <li><p>Function <code>prep.calBeta</code> generates and binds to <code>design</code> the <em>synthetic linearized variables</em> <strong><em>z</em></strong> needed for the calibration task.</p></li>
 <li><p>Then, given the <em>prepared</em> <code>design</code> object returned by <code>prep.calBeta</code>, function <code>pop.calBeta</code> generates the <em>control totals</em> data frame for those <strong><em>z</em></strong> variables.</p></li>
-</ul><p>Of course, once prepared, survey data and control totals returned by the above functions will be fed in input to function <code><a href='e.calibrate.html'>e.calibrate</a></code>, which will run the calibration task.<br /><br /></p>
+</ul><p>Of course, once prepared, survey data and control totals returned by the above functions will be fed as input to function <code><a href='e.calibrate.html'>e.calibrate</a></code>, which will run the calibration task.<br /><br /></p>
 <p><strong>Function <code>prep.calBeta()</code></strong><br />
 Function <code>prep.calBeta</code> makes it possible to:</p><ol>
 <li><p>Calibrate on regression coefficients of <em>different linear models</em>, each known at the <em>overall population level</em>.</p></li>
@@ -189,16 +189,16 @@ Function <code>prep.calBeta</code> makes it possible to:</p><ol>
 The <code>design</code> variables referenced by <code>model</code> formula(s) must be <code>numeric</code> or <code>factor</code> and must not contain any missing value (<code>NA</code>).</p>
 <p>The mandatory argument <code>Beta</code> specifies the vector(s) of regression coefficients that will be used as calibration benchmarks. Use a <code>numeric</code> vector to specify regression coefficients of a <em>single</em> linear model, or a <code>list</code> of <code>numeric</code> vectors to specify regression coefficients of <em>several</em> different linear models. The <code>Beta</code> vector(s) must not contain any missing value (<code>NA</code>).</p>
 <p>If argument <code>model</code> is passed as a list, argument <code>Beta</code> must be passed as a list too, and the <code>length</code> of both must be the same. If this is the case, <code>Beta</code> vectors will be <em>positionally</em> tied to linear model formulas contained in <code>model</code>.</p>
-<p>Each vector of regression coefficients specified through <code>Beta</code> must be <em>consistent</em> with the corresponding <code>model</code>, namely match its model matrix columns (as generated using actual <code>design</code> data). Function <code>prep.calBeta</code> will check for this consistency and raise an informative error message in case of failure.<br />
-Note that, in order to ensure consistency with <code>model</code>, not only the <code>length</code>, but also the <em>order</em> of <code>Beta</code> elements <em>matters</em>. If in doubt, you can easily learn about the <em>right</em> ordering of <code>Beta</code> coefficients, given <code>model</code>, by calling function <code><a href='svystatB.html'>svystatB</a></code> as follows: <code><a href='svystatB.html'>svystatB(design, model)</a></code>. This will, of course, return the estimated regression coefficients of <code>model</code> <em>before</em> calibration.<br />
-Note that each <code>Beta</code> vector can have <code>names</code> or not. If a <code>Beta</code> vector has <em>names</em> that match the expected ones (given the corresponding <code>model</code> formula), but appear in a <em>different order</em>, then function <code>prep.calBeta</code> will suitably re-order them and inform you with a <code>warning</code> message.</p>
+<p>Each vector of regression coefficients specified through <code>Beta</code> must be <em>consistent</em> with the corresponding <code>model</code>, namely match its model matrix columns (as generated using actual <code>design</code> data). Function <code>prep.calBeta</code> will check for this consistency and raise an informative error message in case of failure.</p>
+<p>Note that, in order to ensure consistency with <code>model</code>, not only the <code>length</code>, but also the <em>order</em> of <code>Beta</code> elements <em>matters</em>. If in doubt, you can easily learn about the <em>right</em> ordering of <code>Beta</code> coefficients, given <code>model</code>, by calling function <code><a href='svystatB.html'>svystatB</a></code> as follows: <code><a href='svystatB.html'>svystatB(design, model)</a></code>. This will, of course, return the estimated regression coefficients of <code>model</code> <em>before</em> calibration.</p>
+<p>Note that each <code>Beta</code> vector can have <code>names</code> or not. If a <code>Beta</code> vector has <em>names</em> that match the expected ones (given the corresponding <code>model</code> formula), but appear in a <em>different order</em>, then function <code>prep.calBeta</code> will suitably re-order them and inform you with a <code>warning</code> message.</p>
 <p>As anticipated, argument <code>by</code> can be used to enable calibration on regression coefficients known at <em>domain level</em> (i.e. within subpopulations).</p>
 <p>If passed, <code>by</code> must be a formula: for example, the statement <code>by=~B1:B2</code> defines as domains the subpopulations determined by crossing the modalities of variables <code>B1</code> and <code>B2</code>. Notice that a formula like <code>by=~B1+B2</code> will be automatically translated into the factor-crossing formula <code>by=~B1:B2</code>. The <code>design</code> variables referenced by <code>by</code> (if any) should be of type <code>factor</code>, otherwise they will be coerced. Note that, to prevent obvious collinearity issues, the variables referenced by argument <code>by</code> must <em>not</em> appear in the input <code>model</code> formula: otherwise, the program will stop and print an error message.</p>
 <p>If you specify domains through argument <code>by</code>, you will be allowed to specify <em>just a single</em> linear model through argument <code>model</code>. Instead, through argument <code>Beta</code>, you will have to specify domain-level vectors of regression coefficients. Therefore, <code>Beta</code> will be necessarily passed as a <em>list</em>. Note that, in this case, the <code>Beta</code> list must have as many components as the domains defined through argument <code>by</code>, and the two will be matched <em>positionally</em> by function <code>prep.calBeta</code>. Therefore, the <em>order</em> of elements in the <code>Beta</code> list <em>matters</em>. Specifically, <code>Beta</code> vectors must appear in the same order as the domains specified by argument <code>by</code>. You can easily learn about the <em>right</em> ordering of <code>by</code> domains (and hence <code>Beta</code> elements) by calling function <code><a href='svystatB.html'>svystatB</a></code> as follows: <code><a href='svystatB.html'>svystatB(design, model, by)</a></code>. This will, of course, return the estimated regression coefficients of <code>model</code> within <code>by</code> domains <em>before</em> calibration.</p>
-<p>Lastly, if you specify domains through argument <code>by</code>, you will be allowed to decide whether <code>design</code> should be prepared for a <em>global</em> or a <em>partitioned</em> calibration task (see <code><a href='e.calibrate.html'>e.calibrate</a></code>). Recall that partitioned calibration tasks are computationally more efficient, but produce exactly the same results. Note that, if you select <code>partition = TRUE</code>, than the <em>calibration domains</em> used to split the global calibration task will be the same domains specified via argument <code>by</code>. More explicitly: function <code><a href='e.calibrate.html'>e.calibrate</a></code> will eventually be called on <code>prep.calBeta</code>'s output object silently assuming <code>partition = by</code>.</p>
+<p>Lastly, if you specify domains through argument <code>by</code>, you will be allowed to decide whether <code>design</code> should be prepared for a <em>global</em> or a <em>partitioned</em> calibration task (see <code><a href='e.calibrate.html'>e.calibrate</a></code>). Recall that partitioned calibration tasks are computationally more efficient, but produce exactly the same results. Note that, if you select <code>partition = TRUE</code>, then the <em>calibration domains</em> used to split the global calibration task will be the same domains specified via argument <code>by</code>. More explicitly: function <code><a href='e.calibrate.html'>e.calibrate</a></code> will eventually be called on <code>prep.calBeta</code>'s output object silently assuming <code>partition = by</code>.</p>
 <p>The synthetic linearized variables <strong><em>z</em></strong> prepared by <code>prep.calBeta</code> will eventually be used by function <code><a href='e.calibrate.html'>e.calibrate</a></code> to solve the calibration task. Argument <code>drop.z</code> allows you to instruct <code><a href='e.calibrate.html'>e.calibrate</a></code> to drop these variables from its output object - or rather keep them within it - upon completion of the calibration task. The default has been set to <code>TRUE</code> to reduce memory usage. In case you want to be able to consistently trim weights after calibration via function <code><a href='trimcal.html'>trimcal</a></code>, you <em>must</em> specify <code>drop.z = FALSE</code>.<br /><br /></p>
 <p><strong>Function <code>pop.calBeta()</code></strong><br />
-Given the <em>prepared</em> <code>design</code> object returned by <code>prep.calBeta</code>, function <code>pop.calBeta</code> generates the <em>control totals</em> data frame needed to run the calibration task. This dataframe suitably accomodates the control totals of the <em>synthetic linearized variables</em> <strong><em>z</em></strong> prepared by <code>prep.calBeta</code>.</p>
+Given the <em>prepared</em> <code>design</code> object returned by <code>prep.calBeta</code>, function <code>pop.calBeta</code> generates the <em>control totals</em> data frame needed to run the calibration task. This data frame suitably accommodates the control totals of the <em>synthetic linearized variables</em> <strong><em>z</em></strong> prepared by <code>prep.calBeta</code>.</p>
 <p>Note that the data frame object returned by <code>pop.calBeta</code> is <em>already filled</em>, with control totals that are <em>all zero</em>, and it is ready to be directly passed to function <code><a href='e.calibrate.html'>e.calibrate</a></code> (see the &#8216;Examples&#8217; section).</p>
 <p>Note, lastly, that printing this control totals data frame might not be very telling: to better understand its structure you should instead leverage function <code><a href='describe.html'>pop.desc</a></code>, for which a method dedicated to <em>&#8216;special purpose calibration&#8217;</em> tasks is available (see the &#8216;Examples&#8217; section).</p>
     <h2 class="hasAnchor" id="linear-algebra-remark"><a class="anchor" href="#linear-algebra-remark"></a>Linear Algebra Remark</h2>
@@ -210,7 +210,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 
     
 <ul>
-<li><p>For function <code>pop.calBeta</code>, an object of the same class as <code>design</code>, storing the freshly created <em>synthetic linearized variables</em> <strong><em>z</em></strong> as columns of its <code>$variables</code> slot (see the &#8216;Examples&#8217; section).</p></li>
+<li><p>For function <code>prep.calBeta</code>, an object of the same class as <code>design</code>, storing the freshly created <em>synthetic linearized variables</em> <strong><em>z</em></strong> as columns of its <code>$variables</code> slot (see the &#8216;Examples&#8217; section).</p></li>
 <li><p>For function <code>pop.calBeta</code>, a <em>control totals</em> data frame for those <strong><em>z</em></strong> variables, with class <code>spc.pop</code> (see the &#8216;Examples&#8217; section).</p></li>
 </ul>
 
@@ -267,34 +267,34 @@ A second, very attractive alternative would be to run the special purpose calibr
 #&gt; 5 1.(19,49] Agriculture Agriculture.Center Center.1.(19,49].0     0.5     0.5
 #&gt; 6 1.(49,99] Agriculture Agriculture.Center Center.1.(49,99].0    60.0    60.0
 #&gt;           y weight       fpc ent dom3 y_.Intercept.     y_emp.num
-#&gt; 1 1636.6075   1.40 0.7142857   1    C -2.735590e-13  4.440892e-16
-#&gt; 2 1002.4378   1.40 0.7142857   1    C  1.565414e-14 -2.775558e-17
-#&gt; 3  444.4637   1.40 0.7142857   1    D  3.108624e-13 -6.661338e-16
-#&gt; 4  252.1287   1.40 0.7142857   1    D  3.890221e-13 -8.881784e-16
+#&gt; 1 1636.6075   1.40 0.7142857   1    C -2.771117e-13  4.440892e-16
+#&gt; 2 1002.4378   1.40 0.7142857   1    C  1.565414e-14 -1.387779e-17
+#&gt; 3  444.4637   1.40 0.7142857   1    D  3.126388e-13 -6.661338e-16
+#&gt; 4  252.1287   1.40 0.7142857   1    D  3.907985e-13 -8.881784e-16
 #&gt; 5  466.5918   1.40 0.7142857   1    D  3.765876e-13 -8.881784e-16
-#&gt; 6  742.9053   1.25 0.8000000   1    B -3.318235e-12  7.993606e-15
+#&gt; 6  742.9053   1.25 0.8000000   1    B -3.318235e-12  7.105427e-15
 #&gt;   y_emp.cl.9.19. y_emp.cl.19.49. y_emp.cl.49.99. y_emp.cl.99.Inf.
-#&gt; 1   1.776357e-14   -2.590537e-01    3.552714e-15    -1.421085e-14
-#&gt; 2  -7.771561e-16   -5.831354e-03   -3.330669e-16     5.551115e-16
+#&gt; 1   1.421085e-14   -2.590537e-01    7.105427e-15    -1.065814e-14
+#&gt; 2  -7.771561e-16   -5.831354e-03   -4.440892e-16     5.551115e-16
 #&gt; 3  -1.421085e-14   -3.717904e-01   -7.105427e-15     7.105427e-15
-#&gt; 4  -1.776357e-14   -6.547574e-01   -8.881784e-15     8.881784e-15
-#&gt; 5  -2.131628e-14   -2.010425e-01   -7.105427e-15     1.065814e-14
-#&gt; 6   7.105427e-15   -1.421085e-14   -3.917770e+00     4.263256e-14
+#&gt; 4  -1.776357e-14   -6.547574e-01   -8.881784e-15     7.105427e-15
+#&gt; 5  -1.421085e-14   -2.010425e-01   -7.105427e-15     1.421085e-14
+#&gt; 6   0.000000e+00   -2.131628e-14   -3.917770e+00     3.552714e-14
 #&gt;   y_emp.num.emp.cl.9.19. y_emp.num.emp.cl.19.49. y_emp.num.emp.cl.49.99.
 #&gt; 1           0.000000e+00            1.225995e-02           -4.440892e-16
-#&gt; 2           1.387779e-17           -9.993173e-06            1.387779e-17
+#&gt; 2           0.000000e+00           -9.993173e-06            2.775558e-17
 #&gt; 3           2.220446e-16            8.367914e-03            4.440892e-16
-#&gt; 4           6.661338e-16            1.683377e-02            4.440892e-16
+#&gt; 4           4.440892e-16            1.683377e-02            8.881784e-16
 #&gt; 5           4.440892e-16            1.823722e-03            4.440892e-16
-#&gt; 6          -6.217249e-15           -6.217249e-15            4.896417e-02
+#&gt; 6          -6.217249e-15           -5.329071e-15            4.896417e-02
 #&gt;   y_emp.num.emp.cl.99.Inf.
 #&gt; 1            -4.440892e-16
-#&gt; 2             2.775558e-17
+#&gt; 2             1.387779e-17
 #&gt; 3             6.661338e-16
-#&gt; 4             8.881784e-16
-#&gt; 5             8.881784e-16
-#&gt; 6            -7.105427e-15</div><div class='input'>
-<span class='co'># Then, prepare the control totals dataframe for the calibration task:</span>
+#&gt; 4             6.661338e-16
+#&gt; 5             4.440892e-16
+#&gt; 6            -5.329071e-15</div><div class='input'>
+<span class='co'># Then, prepare the control totals data frame for the calibration task:</span>
 <span class='no'>pop0</span> <span class='kw'>&lt;-</span> <span class='fu'>pop.calBeta</span>(<span class='no'>sbsdes0</span>)
 
 <span class='co'># Have a look...</span>
@@ -330,16 +330,16 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># Check that calibration estimates of regression coefficients now match the</span>
 <span class='co'># input B0 values derived from the external source:</span>
 <span class='fu'><a href='svystatB.html'>svystatB</a></span>(<span class='no'>sbscal0</span>, <span class='no'>model0</span>)</div><div class='output co'>#&gt;                          RegCoef.y           SE
-#&gt; (Intercept)             283.275194 3.110855e-12
-#&gt; emp.num                  16.331333 4.447773e-13
-#&gt; emp.cl(9,19]            -57.821776 7.072171e-12
-#&gt; emp.cl(19,49]           -97.929104 3.000343e-11
-#&gt; emp.cl(49,99]            95.802161 1.565824e-10
-#&gt; emp.cl(99,Inf]         1981.066079 3.164952e-12
-#&gt; emp.num:emp.cl(9,19]      8.261965 6.701616e-13
-#&gt; emp.num:emp.cl(19,49]    11.644131 1.162343e-12
-#&gt; emp.num:emp.cl(49,99]     6.751837 2.327074e-12
-#&gt; emp.num:emp.cl(99,Inf]   -0.572829 4.395589e-13</div><div class='input'><span class='no'>B0</span></div><div class='output co'>#&gt;            (Intercept)                emp.num           emp.cl(9,19] 
+#&gt; (Intercept)             283.275194 2.236397e-12
+#&gt; emp.num                  16.331333 2.746405e-13
+#&gt; emp.cl(9,19]            -57.821776 2.398234e-12
+#&gt; emp.cl(19,49]           -97.929104 3.878777e-12
+#&gt; emp.cl(49,99]            95.802161 1.484270e-11
+#&gt; emp.cl(99,Inf]         1981.066079 2.017717e-12
+#&gt; emp.num:emp.cl(9,19]      8.261965 2.950886e-13
+#&gt; emp.num:emp.cl(19,49]    11.644131 2.883649e-13
+#&gt; emp.num:emp.cl(49,99]     6.751837 3.909563e-13
+#&gt; emp.num:emp.cl(99,Inf]   -0.572829 2.906648e-13</div><div class='input'><span class='no'>B0</span></div><div class='output co'>#&gt;            (Intercept)                emp.num           emp.cl(9,19] 
 #&gt;             283.275194              16.331333             -57.821776 
 #&gt;          emp.cl(19,49]          emp.cl(49,99]         emp.cl(99,Inf] 
 #&gt;             -97.929104              95.802161            1981.066079 
@@ -371,15 +371,15 @@ A second, very attractive alternative would be to run the special purpose calibr
   <span class='co'># Check that calibration estimates of regression coefficients now match the</span>
   <span class='co'># input B1 values derived from the external source...</span>
   <span class='fu'><a href='svystatB.html'>svystatB</a></span>(<span class='no'>sbscal1</span>, <span class='no'>model1</span>)</div><div class='output co'>#&gt;                        RegCoef.va.imp2           SE
-#&gt; nace.macroAgriculture       5924.29979 2.957017e-12
-#&gt; nace.macroIndustry          6032.07596 1.866033e-12
-#&gt; nace.macroCommerce          9082.05961 1.085778e-12
-#&gt; nace.macroServices          5926.88094 1.347099e-12
-#&gt; emp.num:emp.cl[6,9]         -766.68839 1.676626e-13
-#&gt; emp.num:emp.cl(9,19]        -366.77419 1.160064e-13
-#&gt; emp.num:emp.cl(19,49]       -112.98311 3.172506e-14
-#&gt; emp.num:emp.cl(49,99]        -25.49606 1.492446e-14
-#&gt; emp.num:emp.cl(99,Inf]        12.87226 2.332265e-15</div><div class='input'>  <span class='no'>B1</span></div><div class='output co'>#&gt;  nace.macroAgriculture     nace.macroIndustry     nace.macroCommerce 
+#&gt; nace.macroAgriculture       5924.29979 1.765520e-12
+#&gt; nace.macroIndustry          6032.07596 2.000874e-12
+#&gt; nace.macroCommerce          9082.05961 9.230327e-13
+#&gt; nace.macroServices          5926.88094 8.881059e-13
+#&gt; emp.num:emp.cl[6,9]         -766.68839 1.414606e-13
+#&gt; emp.num:emp.cl(9,19]        -366.77419 8.289589e-14
+#&gt; emp.num:emp.cl(19,49]       -112.98311 3.430214e-14
+#&gt; emp.num:emp.cl(49,99]        -25.49606 1.131838e-14
+#&gt; emp.num:emp.cl(99,Inf]        12.87226 2.904212e-15</div><div class='input'>  <span class='no'>B1</span></div><div class='output co'>#&gt;  nace.macroAgriculture     nace.macroIndustry     nace.macroCommerce 
 #&gt;             5924.29979             6032.07596             9082.05961 
 #&gt;     nace.macroServices    emp.num:emp.cl[6,9]   emp.num:emp.cl(9,19] 
 #&gt;             5926.88094             -766.68839             -366.77419 
@@ -400,10 +400,10 @@ A second, very attractive alternative would be to run the special purpose calibr
   <span class='co'># Check that calibration estimates of regression coefficients now match the</span>
   <span class='co'># input B2 values derived from the external source...</span>
   <span class='fu'><a href='svystatB.html'>svystatB</a></span>(<span class='no'>sbscal2</span>, <span class='no'>model2</span>)</div><div class='output co'>#&gt;       RegCoef.y           SE
-#&gt; dom3A  1486.811 5.946116e-14
-#&gt; dom3B  1586.184 1.221214e-13
-#&gt; dom3C  1503.338 7.099216e-14
-#&gt; dom3D  1540.387 1.266409e-13</div><div class='input'>  <span class='no'>B2</span></div><div class='output co'>#&gt;    dom3A    dom3B    dom3C    dom3D 
+#&gt; dom3A  1486.811 2.301386e-14
+#&gt; dom3B  1586.184 5.055403e-14
+#&gt; dom3C  1503.338 9.997258e-14
+#&gt; dom3D  1540.387 6.728561e-14</div><div class='input'>  <span class='no'>B2</span></div><div class='output co'>#&gt;    dom3A    dom3B    dom3C    dom3D 
 #&gt; 1486.811 1586.184 1503.338 1540.387 </div><div class='input'>  <span class='co'># ...but, of course, do *not* match those of B1:</span>
   <span class='fu'><a href='svystatB.html'>svystatB</a></span>(<span class='no'>sbscal2</span>, <span class='no'>model1</span>)</div><div class='output co'>#&gt;                        RegCoef.va.imp2          SE
 #&gt; nace.macroAgriculture       5798.62214 232.4651711
@@ -425,10 +425,10 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># Prepare the survey design for the joint calibration task:</span>
 <span class='no'>sbsdes1_2</span> <span class='kw'>&lt;-</span> <span class='fu'>prep.calBeta</span>(<span class='no'>sbsdes</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>model1</span>, <span class='no'>model2</span>), <span class='kw'>Beta</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>B1</span>, <span class='no'>B2</span>))
 
-<span class='co'># Prepare the control totals dataframe for the joint calibration task:</span>
+<span class='co'># Prepare the control totals data frame for the joint calibration task:</span>
 <span class='no'>pop1_2</span> <span class='kw'>&lt;-</span> <span class='fu'>pop.calBeta</span>(<span class='no'>sbsdes1_2</span>)
 
-<span class='co'># Have a look to the control totals (note the presence of two models and</span>
+<span class='co'># Have a look at the control totals (note the presence of two models and</span>
 <span class='co'># Beta vectors):</span>
 <span class='fu'><a href='describe.html'>pop.desc</a></span>(<span class='no'>pop1_2</span>)</div><div class='output co'>#&gt; # Data frame of control totals for a *special purpose calibration* task
 #&gt; - Benchmark parameters:       Regression Coefficients
@@ -474,24 +474,24 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># Check that calibration estimates of regression coefficients now match *both*</span>
 <span class='co'># the B1 and B2 values derived from the external sources:</span>
 <span class='fu'><a href='svystatB.html'>svystatB</a></span>(<span class='no'>sbscal1_2</span>, <span class='no'>model1</span>)</div><div class='output co'>#&gt;                        RegCoef.va.imp2           SE
-#&gt; nace.macroAgriculture       5924.29979 3.588752e-12
-#&gt; nace.macroIndustry          6032.07596 1.824968e-12
-#&gt; nace.macroCommerce          9082.05961 1.080236e-12
-#&gt; nace.macroServices          5926.88094 1.492405e-12
-#&gt; emp.num:emp.cl[6,9]         -766.68839 2.027428e-13
-#&gt; emp.num:emp.cl(9,19]        -366.77419 8.760977e-14
-#&gt; emp.num:emp.cl(19,49]       -112.98311 2.926817e-14
-#&gt; emp.num:emp.cl(49,99]        -25.49606 2.258273e-14
-#&gt; emp.num:emp.cl(99,Inf]        12.87226 2.870303e-15</div><div class='input'><span class='no'>B1</span></div><div class='output co'>#&gt;  nace.macroAgriculture     nace.macroIndustry     nace.macroCommerce 
+#&gt; nace.macroAgriculture       5924.29979 2.973064e-12
+#&gt; nace.macroIndustry          6032.07596 1.967851e-12
+#&gt; nace.macroCommerce          9082.05961 1.063714e-12
+#&gt; nace.macroServices          5926.88094 1.258675e-12
+#&gt; emp.num:emp.cl[6,9]         -766.68839 2.000892e-13
+#&gt; emp.num:emp.cl(9,19]        -366.77419 6.490936e-14
+#&gt; emp.num:emp.cl(19,49]       -112.98311 4.277341e-14
+#&gt; emp.num:emp.cl(49,99]        -25.49606 2.554267e-14
+#&gt; emp.num:emp.cl(99,Inf]        12.87226 4.233883e-15</div><div class='input'><span class='no'>B1</span></div><div class='output co'>#&gt;  nace.macroAgriculture     nace.macroIndustry     nace.macroCommerce 
 #&gt;             5924.29979             6032.07596             9082.05961 
 #&gt;     nace.macroServices    emp.num:emp.cl[6,9]   emp.num:emp.cl(9,19] 
 #&gt;             5926.88094             -766.68839             -366.77419 
 #&gt;  emp.num:emp.cl(19,49]  emp.num:emp.cl(49,99] emp.num:emp.cl(99,Inf] 
 #&gt;             -112.98311              -25.49606               12.87226 </div><div class='input'><span class='fu'><a href='svystatB.html'>svystatB</a></span>(<span class='no'>sbscal1_2</span>, <span class='no'>model2</span>)</div><div class='output co'>#&gt;       RegCoef.y           SE
-#&gt; dom3A  1486.811 1.862539e-13
-#&gt; dom3B  1586.184 5.412718e-14
-#&gt; dom3C  1503.338 2.803516e-14
-#&gt; dom3D  1540.387 5.373730e-14</div><div class='input'><span class='no'>B2</span></div><div class='output co'>#&gt;    dom3A    dom3B    dom3C    dom3D 
+#&gt; dom3A  1486.811 1.521798e-13
+#&gt; dom3B  1586.184 1.266067e-13
+#&gt; dom3C  1503.338 2.518340e-14
+#&gt; dom3D  1540.387 7.797772e-14</div><div class='input'><span class='no'>B2</span></div><div class='output co'>#&gt;    dom3A    dom3B    dom3C    dom3D 
 #&gt; 1486.811 1586.184 1503.338 1540.387 </div><div class='input'><span class='co'># OK</span>
 
 
@@ -550,7 +550,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># Prepare the control totals for the calibration task:</span>
 <span class='no'>pop.g</span> <span class='kw'>&lt;-</span> <span class='fu'>pop.calBeta</span>(<span class='no'>sbsdes.g</span>)
 
-<span class='co'># Have a look to the control totals (note the presence of one Beta vector *for</span>
+<span class='co'># Have a look at the control totals (note the presence of one Beta vector *for</span>
 <span class='co'># each domain*):</span>
 <span class='fu'><a href='describe.html'>pop.desc</a></span>(<span class='no'>pop.g</span>)</div><div class='output co'>#&gt; # Data frame of control totals for a *special purpose calibration* task
 #&gt; - Benchmark parameters:       Regression Coefficients
@@ -656,30 +656,30 @@ A second, very attractive alternative would be to run the special purpose calibr
 #&gt; C                     -79.52702                      -8.59304
 #&gt; D                    -118.21161                     -18.76583
 #&gt;   va.imp2_emp.num:emp.cl(99,Inf] SE.va.imp2_nace.macroAgriculture
-#&gt; A                      14.581521                     1.464051e-11
-#&gt; B                       9.449148                     2.626572e-12
-#&gt; C                      16.252348                     7.715128e-12
-#&gt; D                      13.477778                     2.826564e-12
+#&gt; A                      14.581521                     1.649025e-11
+#&gt; B                       9.449148                     1.673877e-12
+#&gt; C                      16.252348                     3.674102e-12
+#&gt; D                      13.477778                     2.926656e-12
 #&gt;   SE.va.imp2_nace.macroIndustry SE.va.imp2_nace.macroCommerce
-#&gt; A                  7.267283e-12                  8.222697e-12
-#&gt; B                  5.508275e-13                  2.371340e-12
-#&gt; C                  3.242956e-12                  4.110657e-12
-#&gt; D                  1.055484e-12                  6.637389e-12
+#&gt; A                  4.627727e-12                  7.514063e-12
+#&gt; B                  2.261567e-12                  1.763546e-12
+#&gt; C                  2.087527e-12                  2.119125e-12
+#&gt; D                  7.339597e-13                  6.153314e-12
 #&gt;   SE.va.imp2_nace.macroServices SE.va.imp2_emp.num:emp.cl[6,9]
-#&gt; A                  7.466187e-12                   9.070664e-13
-#&gt; B                  1.652352e-12                   2.072976e-13
-#&gt; C                  3.462708e-12                   5.007919e-13
-#&gt; D                  2.859232e-12                   4.591229e-13
+#&gt; A                  6.585140e-12                   8.276863e-13
+#&gt; B                  1.651707e-12                   1.646465e-13
+#&gt; C                  2.708955e-12                   2.925210e-13
+#&gt; D                  1.908998e-12                   4.766464e-13
 #&gt;   SE.va.imp2_emp.num:emp.cl(9,19] SE.va.imp2_emp.num:emp.cl(19,49]
-#&gt; A                    5.768278e-13                     2.066474e-13
-#&gt; B                    4.520645e-14                     2.322698e-14
-#&gt; C                    3.992955e-13                     1.247204e-13
-#&gt; D                    1.631044e-13                     9.610965e-14
+#&gt; A                    4.565747e-13                     1.847763e-13
+#&gt; B                    5.286519e-14                     3.958670e-14
+#&gt; C                    1.944622e-13                     1.175577e-13
+#&gt; D                    1.675736e-13                     8.469797e-14
 #&gt;   SE.va.imp2_emp.num:emp.cl(49,99] SE.va.imp2_emp.num:emp.cl(99,Inf]
-#&gt; A                     3.087308e-13                      7.951077e-15
-#&gt; B                     9.279691e-15                      5.404357e-15
-#&gt; C                     7.720180e-14                      9.461398e-15
-#&gt; D                     5.160165e-14                      1.556487e-14</div><div class='input'><span class='no'>B</span></div><div class='output co'>#&gt; sbs.frame$dom3: A
+#&gt; A                     2.641439e-13                      6.771809e-15
+#&gt; B                     2.135891e-14                      4.751756e-15
+#&gt; C                     5.735525e-14                      1.025424e-14
+#&gt; D                     5.519336e-14                      3.977953e-15</div><div class='input'><span class='no'>B</span></div><div class='output co'>#&gt; sbs.frame$dom3: A
 #&gt;  nace.macroAgriculture     nace.macroIndustry     nace.macroCommerce 
 #&gt;             5963.62356             5681.88344             8265.52592 
 #&gt;     nace.macroServices    emp.num:emp.cl[6,9]   emp.num:emp.cl(9,19] 
@@ -719,7 +719,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># Prepare the control totals for the calibration task:</span>
 <span class='no'>pop.p</span> <span class='kw'>&lt;-</span> <span class='fu'>pop.calBeta</span>(<span class='no'>sbsdes.p</span>)
 
-<span class='co'># Have a look to the control totals (note the presence of one Beta vector *for</span>
+<span class='co'># Have a look at the control totals (note the presence of one Beta vector *for</span>
 <span class='co'># each domain*):</span>
 <span class='fu'><a href='describe.html'>pop.desc</a></span>(<span class='no'>pop.p</span>)</div><div class='output co'>#&gt; # Data frame of control totals for a *special purpose calibration* task
 #&gt; - Benchmark parameters:       Regression Coefficients
@@ -814,30 +814,30 @@ A second, very attractive alternative would be to run the special purpose calibr
 #&gt; C                     -79.52702                      -8.59304
 #&gt; D                    -118.21161                     -18.76583
 #&gt;   va.imp2_emp.num:emp.cl(99,Inf] SE.va.imp2_nace.macroAgriculture
-#&gt; A                      14.581521                     1.473273e-11
-#&gt; B                       9.449148                     2.358546e-12
-#&gt; C                      16.252348                     4.851001e-12
-#&gt; D                      13.477778                     8.698131e-13
+#&gt; A                      14.581521                     1.657754e-11
+#&gt; B                       9.449148                     1.505607e-12
+#&gt; C                      16.252348                     3.625900e-12
+#&gt; D                      13.477778                     2.999670e-12
 #&gt;   SE.va.imp2_nace.macroIndustry SE.va.imp2_nace.macroCommerce
-#&gt; A                  1.638006e-11                  9.124250e-12
-#&gt; B                  9.455565e-13                  1.396646e-12
-#&gt; C                  2.496062e-12                  4.006464e-12
-#&gt; D                  5.323422e-13                  1.417058e-12
+#&gt; A                  7.517440e-12                  9.921047e-12
+#&gt; B                  9.697959e-13                  1.411285e-12
+#&gt; C                  1.444591e-12                  1.924490e-12
+#&gt; D                  9.655320e-13                  1.460114e-12
 #&gt;   SE.va.imp2_nace.macroServices SE.va.imp2_emp.num:emp.cl[6,9]
-#&gt; A                  9.249272e-12                   1.176730e-12
-#&gt; B                  1.157037e-12                   1.186337e-13
-#&gt; C                  3.800487e-12                   4.371859e-13
-#&gt; D                  6.853105e-13                   1.249636e-13
+#&gt; A                  7.827113e-12                   9.918396e-13
+#&gt; B                  1.040222e-12                   1.545174e-13
+#&gt; C                  2.134538e-12                   2.819066e-13
+#&gt; D                  7.932300e-13                   1.476412e-13
 #&gt;   SE.va.imp2_emp.num:emp.cl(9,19] SE.va.imp2_emp.num:emp.cl(19,49]
-#&gt; A                    7.084993e-13                     3.896926e-13
-#&gt; B                    6.554536e-14                     2.534028e-14
-#&gt; C                    3.492117e-13                     1.098546e-13
-#&gt; D                    1.275862e-13                     4.537337e-14
+#&gt; A                    7.280724e-13                     3.501405e-13
+#&gt; B                    4.813838e-14                     3.231251e-14
+#&gt; C                    1.755295e-13                     6.969972e-14
+#&gt; D                    1.253074e-13                     5.712184e-14
 #&gt;   SE.va.imp2_emp.num:emp.cl(49,99] SE.va.imp2_emp.num:emp.cl(99,Inf]
-#&gt; A                     3.243194e-13                      2.668893e-14
-#&gt; B                     4.825743e-14                      9.466470e-15
-#&gt; C                     7.614446e-14                      2.720381e-15
-#&gt; D                     2.060717e-14                      1.629309e-14</div><div class='input'><span class='no'>B</span></div><div class='output co'>#&gt; sbs.frame$dom3: A
+#&gt; A                     2.714481e-13                      2.282429e-14
+#&gt; B                     3.468040e-14                      9.721090e-16
+#&gt; C                     5.297488e-14                      2.556882e-15
+#&gt; D                     2.323334e-14                      1.199736e-14</div><div class='input'><span class='no'>B</span></div><div class='output co'>#&gt; sbs.frame$dom3: A
 #&gt;  nace.macroAgriculture     nace.macroIndustry     nace.macroCommerce 
 #&gt;             5963.62356             5681.88344             8265.52592 
 #&gt;     nace.macroServices    emp.num:emp.cl[6,9]   emp.num:emp.cl(9,19] 
@@ -870,7 +870,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 #&gt;             -118.21161              -18.76583               13.47778 </div><div class='input'><span class='co'># OK</span>
 
 <span class='co'>## Lastly, check that calibration weights obtained using the *global* and </span>
-<span class='co'>## *partitioned* solution are the same:</span>
+<span class='co'>## *partitioned* solutions are the same:</span>
 <span class='fu'><a href='g.range.html'>g.range</a></span>(<span class='no'>sbscal.g</span>)</div><div class='output co'>#&gt;      g.min      g.max 
 #&gt; 0.09254688 2.11921444 </div><div class='input'><span class='fu'><a href='g.range.html'>g.range</a></span>(<span class='no'>sbscal.p</span>)</div><div class='output co'>#&gt;      g.min      g.max 
 #&gt; 0.09254688 2.11921444 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span>(<span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal.g</span>), <span class='fu'><a href='weights.html'>weights</a></span>(<span class='no'>sbscal.p</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># OK</span>
@@ -880,7 +880,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># BONUS TIP: Calibration on the mean (or on domain means) #</span>
 <span class='co'>#            of one variable or multiple variables.       #</span>
 <span class='co'>###########################################################</span>
-<span class='co'># Since the domain mean of a numeric variable can be thought as a</span>
+<span class='co'># Since the domain mean of a numeric variable can be thought of as a</span>
 <span class='co'># regression coefficient (see the 'Examples' section of ?svystatB),</span>
 <span class='co'># you can use the ReGenesees facilities documented above to</span>
 <span class='co'># *calibrate on the mean (or on domain means)* of *one variable</span>
@@ -909,7 +909,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='no'>pop.new</span> <span class='kw'>&lt;-</span> <span class='fu'>pop.calBeta</span>(<span class='no'>exdes.new</span>)
 <span class='no'>excal.new</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='no'>exdes.new</span>, <span class='no'>pop.new</span>)
 
-<span class='co'># Now, check that calibration estimate of average income now match the known</span>
+<span class='co'># Check that the calibration estimate of average income now matches the known</span>
 <span class='co'># value derived from the external source *without residual uncertainty*:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>excal.new</span>, ~<span class='no'>income</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;        Mean           SE
 #&gt; income 1270 3.148794e-14</div><div class='input'><span class='no'>income.AVG</span></div><div class='output co'>#&gt; [1] 1270</div><div class='input'>
@@ -925,7 +925,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># however, that argument 'by' would provide an alternative way to achieve</span>
 <span class='co'># the same result).</span>
 <span class='co'># Suppose you know with satisfactory accuracy the *average income* by the</span>
-<span class='co'># crossclassification of sex and marital status:</span>
+<span class='co'># cross-classification of sex and marital status:</span>
 <span class='no'>income.AVG.sex.marstat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>f.married</span>   <span class='kw'>=</span> <span class='fl'>1310</span>, <span class='kw'>m.married</span>   <span class='kw'>=</span> <span class='fl'>1260</span>,
                             <span class='kw'>f.unmarried</span> <span class='kw'>=</span> <span class='fl'>1150</span>, <span class='kw'>m.unmarried</span> <span class='kw'>=</span> <span class='fl'>1200</span>,
                             <span class='kw'>f.widowed</span>   <span class='kw'>=</span> <span class='fl'>1380</span>, <span class='kw'>m.widowed</span>   <span class='kw'>=</span> <span class='fl'>1300</span>)
@@ -936,16 +936,16 @@ A second, very attractive alternative would be to run the special purpose calibr
 #&gt; <span class='warning'>  Please double-check the consistency of 'model' and 'Beta' input values.</span></div><div class='input'><span class='no'>pop.new</span> <span class='kw'>&lt;-</span> <span class='fu'>pop.calBeta</span>(<span class='no'>exdes.new</span>)
 <span class='no'>excal.new</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='e.calibrate.html'>e.calibrate</a></span>(<span class='no'>exdes.new</span>, <span class='no'>pop.new</span>)
 
-<span class='co'># Now, check that calibration estimates of average income by domains now match</span>
+<span class='co'># Check that calibration estimates of average income by domains now match</span>
 <span class='co'># the known values derived from the external source *without residual</span>
 <span class='co'># uncertainty*:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>excal.new</span>, ~<span class='no'>income</span>, ~<span class='no'>sex</span>:<span class='no'>marstat</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;             sex   marstat Mean.income SE.Mean.income
-#&gt; f.married     f   married        1310   2.167736e-14
-#&gt; m.married     m   married        1260   3.149995e-15
-#&gt; f.unmarried   f unmarried        1150   6.709128e-14
-#&gt; m.unmarried   m unmarried        1200   1.835315e-14
+#&gt; f.married     f   married        1310   7.419890e-15
+#&gt; m.married     m   married        1260   2.486852e-14
+#&gt; f.unmarried   f unmarried        1150   5.961929e-14
+#&gt; m.unmarried   m unmarried        1200   4.604666e-14
 #&gt; f.widowed     f   widowed        1380   2.339318e-14
-#&gt; m.widowed     m   widowed        1300   2.183212e-14</div><div class='input'><span class='no'>income.AVG.sex.marstat</span></div><div class='output co'>#&gt;   f.married   m.married f.unmarried m.unmarried   f.widowed   m.widowed 
+#&gt; m.widowed     m   widowed        1300   1.998063e-14</div><div class='input'><span class='no'>income.AVG.sex.marstat</span></div><div class='output co'>#&gt;   f.married   m.married f.unmarried m.unmarried   f.widowed   m.widowed 
 #&gt;        1310        1260        1150        1200        1380        1300 </div><div class='input'>
 <span class='co'># ...while there is *residual uncertainty* in the estimates of the numerator and</span>
 <span class='co'># denominator totals:</span>
@@ -983,18 +983,18 @@ A second, very attractive alternative would be to run the special purpose calibr
 <span class='co'># Now, check that calibration estimates match the known domain means derived</span>
 <span class='co'># from the external source:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>excal.new</span>, ~<span class='no'>income</span>, ~<span class='no'>sex</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;   sex Mean.income SE.Mean.income
-#&gt; f   f        1245   2.397528e-13
-#&gt; m   m        1250   2.886708e-14</div><div class='input'><span class='no'>income.AVG.sex</span></div><div class='output co'>#&gt;    f    m 
+#&gt; f   f        1245   2.413856e-13
+#&gt; m   m        1250   3.258453e-14</div><div class='input'><span class='no'>income.AVG.sex</span></div><div class='output co'>#&gt;    f    m 
 #&gt; 1245 1250 </div><div class='input'><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>excal.new</span>, ~<span class='no'>income</span>, ~<span class='no'>marstat</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;             marstat Mean.income SE.Mean.income
-#&gt; married     married        1260   5.530487e-14
-#&gt; unmarried unmarried        1230   3.157294e-14
-#&gt; widowed     widowed        1290   5.158032e-14</div><div class='input'><span class='no'>income.AVG.marstat</span></div><div class='output co'>#&gt;   married unmarried   widowed 
+#&gt; married     married        1260   6.275435e-14
+#&gt; unmarried unmarried        1230   2.815912e-14
+#&gt; widowed     widowed        1290   8.353035e-14</div><div class='input'><span class='no'>income.AVG.marstat</span></div><div class='output co'>#&gt;   married unmarried   widowed 
 #&gt;      1260      1230      1290 </div><div class='input'><span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>excal.new</span>, ~<span class='no'>z</span>, ~<span class='no'>age5c</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"Mean"</span>)</div><div class='output co'>#&gt;   age5c Mean.z    SE.Mean.z
-#&gt; 1     1    125 1.109197e-14
-#&gt; 2     2    130 1.152637e-14
-#&gt; 3     3    135 5.679110e-15
-#&gt; 4     4    125 1.212958e-14
-#&gt; 5     5    140 4.419762e-15</div><div class='input'><span class='no'>z.AVG.age5c</span></div><div class='output co'>#&gt;   1   2   3   4   5 
+#&gt; 1     1    125 1.865641e-14
+#&gt; 2     2    130 3.483008e-15
+#&gt; 3     3    135 3.263680e-15
+#&gt; 4     4    125 1.819110e-15
+#&gt; 5     5    140 7.245643e-15</div><div class='input'><span class='no'>z.AVG.age5c</span></div><div class='output co'>#&gt;   1   2   3   4   5 
 #&gt; 125 130 135 125 140 </div><div class='input'># OK
 
 </div></pre>

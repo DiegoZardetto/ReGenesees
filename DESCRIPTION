@@ -5,7 +5,7 @@ Title: R Evolved Generalized Software for Sampling Estimates and Errors
 Description: Design-Based and Model-Assisted analysis of complex sample surveys.
         Multistage, stratified, clustered, unequally weighted survey designs.
         Calibration of survey weights. Horvitz-Thompson and Calibration Estimators.
-        Variance Estimation for nonlinear smooth estimators by Taylor-series
+        Variance Estimation for nonlinear (smooth) estimators by Taylor-series
         linearization. Estimates, standard errors, confidence intervals and design
         effects for: Totals, Means, absolute and relative Frequency Distributions
         (marginal, conditional, and joint), Ratios, Shares and Ratios of Shares,
@@ -18,7 +18,7 @@ Description: Design-Based and Model-Assisted analysis of complex sample surveys.
         population parameters, e.g. multiple regression coefficients.
         Generalized Variance Functions (GVF) method for predicting sampling variance
         estimates. Sample size requirements and power calculations.
-Version: 2.4
+Version: 2.5
 Author: Diego Zardetto [aut, cre]
 Maintainer: Diego Zardetto <zardetto@istat.it>
 Authors@R: person("Diego", "Zardetto", role = c("aut", "cre"), email = "zardetto@istat.it")

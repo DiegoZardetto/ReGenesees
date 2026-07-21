@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -171,7 +171,7 @@ summary(object, correlation = FALSE, symbolic.cor = FALSE, ...)</pre>
     </tr>
     <tr>
       <th>model</th>
-      <td><p>The GVF model(s) to be fitted (see &#8216;Details&#8217;). <code>NULL</code> (the default) requires to fit <em>all</em> the registered GVF models currently available in <code><a href='GVF.db.html'>GVF.db</a></code>.</p></td>
+      <td><p>The GVF model(s) to be fitted (see &#8216;Details&#8217;). <code>NULL</code> (the default) requires fitting <em>all</em> the registered GVF models currently available in <code><a href='GVF.db.html'>GVF.db</a></code>.</p></td>
     </tr>
     <tr>
       <th>weights</th>
@@ -205,14 +205,14 @@ summary(object, correlation = FALSE, symbolic.cor = FALSE, ...)</pre>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Function <code>fit.gvf</code> fits one or more GVF models to a set of survey statistics. The rationale for fitting multiple models to the same data is primarily for comparison purposes: the user is expected to eventually choose his preferred model, in order to obtain sampling errors predictions.</p>
+    <p>Function <code>fit.gvf</code> fits one or more GVF models to a set of survey statistics. The rationale for fitting multiple models to the same data is primarily for comparison purposes: the user is expected to eventually choose their preferred model, in order to obtain sampling errors predictions.</p>
 <p>Argument <code>gvf.input</code> specifies the set of (pre computed) estimates and errors to which GVF models are to be fitted, as prepared by functions <code><a href='gvf.input.html'>gvf.input</a></code> and/or <code><a href='svystat.html'>svystat</a></code>.</p>
 <p>One or more GVF models can be fitted <em>simultaneously</em> to the same data, depending on the way argument <code>model</code> is passed.</p>
 <p>Argument <code>model</code> can be either:</p>
 <p>(1) <code>NULL</code> (the default) meaning <em>all</em> the registered models currently available in <code><a href='GVF.db.html'>GVF.db</a></code>;</p>
 <p>(2) any sub-vector of <code>GVF.db$Model.id</code>, i.e. an integer vector identifying an arbitrary selection of registered models;</p>
 <p>(3) an arbitrary (single) formula, i.e. any custom, user-defined GVF model.<br /></p>
-<p>When <code>model</code> is passed via options (1) or (2), function <code>fit.gvf</code> can take advantage of any additional information available inside <code>GVF.db</code>, e.g. to warn the user in case a GVF model is not deemed to be appropriate for the kind of estimates contained into <code>gvf.input</code> (see &#8216;Examples&#8217;).</p>
+<p>When <code>model</code> is passed via options (1) or (2), function <code>fit.gvf</code> can take advantage of any additional information available inside <code>GVF.db</code>, e.g. to warn the user in case a GVF model is not deemed to be appropriate for the kind of estimates contained in <code>gvf.input</code> (see &#8216;Examples&#8217;).</p>
 <p>Argument <code>weights</code> enables fitting the specified GVF model(s) via weighted least squares. By default <code>weights = NULL</code> and ordinary least squares are used. The weights must be passed by a formula referencing variables belonging to <code>gvf.input</code>. For instance, to weight observations according to reciprocals of squared CVs, one can use <code>weights</code> <code>=</code> <code>~I(CV^-2)</code>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -193,32 +193,32 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Owing to <span class="pkg">ReGenesees</span>'s ability to provide proper variance estimates for (complex functions of) calibration estimators, some users may be tempted to exploit <span class="pkg">ReGenesees</span> in the estimation phase <em>even if</em> they did <em>not</em> use <span class="pkg">ReGenesees</span> for calibration.</p>
-<p>This result <em>cannot</em> be achieved naively, by simply passing to <span class="pkg">ReGenesees</span> function <code><a href='e.svydesign.html'>e.svydesign</a></code> the survey data and supplying the externally calibrated weights through its <code>weights</code> argument.</p>
+<p>This result <em>cannot</em> be achieved naively, by simply passing the survey data to <span class="pkg">ReGenesees</span> function <code><a href='e.svydesign.html'>e.svydesign</a></code> and supplying the externally calibrated weights through its <code>weights</code> argument.</p>
 <p>Indeed, variance estimation methods of <span class="pkg">ReGenesees</span>'s summary statistics functions (<code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, <code><a href='svystatS.html'>svystatS</a></code>, <code><a href='svystatSR.html'>svystatSR</a></code>, <code><a href='svystatB.html'>svystatB</a></code>, <code><a href='svystatQ.html'>svystatQ</a></code>, <code><a href='svystatL.html'>svystatL</a></code> and <code><a href='svystat.html'>svystat</a></code>) are dispatched according to the class of the input <code>design</code> object:</p><ol>
-<li><p>If the design object is un-calibrated (i.e. its class is &#8216;analytic&#8217;), variance formulas are appropriate to Horvitz-Thompson estimators (and functions of them).</p></li>
-<li><p>If the design object is calibrated (i.e. its class is &#8216;cal.analytic&#8217;), variance formulas are appropriate to Calibration estimators (and functions of them).</p></li>
+<li><p>If the design object is un-calibrated (i.e. its class is &#8216;analytic&#8217;), variance formulas are appropriate for Horvitz-Thompson estimators (and functions of them).</p></li>
+<li><p>If the design object is calibrated (i.e. its class is &#8216;cal.analytic&#8217;), variance formulas are appropriate for calibration estimators (and functions of them).</p></li>
 </ol>
 
 <p>Therefore, the naive approach of passing the externally calibrated weights <code>weights.cal</code> to <code><a href='e.svydesign.html'>e.svydesign</a></code> as if they were initial or design weights cannot succeed, since it would result in HT-like variance estimates, leading generally to <em>variance overestimation</em> (with bigger upward bias for variables that are better explained by the calibration model).</p>
-<p>Function <code>ext.calibrated</code> has been designed exactly to avoid the aforementioned pitfalls and to allow <span class="pkg">ReGenesees</span> provide correct variance estimates of (functions of) calibration estimators, even if the survey weights have been calibrated externally by other software.</p>
+<p>Function <code>ext.calibrated</code> has been designed exactly to avoid the aforementioned pitfalls and to allow <span class="pkg">ReGenesees</span> to provide correct variance estimates of (functions of) calibration estimators, even if the survey weights have been calibrated externally by other software.</p>
 <p>Argument <code>weights.cal</code> identifies the externally calibrated weights of the units included in the sample. The <code>data</code> variable referenced by <code>weights.cal</code> must be numeric. Currently, only <em>positive</em> externally calibrated weights can be handled (see the dedicated section below).</p>
 <p>Other arguments to <code>ext.calibrated</code> derive either from function <code><a href='e.svydesign.html'>e.svydesign</a></code> or from function <code><a href='e.calibrate.html'>e.calibrate</a></code>. The former serve the purpose of passing the survey data and the corresponding sampling design metadata, the latter are meant to tell <code>ext.calibrated</code> how the externally calibrated weights have been obtained.</p>
     <h2 class="hasAnchor" id="what-if-externally-calibrated-weights-happen-to-be-negative-"><a class="anchor" href="#what-if-externally-calibrated-weights-happen-to-be-negative-"></a>What if externally calibrated weights happen to be negative?</h2>
 
-    <p>From a methodological perspective, negative calibration weights are legitimate. However, owing to software implementation details whose modification would not be trivial, function <code>ext.calibrated</code> is <em>not</em> yet able to cope with this case. Note that the problem is actually due to the <em>external</em> origin of the negative calibration weights. In fact, <span class="pkg">ReGenesees</span> calibration and estimation facilities are entirely able to cope with possibly negative calibration weights, provided they were computed <em>internally</em>.</p>
+    <p>From a methodological perspective, negative calibration weights are legitimate. However, owing to software implementation details whose modification would not be trivial, function <code>ext.calibrated</code> is <em>not</em> yet able to cope with this case. Note that the problem is actually due to the <em>external</em> origin of the negative calibration weights. In fact, <span class="pkg">ReGenesees</span> calibration and estimation facilities are fully able to cope with possibly negative calibration weights, provided they were computed <em>internally</em>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code>cal.analytic</code>, storing the original survey data <em>plus</em> all the sampling design and calibration metadata needed for proper variance estimation.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Exactly as <span class="pkg">ReGenesees</span>'s base functions <code><a href='e.svydesign.html'>e.svydesign</a></code> and <code><a href='e.calibrate.html'>e.calibrate</a></code> would do, <code>ext.calibrated</code> too will wrap inside its return value a local copy of <code>data</code>. As usual, this copy will be stored inside the <code>variables</code> slot of the output list. As usual, again, the calibrated weights will be accessible by using the <code><a href='weights.html'>weights</a></code> function.</p>
+    <p>Just like <span class="pkg">ReGenesees</span>'s base functions <code><a href='e.svydesign.html'>e.svydesign</a></code> and <code><a href='e.calibrate.html'>e.calibrate</a></code>, <code>ext.calibrated</code> too wraps a local copy of <code>data</code> inside its return value. As usual, this copy is stored inside the <code>variables</code> slot of the output list. As usual, again, the calibrated weights are accessible by using the <code><a href='weights.html'>weights</a></code> function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='e.svydesign.html'>e.svydesign</a></code> to bind survey data and sampling design metadata, and <code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating survey weights within <span class="pkg">ReGenesees</span>.</p></div>
+    <div class='dont-index'><p><code><a href='ext.calibrated2.html'>ext.calibrated2</a></code> an approximate version of function <code>ext.calibrated</code> that does <em>not</em> require the <em>base weights</em>, <code><a href='e.svydesign.html'>e.svydesign</a></code> to bind survey data and sampling design metadata, and <code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating survey weights within <span class="pkg">ReGenesees</span>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'># Load data sbs data</span>
+<span class='co'># Load the sbs data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sbs</span>)
 
 <span class='co'>#########################################################################</span>

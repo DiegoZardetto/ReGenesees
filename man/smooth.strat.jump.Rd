@@ -24,19 +24,19 @@ If the current value of the strata variable (i.e. the one observed at survey-tim
 
 In most enterprise surveys the sampling design is such that smaller firms receive a smaller inclusion probability (and hence a larger design weight). Therefore, stratum jumpers often have a \dQuote{too large} weight, in the sense that they would have received a smaller weight had their actual size been known at sampling-time. When these units also happen to have a large value of interest variable \code{y}, they may become influential in estimation. Even though stratum jumpers may exist in household surveys too, business surveys are much more exposed to the risk that stratum jumpers unduly influence estimation, as their target populations are typically highly skewed with respect to many interest variables. As a consequence, in business surveys, stratum jumpers can result in inefficient (and, under some circumstances, even biased) design-based estimators.
 
-Despite stratum jumpers are actually a concern only when both their design weight \code{w} and their \code{y} value (as measured at survey-time) conspire to yield an influential value of \code{w * y}, function \code{smooth.strat.jump} tries to mitigate their potential adverse impact by smoothing the weights \emph{without} using any information on \code{y}. Such a choiche is driven by two major aims. First, the methodology must preserve the universality of the weights (i.e. the same weights must be used to compute estimates for whatever interest variables \code{y}). Second, the methodology should not require explicit modeling efforts and be easy enough to scale to production settings that need automated and replicable procedures. 
+Although stratum jumpers are actually a concern only when both their design weight \code{w} and their \code{y} value (as measured at survey-time) conspire to yield an influential value of \code{w * y}, function \code{smooth.strat.jump} tries to mitigate their potential adverse impact by smoothing the weights \emph{without} using any information on \code{y}. Such a choice is driven by two major aims. First, the methodology must preserve the universality of the weights (i.e. the same weights must be used to compute estimates for whatever interest variables \code{y}). Second, the methodology should not require explicit modeling efforts and be easy enough to scale to production settings that need automated and replicable procedures. 
 
 Argument \code{design} identifies the survey design object that is (possibly) affected by stratum jumpers and contains the weights that will be smoothed. In case no stratum jumpers are found, the function will raise an error. Object \code{design} can only be a one-stage unit sampling design. Moreover, it must be a non-calibrated object. Should any of these conditions be false, the function would raise an error. Note, lastly, that function \code{smooth.strat.jump} will not smooth further weights that have already been smoothed. This is a deliberate design choice, devised to discourage over-smoothing and cosmetic adjustments of the survey weights.
 
-Formula \code{curr.strata} defines the \emph{current} strata variable, as observed at survey-time. This is different from the \emph{design} strata variable used to build object \code{design} using function \code{\link{e.svydesign}}, as the latter was measured at sampling-time. Function \code{smooth.strat.jump} will flag as stratum jumpers all the units whose \emph{current} stratum differs from the \emph{design} one. Note that the function will handle properly even \code{design} objects whose strata were collapsed for variance estimation purposes (via \code{\link{collapse.strata}}), by accessing and using the original \emph{non-collapsed} design strata. Note that, in case \emph{current} strata become available only after object \code{design} was created, you may use function \code{\link{des.addvars}} to add this new column to the old object.
+Formula \code{curr.strata} defines the \emph{current} strata variable, as observed at survey-time. This is different from the \emph{design} strata variable used to build object \code{design} using function \code{\link{e.svydesign}}, as the latter was measured at sampling-time. Function \code{smooth.strat.jump} will flag as stratum jumpers all the units whose \emph{current} stratum differs from the \emph{design} one. Note that the function will properly handle even \code{design} objects whose strata were collapsed for variance estimation purposes (via \code{\link{collapse.strata}}), by accessing and using the original \emph{non-collapsed} design strata. Note that, in case \emph{current} strata become available only after object \code{design} was created, you may use function \code{\link{des.addvars}} to add this new column to the old object.
 
 The weight smoothing process entails two steps:
 \enumerate{
   \item{The weights are smoothed according to a given method (see below): \code{w -> w1}}
-  \item{The weights \code{w1} of all units are scaled by a global factor so as to preserve the initial overall sum of weights: \code{w1 -> w2 = scale * w1} with  \code{scale = sum(w)/sum(w1)}}
+  \item{The weights \code{w1} of all units are scaled by a global factor so as to preserve the initial overall sum of weights: \code{w1 -> w2 = scale * w1} with \code{scale = sum(w)/sum(w1)}}
 }
 
-Argument \code{method} controls the smoothing algorithm. Two methods can be selected: \code{'MinChange'} (the default) and \code{'Beaumont'} (which implements the proposal of [Beaumont, Rivest 09]). Note that the methods only differ with respect to step 1., as step 2. is identical for both of them.
+Argument \code{method} controls the smoothing algorithm. Two methods can be selected: \code{'MinChange'} (the default) and \code{'Beaumont'} (which implements the proposal of [Beaumont, Rivest 2009]). Note that the methods only differ with respect to step 1., as step 2. is identical for both of them.
 
 The step 1 working mechanism of these methods can be summarized as follows:\cr
 \itemize{
@@ -48,9 +48,9 @@ Only the weights of stratum jumpers are smoothed, by setting their value to the 
 }
 The weights of all units are smoothed, by setting their value to the average weight of units belonging to the same \emph{current} stratum, with the exception of \emph{minimum weight} units, whose weights are left unchanged. Therefore all weights, excluding only minimum weights within each current stratum, are smoothed. Note that this smoothing affects all current strata, even those that do \emph{not} include any stratum jumper.\cr\cr
 
-In summary, both methods often lead to very similar smoothed weights for units that are stratum jumpers. However method \code{'Beaumont'} smooths the weights of all other (i.e. \emph{non} stratum jumpers) units much more aggressively than method \code{'MinChange'} (which only minimally alters them in step 2. to preserve the overall sum of weights). Moreover, method \code{'MinChange'} treats stratum jumpers that grew in size and those that decreased in size on the same footing, whereas method \code{'Beaumont'} typically smooths the weights of the former more than those of the latter (owing to its minimum weight preservation constraint, see \sQuote{Examples}).
+In summary, both methods often lead to very similar smoothed weights for units that are stratum jumpers. However, method \code{'Beaumont'} smooths the weights of all other (i.e. \emph{non} stratum jumpers) units much more aggressively than method \code{'MinChange'} (which only minimally alters them in step 2. to preserve the overall sum of weights). Moreover, method \code{'MinChange'} treats stratum jumpers that grew in size and those that decreased in size on the same footing, whereas method \code{'Beaumont'} typically smooths the weights of the former more than those of the latter (owing to its minimum weight preservation constraint, see \sQuote{Examples}).
 
-Note that every call to \code{smooth.strat.jump} generates, by side effect, a diagnostics data structure named \code{strat.jump.status} into the \code{.GlobalEnv} (see \sQuote{Examples}). This is a data frame with one row for each stratum jumper unit, whith the following columns:
+Note that every call to \code{smooth.strat.jump} generates, by side effect, a diagnostics data structure named \code{strat.jump.status} in the \code{.GlobalEnv} (see \sQuote{Examples}). This is a data frame with one row for each stratum jumper unit, with the following columns:
 \preformatted{
   Column                 Meaning
   IDS....................Unit identifier
@@ -72,11 +72,11 @@ An object of the same class as \code{design}. The data frame it contains (stored
 }
 
 \section{Methodological Remark}{
-Smoothing survey weights is a model-based approach, see [Beaumont 08] (e.g.\code{method = 'Beaumont'} basically models the smoothed weights as a function of the current strata using a one-way ANOVA model plus constraints). Therefore Horvitz-Thompson-like estimators that use smoothed weights - instead of design weights - cannot be guaranteed to be design-unbiased. Of course, the need to smooth the weights arises precisely because the existence of stratum jumpers already signals a departure from the ideal conditions of design-based inference.
+Smoothing survey weights is a model-based approach (see [Beaumont 2008]); e.g. \code{method = 'Beaumont'} basically models the smoothed weights as a function of the current strata using a one-way ANOVA model plus constraints. Therefore, Horvitz-Thompson-like estimators that use smoothed weights - instead of design weights - cannot be guaranteed to be design-unbiased. Of course, the need to smooth the weights arises precisely because the existence of stratum jumpers already signals a departure from the ideal conditions of design-based inference.
 
 As the design-unbiasedness of Horvitz-Thompson estimators in probability sampling rests on using design weights that are reciprocals of inclusion probabilities, smoothing methods that change the design weights the least appear preferable in a design-based perspective. For this reason, function \code{smooth.strat.jump} adopts the \code{'MinChange'} method by default. One could, nonetheless, argue that the \code{'Beaumont'} method could sometimes perform better (e.g. lead to more efficient estimates) from a model-based perspective.
 
-Regardless the choice of argument \code{method}, in order to reduce any possible design-bias introduced by smoothing the weights, users are advised to \emph{calibrate the smoothed weights} using any auxiliary information available from external sources that are \emph{more up-to-date} than the sampling frame.
+Regardless of the choice of argument \code{method}, in order to reduce any possible design-bias introduced by smoothing the weights, users are advised to \emph{calibrate the smoothed weights} using any auxiliary information available from external sources that are \emph{more up-to-date} than the sampling frame.
 }
 
 \author{Diego Zardetto}
@@ -93,7 +93,7 @@ Beaumont, J. F., Rivest, L. P. (2009). Dealing with outliers in survey data. In 
 
 \examples{
 ##################################################################################
-# Build [Beaumont, Rivest 09] example dataset, containing:                       #
+# Build [Beaumont, Rivest 2009] example dataset, containing:                     #
 # - a first stratum 'A' that, at survey time, contains one large weight stratum  #
 #   jumper received from design-stratum 'B'                                      #
 # - a second stratum 'B' that, at survey time, does not contain stratum jumpers  #

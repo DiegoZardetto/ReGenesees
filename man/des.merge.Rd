@@ -18,19 +18,19 @@ des.merge(design, data, key)
 }
 
 \details{
-This function updates the survey variables contained into \code{design} (i.e. \code{design$variables}), by merging the original data with those contained into the \code{data} data frame. The merge operation exploits a \emph{single} variable \code{key}, which must be common to both \code{design} and \code{data}.
+This function updates the survey variables contained in \code{design} (i.e. \code{design$variables}), by merging the original data with those contained in the \code{data} data frame. The merge operation exploits a \emph{single} variable \code{key}, which must be common to both \code{design} and \code{data}.
 
-The function preserves both the original \emph{ordering} of the survey data stored into \code{design}, as well as all the original sampling design \emph{metadata}.
+The function preserves both the original \emph{ordering} of the survey data stored in \code{design}, as well as all the original sampling design \emph{metadata}.
 
-The variable referenced by \code{key} must be a \emph{valid} unique key for both \code{design} and \code{data}: it must not contain duplicated values, nor \code{NA}s. Moreover, the values of \code{key} in \code{design} and \code{data} must be in \emph{1:1 correspondence}. These requirements are meant to ensure that the \emph{new} survey data (that is the merged ones) will have exactly the same number of rows as the \emph{old} survey data stored into \code{design}.
+The variable referenced by \code{key} must be a \emph{valid} unique key for both \code{design} and \code{data}: it must not contain duplicated values, nor \code{NA}s. Moreover, the values of \code{key} in \code{design} and \code{data} must be in \emph{1:1 correspondence}. These requirements are meant to ensure that the \emph{new} survey data (that is the merged ones) will have exactly the same number of rows as the \emph{old} survey data stored in \code{design}.
 
-Should \code{design} and \code{data} contain further common variables besides the \code{key}, only their original \code{design} version will be retained. Thus, \code{des.merge} cannot modify any pre-existing \code{design} columns. This an intentional feature intended to safeguard the integrity of the relations between survey data and sampling design metadata stored in \code{design}.
+Should \code{design} and \code{data} contain further common variables besides the \code{key}, only their original \code{design} version will be retained. Thus, \code{des.merge} cannot modify any pre-existing \code{design} columns. This is an intentional feature intended to safeguard the integrity of the relations between survey data and sampling design metadata stored in \code{design}.
 }
 
 \section{Practical Purpose}{
 In the field of Official Statistics, it is not infrequent that calibration weights must be computed even several months before the target variables of the survey are made available for estimation. Such a time lag follows from the fact that target variables typically undergo much more thorough editing and imputation procedures than auxiliary variables.
 
-In such production scenarios, function \code{des.merge} allows to tackle the task of computing estimates and errors for the fresh-released target variables \emph{without} any need of \emph{repeating} the calibration step. Indeed, by using the function, one can join the data contained into an already calibrated \code{design} object with new \code{data} made available only after the calibration step. The merge operation is made easy and safe, and preserves all the original calibration metadata (e.g. those needed for variance estimation).
+In such production scenarios, function \code{des.merge} makes it possible to tackle the task of computing estimates and errors for the freshly released target variables \emph{without} any need of \emph{repeating} the calibration step. Indeed, by using the function, one can join the data contained in an already calibrated \code{design} object with new \code{data} made available only after the calibration step. The merge operation is made easy and safe, and preserves all the original calibration metadata (e.g. those needed for variance estimation).
 }
 
 \value{

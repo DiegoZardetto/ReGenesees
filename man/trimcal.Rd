@@ -22,11 +22,11 @@ trimcal(cal.design, w.range = c(-Inf, Inf),
 }
 
 \details{
-Extreme calibration weights might determine unstable estimates and inflate sampling error estimates. To avoid this risk, extreme weights may be \emph{trimmed} by using some suitable procedure (see e.g. [Potter 90], [Valliant, Dever, Kreuter 13]). Despite no rigorous justifications exist for any proposed trimming method, sometimes practitioners are (or feel) compelled to apply a trimming step before estimation. This happens more frequently when interest variables are highly skewed at the population level, like in business surveys or in social surveys with a focus on economic variables (e.g. income, see [Verma, Betti, Ghellini 07], [EUROSTAT 16]).
+Extreme calibration weights might determine unstable estimates and inflate sampling error estimates. To avoid this risk, extreme weights may be \emph{trimmed} by using some suitable procedure (see e.g. [Potter 1990], [Valliant, Dever, Kreuter 2013]). Although no rigorous justifications exist for any proposed trimming method, sometimes practitioners are (or feel) compelled to apply a trimming step before estimation. This happens more frequently when interest variables are highly skewed at the population level, like in business surveys or in social surveys with a focus on economic variables (e.g. income, see [Verma, Betti, Ghellini 2007], [EUROSTAT 2016]).
 
-Unfortunately, the most common trimming techniques do \emph{not} preserve the calibration constraints: if the input weights to the trimming algorithm are calibrated, typically the trimmed weights will \emph{not} reproduce the calibration totals. As a consequence, users have to calibrate again the weights after trimming and iterate through the trimming and calibration steps, until a set of weights is obtained that respects both the trimming bounds and the calibration controls.
+Unfortunately, the most common trimming techniques do \emph{not} preserve the calibration constraints: if the input weights to the trimming algorithm are calibrated, typically the trimmed weights will \emph{not} reproduce the calibration totals. As a consequence, users have to calibrate the weights again after trimming and iterate through the trimming and calibration steps, until a set of weights is obtained that respects both the trimming bounds and the calibration controls.
 
-Function \code{trimcal} overcomes this limitation: it allows to trim calibration weights to a specific interval while \emph{simultaneously} preserving all the calibration totals. To achieve this result, a \emph{constrained trimming algorithm} is used, which is similar in spirit to the GEM (Generalized Exponential Method) of [Folsom, Singh 2000], but adopts the range restricted \emph{euclidean} distance - instead of the \emph{logit} - for numerical stability considerations.
+Function \code{trimcal} overcomes this limitation: it makes it possible to trim calibration weights to a specific interval while \emph{simultaneously} preserving all the calibration totals. To achieve this result, a \emph{constrained trimming algorithm} is used, which is similar in spirit to the GEM (Generalized Exponential Method) of [Folsom, Singh 2000], but adopts the range-restricted \emph{Euclidean} distance - instead of the \emph{logit} - for numerical stability considerations.
 
 When \code{w.range} is passed, \emph{both} the trimming limits it defines must be \emph{positive}. In other words, all calibration weights have to be positive after trimming. The purpose of this condition is to enable sound variance estimation on the trimmed object (see also below).
 
@@ -34,13 +34,13 @@ Note that \code{trimcal} is allowed to trim only \emph{already calibrated} weigh
 
 Note also that, in case the original calibration weights were asked to be constant within clusters selected at a given sampling stage (via argument \code{aggregate.stage} of \code{\link{e.calibrate}}), \code{trimcal} will \emph{preserve} that property (see \sQuote{Examples}).
 
-Note lastly that \code{trimcal} will not trim further weights that have \emph{just} been trimmed. This is again a deliberate design choice, devised to discourage over-trimming and cosmetic adjustments of the survey weights. Of course, it is instead entirely legitimate to calibrate again a trimmed object: after that, a further trimming step will be allowed.
+Note lastly that \code{trimcal} will not trim further weights that have \emph{just} been trimmed. This is again a deliberate design choice, devised to discourage over-trimming and cosmetic adjustments of the survey weights. Of course, it is instead entirely legitimate to calibrate a trimmed object again: after that, a further trimming step will be allowed.
 
-From a variance estimation perspective, the trimmed object returned by function \code{trimcal} is treated as an ordinary calibrated object. More precisely, the trimming step is regarded as a \emph{\dQuote{finalization}} of the weight adjustment procedure which generated \code{cal.design}, i.e. as a completion of the previous calibration step. Call \code{w}, \code{w.cal} and \code{w.cal.trim} the starting weights, the calibrated weights of \code{cal.design} and the trimmed calibration weights as computed by function \code{trimcal}, respectively. Variance estimates computed on the trimmed object will pretend that one passed from \code{w} to \code{w.cal.trim} \emph{directly} (\code{w -> w.cal.trim}), rather then in two steps (\code{w -> w.cal -> w.cal.trim}). Note incidentally that function \code{\link{get.residuals}}, when invoked on a trimmed object, will behave consistently with the variance estimation approach documented here.
+From a variance estimation perspective, the trimmed object returned by function \code{trimcal} is treated as an ordinary calibrated object. More precisely, the trimming step is regarded as a \emph{\dQuote{finalization}} of the weight adjustment procedure which generated \code{cal.design}, i.e. as a completion of the previous calibration step. Call \code{w}, \code{w.cal} and \code{w.cal.trim} the starting weights, the calibrated weights of \code{cal.design} and the trimmed calibration weights as computed by function \code{trimcal}, respectively. Variance estimates computed on the trimmed object will pretend that one passed from \code{w} to \code{w.cal.trim} \emph{directly} (\code{w -> w.cal.trim}), rather than in two steps (\code{w -> w.cal -> w.cal.trim}). Note incidentally that function \code{\link{get.residuals}}, when invoked on a trimmed object, will behave consistently with the variance estimation approach documented here.
 }
 
 \section{Trimming Process Diagnostics}{
-Function \code{trimcal} exploits a \emph{constrained} trimming algorithm to adjust the calibration weights so that (i) they fall within a bounded interval but (ii) still preserve all the calibration totals. \emph{When this task is unfeasible, the algorithm will fail}. As a consequence, the adjusted weights returned in the output object will respect the range restrictions set by \code{w.range}, but some of the calibration constraints will be broken. Exactly as for function \code{\link{e.calibrate}}, in order to asses the degree of violation of the calibration constraints introduced by trimming, the user can exploit function \code{\link{check.cal}} (or, equivalently, the diagnostic data structure \code{\link{ecal.status}} available in the \code{.GlobalEnv}).
+Function \code{trimcal} exploits a \emph{constrained} trimming algorithm to adjust the calibration weights so that (i) they fall within a bounded interval but (ii) still preserve all the calibration totals. \emph{When this task is unfeasible, the algorithm will fail}. As a consequence, the adjusted weights returned in the output object will respect the range restrictions set by \code{w.range}, but some of the calibration constraints will be broken. Exactly as for function \code{\link{e.calibrate}}, in order to assess the degree of violation of the calibration constraints introduced by trimming, the user can exploit function \code{\link{check.cal}} (or, equivalently, the diagnostic data structure \code{\link{ecal.status}} available in the \code{.GlobalEnv}).
 }   
 
 \value{
@@ -113,7 +113,7 @@ all.equal(aux.estimates(sbscal,  template=pop),
 
 # Let's have a look at the scatterplots of calibrated and trimmed weights:
 plot(weights(sbsdes), weights(sbscal), pch = 20, col = "red",
-     xlab = "Direct weights", ylab = "Calibration (red) and Trimmed (blue) weights")
+     xlab = "Initial weights", ylab = "Calibration (red) and Trimmed (blue) weights")
 points(weights(sbsdes), weights(sbstrim), pch = 20, col = "blue")
 abline(h = c(0.5, 20), col = "green")
 
@@ -178,7 +178,7 @@ any( tapply( weights(destrim), destrim$variables$famcod,
 trimcal(sbscal, c(-0.05, 18))
 }
 
-# 2) Trimming design (or direct, or initial) weights is not allowed, you can
+# 2) Trimming design (or direct, or initial) weights is not allowed; you can
 #    only trim calibration weights:
 \dontrun{
 trimcal(sbsdes, c(1, 18))
@@ -189,7 +189,7 @@ trimcal(sbsdes, c(1, 18))
 trimcal(sbstrim, c(1, 18))
 }
 
-# 4) You can calibrate again trimmed weights...
+# 4) You can calibrate trimmed weights again...
 pop2<-pop.template(sbsdes, calmodel=~(emp.num+ent):area-1)
 pop2<-fill.template(sbs.frame,pop2)
 sbscal2<-e.calibrate(sbstrim, pop2) 

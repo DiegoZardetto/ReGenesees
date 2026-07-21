@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Artificial Household Survey Data — data.examples" />
-<meta property="og:description" content="Example data frames. Allow to run R code contained in the &amp;#8216;Examples&amp;#8217; section of the ReGenesees package help pages." />
+<meta property="og:description" content="Example data frames used to run R code contained in the &amp;#8216;Examples&amp;#8217; section of the ReGenesees package help pages." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Example data frames. Allow to run <span style="R">R</span> code contained in the &#8216;Examples&#8217; section of the <span class="pkg">ReGenesees</span> package help pages.</p>
+    <p>Example data frames used to run <span style="R">R</span> code contained in the &#8216;Examples&#8217; section of the <span class="pkg">ReGenesees</span> package help pages.</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>data.examples</span>)</pre>
@@ -143,7 +143,7 @@
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>The main data frame, named <code>example</code>, contains (artificial) data from a two stage stratified cluster sampling design. The sample is made up of 3000 final units (individuals), for which the following 21 variables were observed:</p><dl class='dl-horizontal'>
-    <dt><code>towcod</code></dt><dd><p>Code identifying "variance PSUs": towns (PSUs) in not-self-representing (NSR) strata, households (SSUs) in self-representing (SR) strata, <code>numeric</code></p></dd>
+    <dt><code>towcod</code></dt><dd><p>Code identifying &#8220;variance PSUs&#8221;: towns (PSUs) in not-self-representing (NSR) strata, households (SSUs) in self-representing (SR) strata, <code>numeric</code></p></dd>
     <dt><code>famcod</code></dt><dd><p>Code identifying households (SSUs), <code>numeric</code></p></dd>
     <dt><code>key</code></dt><dd><p>Key identifying final units (individuals), <code>numeric</code></p></dd>
     <dt><code>weight</code></dt><dd><p>Initial weights, <code>numeric</code></p></dd>
@@ -169,7 +169,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Objects <code>pop01</code>, ..., <code>pop07pp</code> contain known population totals for various calibration models. Object pairs with names differing in the '<code>p</code>' suffix (such as <code>pop03</code> and <code>pop03p</code>) refer to the <em>same</em> calibration problem but pertain to <em>different</em> solution methods (global and partitioned respectively, see <code><a href='e.calibrate.html'>e.calibrate</a></code>). The two-component numeric vector <code>bounds</code> expresses a possible choice for the allowed range for the ratios between calibrated weights and direct weights in the aforementioned calibration problems.</p>
+    <p>Objects <code>pop01</code>, ..., <code>pop07pp</code> contain known population totals for various calibration models. Object pairs with names differing in the '<code>p</code>' suffix (such as <code>pop03</code> and <code>pop03p</code>) refer to the <em>same</em> calibration problem but pertain to <em>different</em> solution methods (global and partitioned respectively, see <code><a href='e.calibrate.html'>e.calibrate</a></code>). The two-component numeric vector <code>bounds</code> expresses a possible choice for the allowed range for the ratios between calibrated weights and initial weights in the aforementioned calibration problems.</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     <p><strong>Data in the <code>example</code> data frame are artificial.</strong> The <em>structure</em> of <code>example</code> intentionally resembles the one of typical household survey data, but the <em>values</em> it stores are unreliable. The only purpose of such data is that they can be fruitfully exploited to illustrate the syntax and the working mechanism of the functions provided by the <span class="pkg">ReGenesees</span> package.</p>

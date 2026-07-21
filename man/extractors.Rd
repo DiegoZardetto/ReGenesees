@@ -75,7 +75,7 @@ coef(VA.avg)
 ## Extract the confidence interval at 90%
 ## confidence level (the default would be 95%):
 confint(VA.avg, level=0.9)
-## note the argument 'level', which comes from confint function in package stats
+## note the argument 'level', which comes from the confint function in package stats
 }
 
 \keyword{survey}

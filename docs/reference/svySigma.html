@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@
     </tr>
     <tr>
       <th>fin.pop</th>
-      <td><p>If <code>TRUE</code> (the default) the estimation target is the <em>finite</em> population formula of the standard deviation, i.e. the one with <b>N - 1</b> at denominator in the expression of the variance. If <code>FALSE</code> the estimation target is the standard deviation with <b>N</b> at denominator in the expression of the variance.</p></td>
+      <td><p>If <code>TRUE</code> (the default) the estimation target is the <em>finite</em> population formula of the standard deviation, i.e. the one with <b>N - 1</b> in the denominator in the expression of the variance. If <code>FALSE</code> the estimation target is the standard deviation with <b>N</b> in the denominator in the expression of the variance.</p></td>
     </tr>
     <tr>
       <th>vartype</th>
@@ -211,15 +211,15 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Function <code>svySigma</code> computes estimates and sampling errors of the Population Standard Deviation of a numeric variable. These estimates play an important role in many contexts, including sample size guesstimation and power calculations.</p>
-<p>As the Population Standard Deviation is a <em>complex</em> estimator, <code>svySigma</code> automatically linearizes it to estimate its sampling variance. Automatic linearization is performed as function <code><a href='svystatL.html'>svystatL</a></code> would do, along the lines illustrated in [Zardetto, 15]. This, of course, also entails the usage of the residuals technique when the input <code>design</code> object is calibrated (i.e. of class <code>cal.analytic</code>).</p>
+<p>As the Population Standard Deviation is a <em>complex</em> estimator, <code>svySigma</code> automatically linearizes it to estimate its sampling variance. Automatic linearization is performed as function <code><a href='svystatL.html'>svystatL</a></code> would do, along the lines illustrated in [Zardetto 2015]. This, of course, also entails the usage of the residuals technique when the input <code>design</code> object is calibrated (i.e. of class <code>cal.analytic</code>).</p>
 <p>The mandatory argument <code>y</code> identifies the variable of interest. The <code>design</code> variable referenced by <code>y</code> must be <code>numeric</code>.</p>
 <p>If variable <code>y</code> is binary (i.e. has only values <code>0</code> and <code>1</code>), the estimated Population Standard Deviation coincides with the classical Bernoulli expression <code><a href='https://rdrr.io/r/base/MathFun.html'>sqrt(p*(1 - p))</a></code>, where <code>p</code> is the estimated proportion of population units with <code>y = 1</code> (see &#8216;Examples&#8217;).</p>
 <p>The optional argument <code>by</code> specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If <code>by=NULL</code> (the default option), the estimates produced by <code>svySigma</code> refer to the whole population. If specified, estimation domains must be defined by a formula, following the usual syntactic and semantic rules (see e.g. <code><a href='svystatTM.html'>svystatTM</a></code>).</p>
-<p>Argument <code>fin.pop</code> allows the users to select which standard deviation formula they prefer as estimation target. If <code>fin.pop = TRUE</code> (the default) the <em>finite</em> population version of the standard deviation formula will be used, namely the one with <b>N - 1</b> at denominator in the expression of the variance [Sarndal, Swensson, Wretman 92]. If <code>fin.pop = FALSE</code> the standard deviation formula with <b>N</b> at denominator in the expression of the variance will be used.</p>
-<p>The <code>conf.int</code> argument allows to request the confidence intervals for the estimates. By default <code>conf.int=FALSE</code>, that is the confidence intervals are not provided.</p>
+<p>Argument <code>fin.pop</code> allows the users to select which standard deviation formula they prefer as estimation target. If <code>fin.pop = TRUE</code> (the default) the <em>finite</em> population version of the standard deviation formula will be used, namely the one with <b>N - 1</b> in the denominator in the expression of the variance [Sarndal, Swensson, Wretman 1992]. If <code>fin.pop = FALSE</code> the standard deviation formula with <b>N</b> in the denominator in the expression of the variance will be used.</p>
+<p>The <code>conf.int</code> argument makes it possible to request confidence intervals for the estimates. By default <code>conf.int=FALSE</code>, that is, the confidence intervals are not provided.</p>
 <p>Whenever confidence intervals are requested (i.e. <code>conf.int=TRUE</code>), the desired confidence level can be specified by means of the <code>conf.lev</code> argument. The <code>conf.lev</code> value must represent a probability (<code>0&lt;=conf.lev&lt;=1</code>) and its default is chosen to be <code>0.95</code>.</p>
-<p>The optional argument <code>deff</code> allows to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is the design effect is not provided. The design effect of an estimator is defined as the ratio between the sampling variance of the estimator under the actual sampling design and the sampling variance that would be obtained for an 'equivalent' estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect comparing to simple random sampling <em>&#8220;with replacement&#8221;</em>, one must use <code>deff="replace"</code>. See <code><a href='svystatTM.html'>svystatTM</a></code> for further details.</p>
-<p>Missing values (<code>NA</code>) in interest variables should be avoided. If <code>na.rm=FALSE</code> (the default) they generate NAs in estimates (or even an error, if <code>design</code> is calibrated). If <code>na.rm=TRUE</code>, observations containing NAs are dropped, and estimates get computed on non missing values only. This implicitly assumes that missing values hit interest variables <em>completely at random</em>: should this not be the case, computed estimates would be <em>biased</em>.</p>
+<p>The optional argument <code>deff</code> makes it possible to request the design effect [Kish 1995] for the estimates. By default <code>deff=FALSE</code>, that is, the design effect is not provided. The design effect of an estimator is defined as the ratio between the sampling variance of the estimator under the actual sampling design and the sampling variance that would be obtained for an &#8216;equivalent&#8217; estimator under a hypothetical simple random sampling without replacement of the same size. To obtain an estimate of the design effect compared to simple random sampling <em>&#8220;with replacement&#8221;</em>, one must use <code>deff="replace"</code>. See <code><a href='svystatTM.html'>svystatTM</a></code> for further details.</p>
+<p>Missing values (<code>NA</code>) in interest variables should be avoided. If <code>na.rm=FALSE</code> (the default), they generate NAs in estimates (or even an error, if <code>design</code> is calibrated). If <code>na.rm=TRUE</code>, observations containing NAs are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables <em>completely at random</em>: should this not be the case, computed estimates would be <em>biased</em>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object inheriting from the <code>data.frame</code> class, whose detailed structure depends on input parameters' values.</p>
@@ -273,7 +273,7 @@
 <span class='co'># Store only the estimated proportion</span>
 <span class='no'>p.widowed</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span>(<span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>des</span>, ~<span class='no'>is.widowed</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"Mean"</span>))
 
-<span class='co'># Now estimate the population variance of the binary variable 'is.widowed' *with</span>
+<span class='co'># Now estimate the population standard deviation of the binary variable 'is.widowed' *with</span>
 <span class='co'># fin.pop = FALSE*, and verify that it *exactly* equals the Bernoulli expression</span>
 <span class='co'># sqrt(p.widowed * (1 - p.widowed))</span>
 <span class='fu'>svySigma</span>(<span class='no'>des</span>, ~<span class='no'>is.widowed</span>, <span class='kw'>fin.pop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                Sigma        SE CI.l(95%) CI.u(95%)

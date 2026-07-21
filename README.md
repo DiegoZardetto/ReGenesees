@@ -1,6 +1,6 @@
 [![Mentioned in Awesome Official Statistics ](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
 
-# ReGenesees <img src="ReGenesees_LOGO_small.png" align="right" alt="" />
+# ReGenesees <img src="ReGenesees_LOGO_small.png" align="right" alt="ReGenesees.GUI logo" />
 
 **ReGenesees (R Evolved Generalized Software for Sampling Estimates and Errors in Surveys)** is an R package for design-based and model-assisted analysis of complex sample surveys.
 
@@ -10,12 +10,18 @@ ReGenesees is the standard tool for calibration, estimation and sampling error a
 ## Installation
 You can install the **development version** of ReGenesees from [GitHub](https://github.com/DiegoZardetto/ReGenesees) as follows:
 
-```r
-install.packages("devtools")
-devtools::install_github("DiegoZardetto/ReGenesees")
+``` r
+# Recommended
+install.packages("pak")
+pak::pak("DiegoZardetto/ReGenesees")
+
+# Alternative
+install.packages("remotes")
+remotes::install_github("DiegoZardetto/ReGenesees")
 ```
 
-The **latest released version** of ReGenesees can be downloaded from [Istat website](https://www.istat.it/en/classifications-and-tools/methods-and-software-of-the-statistical-process/process-phase/weighting-estimation-and-sampling-error-evaluation/regenesees/) or from the [European Commission platform Joinup]( https://joinup.ec.europa.eu/solution/regenesees-system/releases) (where **older versions** are available too).
+
+The **latest released version** of ReGenesees can be downloaded from the [Istat website](https://www.istat.it/en/classifications-and-tools/methods-and-software-of-the-statistical-process/process-phase/weighting-estimation-and-sampling-error-evaluation/regenesees/) or from the [European Commission platform Joinup](https://joinup.ec.europa.eu/solution/regenesees-system/releases) (where **older versions** are available too).
 
 
 ## Website

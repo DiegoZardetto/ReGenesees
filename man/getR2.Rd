@@ -30,7 +30,7 @@ getR2(object, adjusted = FALSE, ...)
 
 \arguments{
   \item{object}{An object containing one or more fitted GVF models.}
-  \item{adjusted}{Should the \emph{adjusted} \code{R^2} be computed? The default is \code{FALSE}}
+  \item{adjusted}{Should the \emph{adjusted} \code{R^2} be computed? The default is \code{FALSE}.}
   \item{\dots}{Further arguments passed to or from other methods.}
 }
 
@@ -53,7 +53,7 @@ If \code{object} is a set of GVF models fitted to "grouped" data (class \code{gv
 }
 
 \section{Methodological Warning}{
-Each one of the provided quality measures has its own specificities and limitations (e.g. it is senseless to use AIC to compare two GVF models with different response variables). It is up to the user to select the measure which is appropriate to his goals.
+Each one of the provided quality measures has its own specificities and limitations (e.g. it is senseless to use AIC to compare two GVF models with different response variables). It is up to the user to select the measure which is appropriate to their goals.
 }
 
 \author{
@@ -83,7 +83,7 @@ getR2(m)
 AIC(m)
 
 
-## (B) A *a set* of GVF models fitted to the same data ##
+## (B) A *set* of GVF models fitted to the same data ##
 # Fit example data to all registered GVF models:
 mm <- fit.gvf(ee.AF)
 
@@ -92,7 +92,7 @@ getR2(mm, adjusted = TRUE)
 BIC(mm)
 
 
-## (C) a *single* GVF model fitted to *grouped* data ##
+## (C) A *single* GVF model fitted to *grouped* data ##
 # We have at our disposal the following survey design object on household data:
 exdes
 
@@ -105,12 +105,12 @@ str(ee.g)
 m.g <- fit.gvf(ee.g, 1)
 
 # Compute some goodness-of-fit measures:
-getR2(mm)
-AIC(mm)
+getR2(m.g)
+AIC(m.g)
 
 
-## (D) a *set of* GVF models fitted to *grouped* data ##
-# Fit all registered GVF model number separately inside groups:
+## (D) A *set of* GVF models fitted to *grouped* data ##
+# Fit all registered GVF models separately inside groups:
 mm.g <- fit.gvf(ee.g)
 
 # Compute some goodness-of-fit measures:

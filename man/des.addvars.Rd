@@ -17,11 +17,11 @@ des.addvars(design, ...)
 }
 
 \details{
-This function adds to the data frame contained in \code{design} the \emph{new} variables defined by the \code{tag = expr} arguments. A \code{tag} can be specified either by means of an identifier or by a character string; \code{expr} can be any expression that it makes sense to evaluate in the \code{design} environment.
+This function adds to the data frame contained in \code{design} the \emph{new} variables defined by the \code{tag = expr} arguments. A \code{tag} can be specified either by means of an identifier or by a character string; \code{expr} can be any expression that makes sense to evaluate in the \code{design} environment.
 
-For each argument \code{tag = expr} bound to the formal argument \code{\ldots} the added column will have \emph{name} given by the \code{tag} value and \emph{values} obtained by evaluating the \code{expr} expression on \code{design}. Any input expression not supplied with a \code{tag} will be ignored and will therefore have no effect on the \code{des.addvars} return value.
+For each argument \code{tag = expr} bound to the formal argument \code{\ldots}, the added column will have \emph{name} given by the \code{tag} value and \emph{values} obtained by evaluating the \code{expr} expression on \code{design}. Any input expression not supplied with a \code{tag} will be ignored and will therefore have no effect on the \code{des.addvars} return value.
 
-Variables to be added to the input object have to be \emph{new}: namely it is not possible to use \code{des.addvars} to modify the values in a pre-existing \code{design} column. This an intentional feature meant to safeguard the integrity of the relations between survey data and sampling design metadata stored in \code{design}.
+Variables to be added to the input object have to be \emph{new}: namely, it is not possible to use \code{des.addvars} to modify the values in a pre-existing \code{design} column. This is an intentional feature meant to safeguard the integrity of the relations between survey data and sampling design metadata stored in \code{design}.
 }
 
 \value{
@@ -76,7 +76,7 @@ svystatTM(des,~status,estimator="Mean")
 # Mean income for poor and non-poor:
 svystatTM(des,~income,~status,estimator="Mean")
 
-### NOTE: Procedure above yields *correct point estimates* of the share of poor
+### NOTE: The procedure above yields *correct point estimates* of the share of poor
 ###       population and their average income, while *variance estimation is
 ###       approximated* since we neglected the sampling variability of the
 ###       estimated poverty threshold.

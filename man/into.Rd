@@ -20,13 +20,13 @@ inner \%into\% outer
 \details{
 Arguments \code{inner} and \code{outer} must be both \code{factor}s and must have the same \code{length}. Moreover, \code{inner} has to be \emph{strictly nested} into \code{outer}. Nesting is defined by treating elements in \code{inner} and \code{outer} as if they were positionally tied (i.e. as if they belonged to columns of a given data frame). The definition is as follows:\cr
 \cr
-\code{inner} and \code{outer} are strictly nested if, and only if, 1) every set of equal elements in \code{inner} correspond to a set of equal elements in \code{outer}, and 2) \code{inner} has \emph{more} non-empty levels than \code{outer}.\cr
+\code{inner} and \code{outer} are strictly nested if, and only if, 1) every set of equal elements in \code{inner} corresponds to a set of equal elements in \code{outer}, and 2) \code{inner} has \emph{more} non-empty levels than \code{outer}.\cr
 \cr
 If \code{inner} and \code{outer} do not fulfill the conditions above, evaluating \code{inner \%into\% outer} gives an error.
 
 Suppose \code{inner} is actually nested into \code{outer} and define \code{inner.in.outer <- inner \%into\% outer}. The output factor \code{inner.in.outer} is built by recoding \code{inner} levels in such a way that each of them is mapped into the integer which represents its order inside the corresponding level of \code{outer} (see \sQuote{Examples}). As a consequence, the levels of \code{inner.in.outer} will be \code{1:n.max}, being \code{n.max} the \emph{maximum} number of levels of \code{inner} tied to a level of \code{outer}. Since this number is generally considerably smaller than the number of levels of \code{inner}, \code{inner.in.outer} can be seen as a \emph{compressed} representation of \code{inner}. Obviously, compression comes at a price: indeed \code{inner.in.outer} can now be used to identify a level of \code{inner} only \emph{inside} a given level of \code{outer} (see \sQuote{Examples}).
 
-The usefulness of the \code{\%into\%} operator emerges in the calibration context. As we already documented in \code{\link{e.calibrate}}, factorizing a calibration problem (i.e. exploiting the \code{partition} argument of \code{e.calibrate}) determines a significant reduction in computation complexity, especially for big surveys. Now, it is sometimes the case that a calibration model is actually factorizable, even if this property is not self-apparent, due to factor nesting. In such cases, anyway, trying naively to factorize the \code{outer} variable(s) typically leads to very big and sparse model matrices (as well as population totals data frames), with the net result of washing-out the expected efficiency gain. A better alternative is to exploit the \code{\%into\%} operator in order to \emph{compress} the \code{inner} variable in such a way that the \code{outer} variable can be actually factorized \emph{without} giving rise to huge and sparse matrices. Section \sQuote{Examples} reports some practical illustration of the above line of reasoning.
+The usefulness of the \code{\%into\%} operator emerges in the calibration context. As we already documented in \code{\link{e.calibrate}}, factorizing a calibration problem (i.e. exploiting the \code{partition} argument of \code{e.calibrate}) determines a significant reduction in computation complexity, especially for big surveys. Now, it is sometimes the case that a calibration model is actually factorizable, even if this property is not self-apparent, due to factor nesting. In such cases, however, trying naively to factorize the \code{outer} variable(s) typically leads to very big and sparse model matrices (as well as population totals data frames), with the net result of washing out the expected efficiency gain. A better alternative is to exploit the \code{\%into\%} operator in order to \emph{compress} the \code{inner} variable in such a way that the \code{outer} variable can be actually factorized \emph{without} giving rise to huge and sparse matrices. \sQuote{Examples} reports some practical illustration of the above line of reasoning.
 }
 
 \value{
@@ -59,7 +59,7 @@ prov.in.reg
  # the maximum number of provinces inside regions is 3. Thus prov.in.reg
  # is actually a compressed version of dd$prov (whose levels were 6)
  # but, obviously, it can now be used to identify a province only inside
- # a given region. This means that the the two factors below are identical (up
+ # a given region. This means that the two factors below are identical (up
  # to levels' labels):
 dd$prov
 interaction(prov.in.reg,dd$reg,drop=TRUE)
@@ -91,8 +91,8 @@ weights=~weight)
  # ~(procod:age5c + regcod:age10c - 1):sex
  #
  # At first sight it seems that only the sex variable can be factorized
- # in the model above. However if one observe that regions are an aggregation
- # of provinces, one realizes that also the regcod variable can be factorized.
+ # in the model above. However, if one observes that regions are an aggregation
+ # of provinces, one realizes that the regcod variable can also be factorized.
  # Similarly, since categories of age5c are an aggregation of categories of
  # age10c, age5c can be factorized too. In both cases, using the \%into\%
  # operator will save computation time and memory usage. 

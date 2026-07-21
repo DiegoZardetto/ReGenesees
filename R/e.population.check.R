@@ -34,13 +34,11 @@ function (df.population, data, calmodel, partition = FALSE)
     template <- pop.template(data, calmodel, partition)
 
     if (!identical(dim(df.population), dim(template))){
-        stop.dim <- "Dimension of dataframe 'df.population' does not agree with 'calmodel' and 'partition' formulas\n
-                    (to solve the problem use pop.template)"
+        stop.dim <- "Dimension of dataframe 'df.population' does not agree with 'calmodel' and 'partition' formulas\n  (to solve the problem use pop.template)"
         stop(stop.dim)
     }
     if (!identical(names(df.population),names(template))){
-        stop.names <- "Columns names of data frame 'df.population' do not agree with 'calmodel' and 'partition' formulas\n
-                      (to solve the problem use pop.template)"
+        stop.names <- "Columns names of data frame 'df.population' do not agree with 'calmodel' and 'partition' formulas\n  (to solve the problem use pop.template)"
         stop(stop.names)
     }
     if (!identical(partition, FALSE)) {
@@ -55,9 +53,7 @@ function (df.population, data, calmodel, partition = FALSE)
         # a rownames mismatch - if any - has to be tolerated)
         row.names(df.fm) <- NULL
         if (!identical(df.fm, as.matrix(template.factor))){
-            stop.fact <- "Columns of data frame 'df.population' defining calibration domains\n
-                         do not agree with 'calmodel' and 'partition' formulas\n
-                         (to solve the problem use pop.template)"
+            stop.fact <- "Columns of data frame 'df.population' defining calibration domains\n  do not agree with 'calmodel' and 'partition' formulas\n  (to solve the problem use pop.template)"
             stop(stop.fact)
         }
     }

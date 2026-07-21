@@ -4,7 +4,7 @@
 \alias{Zapsmall.data.frame}
 \title{Zapsmall Data Frame Columns and Numeric Vectors}
 \description{
-Put to zero values "close" to zero.
+Put to zero values \dQuote{close} to zero.
 }
 \usage{
 \method{Zapsmall}{default}(x, digits = getOption("digits"), ...)
@@ -17,12 +17,12 @@ Put to zero values "close" to zero.
   \item{\dots}{Arguments for future expansion.}
 }
 \details{
-This function "extends" to \code{data.frame} objects function \code{\link[base]{zapsmall}} from the package \pkg{base}.\cr
-The method for class data.frame 'zaps' values close to zero occurring in columns of \code{x}. Argument \code{except} can be used to prevent specific columns from being zapped.\cr
+This function \dQuote{extends} function \code{\link[base]{zapsmall}} from package \pkg{base} to \code{data.frame} objects.\cr
+The method for class \code{data.frame} \dQuote{zaps} values close to zero occurring in columns of \code{x}. Argument \code{except} can be used to prevent specific columns from being zapped.\cr
 The default method is a bare copy of the original function from package \pkg{base}.
 }
 \value{
-An object of the same class of \code{x}, with values "close" to zero zapped to zero.
+An object of the same class as \code{x}, with values \dQuote{close} to zero zapped to zero.
 }
 \author{
 Diego Zardetto

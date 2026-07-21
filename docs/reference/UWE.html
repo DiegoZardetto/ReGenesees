@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -149,14 +149,14 @@
     <tr>
       <th>by</th>
       <td><p>Formula specifying variables that define "estimation domains". If <code>NULL</code>
-           (the default option) the UWE refer to the whole sample.</p></td>
+           (the default option) the UWE refers to the whole sample.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Function <code>UWE</code> computes the Unequal Weighting Effect for the current (<code>w</code>) and initial (<code>w0</code>) weights of a design object, plus the corresponding variance inflation (or deflation) factor (<code>UWE(w) / UWE(w0)</code>) induced by changing the weights from <code>w0</code> to <code>w</code> (<code>w0 -&gt; w</code>).</p>
-<p>Following Kish's definition [Kish 92], the UWE is calculated as 1 plus the relative sample variance of the weights: <code>UWE(w) = 1 + RelVar(w)</code>.</p>
+<p>Following Kish's definition [Kish 1992], the UWE is calculated as 1 plus the relative sample variance of the weights: <code>UWE(w) = 1 + RelVar(w)</code>.</p>
 <p>The <em>current</em> weights, <code>w</code>, of <code>design</code> are the weights that would be returned by <code><a href='weights.html'>weights</a>(design)</code> and would be used for estimation purposes by functions <code><a href='svystatTM.html'>svystatTM</a></code>, <code><a href='svystatR.html'>svystatR</a></code>, etc.</p>
 <p>The <em>initial</em> weights, <code>w0</code>, of <code>design</code> depend on the nature of object <code>design</code>:</p><ul>
 <li><p>If <code>design</code> is the outcome of a <strong>&#8216;weight-changing pipeline&#8217;</strong>, <code>w0 -&gt; w1 -&gt; ... -&gt; w</code>, i.e. it was obtained by the application of an arbitrary <em>chain</em> of <span class="pkg">ReGenesees</span> functions that <em>modify the weights</em> (e.g. <code><a href='smooth.strat.jump.html'>smooth.strat.jump</a></code>, <code><a href='e.calibrate.html'>e.calibrate</a></code>, <code><a href='ext.calibrated.html'>ext.calibrated</a></code>, <code><a href='trimcal.html'>trimcal</a></code>, ...), then the initial weights, <code>w0</code>, are the weights of the starting design object in the pipeline.</p></li>
@@ -174,12 +174,12 @@
 
     <h2 class="hasAnchor" id="methodological-remark"><a class="anchor" href="#methodological-remark"></a>Methodological Remark</h2>
 
-    <p>Kish's UWE is a model-based tool that can be useful for diagnostic purposes. However, its values must be interpreted with some caution, exactly as it is necessary to do for model-based estimates of Kish's Deff.</p>
-<p>In particular, UWE is - by construction - only sensitive to variations of the <em>sample</em> variance of the weights. Therefore, it is unable to discriminate weight adjustments which, despite adding variability to the weights at sample level, might result in reductions of the <em>sampling</em> variance for some estimators. This is often the case of calibration, which may well make survey weights more unequal, but nonetheless cause their reciprocals to become more correlated to some interest variables. Similar considerations hold for stratified sampling, to the extent that, with respect to the interest variables, units tend to be more similar within strata than between strata.</p>
+    <p>Kish's UWE is a model-based tool that can be useful for diagnostic purposes. However, its values must be interpreted with some caution, just as is necessary for model-based estimates of Kish's Deff.</p>
+<p>In particular, UWE is - by construction - only sensitive to variations of the <em>sample</em> variance of the weights. Therefore, it is unable to discriminate weight adjustments which, despite adding variability to the weights at sample level, might result in reductions of the <em>sampling</em> variance for some estimators. This is often the case of calibration, which may well make survey weights more unequal, but nonetheless cause their reciprocals to become more correlated with some interest variables. Similar considerations hold for stratified sampling, to the extent that, with respect to the interest variables, units tend to be more similar within strata than between strata.</p>
 <p>In any case, the UWE can turn out handy when comparing the potential outcomes of performing the same kind of weight adjustment under slightly different settings (e.g. calibration with different bounds or distance functions, trimming with different thresholds, etc.).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Kish, L. (1992). Weighting for unequal Pi. Journal of Official Statistics, 8, 183-200.</p>
+    <p>Kish, L. (1992). <em>&#8220;Weighting for unequal Pi&#8221;</em>. Journal of Official Statistics, 8, 183-200.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><span class="pkg">ReGenesees</span> functions which define survey weights (<code><a href='e.svydesign.html'>e.svydesign</a></code>), or modify survey weights (e.g. <code><a href='smooth.strat.jump.html'>smooth.strat.jump</a></code>, <code><a href='e.calibrate.html'>e.calibrate</a></code>, <code><a href='ext.calibrated.html'>ext.calibrated</a></code>, <code><a href='trimcal.html'>trimcal</a></code>, ...).</p></div>
@@ -294,7 +294,7 @@
 #&gt; 2: e.calibrate(sbssmooth, N.RHG)
 #&gt; 1: smooth.strat.jump(sbsdes, ~curr.strata)</div><div class='input'>
 <span class='co'># -- 4) Consistently trim calibration weights</span>
-<span class='co'># Say one wants to avoid weights that are less then 1 and above 50:</span>
+<span class='co'># Say one wants to avoid weights that are less than 1 and above 50:</span>
 <span class='no'>sbstrim</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trimcal.html'>trimcal</a></span>(<span class='no'>sbscal</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>50</span>))
 
 <span class='co'># Have a look</span>

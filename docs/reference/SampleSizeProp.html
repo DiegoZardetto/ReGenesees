@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -182,7 +182,7 @@
     </tr>
     <tr>
       <th>prec.ind</th>
-      <td><p>The precision indicator for which the specified precison level <code>prec</code> has to be attained. The following uncertainty measures can be used as precision indicators: Margin of Error (<code>'ME'</code>, the default), Relative Margin of Error (<code>'RME'</code>), Standard Error (<code>'SE'</code>), and Coefficient of Variation (<code>'CV'</code>, also known as Relative Standard Error).</p></td>
+      <td><p>The precision indicator for which the specified precision level <code>prec</code> has to be attained. The following uncertainty measures can be used as precision indicators: Margin of Error (<code>'ME'</code>, the default), Relative Margin of Error (<code>'RME'</code>), Standard Error (<code>'SE'</code>), and Coefficient of Variation (<code>'CV'</code>, also known as Relative Standard Error).</p></td>
     </tr>
     <tr>
       <th>P</th>
@@ -264,27 +264,27 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>These functions are intended as simple everyday tools for basic sampling design decisions and survey planning. They address sample size requirements and power calculations for <em>proportions</em> in surveys (typically household surveys) adopting one- or two-stage sampling designs. The proportions acting as estimation targets can be defined either in terms of individuals or in terms of households. Specific arguments (such as <code>hhSize</code>, <code>AVEhh</code>, <code>old.clus.size</code>, and <code>new.clus.size</code>) can be tweaked to cover different designs (one or two stages) and target populations (proportions of individuals or households), see the &#8216;Examples&#8217; section.</p>
-<p>The formulas needed to guesstimate the minimum sample size required to satisfy specific precision constraints in the estimation of a proportion (function <code>n.prop</code>) or the expected precision of the estimator of the proportion given a specified sample size (function <code>prec.prop</code>) are available in many textbooks and spreadsheet templates (see, e.g., [Rosner 2006], [Lance, Hattori 2016], [ILO 2014], [UNICEF 2023]).</p>
+    <p>These functions are intended as simple everyday tools for basic sampling design decisions and survey planning. They address sample size requirements and power calculations for <em>proportions</em> in surveys (typically household surveys) adopting one- or two-stage sampling designs. The proportions acting as estimation targets can be defined either in terms of individuals or in terms of households. Specific arguments (such as <code>hhSize</code>, <code>AVEhh</code>, <code>old.clus.size</code>, and <code>new.clus.size</code>) can be tweaked to cover different designs (one or two stages) and target populations (proportions of individuals or households); see the &#8216;Examples&#8217; section.</p>
+<p>The formulas needed to guesstimate the minimum sample size required to satisfy specific precision constraints in the estimation of a proportion (function <code>n.prop</code>) or the expected precision of the estimator of the proportion given a specified sample size (function <code>prec.prop</code>) are available in many textbooks and spreadsheet templates (see, e.g., [Rosner 2006], [Lance, Hattori 2016], [ILO 2014a], [ILO 2014b], [UNICEF 2023]).</p>
 <p>The formula needed to guesstimate the minimum sample size required to attain specified levels of significance and power in a statistical test that compares two proportions (function <code>n.comp2prop</code>) can be derived from equation 10.14 on page 381 of [Rosner 2006], by extending it to real-world complex sampling designs (see, e.g., arguments <code>RR</code> and <code>DEFF</code>). Functions <code>pow.comp2prop</code> and <code>mde.comp2prop</code> solve the resulting equation for <code>Power</code> (= <code>1 - beta</code>) and <code>MDE</code> given a specified <em>total</em> sample size, <code>n</code>.</p>
 <p><strong>NOTE:</strong> For both <code>pow.comp2prop</code> and <code>mde.comp2prop</code>, argument <code>n</code> must be the <em>total</em> sample size, namely the sum of the sample sizes of the two groups (group 1 and group 2) whose estimated proportions need to be compared. The way the total sample size is allocated to the two groups is controlled by argument <code>K1</code>.</p>
-<p><strong>NOTE:</strong> Despite most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, as illustrated in the &#8216;Examples&#8217; section, the Minimum Detectable Effect does not necessarily need to be equal to its default expression (<code>MDE = abs(P2 - P1)</code>).</p>
-<p><strong>NOTE:</strong> Arguments <code>F</code>, <code>hhSize</code>, and <code>AVEhh</code> are necessarily related to each other, as it is illustrated by the expression of the default of <code>AVEhh</code>, thus it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity <code>AVEhh = F * hhSize</code>.</p>
-<p><strong>NOTE:</strong> Most of the arguments to the above five functions are vectorized, meaning that users can pass <code>numeric</code> vectors to them to investigate multiple design scenarios in a single shot (e.g. via <code>MDE = c(0.06, 0.08, 0.10)</code>). When vectors of length greater than 1 are passed to multiple arguments, <span style="R">R</span> recycling rule will kick in.</p>
+<p><strong>NOTE:</strong> Although most of the arguments to the above five functions come with default values, those defaults must not be considered as suggested values: in general, users will need to specify actual values that suit their specific design needs. For instance, as illustrated in the &#8216;Examples&#8217; section, the Minimum Detectable Effect does not necessarily need to be equal to its default expression (<code>MDE = abs(P2 - P1)</code>).</p>
+<p><strong>NOTE:</strong> Arguments <code>F</code>, <code>hhSize</code>, and <code>AVEhh</code> are necessarily related to each other, as illustrated by the expression of the default of <code>AVEhh</code>; thus, it is not required to specify all of them. If all are explicitly passed, the function will check that they comply with the identity <code>AVEhh = F * hhSize</code>.</p>
+<p><strong>NOTE:</strong> Most of the arguments to the above five functions are vectorized, meaning that users can pass <code>numeric</code> vectors to them to investigate multiple design scenarios in a single shot (e.g. via <code>MDE = c(0.06, 0.08, 0.10)</code>). When vectors of length greater than 1 are passed to multiple arguments, the <span style="R">R</span> recycling rule will kick in.</p>
 <p><strong>NOTE:</strong> Input values for sample size, <code>n</code>, and population size (if any), <code>N</code>, should be positive integers. The functions will silently make them so, by using their <code><a href='https://rdrr.io/r/base/Round.html'>round(abs( ))</a></code> values. When both <code>n</code> and <code>N</code> are specified, an error will be raised if <code>n &gt; N</code>.</p>
 <p><strong>NOTE:</strong> Since, as shown in the &#8216;Examples&#8217; section, the functions can be tweaked to cover different designs (one or two stages) and target populations (proportions of <em>individuals</em> or <em>households</em>), users who do not want to neglect finite population corrections must specify the population size <code>N</code> in terms of the <em>analytical units</em> that are relevant to their analysis.</p>
-<p><strong>NOTE:</strong> Both functions <code>n.prop</code> and <code>n.comp2prop</code> return the <em>ceiling</em> of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performances than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).</p>
+<p><strong>NOTE:</strong> Both functions <code>n.prop</code> and <code>n.comp2prop</code> return the <em>ceiling</em> of the analytically calculated minimum sample sizes (which are not integers in general). This is conservative and will result in slightly better sampling performance than the nominally requested ones (e.g. higher precision or power, and smaller confidence intervals or MDEs).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>n.prop</code>, <code>prec.prop</code>, <code>pow.comp2prop</code>, and <code>mde.comp2prop</code>, a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
-<p>For <code>n.comp2prop</code>, a list of length 3 with names <code>n1</code>, <code>n2</code>, and <code>n</code>, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under <span style="R">R</span> recycling rule).</p>
+    <p>For <code>n.prop</code>, <code>prec.prop</code>, <code>pow.comp2prop</code>, and <code>mde.comp2prop</code>, a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under the <span style="R">R</span> recycling rule).</p>
+<p>For <code>n.comp2prop</code>, a list of length 3 with names <code>n1</code>, <code>n2</code>, and <code>n</code>, providing the required sample sizes for group 1, group 2, and the overall sample. Each of the elements of the list is a <code>numeric</code> vector whose length depends on the length of the numeric inputs passed to the function (under the <span style="R">R</span> recycling rule).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>UNICEF (2023) MICS7 TOOLS. URL: <a href='https://mics.unicef.org/tools#survey-design'>https://mics.unicef.org/tools#survey-design</a>.</p>
-<p>ILO (2014) ILO-IPEC TOOLS. URL: <a href='https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys'>https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys</a>.</p>
-<p>ILO (2014) ILO-IPEC TEMPLATE. URL: <a href='https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Template_2014.xlsx'>https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Template_2014.xlsx</a>.</p>
-<p>Rosner, B. (2006) Fundamentals of biostatistics (7th ed.). Boston, MA: Brooks/Cole.</p>
-<p>Lance, P., Hattori, A. (2016) Sampling and evaluation. Chapel Hill, North Carolina: MEASURE Evaluation, University of North Carolina (2016).</p>
+<p>ILO (2014a) ILO-IPEC TOOLS. URL: <a href='https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys'>https://www.ilo.org/resource/training-material/interactive-tools-sampling-household-based-child-labour-surveys</a>.</p>
+<p>ILO (2014b) ILO-IPEC TEMPLATE. URL: <a href='https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Template_2014.xlsx'>https://www.ilo.org/sites/default/files/2024-09/Child_labour_Sampling_Tools_Tool_01_Sample_Size_and_Margin_of_Error_Template_2014.xlsx</a>.</p>
+<p>Rosner, B. (2006) <em>&#8220;Fundamentals of biostatistics (7th ed.)&#8221;</em>. Boston, MA: Brooks/Cole.</p>
+<p>Lance, P., Hattori, A. (2016) <em>&#8220;Sampling and evaluation&#8221;</em>. Chapel Hill, North Carolina: MEASURE Evaluation, University of North Carolina.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Functions <code><a href='SampleSizeMean.html'>n.mean</a></code>, <code><a href='SampleSizeMean.html'>prec.mean</a></code>, <code><a href='SampleSizeMean.html'>n.comp2mean</a></code>, <code><a href='SampleSizeMean.html'>pow.comp2mean</a></code>, and <code><a href='SampleSizeMean.html'>mde.comp2mean</a></code> provide the same functionalities documented here, when the statistics of interest are <em>means</em> rather than proportions.</p></div>
@@ -293,7 +293,7 @@
     <pre class="examples"><div class='input'><span class='co'>##########################</span>
 <span class='co'># Reproducible example 1 #</span>
 <span class='co'>##########################</span>
-<span class='co'># Solve the illustrating example problem stored in sheet 'Sample Size(SS) for one domain'</span>
+<span class='co'># Solve the illustrating example problem stored in sheet 'Sample Size (SS) for one domain'</span>
 <span class='co'># of the MICS7 Excel template (which can be freely downloaded from:</span>
 <span class='co'># https://mics.unicef.org/tools?round=mics7):</span>
 
@@ -362,7 +362,7 @@
 #&gt; # -&gt; Required sample size:
 #&gt;   n = 2277 
 #&gt; </div><div class='input'>
-<span class='co'># NOTE: We get 2277. The result of the ILO-IPEC template is a bit larger: 2370. This</span>
+<span class='co'># NOTE: We get 2277. The result of the ILO-IPEC template is a bit larger: 2370. This is</span>
 <span class='co'>#       simply because the ILO-IPEC template too approximates the 1 - 0.05/2 quantile of</span>
 <span class='co'>#       the standard normal distribution with 2. Indeed, one can see that 2370 is exactly</span>
 <span class='co'>#       equal to:</span>
@@ -416,7 +416,7 @@
 <span class='co'># Suppose the survey you are designing will use 20 households per PSU, rather than the 16</span>
 <span class='co'># used by the survey from which you obtained the anticipated estimates used so far. Since</span>
 <span class='co'># this setting is expected to increase the DEFF, a larger sample size will be needed to</span>
-<span class='co'># the meet the previous precision constraint of ME = 0.03:</span>
+<span class='co'># meet the previous precision constraint of ME = 0.03:</span>
 <span class='fu'>n.prop</span>(<span class='kw'>prec</span><span class='kw'>=</span> <span class='fl'>0.03</span>, <span class='kw'>prec.ind</span><span class='kw'>=</span> <span class='st'>"ME"</span>, <span class='kw'>P</span><span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>DEFF</span><span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>F</span><span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>hhSize</span><span class='kw'>=</span> <span class='fl'>5.0</span>, <span class='kw'>RR</span><span class='kw'>=</span> <span class='fl'>0.9</span>,
        <span class='kw'>old.clus.size</span><span class='kw'>=</span> <span class='fl'>16</span>, <span class='kw'>new.clus.size</span><span class='kw'>=</span> <span class='fl'>20</span>)</div><div class='output co'>#&gt; # Precision constraint:
 #&gt;   ME = 0.03
@@ -547,7 +547,7 @@
 <span class='co'>#######################################################################</span>
 <span class='co'># An assistance program aims to reduce by 20% the prevalence of stunted children under age</span>
 <span class='co'># 5 in a given target area. The historical prevalence before the intervention is estimated</span>
-<span class='co'># at 35%, so bringing it down to 28% (a 20% reduction, resulting in a 7 percentage points</span>
+<span class='co'># at 35%, so bringing it down to 28% (a 20% reduction, resulting in a 7-percentage-point</span>
 <span class='co'># decrease) would be considered a full success. To evaluate the impact of the intervention,</span>
 <span class='co'># two household surveys will be conducted before (T0) and after (T1) the implementation.</span>
 <span class='co'># The surveys will have the same sample sizes, and it is desired that the study manages to</span>
@@ -556,7 +556,7 @@
 <span class='co'># general population is estimated to be 15% and the average household size to be 5.6. The</span>
 <span class='co'># latest household survey that estimated the prevalence of stunted children under age 5</span>
 <span class='co'># reported a DEFF of 2.70, used a two-stage stratified cluster sampling design with 20</span>
-<span class='co'># households per each sampled EA, and had a response rate of 92%. If the same sampling</span>
+<span class='co'># households per sampled EA, and had a response rate of 92%. If the same sampling</span>
 <span class='co'># design were adopted, how many households would be needed to achieve 80% power for the</span>
 <span class='co'># detection of the sought-after minimum effect at significance level 5%?</span>
 
@@ -623,9 +623,9 @@
 <span class='co'>#       Therefore, the proposed design would save 655 (= 3940 - 3285) households per round,</span>
 <span class='co'>#       but would require visiting 22 (= 219 - 197) additional EAs per round.</span>
 
-<span class='co'># Suppose that the available budget only allows to survey 5000 households, 2500 per round,</span>
-<span class='co'># and that logistic constraints dictate to survey 15 households per EA. What would be the</span>
-<span class='co'># expected MDE of the study in that case, if a 80% power is desired?</span>
+<span class='co'># Suppose that the available budget only allows surveying 5000 households, 2500 per round,</span>
+<span class='co'># and that logistic constraints dictate surveying 15 households per EA. What would be the</span>
+<span class='co'># expected MDE of the study in that case, if an 80% power is desired?</span>
 
 <span class='fu'>mde.comp2prop</span>(<span class='kw'>n</span><span class='kw'>=</span> <span class='fl'>5000</span>, <span class='kw'>P1</span> <span class='kw'>=</span> <span class='fl'>0.35</span>, <span class='kw'>sides</span> <span class='kw'>=</span> <span class='st'>"one-tailed"</span>, <span class='kw'>DEFF</span> <span class='kw'>=</span> <span class='fl'>2.7</span>, <span class='kw'>RR</span> <span class='kw'>=</span> <span class='fl'>0.92</span>,
               <span class='kw'>F</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>hhSize</span> <span class='kw'>=</span> <span class='fl'>5.6</span>, <span class='kw'>old.clus.size</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>new.clus.size</span> <span class='kw'>=</span> <span class='fl'>15</span>)</div><div class='output co'>#&gt; # Sample size(s):
@@ -653,11 +653,11 @@
 #&gt;   MDE = 0.05721292 
 #&gt; </div><div class='input'>
 # NOTE: The MDE would be about 5.7 percentage points. This means that, if the assistance
-#       program actually results in the hoped-for 7 percentage points reduction, the study
+#       program actually results in the hoped-for 7-percentage-point reduction, the study
 #       will detect its effect as statistically significant with high probability (>= 80%).
 #       However, should the program result in a smaller, yet not negligible, impact (e.g.
 #       a reduction of 5 percentage points), the study will have less than 80% probability
-#       to detect it, because of the sample size constraint.
+#       of detecting it, because of the sample size constraint.
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

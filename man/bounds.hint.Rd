@@ -25,7 +25,7 @@ bounds.hint(design, df.population,
 }
 
 \details{
-Function \code{bounds.hint} returns a \code{bounds} value for which \code{e.calibtrate} is \emph{likely} to converge. This interval is just a sound hint, \emph{not} an exact result (see \sQuote{Note}).
+Function \code{bounds.hint} returns a \code{bounds} value for which \code{e.calibrate} is \emph{likely} to converge. This interval is just a sound hint, \emph{not} an exact result (see \sQuote{Note}).
 
 The mandatory argument \code{design} identifies the \code{analytic} object on which the calibration problem is defined.
 
@@ -33,7 +33,7 @@ The mandatory argument \code{df.population} identifies the known totals data fra
 
 The argument \code{calmodel} symbolically defines the calibration model you want to use: it identifies the auxiliary variables and the constraints for the calibration problem. The \code{design} variables referenced by \code{calmodel} must be \code{numeric} or \code{factor} and must not contain any missing value (\code{NA}). The argument can be omitted provided \code{df.population} is an object of class \code{pop.totals} (see \code{\link{population.check}}). 
 
-The optional argument \code{partition} specifies the variables that define the calibration domains for the model. The default value (\code{FALSE}) means either that there are not calibration domains or that you want to solve the problem globally (even though it could be factorized). The \code{design} variables referenced by \code{partition} (if any) must be \code{factor} and must not contain any missing value (\code{NA}). The argument can be omitted provided \code{df.population} is an object of class \code{pop.totals} (see \code{\link{population.check}}).
+The optional argument \code{partition} specifies the variables that define the calibration domains for the model. The default value (\code{FALSE}) means either that there are no calibration domains or that you want to solve the problem globally (even though it could be factorized). The \code{design} variables referenced by \code{partition} (if any) must be \code{factor} and must not contain any missing value (\code{NA}). The argument can be omitted provided \code{df.population} is an object of class \code{pop.totals} (see \code{\link{population.check}}).
 
 The optional argument \code{msg} enables/disables printing of a summary description of the achieved result.
 }
@@ -45,9 +45,9 @@ A numeric vector of length 2, representing the \emph{suggested} value for the \c
 \note{
 Assessing the feasibility of an arbitrary calibration problem is not an easy task. The problem is even more difficult whenever additional \emph{\dQuote{range restrictions}} are imposed. Indeed, even if one assumes that the calibration constraints define a consistent system, one also has to choose the \code{bounds} such that the feasible region is non-empty.
 
-One can argue that there must exist a minimum-length interval \eqn{I=[L,U]} such that, if it is covered by \code{bounds}, the specified calibration problem is feasible. Unfortunately in order to compute exactly that minimum-length interval \eqn{I} one should solve a big linear programming problem [Vanderhoeft 01]. As an alternative, a trial and error procedure has been frequently proposed [Deville et al. 1993; Sautory 1993]: (i) start with a very large interval \code{bounds.0}; (ii) if convergence is achieved, shrink it so as to obtain a new interval \code{bounds.1}; (iii) repeat until you get a sufficiently tight feasible interval \code{bounds.n}. The drawback is that this procedure can cost a lot of computer time since, for each choice of the \code{bounds}, the full calibration problem has to be solved.
+One can argue that there must exist a minimum-length interval \eqn{I=[L,U]} such that, if it is covered by \code{bounds}, the specified calibration problem is feasible. Unfortunately, in order to compute exactly that minimum-length interval \eqn{I} one should solve a big linear programming problem [Vanderhoeft 2001]. As an alternative, a trial-and-error procedure has been frequently proposed [Deville et al. 1993; Sautory 1993]: (i) start with a very large interval \code{bounds.0}; (ii) if convergence is achieved, shrink it so as to obtain a new interval \code{bounds.1}; (iii) repeat until you get a sufficiently tight feasible interval \code{bounds.n}. The drawback is that this procedure can cost a lot of computer time since, for each choice of the \code{bounds}, the full calibration problem has to be solved.
 
-However, when both the benchmark population totals and the corresponding Horvitz-Thompson estimates are \emph{all non-negative}, it is easy to find at least a given specific interval \eqn{I^*=[L^*,U^*]} such that, if it is \emph{not} covered by \code{bounds}, the current calibration problem is \emph{surely unfeasible}. This means that any feasible \code{bounds} value must necessarily contain the \eqn{I^*} interval. Function \code{bounds.hint}: (i) first identifies such an \eqn{I^*} interval (by computing the range of the ratios between known population totals and corresponding direct Horvitz-Thompson estimates), (ii) then builds a new interval \eqn{I^{sugg}} with same midpoint and double length. The latter is the \emph{suggested} value for the \code{bounds} argument of \code{e.calibrate}. The return value of \code{bounds.hint} should be understood as a useful starting guess for \code{bounds}, even though there is definitely no warranty that the calibration algorithm will actually converge.
+However, when both the benchmark population totals and the corresponding Horvitz-Thompson estimates are \emph{all non-negative}, it is easy to find at least one specific interval \eqn{I^*=[L^*,U^*]} such that, if it is \emph{not} covered by \code{bounds}, the current calibration problem is \emph{surely unfeasible}. This means that any feasible \code{bounds} value must necessarily contain the \eqn{I^*} interval. Function \code{bounds.hint}: (i) first identifies such an \eqn{I^*} interval (by computing the range of the ratios between known population totals and corresponding initial Horvitz-Thompson estimates), (ii) then builds a new interval \eqn{I^{sugg}} with the same midpoint and double length. The latter is the \emph{suggested} value for the \code{bounds} argument of \code{e.calibrate}. The return value of \code{bounds.hint} should be understood as a useful starting guess for \code{bounds}, even though there is definitely no guarantee that the calibration algorithm will actually converge.
 }
 
 \author{Diego Zardetto}
@@ -88,7 +88,7 @@ descal06p<-e.calibrate(design=des,df.population=pop06p,
            calmodel=~age5c-1,partition=~procod,calfun="logit",
            bounds=c(0.62,1.50),aggregate.stage=2,force=FALSE)
 }
-# The warning message raised by e.calibrate tells that
+# The warning message raised by e.calibrate states that
 # the population total of variable age5c5 (i.e. the fifth
 # age class frequency) was not matched.
 

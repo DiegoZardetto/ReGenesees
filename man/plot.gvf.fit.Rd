@@ -57,7 +57,7 @@ The \emph{\sQuote{Residuals vs Fitted}} plot is special in that it will be alway
 
 Additional plots - beyond \emph{\sQuote{Residuals vs Fitted}} - can be requested through argument \code{which.more}. Any subset of \code{1:6} is allowed, provided its \code{length} does not exceed \code{3}. Therefore, at most \code{4} plots will be generated simultaneously.
 
-Note that the \emph{default} behaviour of this function do depend on whether input object \code{x} stores \emph{one} or \emph{more than one} fitted GVF models. In the first case, plots \code{0:3} will be returned in a multiple plot with a 2x2 layout. In the second case, only the default plot number \code{0} will be returned, opening a new graphics frame for each different GVF model.
+Note that the \emph{default} behaviour of this function does depend on whether input object \code{x} stores \emph{one} or \emph{more than one} fitted GVF models. In the first case, plots \code{0:3} will be returned in a multiple plot with a 2x2 layout. In the second case, only the default plot number \code{0} will be returned, opening a new graphics frame for each different GVF model.
 
 Argument \code{id.n} specifies how many points have to be labelled, starting with the most extreme in terms of residuals: this applies to all plots.
 
@@ -153,7 +153,7 @@ plot(m.g)
 plot(m.g, which.more = c(1:2,4))
 
 
-## (D) Plots of *many* GVF model fitted to different groups ##
+## (D) Plots of *many* GVF models fitted to different groups ##
 # Fit all registered GVF models for frequencies separately inside groups:
 mm.g <- fit.gvf(ee, 1:3)
 

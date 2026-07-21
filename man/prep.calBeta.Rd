@@ -28,14 +28,14 @@ pop.calBeta(design)
 \strong{\emph{Special Purpose Calibration} tasks}\cr
 \pkg{ReGenesees 2.1} introduced support for \emph{\sQuote{special purpose calibration}} tasks, i.e. facilities to calibrate survey weights so as to match complex population parameters, instead of ordinary population totals.
 
-When calibration benchmarks come in the form of population parameters that are complex, \emph{non-linear} functions of auxiliary variables (like, in the present case, multiple regression coefficients), calibration constraints have to be linearized first. This generates \emph{synthetic linearized variables} \strong{\emph{z}}, which are the \emph{actual calibration variables} the calibration algorithm will eventually work on. Typically, \emph{control totals} for these synthetic linearized variables \strong{\emph{z}} will \emph{all} be \emph{zero}. See, e.g. [Lesage, 2011].
+When calibration benchmarks come in the form of population parameters that are complex, \emph{non-linear} functions of auxiliary variables (like, in the present case, multiple regression coefficients), calibration constraints have to be linearized first. This generates \emph{synthetic linearized variables} \strong{\emph{z}}, which are the \emph{actual calibration variables} the calibration algorithm will eventually work on. Typically, \emph{control totals} for these synthetic linearized variables \strong{\emph{z}} will \emph{all} be \emph{zero}. See, e.g. [Lesage 2011].
 
 Put briefly:
 \itemize{
   \item {Function \code{prep.calBeta} generates and binds to \code{design} the \emph{synthetic linearized variables} \strong{\emph{z}} needed for the calibration task.}
   \item {Then, given the \emph{prepared} \code{design} object returned by \code{prep.calBeta}, function \code{pop.calBeta} generates the \emph{control totals} data frame for those \strong{\emph{z}} variables.}
 }
-Of course, once prepared, survey data and control totals returned by the above functions will be fed in input to function \code{\link{e.calibrate}}, which will run the calibration task.\cr\cr
+Of course, once prepared, survey data and control totals returned by the above functions will be fed as input to function \code{\link{e.calibrate}}, which will run the calibration task.\cr\cr
 
 \strong{Function \code{prep.calBeta()}}\cr
 Function \code{prep.calBeta} makes it possible to:
@@ -52,8 +52,10 @@ The mandatory argument \code{Beta} specifies the vector(s) of regression coeffic
 
 If argument \code{model} is passed as a list, argument \code{Beta} must be passed as a list too, and the \code{length} of both must be the same. If this is the case, \code{Beta} vectors will be \emph{positionally} tied to linear model formulas contained in \code{model}.
 
-Each vector of regression coefficients specified through \code{Beta} must be \emph{consistent} with the corresponding \code{model}, namely match its model matrix columns (as generated using actual \code{design} data). Function \code{prep.calBeta} will check for this consistency and raise an informative error message in case of failure.\cr
-Note that, in order to ensure consistency with \code{model}, not only the \code{length}, but also the \emph{order} of \code{Beta} elements \emph{matters}. If in doubt, you can easily learn about the \emph{right} ordering of \code{Beta} coefficients, given \code{model}, by calling function \code{\link{svystatB}} as follows: \code{svystatB(design, model)}. This will, of course, return the estimated regression coefficients of \code{model} \emph{before} calibration.\cr
+Each vector of regression coefficients specified through \code{Beta} must be \emph{consistent} with the corresponding \code{model}, namely match its model matrix columns (as generated using actual \code{design} data). Function \code{prep.calBeta} will check for this consistency and raise an informative error message in case of failure.
+
+Note that, in order to ensure consistency with \code{model}, not only the \code{length}, but also the \emph{order} of \code{Beta} elements \emph{matters}. If in doubt, you can easily learn about the \emph{right} ordering of \code{Beta} coefficients, given \code{model}, by calling function \code{\link{svystatB}} as follows: \code{svystatB(design, model)}. This will, of course, return the estimated regression coefficients of \code{model} \emph{before} calibration.
+
 Note that each \code{Beta} vector can have \code{names} or not. If a \code{Beta} vector has \emph{names} that match the expected ones (given the corresponding \code{model} formula), but appear in a \emph{different order}, then function \code{prep.calBeta} will suitably re-order them and inform you with a \code{warning} message.
 
 As anticipated, argument \code{by} can be used to enable calibration on regression coefficients known at \emph{domain level} (i.e. within subpopulations).
@@ -62,12 +64,12 @@ If passed, \code{by} must be a formula: for example, the statement \code{by=~B1:
 
 If you specify domains through argument \code{by}, you will be allowed to specify \emph{just a single} linear model through argument \code{model}. Instead, through argument \code{Beta}, you will have to specify domain-level vectors of regression coefficients. Therefore, \code{Beta} will be necessarily passed as a \emph{list}. Note that, in this case, the \code{Beta} list must have as many components as the domains defined through argument \code{by}, and the two will be matched \emph{positionally} by function \code{prep.calBeta}. Therefore, the \emph{order} of elements in the \code{Beta} list \emph{matters}. Specifically, \code{Beta} vectors must appear in the same order as the domains specified by argument \code{by}. You can easily learn about the \emph{right} ordering of \code{by} domains (and hence \code{Beta} elements) by calling function \code{\link{svystatB}} as follows: \code{svystatB(design, model, by)}. This will, of course, return the estimated regression coefficients of \code{model} within \code{by} domains \emph{before} calibration.
 
-Lastly, if you specify domains through argument \code{by}, you will be allowed to decide whether \code{design} should be prepared for a \emph{global} or a \emph{partitioned} calibration task (see \code{\link{e.calibrate}}). Recall that partitioned calibration tasks are computationally more efficient, but produce exactly the same results. Note that, if you select \code{partition = TRUE}, than the \emph{calibration domains} used to split the global calibration task will be the same domains specified via argument \code{by}. More explicitly: function \code{\link{e.calibrate}} will eventually be called on \code{prep.calBeta}'s output object silently assuming \code{partition = by}.
+Lastly, if you specify domains through argument \code{by}, you will be allowed to decide whether \code{design} should be prepared for a \emph{global} or a \emph{partitioned} calibration task (see \code{\link{e.calibrate}}). Recall that partitioned calibration tasks are computationally more efficient, but produce exactly the same results. Note that, if you select \code{partition = TRUE}, then the \emph{calibration domains} used to split the global calibration task will be the same domains specified via argument \code{by}. More explicitly: function \code{\link{e.calibrate}} will eventually be called on \code{prep.calBeta}'s output object silently assuming \code{partition = by}.
 
 The synthetic linearized variables \strong{\emph{z}} prepared by \code{prep.calBeta} will eventually be used by function \code{\link{e.calibrate}} to solve the calibration task. Argument \code{drop.z} allows you to instruct \code{\link{e.calibrate}} to drop these variables from its output object - or rather keep them within it - upon completion of the calibration task. The default has been set to \code{TRUE} to reduce memory usage. In case you want to be able to consistently trim weights after calibration via function \code{\link{trimcal}}, you \emph{must} specify \code{drop.z = FALSE}.\cr\cr
 
 \strong{Function \code{pop.calBeta()}}\cr
-Given the \emph{prepared} \code{design} object returned by \code{prep.calBeta}, function \code{pop.calBeta} generates the \emph{control totals} data frame needed to run the calibration task. This dataframe suitably accomodates the control totals of the \emph{synthetic linearized variables} \strong{\emph{z}} prepared by \code{prep.calBeta}.
+Given the \emph{prepared} \code{design} object returned by \code{prep.calBeta}, function \code{pop.calBeta} generates the \emph{control totals} data frame needed to run the calibration task. This data frame suitably accommodates the control totals of the \emph{synthetic linearized variables} \strong{\emph{z}} prepared by \code{prep.calBeta}.
 
 Note that the data frame object returned by \code{pop.calBeta} is \emph{already filled}, with control totals that are \emph{all zero}, and it is ready to be directly passed to function \code{\link{e.calibrate}} (see the \sQuote{Examples} section).
 
@@ -83,7 +85,7 @@ A second, very attractive alternative would be to run the special purpose calibr
 
 \value{
 \itemize{
-  \item {For function \code{pop.calBeta}, an object of the same class as \code{design}, storing the freshly created \emph{synthetic linearized variables} \strong{\emph{z}} as columns of its \code{$variables} slot (see the \sQuote{Examples} section).}
+  \item {For function \code{prep.calBeta}, an object of the same class as \code{design}, storing the freshly created \emph{synthetic linearized variables} \strong{\emph{z}} as columns of its \code{$variables} slot (see the \sQuote{Examples} section).}
   \item {For function \code{pop.calBeta}, a \emph{control totals} data frame for those \strong{\emph{z}} variables, with class \code{spc.pop} (see the \sQuote{Examples} section).}
 }
 }
@@ -127,7 +129,7 @@ sbsdes0 <- prep.calBeta(design = sbsdes, model = model0, Beta = B0)
 # Have a look at the freshly created *synthetic* auxiliary variables: 
 head(sbsdes0$variables)
 
-# Then, prepare the control totals dataframe for the calibration task:
+# Then, prepare the control totals data frame for the calibration task:
 pop0 <- pop.calBeta(sbsdes0)
 
 # Have a look...
@@ -192,10 +194,10 @@ B2 <- coef(lm(model2, data = sbs.frame))
 # Prepare the survey design for the joint calibration task:
 sbsdes1_2 <- prep.calBeta(sbsdes, model = list(model1, model2), Beta = list(B1, B2))
 
-# Prepare the control totals dataframe for the joint calibration task:
+# Prepare the control totals data frame for the joint calibration task:
 pop1_2 <- pop.calBeta(sbsdes1_2)
 
-# Have a look to the control totals (note the presence of two models and
+# Have a look at the control totals (note the presence of two models and
 # Beta vectors):
 pop.desc(pop1_2)
 pop1_2
@@ -238,7 +240,7 @@ sbsdes.g <- prep.calBeta(sbsdes, model, Beta = B, by = ~dom3)
 # Prepare the control totals for the calibration task:
 pop.g <- pop.calBeta(sbsdes.g)
 
-# Have a look to the control totals (note the presence of one Beta vector *for
+# Have a look at the control totals (note the presence of one Beta vector *for
 # each domain*):
 pop.desc(pop.g)
 pop.g
@@ -260,7 +262,7 @@ sbsdes.p <- prep.calBeta(sbsdes, model, Beta = B, by = ~dom3, partition = TRUE)
 # Prepare the control totals for the calibration task:
 pop.p <- pop.calBeta(sbsdes.p)
 
-# Have a look to the control totals (note the presence of one Beta vector *for
+# Have a look at the control totals (note the presence of one Beta vector *for
 # each domain*):
 pop.desc(pop.p)
 pop.p
@@ -275,7 +277,7 @@ B
 # OK
 
 ## Lastly, check that calibration weights obtained using the *global* and 
-## *partitioned* solution are the same:
+## *partitioned* solutions are the same:
 g.range(sbscal.g)
 g.range(sbscal.p)
 all.equal(weights(sbscal.g), weights(sbscal.p))
@@ -286,7 +288,7 @@ all.equal(weights(sbscal.g), weights(sbscal.p))
 # BONUS TIP: Calibration on the mean (or on domain means) #
 #            of one variable or multiple variables.       #
 ###########################################################
-# Since the domain mean of a numeric variable can be thought as a
+# Since the domain mean of a numeric variable can be thought of as a
 # regression coefficient (see the 'Examples' section of ?svystatB),
 # you can use the ReGenesees facilities documented above to
 # *calibrate on the mean (or on domain means)* of *one variable
@@ -315,7 +317,7 @@ exdes.new <- prep.calBeta(exdes, income ~ 1, Beta = income.AVG)
 pop.new <- pop.calBeta(exdes.new)
 excal.new <- e.calibrate(exdes.new, pop.new)
 
-# Now, check that calibration estimate of average income now match the known
+# Check that the calibration estimate of average income now matches the known
 # value derived from the external source *without residual uncertainty*:
 svystatTM(excal.new, ~income, estimator = "Mean")
 income.AVG
@@ -331,7 +333,7 @@ svystatTM(excal.new, ~income + ones, estimator = "Total")
 # however, that argument 'by' would provide an alternative way to achieve
 # the same result).
 # Suppose you know with satisfactory accuracy the *average income* by the
-# crossclassification of sex and marital status:
+# cross-classification of sex and marital status:
 income.AVG.sex.marstat <- c(f.married   = 1310, m.married   = 1260,
                             f.unmarried = 1150, m.unmarried = 1200,
                             f.widowed   = 1380, m.widowed   = 1300)
@@ -342,7 +344,7 @@ exdes.new <- prep.calBeta(exdes, income ~ sex:marstat -1,
 pop.new <- pop.calBeta(exdes.new)
 excal.new <- e.calibrate(exdes.new, pop.new)
 
-# Now, check that calibration estimates of average income by domains now match
+# Check that calibration estimates of average income by domains now match
 # the known values derived from the external source *without residual
 # uncertainty*:
 svystatTM(excal.new, ~income, ~sex:marstat, estimator = "Mean")

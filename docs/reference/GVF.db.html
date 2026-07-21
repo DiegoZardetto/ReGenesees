@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Archive of Registered GVF Models — GVF.db" />
-<meta property="og:description" content="GVF.db is the archive of registered (i.e. built-in and/or user-defined) Generalized Variance Functions models supported by ReGenesees. Special accessor functions allow to customize, maintain, extend, update, save and reset such archive." />
+<meta property="og:description" content="GVF.db is the archive of registered (i.e. built-in and/or user-defined) Generalized Variance Functions models supported by ReGenesees. Special accessor functions make it possible to customize, maintain, extend, update, save and reset such archive." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -134,7 +134,7 @@
     </div>
 
     <div class="ref-description">
-    <p><code>GVF.db</code> is the archive of <em>registered</em> (i.e. built-in and/or user-defined) Generalized Variance Functions models supported by <span class="pkg">ReGenesees</span>. Special accessor functions allow to customize, maintain, extend, update, save and reset such archive.</p>
+    <p><code>GVF.db</code> is the archive of <em>registered</em> (i.e. built-in and/or user-defined) Generalized Variance Functions models supported by <span class="pkg">ReGenesees</span>. Special accessor functions make it possible to customize, maintain, extend, update, save and reset such archive.</p>
     </div>
 
     <pre class="usage"><span class='no'>GVF.db</span>
@@ -227,11 +227,11 @@ Function <code>GVF.db$insert</code> has just a single mandatory argument: <code>
  (9)  'Regression Coefficient'
 (10)  'Quantile'
 (11)  'Complex Estimator'
- </pre><p>Note that category <code>'Frequency'</code> has to be understood as an aggregation of categories <code>'Absolute Frequency'</code> and <code>'Relative Frequency'</code>, thus being appropriate for GVF models which are deemed to work well for estimators of <em>both</em> kind of frequencies.</p>
-<p>One of the primary motivations for building and fitting a GVF model is to exploit the fitted model to <em>predict</em> the sampling error associated to a given estimate, instead of having to <em>compute</em> directly an estimate of such sampling error. Optional argument <code>Resp.to.CV</code> is relevant to that scope.</p>
-<p>Indeed, different GVF models can actually specify as response term (call it <code>'resp'</code> for definiteness) different functions of variables <code>'SE'</code>, <code>'CV'</code>, and <code>'VAR'</code>, but <span class="pkg">ReGenesees</span> will always adopt variable <code>'CV'</code> as a <em>pivot</em>. Thus, when registering a new GVF model, the user can provide via argument <code>Resp.to.CV</code> the function which transforms the response of the model, <code>'resp'</code>, into the pivot measure of variability, <code>'CV'</code>. A look to the default content of <code>GVF.db</code> should make the latter statement clear (see &#8216;Examples&#8217;).</p>
+ </pre><p>Note that category <code>'Frequency'</code> has to be understood as an aggregation of categories <code>'Absolute Frequency'</code> and <code>'Relative Frequency'</code>, thus being appropriate for GVF models which are deemed to work well for estimators of <em>both</em> kinds of frequencies.</p>
+<p>One of the primary motivations for building and fitting a GVF model is to exploit the fitted model to <em>predict</em> the sampling error associated with a given estimate, instead of having to <em>compute</em> directly an estimate of such sampling error. Optional argument <code>Resp.to.CV</code> is relevant to that scope.</p>
+<p>Indeed, different GVF models can actually specify as response term (call it <code>'resp'</code> for definiteness) different functions of variables <code>'SE'</code>, <code>'CV'</code>, and <code>'VAR'</code>, but <span class="pkg">ReGenesees</span> will always adopt variable <code>'CV'</code> as a <em>pivot</em>. Thus, when registering a new GVF model, the user can provide via argument <code>Resp.to.CV</code> the function which transforms the response of the model, <code>'resp'</code>, into the pivot measure of variability, <code>'CV'</code>. A look at the default content of <code>GVF.db</code> should make the latter statement clear (see &#8216;Examples&#8217;).</p>
 <p>Note that while <code>Resp.to.CV</code> is passed as a character string, that string is expected to represent a well-formed mathematical expression (otherwise function <code><a href='predictCV.html'>predictCV</a></code> would not work). Moreover, only variables <code>'resp'</code> and <code>'Y'</code> are allowed to appear inside <code>Resp.to.CV</code> (which is enough, since <code>'VAR'</code> and <code>'SE'</code> can be expressed in terms of <code>'CV'</code> and <code>'Y'</code>).</p>
-<p>If the user does not specify <code>Resp.to.CV</code> when registering a new GVF model, he will be not able to use function <code><a href='predictCV.html'>predictCV</a></code> for predicting CV values based on the fitted GVF model.</p>
+<p>If the user does not specify <code>Resp.to.CV</code> when registering a new GVF model, they will not be able to use function <code><a href='predictCV.html'>predictCV</a></code> for predicting CV values based on the fitted GVF model.</p>
 <p>Lastly, note that the <code>Model.id</code> of a newly inserted GVF model will automatically be set, by adding 1 to the previous maximum of <code>Model.id</code>.<br /><br /></p>
 
 <p><strong>GVF.db$delete()</strong><br />
@@ -248,7 +248,7 @@ Function <code>GVF.db$assign</code> has just a single mandatory argument: <code>
 Function <code>GVF.db$reset</code> has no mandatory arguments and simply restores the default version of <code>GVF.db</code> (i.e. the one containing built-in GVF models only).<br /><br /></p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>Built-in GVF models for frequencies (i.e. those with <code>Model.id</code> <code>1</code>, <code>2</code>, and <code>3</code>) are discussed in Chapter 7 of [Wolter 07], along with their theoretical justification. Built-in GVF models for totals (i.e. those with <code>Model.id</code> <code>4</code>, and <code>5</code>) lack a rigorous justification, but have sometimes been used successfully on a purely empirical basis. For instance, Istat surveys on structural business statistics adopted models of that kind to summarize standard errors in publications and to allow their approximate evaluation on a custom basis.</p>
+    <p>Built-in GVF models for frequencies (i.e. those with <code>Model.id</code> <code>1</code>, <code>2</code>, and <code>3</code>) are discussed in Chapter 7 of [Wolter 2007], along with their theoretical justification. Built-in GVF models for totals (i.e. those with <code>Model.id</code> <code>4</code>, and <code>5</code>) lack a rigorous justification, but have sometimes been used successfully on a purely empirical basis. For instance, Istat surveys on structural business statistics adopted models of that kind to summarize standard errors in publications and to allow their approximate evaluation on a custom basis.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Wolter, K.M. (2007) <em>&#8220;Introduction to Variance Estimation&#8221;</em>, Second Edition, Springer-Verlag, New York.</p>
@@ -421,7 +421,7 @@ Function <code>GVF.db$reset</code> has no mandatory arguments and simply restore
 <span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>CV</span>^<span class='fl'>2</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>Y</span>))
 }
 <span class='co'># ...if this is the case, it can even be "equivalent" to old ones: e.g.</span>
-<span class='co'># the following is identical to model number 5 and will produces identical </span>
+<span class='co'># the following is identical to model number 5 and will produce identical </span>
 <span class='co'># estimates and predictions (as you may want to check):</span>
 <span class='no'>GVF.db</span>$<span class='fu'>insert</span>(<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>VAR</span>)/<span class='no'>Y</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>1</span>/<span class='no'>Y</span>) + <span class='no'>Y</span>, <span class='st'>"Total"</span>, <span class='kw'>Resp.to.CV</span> <span class='kw'>=</span> <span class='st'>"resp"</span>)</div><div class='output co'>#&gt; 
 #&gt; # New GVF model has been registered

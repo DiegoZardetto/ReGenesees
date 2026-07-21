@@ -28,7 +28,7 @@ Function \code{\link{pop.template}} generates a \emph{template} (i.e. \emph{empt
 
 When the sampling frame of the survey is available and the actual population totals can be calculated from this source, function \code{\link{fill.template}} (i) automatically computes the totals of the auxiliary variables from the sampling frame, (ii) safely arranges and formats these values according to the \code{template} structure. Therefore, function \code{\link{fill.template}} avoids any need for the user to understand, comply with, or even be aware of, the structure of the template that is being filled.
 
-On the contrary, when the population totals are available to the user as such, that is in the form of already computed aggregated values (e.g. because they come from an external source, like a Population Census), it is up to the user to correctly fill the template, that is to put the \emph{right values} in the \emph{right slots} of the prepared template.
+On the contrary, when the population totals are available to the user as such, that is, in the form of already computed aggregated values (e.g. because they come from an external source, like a Population Census), it is up to the user to correctly fill the template, that is, to put the \emph{right values} in the \emph{right slots} of the prepared template.
 
 Function \code{pop.desc} has been designed for users who cannot take advantage of function \code{fill.template}, to help them understand the structure of the known totals template, in order to safely fill it with actual figures.
 
@@ -36,7 +36,7 @@ Invoking \code{pop.desc} will print on screen a detailed natural language descri
 }
 
 \value{
-The main purpose of the function is to print on screen, anyway it returns invisibly the input \code{pop.totals} object (as \code{print} would do).
+The main purpose of the function is to print on screen; however, it returns invisibly the input \code{pop.totals} object (as \code{print} would do).
 }
 
 \author{Diego Zardetto}

@@ -17,13 +17,13 @@
 \docType{data}
 \title{Artificial Household Survey Data}
 \description{
-Example data frames. Allow to run \R code contained in the \sQuote{Examples} section of the \pkg{ReGenesees} package help pages.
+Example data frames used to run \R code contained in the \sQuote{Examples} section of the \pkg{ReGenesees} package help pages.
 }
 \usage{data(data.examples)}
 \format{
 The main data frame, named \code{example}, contains (artificial) data from a two stage stratified cluster sampling design. The sample is made up of 3000 final units (individuals), for which the following 21 variables were observed:
   \describe{
-    \item{\code{towcod}}{Code identifying "variance PSUs": towns (PSUs) in not-self-representing (NSR) strata, households (SSUs) in self-representing (SR) strata, \code{numeric}}
+    \item{\code{towcod}}{Code identifying \dQuote{variance PSUs}: towns (PSUs) in not-self-representing (NSR) strata, households (SSUs) in self-representing (SR) strata, \code{numeric}}
     \item{\code{famcod}}{Code identifying households (SSUs), \code{numeric}}
     \item{\code{key}}{Key identifying final units (individuals), \code{numeric}}
     \item{\code{weight}}{Initial weights, \code{numeric}}
@@ -47,7 +47,7 @@ The main data frame, named \code{example}, contains (artificial) data from a two
   }
 }
 \details{
-Objects \code{pop01}, \ldots, \code{pop07pp} contain known population totals for various calibration models. Object pairs with names differing in the '\code{p}' suffix (such as \code{pop03} and \code{pop03p}) refer to the \emph{same} calibration problem but pertain to \emph{different} solution methods (global and partitioned respectively, see \code{\link{e.calibrate}}). The two-component numeric vector \code{bounds} expresses a possible choice for the allowed range for the ratios between calibrated weights and direct weights in the aforementioned calibration problems.
+Objects \code{pop01}, \ldots, \code{pop07pp} contain known population totals for various calibration models. Object pairs with names differing in the '\code{p}' suffix (such as \code{pop03} and \code{pop03p}) refer to the \emph{same} calibration problem but pertain to \emph{different} solution methods (global and partitioned respectively, see \code{\link{e.calibrate}}). The two-component numeric vector \code{bounds} expresses a possible choice for the allowed range for the ratios between calibrated weights and initial weights in the aforementioned calibration problems.
 }
 \section{Warning}{
 \strong{Data in the \code{example} data frame are artificial.} The \emph{structure} of \code{example} intentionally resembles the one of typical household survey data, but the \emph{values} it stores are unreliable. The only purpose of such data is that they can be fruitfully exploited to illustrate the syntax and the working mechanism of the functions provided by the \pkg{ReGenesees} package.

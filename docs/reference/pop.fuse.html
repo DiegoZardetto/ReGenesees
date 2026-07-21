@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Fuse Control Totals Data Frames for Special Purpose and Ordinary Calibration Tasks — pop.fuse" />
-<meta property="og:description" content="Allows to solve jointly a special purpose calibration task and an ordinary calibration task by fusing their respective control totals." />
+<meta property="og:description" content="Makes it possible to solve jointly a special purpose calibration task and an ordinary calibration task by fusing their respective control totals." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -134,7 +134,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Allows to solve jointly a special purpose calibration task and an ordinary calibration task by fusing their respective control totals.</p>
+    <p>Makes it possible to solve jointly a special purpose calibration task and an ordinary calibration task by fusing their respective control totals.</p>
     </div>
 
     <pre class="usage"><span class='fu'>pop.fuse</span>(<span class='no'>spc.pop</span>, <span class='no'>pop</span>, <span class='no'>design</span>)</pre>
@@ -171,7 +171,7 @@
 <p>Argument <code>design</code> must be the survey design object that:<br />
 (i)  was already <em>prepared</em> for the special purpose calibration task at hand, and<br />
 (ii) you want to calibrate simultaneously also on the ordinary population totals at hand.</p>
-<p>Note that condition (i) requires that object <code>design</code> has actually been used to build object <code>spc.pop</code> (see the &#8216;Examples&#8217; section). Note, moreover, that condition (ii) requires that you eventually run <code><a href='e.calibrate.html'>e.calibrate</a></code> on object <code>design</code> (see the &#8216;Examples&#8217; section).</p>
+<p>Note that condition (i) requires that object <code>design</code> has actually been used to build object <code>spc.pop</code> (see &#8216;Examples&#8217;). Note, moreover, that condition (ii) requires that you eventually run <code><a href='e.calibrate.html'>e.calibrate</a></code> on object <code>design</code> (see &#8216;Examples&#8217;).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <em>fused</em> data frame, with class <code>spc.pop</code>, encompassing control totals for both the special purpose calibration task and the ordinary calibration task.</p>
@@ -186,7 +186,7 @@
 <span class='co'># (A) complex population parameters (e.g. multiple regression coefficients)</span>
 <span class='co'># (B) ordinary population totals</span>
 <span class='co'># You just have to:</span>
-<span class='co'>## 1) prepare the survey desing and control totals data frame for (A)</span>
+<span class='co'>## 1) prepare the survey design and control totals data frame for (A)</span>
 <span class='co'>## 2) create and fill the known totals data frame for (B)</span>
 <span class='co'>## 3) fuse the control totals data frames produced in steps 1) and 2)!</span>
 
@@ -215,7 +215,7 @@
 <span class='co'>#     activity macro sectors</span>
 <span class='co'>## 2) Create and fill the known totals data frame for calibration (B)</span>
 <span class='no'>pop.B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pop.template.html'>pop.template</a></span>(<span class='no'>sbsdes.A</span>, <span class='kw'>calmodel</span> <span class='kw'>=</span> ~(<span class='no'>ent</span> + <span class='no'>emp.num</span>):<span class='no'>nace.macro</span> - <span class='fl'>1</span>)
-<span class='co'># Note that, to create the template above, you could have used equally well </span>
+<span class='co'># Note that, to create the template above, you could have equally well used</span>
 <span class='co'># the original object sbsdes.</span>
 <span class='no'>pop.B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fill.template.html'>fill.template</a></span>(<span class='no'>pop.B</span>, <span class='kw'>universe</span> <span class='kw'>=</span> <span class='no'>sbs.frame</span>)</div><div class='output co'>#&gt; 
 #&gt; # Coherence check between 'universe' and 'template': OK
@@ -256,21 +256,21 @@
 <span class='co'># Now, check that all the benchmarks are indeed matched:</span>
 <span class='co'># (A) Multiple regression cofficients:</span>
 <span class='fu'><a href='svystatB.html'>svystatB</a></span>(<span class='no'>sbscal.AB</span>, <span class='no'>model</span>)</div><div class='output co'>#&gt;                RegCoef.va.imp2           SE
-#&gt; (Intercept)         1089.38458 5.478504e-14
-#&gt; emp.num               11.08138 1.251929e-15
-#&gt; emp.cl(9,19]         326.33374 3.070152e-13
-#&gt; emp.cl(19,49]       1150.02177 4.822061e-13
-#&gt; emp.cl(49,99]       2429.47373 3.317874e-13
-#&gt; emp.cl(99,Inf]      7601.21526 1.434845e-12</div><div class='input'><span class='no'>Beta</span></div><div class='output co'>#&gt;    (Intercept)        emp.num   emp.cl(9,19]  emp.cl(19,49]  emp.cl(49,99] 
+#&gt; (Intercept)         1089.38458 6.097460e-14
+#&gt; emp.num               11.08138 1.945762e-15
+#&gt; emp.cl(9,19]         326.33374 2.462072e-13
+#&gt; emp.cl(19,49]       1150.02177 3.017602e-13
+#&gt; emp.cl(49,99]       2429.47373 5.993849e-13
+#&gt; emp.cl(99,Inf]      7601.21526 1.906970e-12</div><div class='input'><span class='no'>Beta</span></div><div class='output co'>#&gt;    (Intercept)        emp.num   emp.cl(9,19]  emp.cl(19,49]  emp.cl(49,99] 
 #&gt;     1089.38458       11.08138      326.33374     1150.02177     2429.47373 
 #&gt; emp.cl(99,Inf] 
 #&gt;     7601.21526 </div><div class='input'>
 <span class='co'># (B) Ordinary population totals:</span>
 <span class='fu'><a href='svystatTM.html'>svystatTM</a></span>(<span class='no'>sbscal.AB</span>, ~<span class='no'>ent</span> + <span class='no'>emp.num</span>, ~<span class='no'>nace.macro</span>)</div><div class='output co'>#&gt;              nace.macro Total.ent Total.emp.num SE.Total.ent SE.Total.emp.num
-#&gt; Agriculture Agriculture       458         17168 2.222306e-14     6.652474e-12
-#&gt; Industry       Industry      9295        579580 3.417057e-14     3.083888e-12
-#&gt; Commerce       Commerce      3060         69525 6.375634e-14     4.646905e-12
-#&gt; Services       Services      4505        318121 2.509948e-13     2.128873e-11</div><div class='input'><span class='no'>pop.B</span></div><div class='output co'>#&gt;   ent:nace.macroAgriculture ent:nace.macroIndustry ent:nace.macroCommerce
+#&gt; Agriculture Agriculture       458         17168 8.768038e-14     1.800426e-12
+#&gt; Industry       Industry      9295        579580 1.147512e-13     2.275099e-12
+#&gt; Commerce       Commerce      3060         69525 7.583541e-14     1.400127e-12
+#&gt; Services       Services      4505        318121 2.302562e-14     5.726417e-11</div><div class='input'><span class='no'>pop.B</span></div><div class='output co'>#&gt;   ent:nace.macroAgriculture ent:nace.macroIndustry ent:nace.macroCommerce
 #&gt; 1                       458                   9295                   3060
 #&gt;   ent:nace.macroServices emp.num:nace.macroAgriculture
 #&gt; 1                   4505                         17168

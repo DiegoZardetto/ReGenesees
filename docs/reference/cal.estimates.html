@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ReGenesees</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.5</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -167,15 +167,15 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The main purpose of function <code>aux.estimates</code> is to make easy the task of estimating the totals of <em>all</em> the auxiliary variables involved in a calibration model (separately inside distinct calibration domains, if specified). Even if such totals can be estimated also by repeatedly invoking function <code><a href='svystatTM.html'>svystatTM</a></code>, this may reveal very tricky in practice, because real-world calibration tasks (e.g. in the field of Official Statistics) can simultaneously involve hundreds of auxiliary variables. Moreover, total estimates provided by function <code><a href='svystatTM.html'>svystatTM</a></code> are always complemented by sampling errors, whose estimation is very computationally demanding.</p>
-<p>Function <code>aux.estimates</code>, on the contrary, <em>only</em> provides estimates of totals (i.e. without associated sampling errors), thus being very quick to be executed. Moreover, <code>aux.estimates</code> is able to compute, <em>in just a single shot</em>, all the totals of the auxiliary variables of a calibration model, no matter how complex the model is. Lastly, as a third strong point, the totals estimated by <code>aux.estimates</code> will be returned exactly in the same <em>standard format</em> in which the known population totals for the related calibration task need to be represented (see <code><a href='pop.template.html'>pop.template</a></code>, <code><a href='population.check.html'>population.check</a></code>, <code><a href='fill.template.html'>fill.template</a></code>).</p>
-<p>It may be useful to point out that, besides having been designed to handle auxiliary variables involved in calibration models, function <code>aux.estimates</code> could be also used for computing <em>general</em> estimates of totals inside subpopulations in a very effective way (see &#8216;Examples&#8217;).</p>
+    <p>The main purpose of function <code>aux.estimates</code> is to make it easy to estimate the totals of <em>all</em> the auxiliary variables involved in a calibration model (separately inside distinct calibration domains, if specified). Even if such totals can also be estimated by repeatedly invoking function <code><a href='svystatTM.html'>svystatTM</a></code>, this may prove very tricky in practice, because real-world calibration tasks (e.g. in the field of Official Statistics) can simultaneously involve hundreds of auxiliary variables. Moreover, total estimates provided by function <code><a href='svystatTM.html'>svystatTM</a></code> are always complemented by sampling errors, whose estimation is very computationally demanding.</p>
+<p>Function <code>aux.estimates</code>, on the contrary, <em>only</em> provides estimates of totals (i.e. without associated sampling errors), and is thus very quick to execute. Moreover, <code>aux.estimates</code> is able to compute, <em>in just a single shot</em>, all the totals of the auxiliary variables of a calibration model, no matter how complex the model is. Lastly, as a third strong point, the totals estimated by <code>aux.estimates</code> will be returned exactly in the same <em>standard format</em> in which the known population totals for the related calibration task need to be represented (see <code><a href='pop.template.html'>pop.template</a></code>, <code><a href='population.check.html'>population.check</a></code>, <code><a href='fill.template.html'>fill.template</a></code>).</p>
+<p>It may be useful to point out that, besides having been designed to handle auxiliary variables involved in calibration models, function <code>aux.estimates</code> could also be used for computing <em>general</em> estimates of totals inside subpopulations in a very effective way (see &#8216;Examples&#8217;).</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code>pop.totals</code>, thus inheriting from class <code>data.frame</code> storing the estimated totals in a standard format.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='e.svydesign.html'>e.svydesign</a></code> to bind survey data and sampling design metadata, <code><a href='svystatTM.html'>svystatTM</a></code> for calculating estimates and standard errors of totals, <code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating weights, <code><a href='pop.template.html'>pop.template</a></code> for constructing known totals data frames in compliance with the standard required by <code>e.calibrate</code>, <code><a href='population.check.html'>population.check</a></code> to check that the known totals data frame satisfies that standard, <code><a href='fill.template.html'>fill.template</a></code> to automatically fill the template when a sampling frame is available.</p></div>
+    <div class='dont-index'><p><code><a href='e.svydesign.html'>e.svydesign</a></code> to bind survey data and sampling design metadata, <code><a href='svystatTM.html'>svystatTM</a></code> for calculating estimates and sampling errors of totals, <code><a href='e.calibrate.html'>e.calibrate</a></code> for calibrating weights, <code><a href='pop.template.html'>pop.template</a></code> for constructing known totals data frames in compliance with the standard required by <code>e.calibrate</code>, <code><a href='population.check.html'>population.check</a></code> to check that the known totals data frame satisfies that standard, <code><a href='fill.template.html'>fill.template</a></code> to automatically fill the template when a sampling frame is available.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load sbs data:</span>

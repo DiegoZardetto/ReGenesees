@@ -24,7 +24,7 @@ svystatQ(design, y, probs = c(0.25, 0.5, 0.75), by = NULL,
 \arguments{
   \item{design}{Object of class \code{analytic} (or inheriting from it) containing survey data and sampling design metadata.}
   \item{y}{Formula defining the interest variable.}
-  \item{probs}{Vector of probability values to be used to calculate the quantiles estimates. The default value selects estimates of quartiles.} 
+  \item{probs}{Vector of probability values to be used to calculate the quantile estimates. The default value selects estimates of quartiles.} 
   \item{by}{Formula specifying the variables that define the "estimation domains". If \code{NULL}
            (the default option) estimates refer to the whole population.}
   \item{vartype}{\code{character} vector specifying the desired variability estimators. It is possible to choose
@@ -39,9 +39,9 @@ svystatQ(design, y, probs = c(0.25, 0.5, 0.75), by = NULL,
   \item{\dots}{Additional arguments to \code{coef}, \ldots, \code{confint} methods (if any).}
 }
 \details{
-This function calculates weighted estimates for the Quantiles of a quantitative variable using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and direct weights otherwise.
+This function calculates weighted estimates for the Quantiles of a quantitative variable using suitable weights depending on the class of \code{design}: calibrated weights for class \code{cal.analytic} and base weights otherwise.
 
-Standard errors are calculated using the so-called "Woodruff method" [Woodruff 52][Sarndal, Swensson, Wretman 92]: (i) first a confidence interval (at a given confidence level 1-a) is constructed for the relative frequency of units with values below the estimated quantile, (ii) then the inverse of the estimated cumulative relative frequency distribution (ECDF) is used to map this interval to a confidence interval for the quantile, (iii) lastly the desired standard error is estimated by dividing the length of the obtained confidence interval by the value 2*qnorm(1-a/2). Notice that the procedure above builds, in general, asymmetric confidence intervals around the estimated quantiles.
+Standard errors are calculated using the so-called \dQuote{Woodruff method} [Woodruff 1952] and [Sarndal, Swensson, Wretman 1992]: (i) first a confidence interval (at a given confidence level 1-a) is constructed for the relative frequency of units with values below the estimated quantile, (ii) then the inverse of the estimated cumulative relative frequency distribution (ECDF) is used to map this interval to a confidence interval for the quantile, (iii) lastly the desired standard error is estimated by dividing the length of the obtained confidence interval by the value 2*qnorm(1-a/2). Notice that the procedure above builds, in general, asymmetric confidence intervals around the estimated quantiles.
 
 The mandatory argument \code{y} identifies the variable of interest, that is the variable for which estimates of quantiles have to be calculated. The \code{design} variable referenced by \code{y} must be \code{numeric}.
 
@@ -49,11 +49,9 @@ The optional argument \code{probs} specifies the probability values (\code{0.001
 
 The optional argument \code{by} specifies the variables that define the "estimation domains", that is the subpopulations for which the estimates are to be calculated. If \code{by=NULL} (the default option), the estimates produced by \code{svystatQ} refer to the whole population. Estimation domains must be defined by a formula: for example the statement \code{by=~B1:B2} selects as estimation domains the subpopulations determined by crossing the modalities of variables \code{B1} and \code{B2}. Notice that a formula like \code{by=~B1+B2} will be automatically translated into the factor-crossing formula \code{by=~B1:B2}: if you need to compute estimates for domains \code{B1} and \code{B2} \emph{separately}, you have to call \code{svystatQ} twice. The \code{design} variables referenced by \code{by} (if any) should be of type \code{factor}, otherwise they will be coerced. 
 
-The \code{conf.int} argument allows to request the confidence intervals for the estimates. By default \code{conf.int=FALSE}, that is the confidence intervals are not provided. 
+Owing to the \dQuote{Woodruff method}, confidence intervals for the estimated quantiles are automatically provided. The desired confidence level can be specified by means of the \code{conf.lev} argument. The \code{conf.lev} value must represent a probability (\code{0<=conf.lev<=1}) and its default is chosen to be \code{0.95}.
 
-Whenever confidence intervals are requested (i.e. \code{conf.int=TRUE}), the desired confidence level can be specified by means of the \code{conf.lev} argument. The \code{conf.lev} value must represent a probability (\code{0<=conf.lev<=1}) and its default is chosen to be \code{0.95}.
-
-Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default) they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
+Missing values (\code{NA}) in interest variables should be avoided. If \code{na.rm=FALSE} (the default), they generate NAs in estimates (or even an error, if \code{design} is calibrated). If \code{na.rm=TRUE}, observations containing NAs are dropped, and estimates get computed on non-missing values only. This implicitly assumes that missing values hit interest variables \emph{completely at random}: should this not be the case, computed estimates would be \emph{biased}.
 
 Argument \code{ties} addresses the problem of how to treat duplicated observed values (if any) when computing the ECDF. Option \code{'discrete'} (the default) is appropriate when the variable of interest is genuinely discrete, while \code{'rounded'} is a better choice for a continuous variable, i.e. when duplicates stem from rounding. In the first case the ECDF will show a vertical step corresponding to a duplicated value, in the second a smoother shape will be achieved by linear interpolation.
 }

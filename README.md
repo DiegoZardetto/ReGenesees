@@ -13,11 +13,11 @@ You can install the **development version** of ReGenesees from [GitHub](https://
 ``` r
 # Recommended
 install.packages("remotes")
-remotes::install_github("DiegoZardetto/ReGenesees.GUI")
+remotes::install_github("DiegoZardetto/ReGenesees")
 
 # Alternative
 install.packages("pak")
-pak::pak("DiegoZardetto/ReGenesees.GUI")
+pak::pak("DiegoZardetto/ReGenesees")
 ```
 
 

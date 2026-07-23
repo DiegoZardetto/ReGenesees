@@ -8,6 +8,11 @@
    of information is usually unavailable to users working with publicly
    disseminated survey microdata.
 
+*  PlotCI and BarPlotCI keep computing and using a default value for graphical
+   parameter ylim, but can now also accept a ylim value passed by the user.
+   This can be useful when visually comparing true population parameters with
+   survey estimates that happen to be very far from them.
+
 *  The documentation (help pages, reference manual, GITHUB) was reviewed, fixing
    typos and other minor issues.
 

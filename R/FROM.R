@@ -39,3 +39,6 @@
 # in: gvf.R
 `stats_vcov.lm` <- FROM(fun = "vcov.lm", pkg = "stats")
 
+#### pkg: methods
+# in: ErrPlots.R (BarPlotCI and PlotCI)
+`methods_hasArg` <- FROM(fun = "hasArg", pkg = "methods")

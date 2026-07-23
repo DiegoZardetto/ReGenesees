@@ -21,13 +21,21 @@ if (!is.null(Call[["horiz"]])) {
     }
 
 e <- coef(stat)
+if (is.null(names.arg)) names.arg <- names(e)
+
 ci <- as.numeric(as.matrix(confint(stat, level = level)))
 ci.l <- ci[1:(length(ci)/2)]
 ci.u <- ci[(length(ci)/2 + 1):length(ci)]
 yylim <- range(0, ci.l, ci.u)
-if (is.null(names.arg)) names.arg <- names(e)
 
-x <- barplot(e, ylim = yylim, xlab = xlab, ylab = ylab, names.arg = names.arg, horiz = FALSE, ...)
+# Handle passed ylim (if any)
+Call <- match.call(expand.dots = TRUE)
+if (methods_hasArg("ylim")) {
+     x <- barplot(e, xlab = xlab, ylab = ylab, names.arg = names.arg, horiz = FALSE, ...)
+    } else {
+     x <- barplot(e, ylim = yylim, xlab = xlab, ylab = ylab, names.arg = names.arg, horiz = FALSE, ...)
+    }
+
 points(x, e, pch = pch, col = eb.col)
 arrows(x, ci.l, x, ci.u, length = eb.len, angle = 90, code = 3, col = eb.col, lwd = eb.lwd)
 }
@@ -53,8 +61,16 @@ e <- coef(stat)
 ci <- as.numeric(as.matrix(confint(stat, level = level)))
 ci.l <- ci[1:(length(ci)/2)]
 ci.u <- ci[(length(ci)/2 + 1):length(ci)]
+yylim <- range(ci.l, ci.u)
 
-plot(e, ylim = range(ci.l, ci.u), xaxt = "n", col = eb.col, xlab = xlab, ylab = ylab, ...)
+# Handle passed ylim (if any)
+Call <- match.call(expand.dots = TRUE)
+if (methods_hasArg("ylim")) {
+     plot(e, xaxt = "n", col = eb.col, xlab = xlab, ylab = ylab, ...)
+    } else {
+     plot(e, ylim = yylim, xaxt = "n", col = eb.col, xlab = xlab, ylab = ylab, ...)
+    }
+
 x <- 1:length(e)
 if (is.null(labels)) labels <- names(e)
 suppressWarnings(axis(1, at = x, labels = labels))

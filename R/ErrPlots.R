@@ -29,8 +29,7 @@ ci.u <- ci[(length(ci)/2 + 1):length(ci)]
 yylim <- range(0, ci.l, ci.u)
 
 # Handle passed ylim (if any)
-Call <- match.call(expand.dots = TRUE)
-if (methods_hasArg("ylim")) {
+if (!is.null(Call[["ylim"]])) {
      x <- barplot(e, xlab = xlab, ylab = ylab, names.arg = names.arg, horiz = FALSE, ...)
     } else {
      x <- barplot(e, ylim = yylim, xlab = xlab, ylab = ylab, names.arg = names.arg, horiz = FALSE, ...)
@@ -65,7 +64,7 @@ yylim <- range(ci.l, ci.u)
 
 # Handle passed ylim (if any)
 Call <- match.call(expand.dots = TRUE)
-if (methods_hasArg("ylim")) {
+if (!is.null(Call[["ylim"]])) {
      plot(e, xaxt = "n", col = eb.col, xlab = xlab, ylab = ylab, ...)
     } else {
      plot(e, ylim = yylim, xaxt = "n", col = eb.col, xlab = xlab, ylab = ylab, ...)
@@ -73,6 +72,10 @@ if (methods_hasArg("ylim")) {
 
 x <- 1:length(e)
 if (is.null(labels)) labels <- names(e)
-suppressWarnings(axis(1, at = x, labels = labels))
+if (!is.null(Call[["las"]])) {
+     suppressWarnings(axis(1, at = x, labels = labels, las = Call[["las"]]))
+    } else {
+     suppressWarnings(axis(1, at = x, labels = labels))
+    }
 arrows(x, ci.l, x, ci.u, length = eb.len, angle = 90, code = 3, col = eb.col, lwd = eb.lwd)
 }

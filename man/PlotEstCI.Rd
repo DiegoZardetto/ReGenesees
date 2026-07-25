@@ -104,14 +104,14 @@ pop.par
 
 # Compare estimates and confidence intervals with population parameters:
 PlotCI(VA_per_employee_reg, ylab = "Average Value Added per Employee",
-       xlab = "Region", pch = 19, labels = levels(sbsdes$variables$region),
-       main = "Average Value Added per Employee by Region")
+       xlab = "", pch = 19, labels = levels(sbsdes$variables$region),
+       las = 2, main = "Average Value Added per Employee by Region")
 points(pop.par, pch = 19, col = "red")
-legend("topleft", 
-  legend = c("Sample Estimate", "Population Parameter"), 
-  col = c("black", "red"), 
+legend("topleft",
+  legend = c("Sample Estimate", "Population Parameter"),
+  col = c("black", "red"),
   pch = rep(19, 2),
-  text.col = "black", 
+  text.col = "black",
   inset = c(0.05, 0.05)
 )
 
@@ -126,8 +126,8 @@ legend("topleft",
 # Build a bar plot to visualize estimates and confidence intervals of average value added
 # per employee by region (computed above):
 BarPlotCI(VA_per_employee_reg, ylab = "Average Value Added per Employee",
-          xlab = "Region", pch = 19, col = adjustcolor(2:4, alpha.f = 0.3),
-          names.arg = levels(sbsdes$variables$region),
+          xlab = "", pch = 19, col = adjustcolor(2:4, alpha.f = 0.3),
+          names.arg = levels(sbsdes$variables$region), las = 2,
           main = "Average Value Added per Employee by Region")
 
 
